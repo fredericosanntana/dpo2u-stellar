@@ -5,4 +5,4 @@ Cargo.lock.bak
 .env.local
 *.swp
 .DS_Store
-scripts/deploy.json
+# scripts/deploy.json is committed as the canonical deploy artifact

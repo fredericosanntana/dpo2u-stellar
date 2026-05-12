@@ -1,0 +1,22 @@
+{
+  "network": "testnet",
+  "passphrase": "Test SDF Network ; September 2015",
+  "rpc_url": "https://soroban-testnet.stellar.org",
+  "deployer_pubkey": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "contract_id": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+  "wasm_hash": "d706a07161d784dcf2790c95c5e5e516c0993dfbbd0c8eb7a61cdefd4a6d7595",
+  "upload_tx_hash": "8bbef03d174e4ff0412e474a46dd97a98b0c78f6b36df24ac2cb8f9ad921cd1d",
+  "deploy_tx_hash": "dc7608ac5a85ed23de28b398fce1197ae1f46359cd6ececf489b9f90a4f60a35",
+  "smoke_invoke_tx_hash": "56d18b84b8a2aa41c141e117c8204a6bcdc18de59ab69d26e210ff128a84dc49",
+  "smoke_invoke_function": "authorize_submitter",
+  "wasm_path": "target/wasm32v1-none/release/anticorruption_attestation.optimized.wasm",
+  "wasm_size_bytes": 5865,
+  "stellar_cli_version": "26.0.0",
+  "soroban_sdk_version": "26.0.0",
+  "deployed_at": "2026-05-12T17:55:00Z",
+  "explorer": {
+    "contract": "https://stellar.expert/explorer/testnet/contract/CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+    "deploy_tx": "https://stellar.expert/explorer/testnet/tx/dc7608ac5a85ed23de28b398fce1197ae1f46359cd6ececf489b9f90a4f60a35",
+    "deployer_account": "https://stellar.expert/explorer/testnet/account/GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN"
+  }
+}
