@@ -1,0 +1,18 @@
+[package]
+name = "anticorruption-attestation"
+description = "DPO2U Anti-corruption Pilot — Soroban attestation registry (MVP per PRD v0.2)"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

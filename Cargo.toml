@@ -1,0 +1,25 @@
+[workspace]
+resolver = "2"
+members = ["contracts/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["Frederico Santana <fredericosanntana@gmail.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/fredericosanntana/dpo2u-stellar"
+readme = "README.md"
+rust-version = "1.79"
+
+[workspace.dependencies]
+soroban-sdk = "26.0.0"
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = 0
+strip = "symbols"
+debug-assertions = false
+panic = "abort"
+codegen-units = 1
+lto = true
