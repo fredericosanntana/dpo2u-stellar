@@ -1,0 +1,134 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  # Pin SDK + CLI majors so a silent crate bump cannot break the build green.
+  SOROBAN_SDK_MAJOR: "26"
+  STELLAR_CLI_VERSION: "26.0.0"
+
+jobs:
+  fmt:
+    name: cargo fmt --check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - run: cargo fmt --all --check
+
+  clippy:
+    name: cargo clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+
+  test:
+    name: cargo test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --workspace --locked
+
+  build-wasm:
+    name: stellar contract build (wasm)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32v1-none
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: wasm
+
+      - name: Install stellar-cli (cached binary)
+        run: |
+          set -euo pipefail
+          BIN_DIR="$HOME/.local/bin"
+          mkdir -p "$BIN_DIR"
+          curl -fsSL \
+            "https://github.com/stellar/stellar-cli/releases/download/v${STELLAR_CLI_VERSION}/stellar-cli-${STELLAR_CLI_VERSION}-x86_64-unknown-linux-gnu.tar.gz" \
+            -o /tmp/stellar-cli.tar.gz
+          tar -xzf /tmp/stellar-cli.tar.gz -C "$BIN_DIR"
+          chmod +x "$BIN_DIR/stellar"
+          echo "$BIN_DIR" >> "$GITHUB_PATH"
+
+      - name: stellar --version
+        run: stellar --version
+
+      - name: stellar contract build
+        id: build
+        run: |
+          stellar contract build 2>&1 | tee build.log
+          # Extract wasm hash from build output for drift guard.
+          HASH=$(grep -oE '[a-f0-9]{64}' build.log | head -n 1)
+          echo "wasm_hash=$HASH" >> "$GITHUB_OUTPUT"
+          echo "Build wasm hash: $HASH"
+
+      - name: Wasm size budget (≤16 KiB)
+        run: |
+          SIZE=$(stat -c '%s' target/wasm32v1-none/release/anticorruption_attestation.wasm)
+          echo "wasm size: $SIZE bytes"
+          # Budget: contract must stay under 16 KiB (current is ~6.7 KiB). Bump only with PR justification.
+          if [ "$SIZE" -gt 16384 ]; then
+            echo "::error::wasm size $SIZE exceeds 16384 byte budget"
+            exit 1
+          fi
+
+      - name: Drift guard — fail PR if wasm_hash in scripts/deploy.json out of sync
+        if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          DEPLOYED=$(python3 -c "import json; print(json.load(open('scripts/deploy.json'))['wasm_hash'])")
+          BUILT="${{ steps.build.outputs.wasm_hash }}"
+          if [ "$DEPLOYED" != "$BUILT" ]; then
+            echo "::warning::wasm_hash drift detected"
+            echo "  scripts/deploy.json: $DEPLOYED"
+            echo "  built:                $BUILT"
+            echo "Re-deploy required before merging if contract logic changed."
+            # Drift is a warning, not a failure — many PRs touch only docs/CI and don't require re-deploy.
+            # CI will block ONLY if the contract source changed.
+            if git diff --name-only origin/main...HEAD | grep -qE '^contracts/'; then
+              echo "::error::Contract source changed AND wasm_hash drifted — must re-deploy + update deploy.json"
+              exit 1
+            fi
+          fi
+
+      - name: Upload wasm artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: contract-wasm
+          path: |
+            target/wasm32v1-none/release/anticorruption_attestation.wasm
+            build.log
+          retention-days: 14
+
+  audit:
+    name: cargo audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Install cargo-audit
+        run: cargo install --locked cargo-audit || true
+      - name: Run cargo audit
+        run: cargo audit --deny warnings || echo "::warning::audit findings present (non-blocking for v0.1)"

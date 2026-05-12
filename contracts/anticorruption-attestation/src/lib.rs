@@ -8,8 +8,8 @@
 //! Reference: DPO2U_PRD_Piloto_Anticorrupcao_v0.2 (see `docs/`).
 
 use soroban_sdk::{
-    contract, contracterror, contractimpl, contracttype, panic_with_error,
-    symbol_short, Address, BytesN, Env, Symbol,
+    contract, contracterror, contractimpl, contracttype, panic_with_error, symbol_short, Address,
+    BytesN, Env, Symbol,
 };
 
 #[contracterror]
@@ -87,12 +87,7 @@ impl AntiCorruptionAttestation {
             .publish((symbol_short!("config"), use_case_id), config);
     }
 
-    pub fn authorize_submitter(
-        env: Env,
-        admin: Address,
-        submitter: Address,
-        allowed: bool,
-    ) {
+    pub fn authorize_submitter(env: Env, admin: Address, submitter: Address, allowed: bool) {
         admin.require_auth();
         Self::assert_admin(&env, &admin);
         env.storage()

@@ -1,12 +1,14 @@
 #![cfg(test)]
 
 use super::*;
-use soroban_sdk::{
-    testutils::Address as _,
-    Address, BytesN, Env,
-};
+use soroban_sdk::{testutils::Address as _, Address, BytesN, Env};
 
-fn setup() -> (Env, Address, Address, AntiCorruptionAttestationClient<'static>) {
+fn setup() -> (
+    Env,
+    Address,
+    Address,
+    AntiCorruptionAttestationClient<'static>,
+) {
     let env = Env::default();
     env.mock_all_auths();
     let admin = Address::generate(&env);
@@ -59,13 +61,8 @@ fn register_attestation_happy_path() {
 
     // Returned u32 is the ledger sequence; in test Env it can be 0. We only
     // assert the call succeeded and the record persisted.
-    let _seq = client.register_attestation(
-        &submitter,
-        &use_case,
-        &Verdict::Pass,
-        &evidence,
-        &metadata,
-    );
+    let _seq =
+        client.register_attestation(&submitter, &use_case, &Verdict::Pass, &evidence, &metadata);
 
     let record = client.verify_attestation(&use_case, &evidence).unwrap();
     assert_eq!(record.verdict, Verdict::Pass);
