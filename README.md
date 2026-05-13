@@ -7,12 +7,12 @@
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Network](https://img.shields.io/badge/Network-Stellar%20Testnet-purple.svg)](https://stellar.expert/explorer/testnet)
-[![Status](https://img.shields.io/badge/Phase-Observer%20L1-yellow.svg)](docs/DPO2U_PRD_Piloto_Anticorrupcao_v0.2.docx)
+[![Status](https://img.shields.io/badge/Phase-Observer%20L1-yellow.svg)](docs/DPO2U_PRD_Piloto_Anticorrupcao_v0.3.docx)
 
 ## O que é
 
 Este repositório materializa o **primeiro contrato on-chain** do *Piloto
-Anticorrupção* especificado na [PRD v0.2](docs/DPO2U_PRD_Piloto_Anticorrupcao_v0.2.docx).
+Anticorrupção* especificado na [PRD v0.3](docs/DPO2U_PRD_Piloto_Anticorrupcao_v0.3.docx). Histórico institucional + cronograma do acelerador Stellar37° em [`docs/STELLAR37-ROADMAP.md`](docs/STELLAR37-ROADMAP.md).
 O contrato é um **registro de atestações** que opera junto ao MCP da DPO2U:
 o MCP avalia predicados sobre evidências (fora da cadeia), o contrato grava
 o veredito (`PASS` / `FAIL` / `REVIEW`) junto do `hash` da evidência e dos
@@ -132,7 +132,7 @@ dpo2u-stellar/
 │   ├── Cargo.toml
 │   └── Makefile                            # build/test/optimize/deploy
 ├── docs/
-│   └── DPO2U_PRD_Piloto_Anticorrupcao_v0.2.docx
+│   └── DPO2U_PRD_Piloto_Anticorrupcao_v0.3.docx
 ├── scripts/
 │   └── deploy-testnet.sh                   # one-shot deploy
 ├── Cargo.toml                              # workspace
