@@ -24,7 +24,7 @@ Cronograma operacional do acelerador Stellar37° (31 dias, 2026-05-12 → 2026-0
 |---|---|---|---|---|
 | **M1** | Testnet contract live + 3 significant commits | DPO2U eng | 2026-05-14 | ✅ done 2026-05-12 |
 | **M2** | Discovery: 5 prospect calls + 1 carta de intenção | Chairman | 2026-05-21 | 🟡 in progress |
-| **M3** | x402 decision documented (closed N/A for MVP) | Chairman + advogada | 2026-05-22 | ✅ see [`X402_DECISION.md`](X402_DECISION.md) |
+| **M3** | x402 integration shipped (paymentMiddleware live in mcp-server) | DPO2U eng + Chairman | 2026-05-22 | ✅ see [`X402_INTEGRATION.md`](X402_INTEGRATION.md) — [DPO2U#21](https://github.com/fredericosanntana/DPO2U/pull/21) |
 | **M4** | Hackathon participation (Stellar37° demo day) | DPO2U eng + Chairman | 2026-05-28 | 🟡 prep |
 | **M5** | Security audit kickoff with engaged firm | DPO2U eng | 2026-05-30 | 🔴 not started |
 | **M6** | User demos (3 recorded sessions, ICP-anchored) | Chairman | 2026-06-04 | 🔴 not started |
@@ -73,11 +73,15 @@ Legend: 🟢 not gating · 🟡 in progress · 🔴 blocked / not started · ✅
 
 ---
 
-## M3 — x402 decision documented (✅ done)
+## M3 — x402 integration shipped (✅ done)
 
-**Deliverable**: Decisão formal sobre x402 com justificativa + reentry trigger.
+**Deliverable**: x402 paymentMiddleware integrado ao mcp-server, com gating por use_case + bypass por API key + LGPD Art. 18 §1 free-for-erasure.
 
-**Status**: ✅ — documentada em [`X402_DECISION.md`](X402_DECISION.md). Q5 fechada N/A para MVP. Reentry trigger: post-mainnet AND ≥5 paying clients AND demanda explícita.
+**Status**: ✅ — implementação em [DPO2U#21](https://github.com/fredericosanntana/DPO2U/pull/21) (Sprint M.1). Doc canônica em [`X402_INTEGRATION.md`](X402_INTEGRATION.md). 19 testes novos verdes + 252/252 no pilot stack inteiro.
+
+**Pré-requisito de produção**: `X402_RECIPIENT` (treasury account Stellar G…) provisionado durante Sprint L mainnet ceremony §3.x. Até lá, `X402_ENABLED=false` em todos os deployments.
+
+> Histórico: o doc anterior `X402_DECISION.md` interpretou v0.3 §Q5 como "N/A pra MVP" — leitura incorreta. v0.3 §13.3 lista x402 explicitamente como milestone M3 do Stellar37°, não opcional. Sprint M.1 corrige a leitura E entrega a implementação na mesma semana.
 
 ---
 

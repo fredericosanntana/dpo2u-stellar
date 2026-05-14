@@ -10,7 +10,7 @@ related: ["GTM_PLAN.md", "X402_DECISION.md", "STELLAR37-ROADMAP.md"]
 
 # MONETIZATION MODEL
 
-How the DPO2U Anti-corruption Pilot generates revenue **without breaking the verifiable-compliance promise**. Three tiers (design partner / subscription / x402 future) with explicit activation gates and overlap rules.
+How the DPO2U Anti-corruption Pilot generates revenue **without breaking the verifiable-compliance promise**. Three tiers (design partner / subscription / **x402 per-request — live via [`X402_INTEGRATION.md`](X402_INTEGRATION.md)**) with explicit activation gates and overlap rules.
 
 > **Strategic positioning**: DPO2U is a **Verifiable Compliance Protocol category** (PRD v0.3 §15.2). We are not a RegTech vendor, not a legal services firm, not an internal-tooling supplier. Our durable moat is the **trustless verification primitive**: any third party can audit any decision without our cooperation. Pricing models that compromise that primitive (e.g., gated read access) are excluded.
 
@@ -88,15 +88,27 @@ Above Pro: custom enterprise contract (≥USD 10k/mo). Bespoke SLAs, dedicated i
 - LGPD legal opinion for client's specific workflow — partnership with `[advogada partner]` (separate contract direct between client and partner).
 - Bug bounty payouts to third parties who report vulnerabilities — funded out of DPO2U treasury, not from subscription revenue.
 
-## 3. x402 Per-Request Tier (DEFERRED — gated, see [X402_DECISION.md](X402_DECISION.md))
+## 3. x402 Per-Request Tier (LIVE — Stellar37° M3 criterion)
 
-x402 is **N/A for MVP**. Will be reconsidered when:
-1. Post-mainnet ≥30 days stable.
-2. ≥5 paying clients on subscription.
-3. ≥2 of those clients independently request per-request pricing.
-4. x402 ecosystem maturity signals (3+ production projects + maintained library).
+x402 is **implemented** ([`X402_INTEGRATION.md`](X402_INTEGRATION.md), [DPO2U#21](https://github.com/fredericosanntana/DPO2U/pull/21)). It is a **Stellar37° program criterion**, not an optional add-on.
 
-If x402 activates, it slots in as an **alternative to subscription** for highly variable volumes. Subscription tier remains primary.
+**Default prices** (atomic units, USDC 7 decimals):
+
+| Use case | Atomic | Decimal | LGPD impact |
+|---|---|---|---|
+| `bank_change_v1` | 1,000,000 | 0.10 USDC | per-attestation |
+| `payment_doc_v1` | 5,000,000 | 0.50 USDC | per-attestation |
+| **`erasure_v1`** | **0** | **FREE** | **LGPD Art. 18 §1 enforced server-side** |
+
+**Activation**: `X402_ENABLED=true` plus production treasury account in `X402_RECIPIENT`. Both provisioned during Sprint L mainnet ceremony §3.x.
+
+**Bypass list**: design partner API keys (`X402_BYPASS_API_KEYS`) skip the 402 gate but still hit predicate + L3 submitter. Used during the 6-month design-partner window — pre-conversion to subscription.
+
+**Coexistence with subscription tier**: x402 is **per-request** for variable-volume clients (Web3 founders, occasional auditors). Subscription is **predictable monthly** for high-volume clients (municípios). Same client can use BOTH — subscription for routine workflow + x402 for occasional bursts beyond ceiling.
+
+**Coexistence with design partner tier**: design partners bypass x402 entirely via the API key list during their 6 months. Auto-converts to subscription OR pay-per-request when partnership ends.
+
+**Reference**: [`X402_INTEGRATION.md`](X402_INTEGRATION.md) for the full implementation record + audit hooks + production rollout plan.
 
 ## 4. Custom Enterprise Tier (≥USD 10k / month)
 
