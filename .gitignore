@@ -1,6 +1,8 @@
 target/
 Cargo.lock.bak
 .stellar/
+sdk/node_modules/
+sdk/dist/
 .env
 .env.local
 *.swp

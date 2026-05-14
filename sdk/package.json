@@ -1,0 +1,47 @@
+{
+  "name": "@dpo2u/stellar-sdk",
+  "version": "0.1.0",
+  "description": "Trustless verifier for DPO2U Anti-corruption Pilot attestations on Stellar Soroban. Read-only TypeScript client + CLI for auditors, journalists, and citizens — no wallet, no fee, no DPO2U cooperation required.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "dpo2u-attest": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
+  "dependencies": {
+    "@stellar/stellar-sdk": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fredericosanntana/dpo2u-stellar.git",
+    "directory": "sdk"
+  },
+  "keywords": [
+    "stellar",
+    "soroban",
+    "compliance",
+    "attestation",
+    "audit",
+    "lgpd",
+    "anti-corruption"
+  ],
+  "license": "Apache-2.0"
+}
