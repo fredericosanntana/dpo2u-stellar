@@ -1,0 +1,71 @@
+{
+  "run_id": "2026-05-14T12-37-47",
+  "network": "testnet",
+  "network_passphrase": "Test SDF Network ; September 2015",
+  "contract_id": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+  "wasm_hash": "d706a07161d784dcf2790c95c5e5e516c0993dfbbd0c8eb7a61cdefd4a6d7595",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "submitter": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "use_case_id": "bank_chg",
+  "predicate_set": "bank_chg",
+  "predicate_version": 1,
+  "request_id": "demo-testnet-anchor-001",
+  "evidence_hash": "0dbf43ad5862d6e1c3f16958056e531f09bd23eed0fb515d4185bdbf1206bed4",
+  "metadata_hash": "545a4e8acebb166e0beb5bc275e40465b3200e03e95534064dff2b9a46d19366",
+  "transactions": {
+    "configure_use_case": "8d170b82cf161e193ec4aefd3d400b293a7b66ce853f5a2f6505f2586ec63e97",
+    "register_attestation": "00ee47e25076bf09492bcaa29ab238ad571c0954b0be19a7dab2488895c8e52f"
+  },
+  "ledger_seq": 2550695,
+  "attestation_record_onchain": {
+    "metadata_hash": "545a4e8acebb166e0beb5bc275e40465b3200e03e95534064dff2b9a46d19366",
+    "predicate_set": "bank_chg",
+    "predicate_version": 1,
+    "submitted_by": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+    "timestamp": 1778762267,
+    "verdict": "Pass"
+  },
+  "events_emitted": [
+    {
+      "type": "config",
+      "topics": ["config", "bank_chg"],
+      "data": {
+        "active": true,
+        "predicate_set": "bank_chg",
+        "predicate_version": 1
+      },
+      "tx": "8d170b82cf161e193ec4aefd3d400b293a7b66ce853f5a2f6505f2586ec63e97"
+    },
+    {
+      "type": "attest",
+      "topics": [
+        "attest",
+        "bank_chg",
+        "0dbf43ad5862d6e1c3f16958056e531f09bd23eed0fb515d4185bdbf1206bed4"
+      ],
+      "data": {
+        "metadata_hash": "545a4e8acebb166e0beb5bc275e40465b3200e03e95534064dff2b9a46d19366",
+        "predicate_set": "bank_chg",
+        "predicate_version": 1,
+        "submitted_by": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+        "timestamp": 1778762267,
+        "verdict": "Pass"
+      },
+      "tx": "00ee47e25076bf09492bcaa29ab238ad571c0954b0be19a7dab2488895c8e52f"
+    }
+  ],
+  "auditor_cli_output": {
+    "command": "node sdk/dist/cli.js verify bank_chg 0dbf43ad5862d6e1c3f16958056e531f09bd23eed0fb515d4185bdbf1206bed4",
+    "verdict": "PASS",
+    "exit_code": 0,
+    "trustless": true,
+    "credentials_used": "none"
+  },
+  "explorer_links": {
+    "contract": "https://stellar.expert/explorer/testnet/contract/CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+    "configure_use_case": "https://stellar.expert/explorer/testnet/tx/8d170b82cf161e193ec4aefd3d400b293a7b66ce853f5a2f6505f2586ec63e97",
+    "register_attestation": "https://stellar.expert/explorer/testnet/tx/00ee47e25076bf09492bcaa29ab238ad571c0954b0be19a7dab2488895c8e52f"
+  },
+  "completed_at": "2026-05-14T12:38:00Z",
+  "demo_log": "docs/demos/2026-05-14-testnet-anchor-roundtrip.md"
+}
