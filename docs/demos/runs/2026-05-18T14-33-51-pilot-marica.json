@@ -1,0 +1,90 @@
+{
+  "run_id": "2026-05-18T14-33-51",
+  "network": "testnet",
+  "contract_id": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+  "gateway_url": "https://mcp.dpo2u.com",
+  "use_case_id": "bank_chg",
+  "verdict_target": "fail",
+  "verdict_final": "FAIL",
+  "attempt_id": "att-2b336606-0704-4c3a-b74a-c9567916e212",
+  "request_id": "marica-demo-1779114821-5f1bd0f1",
+  "submitted_payload": {
+    "use_case_id": "bank_chg",
+    "request_id": "marica-demo-1779114821-5f1bd0f1",
+    "evidence": {
+      "supplier_cnpj": "11.222.333/0001-81",
+      "new_account_holder_cnpj": "99.888.777/0001-66",
+      "new_account_bank_ispb": "00000000",
+      "request_channel": "email_externo",
+      "sender_email_domain": "atacante.example.com",
+      "expected_municipal_domain": "marica.rj.gov.br",
+      "audit_seed": "1779114821993033937-0551b5447e3fccb7"
+    }
+  },
+  "hashes": {
+    "evidence_hash": "b364f513c8fb80f25d490f8a7315ce6dea857de4d22a20336836614da0795a93",
+    "metadata_hash": "1e9985023f90b7acbe9b7e136739fd9daeb248b2954151b58fa1e2e3ba760cfd"
+  },
+  "onchain": {
+    "tx_hash": "9d2a7bbcb1568d88c192788ecb526c0914a1ff156f39b6a20ca6725ed6d0d302",
+    "ledger": "2621109",
+    "explorer_tx": "https://stellar.expert/explorer/testnet/tx/9d2a7bbcb1568d88c192788ecb526c0914a1ff156f39b6a20ca6725ed6d0d302",
+    "explorer_contract": "https://stellar.expert/explorer/testnet/contract/CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5"
+  },
+  "gateway_response": {
+    "attempt_id": "att-2b336606-0704-4c3a-b74a-c9567916e212",
+    "request_id": "marica-demo-1779114821-5f1bd0f1",
+    "use_case_id": "bank_chg",
+    "status": "COMPLETED",
+    "created_at": 1779114822025,
+    "updated_at": 1779114829041,
+    "request_body_hash": "d7be06fb716bb0d18a97d01e8e0914effb09521ec61b4d5afa1b63342e883b45",
+    "result": {
+      "verdict": "FAIL",
+      "predicate_set_id": "bank_chg",
+      "predicate_set_version": 1,
+      "evidence_hash_hex": "b364f513c8fb80f25d490f8a7315ce6dea857de4d22a20336836614da0795a93",
+      "metadata_hash_hex": "1e9985023f90b7acbe9b7e136739fd9daeb248b2954151b58fa1e2e3ba760cfd",
+      "predicate_results": [
+        {
+          "id": "P1_cnpj_match",
+          "verdict": "FAIL",
+          "reason": "CNPJ do fornecedor difere do titular da nova conta."
+        },
+        {
+          "id": "P2_official_channel",
+          "verdict": "FAIL",
+          "reason": "Canal 'email_externo' não é oficial."
+        },
+        {
+          "id": "P3_sender_domain",
+          "verdict": "FAIL",
+          "reason": "Domínio 'atacante.example.com' != 'marica.rj.gov.br'."
+        },
+        {
+          "id": "P4_bank_regulated",
+          "verdict": "PASS",
+          "reason": "ISPB 00000000 regulado BCB."
+        },
+        {
+          "id": "P5_no_recent_change",
+          "verdict": "PASS",
+          "reason": "Sem mudança prévia registrada (primeira atestação)."
+        }
+      ],
+      "tx": {
+        "feeBumpTxHash": "9d2a7bbcb1568d88c192788ecb526c0914a1ff156f39b6a20ca6725ed6d0d302",
+        "innerTxHash": "9d2a7bbcb1568d88c192788ecb526c0914a1ff156f39b6a20ca6725ed6d0d302",
+        "ledger": 2621109,
+        "contractId": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+        "explorerUrl": "https://stellar.expert/explorer/testnet/tx/9d2a7bbcb1568d88c192788ecb526c0914a1ff156f39b6a20ca6725ed6d0d302"
+      }
+    }
+  },
+  "auditor_verify": {
+    "command": "dpo2u-attest verify bank_chg b364f513c8fb80f25d490f8a7315ce6dea857de4d22a20336836614da0795a93",
+    "output": "\n  DPO2U Anti-corruption Pilot — attestation verification\n  ────────────────────────────────────────────────────────\n  Contract:    CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5\n  Network:     Test SDF Network ; September 2015\n\n  Verdict:     ❌ FAIL\n  Predicate:   bank_chg@v1\n  Submitter:   GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65\n  Timestamp:   2026-05-18T14:33:47.000Z\n  Meta hash:   1e9985023f90b7acbe9b7e136739fd9daeb248b2954151b58fa1e2e3ba760cfd\n  Explorer:    https://stellar.expert/explorer/testnet/contract/CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+    "exit_code": 3
+  },
+  "completed_at": "2026-05-18T14:33:51Z"
+}
