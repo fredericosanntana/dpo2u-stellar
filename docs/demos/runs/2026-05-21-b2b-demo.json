@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-05-21T23:30:23.348Z",
+  "use_case": "gdpr_compliance_v1",
+  "layer": "B2B",
+  "alerts": [
+    {
+      "use_case": "gdpr_compliance_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "registration_id": "dpo2u.com",
+        "has_dpo": true,
+        "has_dsr_process": true,
+        "has_dpia": true,
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "b1_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "b2_dpo_appointed",
+          "verdict": "PASS",
+          "reason": "Data Protection Officer designado — presente."
+        },
+        {
+          "id": "b3_ropa",
+          "verdict": "REVIEW",
+          "reason": "Registro das atividades de tratamento (RoPA) — não informado; revisar."
+        },
+        {
+          "id": "b4_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "b5_dpia",
+          "verdict": "PASS",
+          "reason": "Data Protection Impact Assessment — presente."
+        },
+        {
+          "id": "b6_breach_notification",
+          "verdict": "REVIEW",
+          "reason": "Notificação de violação em 72h — não informado; revisar."
+        },
+        {
+          "id": "b7_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "07c938614944c0e9c566e55e2f2659806600f769742943c4043855648068fd4e",
+        "metadata_hash_hex": "dda4476ebd3b44db8e370304dbba35c88bf51f58ea9dfb79ef8dbe75bd971370",
+        "tx_hash": "eb990b44ee41e6787048e034fa11d201266d970ca352aaba1efdcf2148416fb0",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/eb990b44ee41e6787048e034fa11d201266d970ca352aaba1efdcf2148416fb0"
+      }
+    }
+  ],
+  "attested_alerts": [
+    {
+      "use_case": "gdpr_compliance_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "registration_id": "dpo2u.com",
+        "has_dpo": true,
+        "has_dsr_process": true,
+        "has_dpia": true,
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "b1_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "b2_dpo_appointed",
+          "verdict": "PASS",
+          "reason": "Data Protection Officer designado — presente."
+        },
+        {
+          "id": "b3_ropa",
+          "verdict": "REVIEW",
+          "reason": "Registro das atividades de tratamento (RoPA) — não informado; revisar."
+        },
+        {
+          "id": "b4_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "b5_dpia",
+          "verdict": "PASS",
+          "reason": "Data Protection Impact Assessment — presente."
+        },
+        {
+          "id": "b6_breach_notification",
+          "verdict": "REVIEW",
+          "reason": "Notificação de violação em 72h — não informado; revisar."
+        },
+        {
+          "id": "b7_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "07c938614944c0e9c566e55e2f2659806600f769742943c4043855648068fd4e",
+        "metadata_hash_hex": "dda4476ebd3b44db8e370304dbba35c88bf51f58ea9dfb79ef8dbe75bd971370",
+        "tx_hash": "eb990b44ee41e6787048e034fa11d201266d970ca352aaba1efdcf2148416fb0",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/eb990b44ee41e6787048e034fa11d201266d970ca352aaba1efdcf2148416fb0"
+      }
+    }
+  ],
+  "attestation_run_at": "2026-05-21T23:30:32.630Z"
+}
