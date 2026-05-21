@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-05-21T14:18:08.778Z",
+  "generated_at": "2026-05-21T02:12:05.106Z",
   "accept_requirement_met": true,
   "sources": {
     "sanctions": {
-      "ceis": 13671,
-      "cnep": 1612,
+      "ceis": 13676,
+      "cnep": 1613,
       "cepim": 3562
     },
     "sanctions_source_dates": {
-      "ceis": "20260521",
-      "cnep": "20260521",
-      "cepim": "20260520"
+      "ceis": "20260520",
+      "cnep": "20260520",
+      "cepim": "20260518"
     },
-    "compras_gov_records": 14430,
-    "distinct_suppliers": 1788,
+    "compras_gov_records": 14417,
+    "distinct_suppliers": 1787,
     "scan_classes": [
       {
         "codigo": 6505,
@@ -33,80 +33,11 @@
     ]
   },
   "summary": {
-    "sanction_alerts": 231,
-    "sanction_fail": 56,
+    "sanction_alerts": 203,
+    "sanction_fail": 28,
     "sanction_review": 175,
-    "sanction_prospective_fail": 28,
-    "overpricing_alerts": 911,
+    "overpricing_alerts": 906,
     "overpricing_groups_trimmed_out": 4
-  },
-  "statistics": {
-    "sanction": {
-      "total": 231,
-      "fail": 56,
-      "review": 175,
-      "prospective_fail": 28,
-      "by_list": {
-        "ceis": 231,
-        "cnep": 1,
-        "cepim": 0
-      }
-    },
-    "overpricing": {
-      "total": 911,
-      "z_bands": {
-        "3.5-10": 618,
-        "10-30": 241,
-        "30-100": 51,
-        ">100": 1
-      },
-      "z_min": 3.5,
-      "z_max": 136.57,
-      "z_median": 6.72,
-      "basket_size": {
-        "min": 8,
-        "p25": 274,
-        "median": 627,
-        "p75": 806,
-        "max": 959
-      }
-    },
-    "coverage": {
-      "by_uf": {
-        "RJ": 231,
-        "CE": 50,
-        "PR": 80,
-        "AC": 9,
-        "PB": 25,
-        "PA": 92,
-        "SP": 129,
-        "PE": 23,
-        "MG": 73,
-        "RO": 15,
-        "TO": 8,
-        "BA": 70,
-        "GO": 28,
-        "MT": 20,
-        "SE": 7,
-        "AM": 58,
-        "RN": 11,
-        "AP": 14,
-        "MS": 22,
-        "RR": 20,
-        "DF": 26,
-        "MA": 33,
-        "AL": 10,
-        "PI": 14,
-        "ES": 11,
-        "RS": 53,
-        "SC": 10
-      },
-      "distinct_uf": 27,
-      "temporal": {
-        "earliest": "2021-12-02",
-        "latest": "2026-05-20"
-      }
-    }
   },
   "sanction_alerts": [
     {
@@ -118,8 +49,6 @@
         "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA",
         "organ": "FUNDO MUN DE SAUDE DE VASSOURAS - RJ",
         "uasg": "927492",
-        "uf": "RJ",
-        "municipio": "VASSOURAS",
         "purchase_date": "2025-11-11",
         "catmat": 354314,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
@@ -135,7 +64,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "FAIL",
-          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES — processo 009/2024."
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA — processo 10583/25 007/25."
         },
         {
           "id": "o3_not_in_cnep",
@@ -150,10 +79,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "eb1e8e35c9b02558b4307b17eece487026a0b4af15074ec948936c9c69635ea4",
-        "metadata_hash_hex": "87ce7c09b6edb62b0e31ac5219d793656eef2df268bbfd15e8c3b3fedffbe345",
-        "tx_hash": "2141095b78655a10e707b87150efbcaea2fb12a68f50f5939dab8a91d35fad5e",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/2141095b78655a10e707b87150efbcaea2fb12a68f50f5939dab8a91d35fad5e"
+        "evidence_hash_hex": "e017c433d5afc4127459a2e9867647fb795ddf096ff821bbc24c2fdaff7ecc55",
+        "metadata_hash_hex": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -165,8 +94,6 @@
         "supplier_name": "DISTRIMED COMERCIO DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE HORIZONTE - CE",
         "uasg": "981253",
-        "uf": "CE",
-        "municipio": "HORIZONTE",
         "purchase_date": "2025-01-09",
         "catmat": 354314,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
@@ -197,10 +124,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "27caebf37d9aad3446bafe442f2a0d7077ffa2c219e1169450b073ca2971d8a7",
-        "metadata_hash_hex": "ee502f267a6c562a5f914f9647310927fd73a0f526e107b042236f74ab4f47c5",
-        "tx_hash": "0e2d7d4eaf6102a2872e8e1d45b5be3c0af97af854ac72264f776a15632551c3",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/0e2d7d4eaf6102a2872e8e1d45b5be3c0af97af854ac72264f776a15632551c3"
+        "evidence_hash_hex": "7ddec968199367b9816701822a2079d6cfedcc93c95ba0281cf96f5c6c63da0f",
+        "metadata_hash_hex": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -212,8 +139,6 @@
         "supplier_name": "ALTERMED MATERIAL MEDICO HOSPITALAR LTDA",
         "organ": "PREFEITURA DE FRANCISCO BELTRAO - PR",
         "uasg": "987565",
-        "uf": "PR",
-        "municipio": "FRANCISCO BELTRÃO",
         "purchase_date": "2022-09-19",
         "catmat": 354314,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
@@ -252,8 +177,6 @@
         "supplier_name": "ILG COMERCIAL LTDA",
         "organ": "PREFEITURA DE MERCEDES - PR",
         "uasg": "985531",
-        "uf": "PR",
-        "municipio": "MERCEDES",
         "purchase_date": "2026-04-02",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -284,10 +207,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "b343b4f2984412ca8a2cd8335561261b15524c952a70d38543cc8eb3ee49032c",
-        "metadata_hash_hex": "343cd9c3110cec07568d4d9b0b171c06f76c9e7be83ea4800a1cd9e719ce2c7b",
-        "tx_hash": "9e2def2a3fc656043105f4d6387b0438453e13842a41733d10562e8a27b304f1",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/9e2def2a3fc656043105f4d6387b0438453e13842a41733d10562e8a27b304f1"
+        "evidence_hash_hex": "8ce845b9ac55c9bc4fb5aa9f114295131c3da8c40c7cbb50e5fbceac152177b2",
+        "metadata_hash_hex": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -299,8 +222,6 @@
         "supplier_name": "CLM FARMA COMERCIO E DISTRIBUIDORA DE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA DE FEIJO - AC",
         "uasg": "980113",
-        "uf": "AC",
-        "municipio": "FEIJÓ",
         "purchase_date": "2025-10-15",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -339,8 +260,6 @@
         "supplier_name": "PHARMAPLUS LTDA",
         "organ": "EPB-SECRETARIA ESTADO D ADMINISTRAÇÃO PARAIBA",
         "uasg": "925302",
-        "uf": "PB",
-        "municipio": "JOÃO PESSOA",
         "purchase_date": "2025-09-17",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -379,8 +298,6 @@
         "supplier_name": "ODONTOMED DISTRIBUIDORA DE MATERIAIS E MEDICAMENTOS HOSPITALARES E ODONTOLOGICOS",
         "organ": "PREFEITURA MUNICIPAL DE BARCARENA - PA",
         "uasg": "980425",
-        "uf": "PA",
-        "municipio": "BARCARENA",
         "purchase_date": "2025-09-18",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -419,8 +336,6 @@
         "supplier_name": "SINERGIA MEDICAMENTOS LTDA",
         "organ": "MSP-PREFEITURA MUNICIPAL DE BURITAMA",
         "uasg": "986263",
-        "uf": "SP",
-        "municipio": "BURITAMA",
         "purchase_date": "2024-11-19",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -459,8 +374,6 @@
         "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
         "organ": "MPR-CONSORCIO INTERM. SAÚDE SUDOESTE SUDOESTE",
         "uasg": "458403",
-        "uf": "PR",
-        "municipio": "FRANCISCO BELTRÃO",
         "purchase_date": "2024-06-11",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -499,8 +412,6 @@
         "supplier_name": "M D G COMERCIAL LTDA.",
         "organ": "PREFEITURA DE VERA CRUZ DO OESTE - PR",
         "uasg": "987989",
-        "uf": "PR",
-        "municipio": "VERA CRUZ DO OESTE",
         "purchase_date": "2023-12-27",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -539,8 +450,6 @@
         "supplier_name": "MARYMED DISTRIBUIDORA DE MEDICAMENTOS E CORRELATOS - EIRELI",
         "organ": "PREFEITURA DE FLORAI - PR",
         "uasg": "987553",
-        "uf": "PR",
-        "municipio": "FLORAÍ",
         "purchase_date": "2022-12-21",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -579,8 +488,6 @@
         "supplier_name": "HIPERFAR MATERIAIS HOSPITALAR E MEDICAMENTOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE PARAUAPEBAS - PA",
         "uasg": "980595",
-        "uf": "PA",
-        "municipio": "PARAUAPEBAS",
         "purchase_date": "2022-12-08",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -619,8 +526,6 @@
         "supplier_name": "FRAGNARI DISTRIBUIDORA DE MEDICAMENTOS LTDA.",
         "organ": "SERVICO AUTONOMO MUNICIPAL DE SAUDE IBITINGA",
         "uasg": "927856",
-        "uf": "SP",
-        "municipio": "IBITINGA",
         "purchase_date": "2022-09-02",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -659,8 +564,6 @@
         "supplier_name": "MEDVIDA DISTRIBUIDORA DE MEDICAMENTOS HOSPITALAR EIRELI",
         "organ": "PREFEITURA DE BELO JARDIM - PE",
         "uasg": "982333",
-        "uf": "PE",
-        "municipio": "BELO JARDIM",
         "purchase_date": "2021-12-29",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -699,8 +602,6 @@
         "supplier_name": "MS HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE BEZERROS - PE",
         "uasg": "982337",
-        "uf": "PE",
-        "municipio": "BEZERROS",
         "purchase_date": "2026-05-07",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -716,7 +617,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "FAIL",
-          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — MS HOSPITALAR LTDA — processo E:04105.853/2024."
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — MS HOSPITALAR LTDA — processo E:04105.1399/2024."
         },
         {
           "id": "o3_not_in_cnep",
@@ -739,8 +640,6 @@
         "supplier_name": "POUSO FARMA HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE SANTA LUZIA - MG",
         "uasg": "985155",
-        "uf": "MG",
-        "municipio": "SANTA LUZIA",
         "purchase_date": "2025-12-02",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -756,7 +655,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "REVIEW",
-          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-01-15, fim 2028-01-15)."
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-31, fim 2029-03-31)."
         },
         {
           "id": "o3_not_in_cnep",
@@ -779,8 +678,6 @@
         "supplier_name": "P & P DISTRIBUIDORA DE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE VIÇOSA - MG",
         "uasg": "985427",
-        "uf": "MG",
-        "municipio": "VIÇOSA",
         "purchase_date": "2025-11-10",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -796,7 +693,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "FAIL",
-          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — P & P DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo PA 033/2025."
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — P & P DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo 002."
         },
         {
           "id": "o3_not_in_cnep",
@@ -819,8 +716,6 @@
         "supplier_name": "EUTICA ATACADISTA DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
         "organ": "MPE-FUNDO MUNICIPAL DE SAÚDE DE CARPINA",
         "uasg": "932218",
-        "uf": "PE",
-        "municipio": "CARPINA",
         "purchase_date": "2025-09-19",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -859,8 +754,6 @@
         "supplier_name": "DF MEDICAL LTDA",
         "organ": "PREFEITURA MUNICIPAL DE BARCARENA - PA",
         "uasg": "980425",
-        "uf": "PA",
-        "municipio": "BARCARENA",
         "purchase_date": "2025-09-18",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -876,7 +769,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "REVIEW",
-          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-10-28, fim 2028-10-27)."
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-11-14, fim 2028-11-14)."
         },
         {
           "id": "o3_not_in_cnep",
@@ -899,8 +792,6 @@
         "supplier_name": "CK COMERCIO DE PRODUTOS E MEDICAMENTOS HOSPITALARES LTDA",
         "organ": "RO - PREFEITURA MUNICIPAL DE PORTO VELHO",
         "uasg": "925172",
-        "uf": "RO",
-        "municipio": "PORTO VELHO",
         "purchase_date": "2025-03-12",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -939,8 +830,6 @@
         "supplier_name": "CIRURGICA MEDPLUS - DISTRIBUIDORA DE MEDICAMENTOS E PRODUTOS HOSPITALARES LTDA",
         "organ": "PREFEITURA MUNICIPAL DE PARANAVAÍ - PR",
         "uasg": "987749",
-        "uf": "PR",
-        "municipio": "PARANAVAÍ",
         "purchase_date": "2025-12-01",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -979,8 +868,6 @@
         "supplier_name": "CROSMEDICA COMERCIO DE PRODUTOS PARA SAUDE LTDA",
         "organ": "PREFEITURA DE PRIMEIRO DE MAIO - PR",
         "uasg": "987789",
-        "uf": "PR",
-        "municipio": "PRIMEIRO DE MAIO",
         "purchase_date": "2024-12-20",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -996,7 +883,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "REVIEW",
-          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-02-13, fim 2027-02-13)."
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-02-12, fim 2027-02-12)."
         },
         {
           "id": "o3_not_in_cnep",
@@ -1019,8 +906,6 @@
         "supplier_name": "JVMED COMERCIO DE MEDICAMENTOS LTDA",
         "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
         "uasg": "155905",
-        "uf": "TO",
-        "municipio": "ARAGUAÍNA",
         "purchase_date": "2024-11-13",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -1059,8 +944,6 @@
         "supplier_name": "LEMED COMERCIO DE MATERIAL E MEDICAMENTOS HOSPITALARES LTDA",
         "organ": "AUTARQUIA MUN. DE SAUDE DE APUCARANA - PR",
         "uasg": "927571",
-        "uf": "PR",
-        "municipio": "APUCARANA",
         "purchase_date": "2024-10-17",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -1099,8 +982,6 @@
         "supplier_name": "ZUCK PAPEIS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE LAJE - BA",
         "uasg": "983677",
-        "uf": "BA",
-        "municipio": "LAJE",
         "purchase_date": "2024-09-26",
         "catmat": 340167,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
@@ -1143,8 +1024,6 @@
         "supplier_cnpj": "05536092000142",
         "supplier_name": "COMPANHIA HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE BOA VISTA - RR",
-        "uf": "RR",
-        "municipio": "BOA VISTA",
         "purchase_date": "2022-05-30",
         "unit_price": 45,
         "basket": {
@@ -1178,10 +1057,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "3650d4da032604c99d879b9d5c8d13329692be382f5c9ff17a7576ca9dd6e8d5",
-        "metadata_hash_hex": "942bf4907e30032abda8d1e6a2dc30ec3663cb743e54986c2ded0d7eb5ab69b6",
-        "tx_hash": "92fb6e2d72ea451e606e9b12351c05fc26a4e2ac78c11682607ecc4e22d382d1",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/92fb6e2d72ea451e606e9b12351c05fc26a4e2ac78c11682607ecc4e22d382d1"
+        "evidence_hash_hex": "8c05b23f55d5eda5f22006598e45d16f4e1c75fa851ff3ac2770d889d2300a9e",
+        "metadata_hash_hex": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -1195,8 +1074,6 @@
         "supplier_cnpj": "04385090000137",
         "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
         "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
-        "uf": "PI",
-        "municipio": "FRANCISCO SANTOS",
         "purchase_date": "2023-04-27",
         "unit_price": 7.22,
         "basket": {
@@ -1230,10 +1107,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "1dc68cab260dfd541d701b2aab44aeaa52a852dd38b4b7b6cca19f7bd7783777",
-        "metadata_hash_hex": "9810f7bc6c2432a549456c4831ec853b8e9589f066d20b75f8885c6548549763",
-        "tx_hash": "6726b9cda4e48bdf0766a6b106469ddc5224cede2908dfca85a3157aec4c0a90",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/6726b9cda4e48bdf0766a6b106469ddc5224cede2908dfca85a3157aec4c0a90"
+        "evidence_hash_hex": "9e82676bbbaef190439b8d708311e3c4017aa757f17a165f4873e738b7705a20",
+        "metadata_hash_hex": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -1247,8 +1124,6 @@
         "supplier_cnpj": "28423060000136",
         "supplier_name": "SUPLY SOLUCOES EM TECNOLOGIA & TRANSPORTES LTDA",
         "organ": "INST.BRAS.DO MEIO AMB.E DOS REC.NAT.RENOVAV.",
-        "uf": "AC",
-        "municipio": "RIO BRANCO",
         "purchase_date": "2022-07-15",
         "unit_price": 104,
         "basket": {
@@ -1282,10 +1157,10 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "d18757d4f979f4c93678007912c57339121f12501142491242cfeffa44043f7a",
-        "metadata_hash_hex": "5d86328f04efe35df7ad267d3b0c4dc6577bb20db9bc5baf422bd35b1bcaaf04",
-        "tx_hash": "9f30f84eaa65f2ff6bae44433fda94eb5d9c1b8a375b92f2ec31152d9c58f62b",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/9f30f84eaa65f2ff6bae44433fda94eb5d9c1b8a375b92f2ec31152d9c58f62b"
+        "evidence_hash_hex": "53470bdbfba764e48ca116c139508599d88038e05275de82b891e0fcd408fc4c",
+        "metadata_hash_hex": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+        "tx_hash": null,
+        "explorer_url": null
       }
     },
     {
@@ -1299,15 +1174,13 @@
         "supplier_cnpj": "02537040000100",
         "supplier_name": "JOSE A M SOARES",
         "organ": "PREFEITURA MUNICIPAL DE PINHEIRO - MA",
-        "uf": "MA",
-        "municipio": "PINHEIRO",
         "purchase_date": "2022-11-18",
         "unit_price": 3.34,
         "basket": {
-          "n": 959,
+          "n": 958,
           "median": 0.2,
           "mad": 0.03,
-          "meanAbsDev": 0.0753621480709074
+          "meanAbsDev": 0.07540219206680604
         }
       },
       "predicate_results": [
@@ -1319,7 +1192,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1344,8 +1217,6 @@
         "supplier_cnpj": "04385090000137",
         "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
         "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
-        "uf": "PI",
-        "municipio": "FRANCISCO SANTOS",
         "purchase_date": "2022-03-24",
         "unit_price": 6,
         "basket": {
@@ -1389,15 +1260,13 @@
         "supplier_cnpj": "16553940000148",
         "supplier_name": "MEDMAX COMERCIO DE MEDICAMENTOS LTDA",
         "organ": "MINISTERIO DA SAUDE",
-        "uf": "MS",
-        "municipio": "CAMPO GRANDE",
         "purchase_date": "2024-06-11",
         "unit_price": 3.28,
         "basket": {
-          "n": 959,
+          "n": 958,
           "median": 0.2,
           "mad": 0.03,
-          "meanAbsDev": 0.0753621480709074
+          "meanAbsDev": 0.07540219206680604
         }
       },
       "predicate_results": [
@@ -1409,7 +1278,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1434,15 +1303,13 @@
         "supplier_cnpj": "41934826000105",
         "supplier_name": "ALTO URUGUAI DISTRIBUIDORA LTDA",
         "organ": "COMANDO DO EXERCITO",
-        "uf": "DF",
-        "municipio": "BRASÍLIA",
         "purchase_date": "2026-03-05",
         "unit_price": 3.27,
         "basket": {
-          "n": 959,
+          "n": 958,
           "median": 0.2,
           "mad": 0.03,
-          "meanAbsDev": 0.0753621480709074
+          "meanAbsDev": 0.07540219206680604
         }
       },
       "predicate_results": [
@@ -1454,7 +1321,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1479,15 +1346,13 @@
         "supplier_cnpj": "32173778000199",
         "supplier_name": "PN COMERCIO E SERVICO LTDA",
         "organ": "PREFEITURA MUNICIPAL DE SÃO BENTO - PB",
-        "uf": "PB",
-        "municipio": "SÃO BENTO",
         "purchase_date": "2022-02-11",
         "unit_price": 73.29,
         "basket": {
-          "n": 739,
-          "median": 3.71,
-          "mad": 0.77,
-          "meanAbsDev": 1.434559539918809
+          "n": 738,
+          "median": 3.705,
+          "mad": 0.7650000000000001,
+          "meanAbsDev": 1.4360562330623308
         }
       },
       "predicate_results": [
@@ -1499,17 +1364,17 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 739 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 738 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
           "verdict": "PASS",
-          "reason": "Preço dentro da escala plausível (mediana R$ 3.7100)."
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7050)."
         },
         {
           "id": "o4_not_statistical_outlier",
           "verdict": "FAIL",
-          "reason": "Preço é outlier: Z-modificado 60.95 (limite 3.5); 1875% vs. mediana R$ 3.7100."
+          "reason": "Preço é outlier: Z-modificado 61.35 (limite 3.5); 1878% vs. mediana R$ 3.7050."
         }
       ]
     },
@@ -1524,8 +1389,6 @@
         "supplier_cnpj": "15229287000101",
         "supplier_name": "VIVRE COMERCIO DE PRODUTOS HOSPITALARES LTDA",
         "organ": "PREFEITURA MUNICIPAL DE JABORANDI - BA",
-        "uf": "BA",
-        "municipio": "JABORANDI",
         "purchase_date": "2025-01-06",
         "unit_price": 8.33,
         "basket": {
@@ -1569,15 +1432,13 @@
         "supplier_cnpj": "01215643000115",
         "supplier_name": "AVANCE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA DE DOM BASILIO - BA",
-        "uf": "BA",
-        "municipio": "DOM BASÍLIO",
         "purchase_date": "2026-03-06",
         "unit_price": 2.71,
         "basket": {
-          "n": 959,
+          "n": 958,
           "median": 0.2,
           "mad": 0.03,
-          "meanAbsDev": 0.0753621480709074
+          "meanAbsDev": 0.07540219206680604
         }
       },
       "predicate_results": [
@@ -1589,7 +1450,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1614,8 +1475,6 @@
         "supplier_cnpj": "04385090000137",
         "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
         "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
-        "uf": "PI",
-        "municipio": "FRANCISCO SANTOS",
         "purchase_date": "2023-04-27",
         "unit_price": 7.59,
         "basket": {
@@ -1659,15 +1518,13 @@
         "supplier_cnpj": "55007465000166",
         "supplier_name": "SANTANA FARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE CACERES - MT",
-        "uf": "MT",
-        "municipio": "CÁCERES",
         "purchase_date": "2025-04-14",
         "unit_price": 2.55,
         "basket": {
-          "n": 959,
+          "n": 958,
           "median": 0.2,
           "mad": 0.03,
-          "meanAbsDev": 0.0753621480709074
+          "meanAbsDev": 0.07540219206680604
         }
       },
       "predicate_results": [
@@ -1679,7 +1536,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1704,15 +1561,13 @@
         "supplier_cnpj": "22778969000120",
         "supplier_name": "DISTRIBUIDORA EXATA DE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE S.FRANCISCO DO BREJÃO",
-        "uf": "MA",
-        "municipio": "SÃO FRANCISCO DO BREJÃO",
         "purchase_date": "2025-07-08",
         "unit_price": 97.49,
         "basket": {
-          "n": 553,
-          "median": 9.15,
-          "mad": 1.1399999999999988,
-          "meanAbsDev": 1.6655410488245912
+          "n": 552,
+          "median": 9.145,
+          "mad": 1.1399999999999997,
+          "meanAbsDev": 1.667163405797101
         }
       },
       "predicate_results": [
@@ -1724,17 +1579,17 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 553 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 552 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
           "verdict": "PASS",
-          "reason": "Preço dentro da escala plausível (mediana R$ 9.1500)."
+          "reason": "Preço dentro da escala plausível (mediana R$ 9.1450)."
         },
         {
           "id": "o4_not_statistical_outlier",
           "verdict": "FAIL",
-          "reason": "Preço é outlier: Z-modificado 52.27 (limite 3.5); 965% vs. mediana R$ 9.1500."
+          "reason": "Preço é outlier: Z-modificado 52.27 (limite 3.5); 966% vs. mediana R$ 9.1450."
         }
       ]
     },
@@ -1749,8 +1604,6 @@
         "supplier_cnpj": "58956341000115",
         "supplier_name": "AMAZONA PHARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE STO ANTONIO DO ICA-AM",
-        "uf": "AM",
-        "municipio": "SANTO ANTÔNIO DO IÇÁ",
         "purchase_date": "2025-11-14",
         "unit_price": 50,
         "basket": {
@@ -1794,8 +1647,6 @@
         "supplier_cnpj": "14080830000180",
         "supplier_name": "DUNAFARMA MEDICAMENTOS LTDA",
         "organ": "COMANDO DO EXERCITO",
-        "uf": "MS",
-        "municipio": "NIOAQUE",
         "purchase_date": "2022-08-24",
         "unit_price": 0.78,
         "basket": {
@@ -1839,8 +1690,6 @@
         "supplier_cnpj": "14779687000110",
         "supplier_name": "JOSE CARLOS DE SOUZA PRODUTOS FARMACEUTICOS LTDA",
         "organ": "ESP-SECRETARIA DA SAUDE",
-        "uf": "SP",
-        "municipio": "SOROCABA",
         "purchase_date": "2025-12-26",
         "unit_price": 0.77,
         "basket": {
@@ -1884,8 +1733,6 @@
         "supplier_cnpj": "41340009000129",
         "supplier_name": "VERIS PRODUTOS PARA SAUDE LTDA",
         "organ": "PREFEITURA MUNICIPAL DE CAMPINAS - SP",
-        "uf": "SP",
-        "municipio": "CAMPINAS",
         "purchase_date": "2025-01-22",
         "unit_price": 138.17,
         "basket": {
@@ -1929,15 +1776,13 @@
         "supplier_cnpj": "01215643000115",
         "supplier_name": "AVANCE MEDICAMENTOS LTDA",
         "organ": "PREFEITURA DE DOM BASILIO - BA",
-        "uf": "BA",
-        "municipio": "DOM BASÍLIO",
         "purchase_date": "2026-03-06",
         "unit_price": 28.36,
         "basket": {
-          "n": 806,
+          "n": 803,
           "median": 2.5,
           "mad": 0.3700000000000001,
-          "meanAbsDev": 1.0265970223325058
+          "meanAbsDev": 1.0292937733499372
         }
       },
       "predicate_results": [
@@ -1949,7 +1794,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 806 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -1967,6 +1812,49 @@
       "use_case": "overpricing_v1",
       "verdict": "FAIL",
       "evidence": {
+        "catmat": 268513,
+        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "12006005010652021",
+        "supplier_cnpj": "26525513000100",
+        "supplier_name": "TURVOMED DISTRIBUIDORA E SERVICOS EIRELI",
+        "organ": "COMANDO DA AERONÁUTICA",
+        "purchase_date": "2021-12-14",
+        "unit_price": 56.89,
+        "basket": {
+          "n": 738,
+          "median": 3.705,
+          "mad": 0.7650000000000001,
+          "meanAbsDev": 1.4360562330623308
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268513, preço unitário R$ 56.8900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 738 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7050)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.89 (limite 3.5); 1435% vs. mediana R$ 3.7050."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
         "catmat": 268375,
         "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
         "unit": "BIS 10",
@@ -1974,15 +1862,13 @@
         "supplier_cnpj": "08778201000126",
         "supplier_name": "DROGAFONTE LTDA",
         "organ": "PREFEITURA DE DOM BASILIO - BA",
-        "uf": "BA",
-        "municipio": "DOM BASÍLIO",
         "purchase_date": "2025-06-02",
         "unit_price": 28.08,
         "basket": {
-          "n": 806,
+          "n": 803,
           "median": 2.5,
           "mad": 0.3700000000000001,
-          "meanAbsDev": 1.0265970223325058
+          "meanAbsDev": 1.0292937733499372
         }
       },
       "predicate_results": [
@@ -1994,7 +1880,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 806 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -2012,51 +1898,6 @@
       "use_case": "overpricing_v1",
       "verdict": "FAIL",
       "evidence": {
-        "catmat": 268513,
-        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
-        "unit": "FR-AM 0",
-        "contract_ref": "12006005010652021",
-        "supplier_cnpj": "26525513000100",
-        "supplier_name": "TURVOMED DISTRIBUIDORA E SERVICOS EIRELI",
-        "organ": "COMANDO DA AERONÁUTICA",
-        "uf": "SP",
-        "municipio": "PIRASSUNUNGA",
-        "purchase_date": "2021-12-14",
-        "unit_price": 56.89,
-        "basket": {
-          "n": 739,
-          "median": 3.71,
-          "mad": 0.77,
-          "meanAbsDev": 1.434559539918809
-        }
-      },
-      "predicate_results": [
-        {
-          "id": "o1_item_identifiable",
-          "verdict": "PASS",
-          "reason": "Item CATMAT 268513, preço unitário R$ 56.8900."
-        },
-        {
-          "id": "o2_basket_sufficient",
-          "verdict": "PASS",
-          "reason": "Cesta com 739 preços comparáveis (mín. 8)."
-        },
-        {
-          "id": "o3_price_in_scale",
-          "verdict": "PASS",
-          "reason": "Preço dentro da escala plausível (mediana R$ 3.7100)."
-        },
-        {
-          "id": "o4_not_statistical_outlier",
-          "verdict": "FAIL",
-          "reason": "Preço é outlier: Z-modificado 46.58 (limite 3.5); 1433% vs. mediana R$ 3.7100."
-        }
-      ]
-    },
-    {
-      "use_case": "overpricing_v1",
-      "verdict": "FAIL",
-      "evidence": {
         "catmat": 268375,
         "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
         "unit": "BIS 10",
@@ -2064,15 +1905,13 @@
         "supplier_cnpj": "21104288000114",
         "supplier_name": "DROGARIA ALMEIDA JUNIO LTDA",
         "organ": "INSTITUTO FEDERAL DE MATO GROSSO",
-        "uf": "MT",
-        "municipio": "CAMPO VERDE",
         "purchase_date": "2022-07-05",
         "unit_price": 28.04,
         "basket": {
-          "n": 806,
+          "n": 803,
           "median": 2.5,
           "mad": 0.3700000000000001,
-          "meanAbsDev": 1.0265970223325058
+          "meanAbsDev": 1.0292937733499372
         }
       },
       "predicate_results": [
@@ -2084,7 +1923,7 @@
         {
           "id": "o2_basket_sufficient",
           "verdict": "PASS",
-          "reason": "Cesta com 806 preços comparáveis (mín. 8)."
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
         },
         {
           "id": "o3_price_in_scale",
@@ -2109,8 +1948,6 @@
         "supplier_cnpj": "30540358000178",
         "supplier_name": "BIOGRAM COMERCIO DE INSUMOS FARMACEUTICOS LTDA",
         "organ": "PREFEITURA MUNICIPAL DE GOVERNADOR VALADARES",
-        "uf": "MG",
-        "municipio": "GOVERNADOR VALADARES",
         "purchase_date": "2025-03-23",
         "unit_price": 0.7267,
         "basket": {
@@ -2154,8 +1991,6 @@
         "supplier_cnpj": "33341536000120",
         "supplier_name": "A. F. A. COMERCIO DE MERCADORIAS EM GERAL LTDA",
         "organ": "PREFEITURA MUNICIPAL DE ACARÁ - PA",
-        "uf": "PA",
-        "municipio": "ACARÁ",
         "purchase_date": "2024-08-27",
         "unit_price": 0.71,
         "basket": {
@@ -2199,8 +2034,6 @@
         "supplier_cnpj": "49386357000149",
         "supplier_name": "CAT DOG ATACADO LTDA",
         "organ": "UNIVERSIDADE FEDERAL DE SANTA CATARINA",
-        "uf": "SC",
-        "municipio": "FLORIANÓPOLIS",
         "purchase_date": "2023-12-15",
         "unit_price": 47.41,
         "basket": {
@@ -2244,8 +2077,6 @@
         "supplier_cnpj": "42529374000149",
         "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
         "organ": "PREFEITURA DE PRESIDENTE BERNARDES - MG",
-        "uf": "MG",
-        "municipio": "PRESIDENTE BERNARDES",
         "purchase_date": "2024-09-27",
         "unit_price": 0.7,
         "basket": {
@@ -2289,8 +2120,6 @@
         "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA",
         "organ": "FUNDO MUN DE SAUDE DE VASSOURAS - RJ",
         "uasg": "927492",
-        "uf": "RJ",
-        "municipio": "VASSOURAS",
         "purchase_date": "2025-11-11",
         "catmat": 354314,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
@@ -2306,7 +2135,7 @@
         {
           "id": "o2_not_in_ceis",
           "verdict": "FAIL",
-          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES — processo 009/2024."
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA — processo 10583/25 007/25."
         },
         {
           "id": "o3_not_in_cnep",
@@ -2321,10 +2150,20 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "eb1e8e35c9b02558b4307b17eece487026a0b4af15074ec948936c9c69635ea4",
-        "metadata_hash_hex": "87ce7c09b6edb62b0e31ac5219d793656eef2df268bbfd15e8c3b3fedffbe345",
-        "tx_hash": "2141095b78655a10e707b87150efbcaea2fb12a68f50f5939dab8a91d35fad5e",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/2141095b78655a10e707b87150efbcaea2fb12a68f50f5939dab8a91d35fad5e"
+        "evidence_hash_hex": "e017c433d5afc4127459a2e9867647fb795ddf096ff821bbc24c2fdaff7ecc55",
+        "metadata_hash_hex": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+        "tx_hash": "ee417591759d78e1d1df5b6f32e5bb56ec408b716e1bfe7d39a258827329cfef",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/ee417591759d78e1d1df5b6f32e5bb56ec408b716e1bfe7d39a258827329cfef",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329726,
+          "verdict": "Fail"
+        }
       }
     },
     {
@@ -2336,8 +2175,6 @@
         "supplier_name": "ILG COMERCIAL LTDA",
         "organ": "PREFEITURA DE MERCEDES - PR",
         "uasg": "985531",
-        "uf": "PR",
-        "municipio": "MERCEDES",
         "purchase_date": "2026-04-02",
         "catmat": 267627,
         "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
@@ -2368,10 +2205,20 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "b343b4f2984412ca8a2cd8335561261b15524c952a70d38543cc8eb3ee49032c",
-        "metadata_hash_hex": "343cd9c3110cec07568d4d9b0b171c06f76c9e7be83ea4800a1cd9e719ce2c7b",
-        "tx_hash": "9e2def2a3fc656043105f4d6387b0438453e13842a41733d10562e8a27b304f1",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/9e2def2a3fc656043105f4d6387b0438453e13842a41733d10562e8a27b304f1"
+        "evidence_hash_hex": "8ce845b9ac55c9bc4fb5aa9f114295131c3da8c40c7cbb50e5fbceac152177b2",
+        "metadata_hash_hex": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+        "tx_hash": "8948bc065b5cffdb4d225270220f1dfedd421bb275d7f4881bcf4fd8d704e024",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/8948bc065b5cffdb4d225270220f1dfedd421bb275d7f4881bcf4fd8d704e024",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329731,
+          "verdict": "Fail"
+        }
       }
     },
     {
@@ -2383,8 +2230,6 @@
         "supplier_name": "DISTRIMED COMERCIO DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE HORIZONTE - CE",
         "uasg": "981253",
-        "uf": "CE",
-        "municipio": "HORIZONTE",
         "purchase_date": "2025-01-09",
         "catmat": 354314,
         "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
@@ -2415,10 +2260,20 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "27caebf37d9aad3446bafe442f2a0d7077ffa2c219e1169450b073ca2971d8a7",
-        "metadata_hash_hex": "ee502f267a6c562a5f914f9647310927fd73a0f526e107b042236f74ab4f47c5",
-        "tx_hash": "0e2d7d4eaf6102a2872e8e1d45b5be3c0af97af854ac72264f776a15632551c3",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/0e2d7d4eaf6102a2872e8e1d45b5be3c0af97af854ac72264f776a15632551c3"
+        "evidence_hash_hex": "7ddec968199367b9816701822a2079d6cfedcc93c95ba0281cf96f5c6c63da0f",
+        "metadata_hash_hex": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+        "tx_hash": "5ca45373d4c4c06f4880b8700140cdfd2fad2621d5dc27dafdac874ebbe47278",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/5ca45373d4c4c06f4880b8700140cdfd2fad2621d5dc27dafdac874ebbe47278",
+        "onchain_verified": true,
+        "onchain_verdict": "Review",
+        "onchain_record": {
+          "metadata_hash": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329736,
+          "verdict": "Review"
+        }
       }
     },
     {
@@ -2432,8 +2287,6 @@
         "supplier_cnpj": "05536092000142",
         "supplier_name": "COMPANHIA HOSPITALAR LTDA",
         "organ": "PREFEITURA MUNICIPAL DE BOA VISTA - RR",
-        "uf": "RR",
-        "municipio": "BOA VISTA",
         "purchase_date": "2022-05-30",
         "unit_price": 45,
         "basket": {
@@ -2467,10 +2320,20 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "3650d4da032604c99d879b9d5c8d13329692be382f5c9ff17a7576ca9dd6e8d5",
-        "metadata_hash_hex": "942bf4907e30032abda8d1e6a2dc30ec3663cb743e54986c2ded0d7eb5ab69b6",
-        "tx_hash": "92fb6e2d72ea451e606e9b12351c05fc26a4e2ac78c11682607ecc4e22d382d1",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/92fb6e2d72ea451e606e9b12351c05fc26a4e2ac78c11682607ecc4e22d382d1"
+        "evidence_hash_hex": "8c05b23f55d5eda5f22006598e45d16f4e1c75fa851ff3ac2770d889d2300a9e",
+        "metadata_hash_hex": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+        "tx_hash": "d6c8bbe8d076c54a52b6442643bca7bf027d1717e320e1954b0e9422dc8f9a61",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/d6c8bbe8d076c54a52b6442643bca7bf027d1717e320e1954b0e9422dc8f9a61",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329741,
+          "verdict": "Fail"
+        }
       }
     },
     {
@@ -2484,8 +2347,6 @@
         "supplier_cnpj": "04385090000137",
         "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
         "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
-        "uf": "PI",
-        "municipio": "FRANCISCO SANTOS",
         "purchase_date": "2023-04-27",
         "unit_price": 7.22,
         "basket": {
@@ -2519,10 +2380,20 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "1dc68cab260dfd541d701b2aab44aeaa52a852dd38b4b7b6cca19f7bd7783777",
-        "metadata_hash_hex": "9810f7bc6c2432a549456c4831ec853b8e9589f066d20b75f8885c6548549763",
-        "tx_hash": "6726b9cda4e48bdf0766a6b106469ddc5224cede2908dfca85a3157aec4c0a90",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/6726b9cda4e48bdf0766a6b106469ddc5224cede2908dfca85a3157aec4c0a90"
+        "evidence_hash_hex": "9e82676bbbaef190439b8d708311e3c4017aa757f17a165f4873e738b7705a20",
+        "metadata_hash_hex": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+        "tx_hash": "cc6becfff2af0755aeea9d7c11a084a7fd74051b5213041f351731753a392ef6",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/cc6becfff2af0755aeea9d7c11a084a7fd74051b5213041f351731753a392ef6",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329746,
+          "verdict": "Fail"
+        }
       }
     },
     {
@@ -2536,8 +2407,6 @@
         "supplier_cnpj": "28423060000136",
         "supplier_name": "SUPLY SOLUCOES EM TECNOLOGIA & TRANSPORTES LTDA",
         "organ": "INST.BRAS.DO MEIO AMB.E DOS REC.NAT.RENOVAV.",
-        "uf": "AC",
-        "municipio": "RIO BRANCO",
         "purchase_date": "2022-07-15",
         "unit_price": 104,
         "basket": {
@@ -2571,12 +2440,22 @@
       ],
       "attestation": {
         "status": "COMPLETED",
-        "evidence_hash_hex": "d18757d4f979f4c93678007912c57339121f12501142491242cfeffa44043f7a",
-        "metadata_hash_hex": "5d86328f04efe35df7ad267d3b0c4dc6577bb20db9bc5baf422bd35b1bcaaf04",
-        "tx_hash": "9f30f84eaa65f2ff6bae44433fda94eb5d9c1b8a375b92f2ec31152d9c58f62b",
-        "explorer_url": "https://stellar.expert/explorer/testnet/tx/9f30f84eaa65f2ff6bae44433fda94eb5d9c1b8a375b92f2ec31152d9c58f62b"
+        "evidence_hash_hex": "53470bdbfba764e48ca116c139508599d88038e05275de82b891e0fcd408fc4c",
+        "metadata_hash_hex": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+        "tx_hash": "c992a4128df7ab8cee93b30bef71d46e3d99fa8c527814343dd98e5e9d481a14",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/c992a4128df7ab8cee93b30bef71d46e3d99fa8c527814343dd98e5e9d481a14",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329751,
+          "verdict": "Fail"
+        }
       }
     }
   ],
-  "attestation_run_at": "2026-05-21T14:20:19.021Z"
+  "attestation_run_at": "2026-05-21T02:15:52.056Z"
 }
