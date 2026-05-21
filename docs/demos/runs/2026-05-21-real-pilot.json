@@ -1,0 +1,2461 @@
+{
+  "generated_at": "2026-05-21T02:12:05.106Z",
+  "accept_requirement_met": true,
+  "sources": {
+    "sanctions": {
+      "ceis": 13676,
+      "cnep": 1613,
+      "cepim": 3562
+    },
+    "sanctions_source_dates": {
+      "ceis": "20260520",
+      "cnep": "20260520",
+      "cepim": "20260518"
+    },
+    "compras_gov_records": 14417,
+    "distinct_suppliers": 1787,
+    "scan_classes": [
+      {
+        "codigo": 6505,
+        "nome": "DROGAS E MEDICAMENTOS",
+        "catmats": 60
+      },
+      {
+        "codigo": 6510,
+        "nome": "CURATIVOS CIRÚRGICOS",
+        "catmats": 25
+      },
+      {
+        "codigo": 7510,
+        "nome": "ARTIGOS DE ESCRITÓRIO",
+        "catmats": 25
+      }
+    ]
+  },
+  "summary": {
+    "sanction_alerts": 203,
+    "sanction_fail": 28,
+    "sanction_review": 175,
+    "overpricing_alerts": 906,
+    "overpricing_groups_trimmed_out": 4
+  },
+  "sanction_alerts": [
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "92749205900182025",
+        "supplier_cnpj": "25279552000101",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA",
+        "organ": "FUNDO MUN DE SAUDE DE VASSOURAS - RJ",
+        "uasg": "927492",
+        "purchase_date": "2025-11-11",
+        "catmat": 354314,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
+        "value": 887.36,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92749205900182025, fornecedor 25279552000101."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA — processo 10583/25 007/25."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "e017c433d5afc4127459a2e9867647fb795ddf096ff821bbc24c2fdaff7ecc55",
+        "metadata_hash_hex": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98125305900552024",
+        "supplier_cnpj": "21830581000169",
+        "supplier_name": "DISTRIMED COMERCIO DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE HORIZONTE - CE",
+        "uasg": "981253",
+        "purchase_date": "2025-01-09",
+        "catmat": 354314,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
+        "value": 1170,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98125305900552024, fornecedor 21830581000169."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-17, fim 2027-03-17)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "7ddec968199367b9816701822a2079d6cfedcc93c95ba0281cf96f5c6c63da0f",
+        "metadata_hash_hex": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98756505000852022",
+        "supplier_cnpj": "00802002000102",
+        "supplier_name": "ALTERMED MATERIAL MEDICO HOSPITALAR LTDA",
+        "organ": "PREFEITURA DE FRANCISCO BELTRAO - PR",
+        "uasg": "987565",
+        "purchase_date": "2022-09-19",
+        "catmat": 354314,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
+        "value": 1278,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98756505000852022, fornecedor 00802002000102."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-08-18, fim 2026-08-18)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98553105900212026",
+        "supplier_cnpj": "20657155000102",
+        "supplier_name": "ILG COMERCIAL LTDA",
+        "organ": "PREFEITURA DE MERCEDES - PR",
+        "uasg": "985531",
+        "purchase_date": "2026-04-02",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 1316,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98553105900212026, fornecedor 20657155000102."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — ILG COMERCIAL LTDA — processo 11797/2025."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "8ce845b9ac55c9bc4fb5aa9f114295131c3da8c40c7cbb50e5fbceac152177b2",
+        "metadata_hash_hex": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98011305900172025",
+        "supplier_cnpj": "40274237000185",
+        "supplier_name": "CLM FARMA COMERCIO E DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA DE FEIJO - AC",
+        "uasg": "980113",
+        "purchase_date": "2025-10-15",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 15500,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98011305900172025, fornecedor 40274237000185."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — CLM FARMA COMERCIO E DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo 08016026659202412."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "92530205901472024",
+        "supplier_cnpj": "03817043000152",
+        "supplier_name": "PHARMAPLUS LTDA",
+        "organ": "EPB-SECRETARIA ESTADO D ADMINISTRAÇÃO PARAIBA",
+        "uasg": "925302",
+        "purchase_date": "2025-09-17",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 1365,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92530205901472024, fornecedor 03817043000152."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-12, fim 2026-06-13)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98042505990042025",
+        "supplier_cnpj": "49803998000151",
+        "supplier_name": "ODONTOMED DISTRIBUIDORA DE MATERIAIS E MEDICAMENTOS HOSPITALARES E ODONTOLOGICOS",
+        "organ": "PREFEITURA MUNICIPAL DE BARCARENA - PA",
+        "uasg": "980425",
+        "purchase_date": "2025-09-18",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 25670.51,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98042505990042025, fornecedor 49803998000151."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — ODONTOMED DISTRIBUIDORA DE MATERIAIS E MEDICAMENTOS HOSPITALARES E ODONTOLOGICOS — processo 99003/2025."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98626305900352024",
+        "supplier_cnpj": "16586871000250",
+        "supplier_name": "SINERGIA MEDICAMENTOS LTDA",
+        "organ": "MSP-PREFEITURA MUNICIPAL DE BURITAMA",
+        "uasg": "986263",
+        "purchase_date": "2024-11-19",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 379.5,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98626305900352024, fornecedor 16586871000250."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-04-23, fim 2028-04-20)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "45840305900032024",
+        "supplier_cnpj": "42529374000149",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
+        "organ": "MPR-CONSORCIO INTERM. SAÚDE SUDOESTE SUDOESTE",
+        "uasg": "458403",
+        "purchase_date": "2024-06-11",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 7020.39,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 45840305900032024, fornecedor 42529374000149."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-05-04, fim 2027-05-03)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98798905000732023",
+        "supplier_cnpj": "19423875000124",
+        "supplier_name": "M D G COMERCIAL LTDA.",
+        "organ": "PREFEITURA DE VERA CRUZ DO OESTE - PR",
+        "uasg": "987989",
+        "purchase_date": "2023-12-27",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 180,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98798905000732023, fornecedor 19423875000124."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2024-12-10, fim 2026-12-09)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98755305000692022",
+        "supplier_cnpj": "23121920000163",
+        "supplier_name": "MARYMED DISTRIBUIDORA DE MEDICAMENTOS E CORRELATOS - EIRELI",
+        "organ": "PREFEITURA DE FLORAI - PR",
+        "uasg": "987553",
+        "purchase_date": "2022-12-21",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 3199.2,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98755305000692022, fornecedor 23121920000163."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-11-03, fim 2026-11-03)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98059505001322021",
+        "supplier_cnpj": "36028477000122",
+        "supplier_name": "HIPERFAR MATERIAIS HOSPITALAR E MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE PARAUAPEBAS - PA",
+        "uasg": "980595",
+        "purchase_date": "2022-12-08",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 63125,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98059505001322021, fornecedor 36028477000122."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-09-18, fim 2028-09-18)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "92785605000102022",
+        "supplier_cnpj": "14271474000182",
+        "supplier_name": "FRAGNARI DISTRIBUIDORA DE MEDICAMENTOS LTDA.",
+        "organ": "SERVICO AUTONOMO MUNICIPAL DE SAUDE IBITINGA",
+        "uasg": "927856",
+        "purchase_date": "2022-09-02",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 234000,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92785605000102022, fornecedor 14271474000182."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-01-16, fim 2027-01-15)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98233305000522021",
+        "supplier_cnpj": "06132785000132",
+        "supplier_name": "MEDVIDA DISTRIBUIDORA DE MEDICAMENTOS HOSPITALAR EIRELI",
+        "organ": "PREFEITURA DE BELO JARDIM - PE",
+        "uasg": "982333",
+        "purchase_date": "2021-12-29",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 6660,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98233305000522021, fornecedor 06132785000132."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2023-04-05, fim 2027-04-05)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98233705930032026",
+        "supplier_cnpj": "36191620000100",
+        "supplier_name": "MS HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BEZERROS - PE",
+        "uasg": "982337",
+        "purchase_date": "2026-05-07",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 1960,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98233705930032026, fornecedor 36191620000100."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — MS HOSPITALAR LTDA — processo E:04105.1399/2024."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98515505900222025",
+        "supplier_cnpj": "18519219000167",
+        "supplier_name": "POUSO FARMA HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE SANTA LUZIA - MG",
+        "uasg": "985155",
+        "purchase_date": "2025-12-02",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 33000,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98515505900222025, fornecedor 18519219000167."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-31, fim 2029-03-31)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98542705900222025",
+        "supplier_cnpj": "52808009000127",
+        "supplier_name": "P & P DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE VIÇOSA - MG",
+        "uasg": "985427",
+        "purchase_date": "2025-11-10",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 2790,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98542705900222025, fornecedor 52808009000127."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — P & P DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo 002."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "93221805900072025",
+        "supplier_cnpj": "04780117000196",
+        "supplier_name": "EUTICA ATACADISTA DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
+        "organ": "MPE-FUNDO MUNICIPAL DE SAÚDE DE CARPINA",
+        "uasg": "932218",
+        "purchase_date": "2025-09-19",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 14560,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 93221805900072025, fornecedor 04780117000196."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — EUTICA ATACADISTA DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA — processo 0026/2024."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98042505990042025",
+        "supplier_cnpj": "44656846000150",
+        "supplier_name": "DF MEDICAL LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BARCARENA - PA",
+        "uasg": "980425",
+        "purchase_date": "2025-09-18",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 12483.75,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98042505990042025, fornecedor 44656846000150."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-11-14, fim 2028-11-14)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "92517205900012025",
+        "supplier_cnpj": "32534969000139",
+        "supplier_name": "CK COMERCIO DE PRODUTOS E MEDICAMENTOS HOSPITALARES LTDA",
+        "organ": "RO - PREFEITURA MUNICIPAL DE PORTO VELHO",
+        "uasg": "925172",
+        "purchase_date": "2025-03-12",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 8370,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92517205900012025, fornecedor 32534969000139."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-06-26, fim 2028-06-23)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98774905900012025",
+        "supplier_cnpj": "52685881000125",
+        "supplier_name": "CIRURGICA MEDPLUS - DISTRIBUIDORA DE MEDICAMENTOS E PRODUTOS HOSPITALARES LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE PARANAVAÍ - PR",
+        "uasg": "987749",
+        "purchase_date": "2025-12-01",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 2080,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98774905900012025, fornecedor 52685881000125."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Declaração de Inidoneidade com prazo determinado — CIRURGICA MEDPLUS - DISTRIBUIDORA DE MEDICAMENTOS E PRODUTOS HOSPITALARES LTDA — processo 19.008.185281/202."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98778905900592024",
+        "supplier_cnpj": "11606767000185",
+        "supplier_name": "CROSMEDICA COMERCIO DE PRODUTOS PARA SAUDE LTDA",
+        "organ": "PREFEITURA DE PRIMEIRO DE MAIO - PR",
+        "uasg": "987789",
+        "purchase_date": "2024-12-20",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 283.2,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98778905900592024, fornecedor 11606767000185."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-02-12, fim 2027-02-12)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15590505900172024",
+        "supplier_cnpj": "14461011000183",
+        "supplier_name": "JVMED COMERCIO DE MEDICAMENTOS LTDA",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155905",
+        "purchase_date": "2024-11-13",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 535,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15590505900172024, fornecedor 14461011000183."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-08-12, fim 2028-08-12)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "92757105900272024",
+        "supplier_cnpj": "37931064000116",
+        "supplier_name": "LEMED COMERCIO DE MATERIAL E MEDICAMENTOS HOSPITALARES LTDA",
+        "organ": "AUTARQUIA MUN. DE SAUDE DE APUCARANA - PR",
+        "uasg": "927571",
+        "purchase_date": "2024-10-17",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 9040,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92757105900272024, fornecedor 37931064000116."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-12-11, fim 2028-12-11)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98367705900122024",
+        "supplier_cnpj": "23232280000169",
+        "supplier_name": "ZUCK PAPEIS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE LAJE - BA",
+        "uasg": "983677",
+        "purchase_date": "2024-09-26",
+        "catmat": 340167,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 150 MG/ML, FORMA FARMACEUTICA: SOLUÇÃO INJETÁVEL ",
+        "value": 11900,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98367705900122024, fornecedor 23232280000169."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-07-15, fim 2025-08-16)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    }
+  ],
+  "overpricing_alerts": [
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268373,
+        "item_desc": "ACICLOVIR, DOSAGEM: 30 MG/G, USO: POMADA OFTÁLMICA ",
+        "unit": "BIS 10",
+        "contract_ref": "98030105000222022",
+        "supplier_cnpj": "05536092000142",
+        "supplier_name": "COMPANHIA HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BOA VISTA - RR",
+        "purchase_date": "2022-05-30",
+        "unit_price": 45,
+        "basket": {
+          "n": 11,
+          "median": 2.48,
+          "mad": 0.20999999999999996,
+          "meanAbsDev": 5.15929090909091
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268373, preço unitário R$ 45.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 11 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.4800)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 136.57 (limite 3.5); 1715% vs. mediana R$ 2.4800."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "8c05b23f55d5eda5f22006598e45d16f4e1c75fa851ff3ac2770d889d2300a9e",
+        "metadata_hash_hex": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000122023",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "purchase_date": "2023-04-27",
+        "unit_price": 7.22,
+        "basket": {
+          "n": 126,
+          "median": 0.3661,
+          "mad": 0.05445,
+          "meanAbsDev": 0.22501031746031736
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267627, preço unitário R$ 7.2200."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 126 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.3661)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 84.90 (limite 3.5); 1872% vs. mediana R$ 0.3661."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "9e82676bbbaef190439b8d708311e3c4017aa757f17a165f4873e738b7705a20",
+        "metadata_hash_hex": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270556,
+        "item_desc": "AMPICILINA, APRESENTAÇÃO: ASSOCIADA COM SULBACTAM , DOSAGEM: 1G + 500MG , TIPO USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "19310506000032022",
+        "supplier_cnpj": "28423060000136",
+        "supplier_name": "SUPLY SOLUCOES EM TECNOLOGIA & TRANSPORTES LTDA",
+        "organ": "INST.BRAS.DO MEIO AMB.E DOS REC.NAT.RENOVAV.",
+        "purchase_date": "2022-07-15",
+        "unit_price": 104,
+        "basket": {
+          "n": 222,
+          "median": 6.0899,
+          "mad": 0.9100999999999999,
+          "meanAbsDev": 1.963871621621621
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270556, preço unitário R$ 104.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 222 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 6.0899)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 72.56 (limite 3.5); 1608% vs. mediana R$ 6.0899."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "53470bdbfba764e48ca116c139508599d88038e05275de82b891e0fcd408fc4c",
+        "metadata_hash_hex": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+        "tx_hash": null,
+        "explorer_url": null
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98086905000162022",
+        "supplier_cnpj": "02537040000100",
+        "supplier_name": "JOSE A M SOARES",
+        "organ": "PREFEITURA MUNICIPAL DE PINHEIRO - MA",
+        "purchase_date": "2022-11-18",
+        "unit_price": 3.34,
+        "basket": {
+          "n": 958,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07540219206680604
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.3400."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 70.60 (limite 3.5); 1570% vs. mediana R$ 0.2000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000082022",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "purchase_date": "2022-03-24",
+        "unit_price": 6,
+        "basket": {
+          "n": 126,
+          "median": 0.3661,
+          "mad": 0.05445,
+          "meanAbsDev": 0.22501031746031736
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267627, preço unitário R$ 6.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 126 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.3661)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.79 (limite 3.5); 1539% vs. mediana R$ 0.3661."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "25703605900042024",
+        "supplier_cnpj": "16553940000148",
+        "supplier_name": "MEDMAX COMERCIO DE MEDICAMENTOS LTDA",
+        "organ": "MINISTERIO DA SAUDE",
+        "purchase_date": "2024-06-11",
+        "unit_price": 3.28,
+        "basket": {
+          "n": 958,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07540219206680604
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.2800."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.25 (limite 3.5); 1540% vs. mediana R$ 0.2000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "16008805900132025",
+        "supplier_cnpj": "41934826000105",
+        "supplier_name": "ALTO URUGUAI DISTRIBUIDORA LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "purchase_date": "2026-03-05",
+        "unit_price": 3.27,
+        "basket": {
+          "n": 958,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07540219206680604
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.2700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.02 (limite 3.5); 1535% vs. mediana R$ 0.2000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268513,
+        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98217905000042022",
+        "supplier_cnpj": "32173778000199",
+        "supplier_name": "PN COMERCIO E SERVICO LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE SÃO BENTO - PB",
+        "purchase_date": "2022-02-11",
+        "unit_price": 73.29,
+        "basket": {
+          "n": 738,
+          "median": 3.705,
+          "mad": 0.7650000000000001,
+          "meanAbsDev": 1.4360562330623308
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268513, preço unitário R$ 73.2900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 738 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7050)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 61.35 (limite 3.5); 1878% vs. mediana R$ 3.7050."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267515,
+        "item_desc": "AMPICILINA, DOSAGEM: 500 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98985905900162024",
+        "supplier_cnpj": "15229287000101",
+        "supplier_name": "VIVRE COMERCIO DE PRODUTOS HOSPITALARES LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE JABORANDI - BA",
+        "purchase_date": "2025-01-06",
+        "unit_price": 8.33,
+        "basket": {
+          "n": 98,
+          "median": 0.48475,
+          "mad": 0.08999999999999997,
+          "meanAbsDev": 0.32685204081632663
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267515, preço unitário R$ 8.3300."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 98 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.4848)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 58.80 (limite 3.5); 1618% vs. mediana R$ 0.4848."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98350105900082026",
+        "supplier_cnpj": "01215643000115",
+        "supplier_name": "AVANCE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "purchase_date": "2026-03-06",
+        "unit_price": 2.71,
+        "basket": {
+          "n": 958,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07540219206680604
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 2.7100."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 56.43 (limite 3.5); 1255% vs. mediana R$ 0.2000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267515,
+        "item_desc": "AMPICILINA, DOSAGEM: 500 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000122023",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "purchase_date": "2023-04-27",
+        "unit_price": 7.59,
+        "basket": {
+          "n": 98,
+          "median": 0.48475,
+          "mad": 0.08999999999999997,
+          "meanAbsDev": 0.32685204081632663
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267515, preço unitário R$ 7.5900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 98 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.4848)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 53.25 (limite 3.5); 1466% vs. mediana R$ 0.4848."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98904705900062025",
+        "supplier_cnpj": "55007465000166",
+        "supplier_name": "SANTANA FARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CACERES - MT",
+        "purchase_date": "2025-04-14",
+        "unit_price": 2.55,
+        "basket": {
+          "n": 958,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07540219206680604
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 2.5500."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 958 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 52.84 (limite 3.5); 1175% vs. mediana R$ 0.2000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270616,
+        "item_desc": "BENZILPENICILINA, APRESENTAÇÃO: POTÁSSICA , DOSAGEM: 5.000.000UI , USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98023005900102025",
+        "supplier_cnpj": "22778969000120",
+        "supplier_name": "DISTRIBUIDORA EXATA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE S.FRANCISCO DO BREJÃO",
+        "purchase_date": "2025-07-08",
+        "unit_price": 97.49,
+        "basket": {
+          "n": 552,
+          "median": 9.145,
+          "mad": 1.1399999999999997,
+          "meanAbsDev": 1.667163405797101
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270616, preço unitário R$ 97.4900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 552 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 9.1450)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 52.27 (limite 3.5); 966% vs. mediana R$ 9.1450."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 442727,
+        "item_desc": "AMPICILINA, CONCENTRAÇÃO: 500 MG, FORMA FARMACEUTICA: PÓ P/ SOLUÇÃO INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98027305900222025",
+        "supplier_cnpj": "58956341000115",
+        "supplier_name": "AMAZONA PHARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE STO ANTONIO DO ICA-AM",
+        "purchase_date": "2025-11-14",
+        "unit_price": 50,
+        "basket": {
+          "n": 209,
+          "median": 3.593,
+          "mad": 0.6269999999999998,
+          "meanAbsDev": 1.343250239234449
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 442727, preço unitário R$ 50.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 209 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.5930)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 49.92 (limite 3.5); 1292% vs. mediana R$ 3.5930."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "16015106000172022",
+        "supplier_cnpj": "14080830000180",
+        "supplier_name": "DUNAFARMA MEDICAMENTOS LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "purchase_date": "2022-08-24",
+        "unit_price": 0.78,
+        "basket": {
+          "n": 945,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027977142857142995
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7800."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 945 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 49.91 (limite 3.5); 1850% vs. mediana R$ 0.0400."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "9013905901472025",
+        "supplier_cnpj": "14779687000110",
+        "supplier_name": "JOSE CARLOS DE SOUZA PRODUTOS FARMACEUTICOS LTDA",
+        "organ": "ESP-SECRETARIA DA SAUDE",
+        "purchase_date": "2025-12-26",
+        "unit_price": 0.77,
+        "basket": {
+          "n": 945,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027977142857142995
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 945 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 49.24 (limite 3.5); 1825% vs. mediana R$ 0.0400."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 483365,
+        "item_desc": "CURATIVO CUTÂNEO, COMPONENTE 1: C/ ALMOFADA FIBRA SINTÉTICA , COMPONENTE 2: BASE ADESIVA , DIMENSÃO: CERCA DE  2,5 X 5,0 CM, ESTERILIDADE: USO ÚNICO ",
+        "unit": "UN 0",
+        "contract_ref": "98629105902612024",
+        "supplier_cnpj": "41340009000129",
+        "supplier_name": "VERIS PRODUTOS PARA SAUDE LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CAMPINAS - SP",
+        "purchase_date": "2025-01-22",
+        "unit_price": 138.17,
+        "basket": {
+          "n": 19,
+          "median": 10.11,
+          "mad": 1.790000000000001,
+          "meanAbsDev": 9.914210526315792
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 483365, preço unitário R$ 138.1700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 19 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 10.1100)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 48.26 (limite 3.5); 1267% vs. mediana R$ 10.1100."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "98350105900082026",
+        "supplier_cnpj": "01215643000115",
+        "supplier_name": "AVANCE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "purchase_date": "2026-03-06",
+        "unit_price": 28.36,
+        "basket": {
+          "n": 803,
+          "median": 2.5,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0292937733499372
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.3600."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 47.14 (limite 3.5); 1034% vs. mediana R$ 2.5000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268513,
+        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "12006005010652021",
+        "supplier_cnpj": "26525513000100",
+        "supplier_name": "TURVOMED DISTRIBUIDORA E SERVICOS EIRELI",
+        "organ": "COMANDO DA AERONÁUTICA",
+        "purchase_date": "2021-12-14",
+        "unit_price": 56.89,
+        "basket": {
+          "n": 738,
+          "median": 3.705,
+          "mad": 0.7650000000000001,
+          "meanAbsDev": 1.4360562330623308
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268513, preço unitário R$ 56.8900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 738 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7050)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.89 (limite 3.5); 1435% vs. mediana R$ 3.7050."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "98350105900342025",
+        "supplier_cnpj": "08778201000126",
+        "supplier_name": "DROGAFONTE LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "purchase_date": "2025-06-02",
+        "unit_price": 28.08,
+        "basket": {
+          "n": 803,
+          "median": 2.5,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0292937733499372
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.0800."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.63 (limite 3.5); 1023% vs. mediana R$ 2.5000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "15833506000122022",
+        "supplier_cnpj": "21104288000114",
+        "supplier_name": "DROGARIA ALMEIDA JUNIO LTDA",
+        "organ": "INSTITUTO FEDERAL DE MATO GROSSO",
+        "purchase_date": "2022-07-05",
+        "unit_price": 28.04,
+        "basket": {
+          "n": 803,
+          "median": 2.5,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0292937733499372
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.0400."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 803 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.56 (limite 3.5); 1022% vs. mediana R$ 2.5000."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "92660706000092025",
+        "supplier_cnpj": "30540358000178",
+        "supplier_name": "BIOGRAM COMERCIO DE INSUMOS FARMACEUTICOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE GOVERNADOR VALADARES",
+        "purchase_date": "2025-03-23",
+        "unit_price": 0.7267,
+        "basket": {
+          "n": 945,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027977142857142995
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7267."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 945 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.32 (limite 3.5); 1717% vs. mediana R$ 0.0400."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98040305900092024",
+        "supplier_cnpj": "33341536000120",
+        "supplier_name": "A. F. A. COMERCIO DE MERCADORIAS EM GERAL LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE ACARÁ - PA",
+        "purchase_date": "2024-08-27",
+        "unit_price": 0.71,
+        "basket": {
+          "n": 945,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027977142857142995
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7100."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 945 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 45.19 (limite 3.5); 1675% vs. mediana R$ 0.0400."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268207,
+        "item_desc": "AMPICILINA, DOSAGEM: 1 G, TIPO USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "15316305002342023",
+        "supplier_cnpj": "49386357000149",
+        "supplier_name": "CAT DOG ATACADO LTDA",
+        "organ": "UNIVERSIDADE FEDERAL DE SANTA CATARINA",
+        "purchase_date": "2023-12-15",
+        "unit_price": 47.41,
+        "basket": {
+          "n": 683,
+          "median": 3.93,
+          "mad": 0.6499999999999999,
+          "meanAbsDev": 0.9676103953147877
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268207, preço unitário R$ 47.4100."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 683 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.9300)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 45.12 (limite 3.5); 1106% vs. mediana R$ 3.9300."
+        }
+      ]
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98506105900252024",
+        "supplier_cnpj": "42529374000149",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
+        "organ": "PREFEITURA DE PRESIDENTE BERNARDES - MG",
+        "purchase_date": "2024-09-27",
+        "unit_price": 0.7,
+        "basket": {
+          "n": 945,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027977142857142995
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 945 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 44.52 (limite 3.5); 1650% vs. mediana R$ 0.0400."
+        }
+      ]
+    }
+  ],
+  "attested_alerts": [
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "92749205900182025",
+        "supplier_cnpj": "25279552000101",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA",
+        "organ": "FUNDO MUN DE SAUDE DE VASSOURAS - RJ",
+        "uasg": "927492",
+        "purchase_date": "2025-11-11",
+        "catmat": 354314,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
+        "value": 887.36,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92749205900182025, fornecedor 25279552000101."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — DISTRIBUIDORA DE MEDICAMENTOS BACKES LTDA — processo 10583/25 007/25."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "e017c433d5afc4127459a2e9867647fb795ddf096ff821bbc24c2fdaff7ecc55",
+        "metadata_hash_hex": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+        "tx_hash": "ee417591759d78e1d1df5b6f32e5bb56ec408b716e1bfe7d39a258827329cfef",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/ee417591759d78e1d1df5b6f32e5bb56ec408b716e1bfe7d39a258827329cfef",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "fc66001e530a9996f12fe8108e805059acbd16a1ca125cf8d918c1281961f449",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329726,
+          "verdict": "Fail"
+        }
+      }
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98553105900212026",
+        "supplier_cnpj": "20657155000102",
+        "supplier_name": "ILG COMERCIAL LTDA",
+        "organ": "PREFEITURA DE MERCEDES - PR",
+        "uasg": "985531",
+        "purchase_date": "2026-04-02",
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "value": 1316,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98553105900212026, fornecedor 20657155000102."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — ILG COMERCIAL LTDA — processo 11797/2025."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "8ce845b9ac55c9bc4fb5aa9f114295131c3da8c40c7cbb50e5fbceac152177b2",
+        "metadata_hash_hex": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+        "tx_hash": "8948bc065b5cffdb4d225270220f1dfedd421bb275d7f4881bcf4fd8d704e024",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/8948bc065b5cffdb4d225270220f1dfedd421bb275d7f4881bcf4fd8d704e024",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "a4e6f903a6507f65c3d0d9cd69693476eb58cc28ef9de19ac7b76bd8a6a6220c",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329731,
+          "verdict": "Fail"
+        }
+      }
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98125305900552024",
+        "supplier_cnpj": "21830581000169",
+        "supplier_name": "DISTRIMED COMERCIO DE MEDICAMENTOS E MATERIAL HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE HORIZONTE - CE",
+        "uasg": "981253",
+        "purchase_date": "2025-01-09",
+        "catmat": 354314,
+        "item_desc": "CIMETIDINA, CONCENTRAÇÃO: 400 MG",
+        "value": 1170,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98125305900552024, fornecedor 21830581000169."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-17, fim 2027-03-17)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "7ddec968199367b9816701822a2079d6cfedcc93c95ba0281cf96f5c6c63da0f",
+        "metadata_hash_hex": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+        "tx_hash": "5ca45373d4c4c06f4880b8700140cdfd2fad2621d5dc27dafdac874ebbe47278",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/5ca45373d4c4c06f4880b8700140cdfd2fad2621d5dc27dafdac874ebbe47278",
+        "onchain_verified": true,
+        "onchain_verdict": "Review",
+        "onchain_record": {
+          "metadata_hash": "0107159375ca52e329d5423cb224db81d7c6c52f7a664cc081aade0e9e1d9485",
+          "predicate_set": "sanction_check_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329736,
+          "verdict": "Review"
+        }
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268373,
+        "item_desc": "ACICLOVIR, DOSAGEM: 30 MG/G, USO: POMADA OFTÁLMICA ",
+        "unit": "BIS 10",
+        "contract_ref": "98030105000222022",
+        "supplier_cnpj": "05536092000142",
+        "supplier_name": "COMPANHIA HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BOA VISTA - RR",
+        "purchase_date": "2022-05-30",
+        "unit_price": 45,
+        "basket": {
+          "n": 11,
+          "median": 2.48,
+          "mad": 0.20999999999999996,
+          "meanAbsDev": 5.15929090909091
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268373, preço unitário R$ 45.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 11 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.4800)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 136.57 (limite 3.5); 1715% vs. mediana R$ 2.4800."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "8c05b23f55d5eda5f22006598e45d16f4e1c75fa851ff3ac2770d889d2300a9e",
+        "metadata_hash_hex": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+        "tx_hash": "d6c8bbe8d076c54a52b6442643bca7bf027d1717e320e1954b0e9422dc8f9a61",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/d6c8bbe8d076c54a52b6442643bca7bf027d1717e320e1954b0e9422dc8f9a61",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "b2bbd973d67d62da0ea2702985125492189fd5c4670272f834e13887a1745c03",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329741,
+          "verdict": "Fail"
+        }
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000122023",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "purchase_date": "2023-04-27",
+        "unit_price": 7.22,
+        "basket": {
+          "n": 126,
+          "median": 0.3661,
+          "mad": 0.05445,
+          "meanAbsDev": 0.22501031746031736
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267627, preço unitário R$ 7.2200."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 126 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.3661)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 84.90 (limite 3.5); 1872% vs. mediana R$ 0.3661."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "9e82676bbbaef190439b8d708311e3c4017aa757f17a165f4873e738b7705a20",
+        "metadata_hash_hex": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+        "tx_hash": "cc6becfff2af0755aeea9d7c11a084a7fd74051b5213041f351731753a392ef6",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/cc6becfff2af0755aeea9d7c11a084a7fd74051b5213041f351731753a392ef6",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "227dbff8902189ec8396f8e23b27db9dd9df1ad83a93ef5126cb794037c3bb83",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329746,
+          "verdict": "Fail"
+        }
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270556,
+        "item_desc": "AMPICILINA, APRESENTAÇÃO: ASSOCIADA COM SULBACTAM , DOSAGEM: 1G + 500MG , TIPO USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "19310506000032022",
+        "supplier_cnpj": "28423060000136",
+        "supplier_name": "SUPLY SOLUCOES EM TECNOLOGIA & TRANSPORTES LTDA",
+        "organ": "INST.BRAS.DO MEIO AMB.E DOS REC.NAT.RENOVAV.",
+        "purchase_date": "2022-07-15",
+        "unit_price": 104,
+        "basket": {
+          "n": 222,
+          "median": 6.0899,
+          "mad": 0.9100999999999999,
+          "meanAbsDev": 1.963871621621621
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270556, preço unitário R$ 104.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 222 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 6.0899)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 72.56 (limite 3.5); 1608% vs. mediana R$ 6.0899."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "53470bdbfba764e48ca116c139508599d88038e05275de82b891e0fcd408fc4c",
+        "metadata_hash_hex": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+        "tx_hash": "c992a4128df7ab8cee93b30bef71d46e3d99fa8c527814343dd98e5e9d481a14",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/c992a4128df7ab8cee93b30bef71d46e3d99fa8c527814343dd98e5e9d481a14",
+        "onchain_verified": true,
+        "onchain_verdict": "Fail",
+        "onchain_record": {
+          "metadata_hash": "c905c7f2e75561508c106541b06d4aa4e95730f7c97cc6d21b5273711ccf366e",
+          "predicate_set": "overpricing_v1",
+          "predicate_version": 1,
+          "submitted_by": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+          "timestamp": 1779329751,
+          "verdict": "Fail"
+        }
+      }
+    }
+  ],
+  "attestation_run_at": "2026-05-21T02:15:52.056Z"
+}
