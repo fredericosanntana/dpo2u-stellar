@@ -1,0 +1,9 @@
+{
+  "generated_at": "2026-05-22T01:49:26.887Z",
+  "use_case": "divergent_payee_v1",
+  "suppliers_scanned": 25,
+  "documents_scanned": 163,
+  "divergences_found": 0,
+  "note": "Favorecido final == nominal em pagamento direto; divergência é esparsa nos dados públicos. Resultado baixo é honesto, não inflado.",
+  "alerts": []
+}
