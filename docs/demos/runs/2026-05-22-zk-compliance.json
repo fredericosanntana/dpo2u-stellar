@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-22T00:45:58.408Z",
+  "generated_at": "2026-05-22T01:39:18.675Z",
   "use_case": "zk_compliance_v1",
   "layer": "B2B",
   "chain_flow": "zk-prover → zk-verifier (on-chain) → zk_compliance_v1 → attestation contract",
@@ -12,7 +12,8 @@
     "jurisdiction": "lgpd",
     "threshold": 70,
     "proof_system": "groth16-bls12-381",
-    "proof_hash": "01398716b139910c3c45531a7c3970435ae6a77096db25ec7c76fe2ce00d6fd5",
+    "proof_hash": "5c3bcbb7f8dd8987e2446c664fc145c573a16cb8a3330ca1971d670284a98283",
+    "zk_context": "5052245317692270917157662305323943977473557419053947991487454734862262984282",
     "zk_verifier_contract": "CBOOYCOU4USCWDKPRXFG4IVA7BLU6ILXD2OBTAMNBM3V3HKRVQC5FMNT",
     "zk_verified": true,
     "attestation_kind": "zk-self-attestation"
@@ -35,9 +36,9 @@
     }
   ],
   "attestation": {
-    "tx_hash": "aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2",
-    "evidence_hash_hex": "53a2b99edf0a2d6e83267301a7105ef7a7c89626c3637a5eedb3f68ec017d90b",
-    "metadata_hash_hex": "b20c481b909c143585ad982ef61ecf1825a4915aa29f1c854b26bfa6e061682b",
-    "explorer_url": "https://stellar.expert/explorer/testnet/tx/aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2"
+    "tx_hash": "6e642e3fc4542c2766c29116164af6a6b1414300ed0b6e6af3be243a5b69797e",
+    "evidence_hash_hex": "c579afd6142a3e68a11902a826db7e77e7bf94e743364ef20550efe6bc6c6ea7",
+    "metadata_hash_hex": "7c973aad7e61c98a295e635b200f763672e11ffba6939f5c5c8cb7fbfe0ce8e1",
+    "explorer_url": "https://stellar.expert/explorer/testnet/tx/6e642e3fc4542c2766c29116164af6a6b1414300ed0b6e6af3be243a5b69797e"
   }
 }

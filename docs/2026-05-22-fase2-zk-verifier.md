@@ -60,11 +60,18 @@ O substrato funciona. Para produção falta:
 
 1. **Cerimônia de trusted setup** — o Groth16 exige um setup por circuito; a
    `vk` desta demo veio de um setup com seed fixa (reprodutível, **não** seguro
-   para produção). Produção exige uma cerimônia multi-party.
-2. **Auditoria de segurança** do contrato verificador.
-3. **Circuito v2 — binding ao compromisso** — hoje o circuito prova só
-   `score >= threshold`; falta amarrar a prova a um compromisso da atestação
-   (`commitment = hash(score, salt)`) para impedir reuso de prova.
+   para produção). Runbook da cerimônia: `docs/zk-trusted-setup-runbook.md`.
+2. **Auditoria de segurança** do contrato verificador — modelo de ameaças e
+   checklist de prontidão: `docs/zk-verifier-threat-model.md` (achado principal:
+   o gateway deve **fixar a vk canônica**, não aceitá-la do cliente).
+
+### ✅ Binding anti-replay (era o item 3)
+
+O circuito ganhou um 2º sinal público `context` (= H(organização, jurisdição,
+nonce), derivado off-chain). A equação de Groth16 ata a prova a esse valor — uma
+prova **não pode ser reusada** em outra atestação. Confirmado on-chain: o
+verificador aceita `[threshold, context]` correto e **rejeita** o `context`
+adulterado. O verificador Soroban não mudou (genérico em N sinais).
 
 ## Wiring — use case `zk_compliance_v1` ✅
 
