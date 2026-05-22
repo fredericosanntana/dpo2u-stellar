@@ -12,18 +12,19 @@ Groth16 via as host functions BLS12-381 do Soroban.
 
 ## Ameaças
 
-### T1 — vk fornecida pelo chamador *(ALTA — achado principal)*
+### T1 — vk fornecida pelo chamador *(CRÍTICA — ✅ MITIGADO 2026-05-22)*
 `verify_proof` recebe a `vk` como **parâmetro**. O contrato responde fielmente
 "esta prova é válida para *esta* vk e *estes* sinais" — mas **não impõe qual vk**
-é a canônica. Um cliente malicioso pode gerar o próprio par (vk, proof) e obter
-`true`.
-**Mitigação:** o *pinning* da vk canônica acontece na camada orquestradora — o
-gateway (`resolveZkCompliance`) deve usar **somente** a vk publicada pela
-cerimônia de trusted setup, nunca uma vk vinda do cliente. Hoje o gateway recebe
-`zk_proof.vk` do cliente — **isto precisa mudar**: o gateway deve carregar a vk
-canônica de um arquivo fixo e ignorar qualquer vk do payload. Alternativa mais
-forte: o contrato **armazena** a vk canônica por circuito (`configure`/admin) e
-`verify_proof` recebe só `(proof, pub_signals)`.
+é a canônica. Um cliente malicioso podia gerar o próprio par (vk, proof) e obter
+`true` → atestação fraudulenta.
+**Mitigação aplicada:** o gateway agora **fixa a vk canônica**
+(`pilot-gateway/src/lib/canonical-vk.ts`); `verifyZkProof` usa sempre a
+`CANONICAL_VK` e `resolveZkCompliance` ignora qualquer `vk` do payload do
+cliente. Correção no commit
+[`6afecb92`](https://github.com/fredericosanntana/DPO2U/commit/6afecb9246fab112099bb88c663faba21503cf47);
+relatório em `2026-05-22-security-audit.md`. Resíduo: a vk fixada é a do setup
+dev — substituída pela vk da cerimônia (T6). Defesa-em-profundidade futura: o
+contrato armazenar a vk canônica por circuito (`configure`/admin).
 
 ### T2 — replay de prova *(MÉDIA — mitigado por A2)*
 Uma prova válida poderia ser re-submetida para outra atestação. **Mitigado** pelo

@@ -46,9 +46,12 @@
 ### Hardening — executável, fora do escopo atacado
 | Item | Estado |
 |---|---|
-| **T1** Gateway fixar a vk canônica (não aceitá-la do cliente) | aberto — bloqueador de produção; landa junto da vk da cerimônia |
+| **T1** Gateway fixar a vk canônica (não aceitá-la do cliente) | ✅ **corrigido** 2026-05-22 (commit `6afecb92`; auditoria de segurança) |
 | **C8** Multisig no admin/submitter do contrato (hoje single-sig) | aberto |
 | **winner_rotation_v1** — fonte de dados | ⚠️ PNCP trava no ambiente; predicado pronto |
+
+> Auditoria de segurança 2026-05-22 — `2026-05-22-security-audit.md`: 1 achado
+> crítico (T1) encontrado, corrigido e verificado.
 
 ### Backlog declarado — exige fontes externas
 - `cnae_mismatch` / `regulatory_authorization` / `price_ceiling` — dependem de
