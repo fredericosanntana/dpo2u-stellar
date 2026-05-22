@@ -1,0 +1,19 @@
+[package]
+name = "zk-verifier"
+description = "DPO2U — verificador Groth16/BLS12-381 on-chain (score privado, prova pública)"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+hex = "0.4"
