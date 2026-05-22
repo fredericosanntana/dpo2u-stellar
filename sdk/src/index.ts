@@ -16,4 +16,9 @@ export {
   hexToBytes32,
 } from './decoder.js';
 export type { UseCaseLayer, UseCaseInfo } from './use-cases.js';
-export { USE_CASES, useCasesByLayer, findUseCase } from './use-cases.js';
+export {
+  USE_CASES,
+  useCasesByLayer,
+  findUseCase,
+  DATA_PROTECTION_JURISDICTIONS,
+} from './use-cases.js';

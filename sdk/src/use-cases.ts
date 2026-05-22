@@ -32,6 +32,13 @@ export const USE_CASES: readonly UseCaseInfo[] = [
   { id: 'popia_officer_v1', layer: 'B2B', label: 'Information Officer POPIA', description: 'Selo da nomeação do Information Officer (POPIA, África do Sul).' },
   { id: 'pipeda_consent_v1', layer: 'B2B', label: 'Consentimento PIPEDA', description: 'Selo de um registro de consentimento PIPEDA (Canadá).' },
   { id: 'pipa_identity_v1', layer: 'B2B', label: 'Identidade PIPA', description: 'Selo de identidade alternativa ao RRN (PIPA, Coreia do Sul).' },
+  { id: 'compliance_attestation_v1', layer: 'B2B', label: 'Atestação de conformidade (16 jurisdições)', description: 'Atesta a conformidade de uma organização contra qualquer uma das 16 jurisdições de proteção de dados do catálogo DPO2U — parametrizado por jurisdição.' },
+];
+
+/** Os 16 códigos de jurisdição de proteção de dados aceitos por `compliance_attestation_v1`. */
+export const DATA_PROTECTION_JURISDICTIONS: readonly string[] = [
+  'lgpd', 'gdpr', 'ccpa', 'pipeda', 'law25', 'appi', 'pipa', 'pdp',
+  'pdpa', 'dpdp', 'uae', 'popia', 'ndpa', 'mexico', 'vietnam', 'malaysia',
 ];
 
 /** Use cases de uma camada. */

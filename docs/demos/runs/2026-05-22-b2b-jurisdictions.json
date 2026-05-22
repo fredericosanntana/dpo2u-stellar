@@ -1,0 +1,1098 @@
+{
+  "generated_at": "2026-05-22T00:12:19.246Z",
+  "use_case": "compliance_attestation_v1",
+  "layer": "B2B",
+  "jurisdictions_covered": 16,
+  "alerts": [
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "lgpd",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'lgpd' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "9ca1366f86050de6f73a2e14315ba99a69ac83d0c9f428d7fff40e918a0691cf",
+        "metadata_hash_hex": "914c093b3a64b0ddf088e9f38b674357ae035e0c6640771d1cec75a2f71989c9",
+        "tx_hash": "7d2000fb1db185bdf15b6ef34302cdf9e425f7ae534c1f393cd5d25776450a34",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/7d2000fb1db185bdf15b6ef34302cdf9e425f7ae534c1f393cd5d25776450a34"
+      }
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "gdpr",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'gdpr' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "b30aaf85b1717a9c297b511fc452c61e3c87b71187178897d074062cb09009fa",
+        "metadata_hash_hex": "3c0bbbdb36f52cf8e0cb7af71dc42a1e8fc30a01667398932b525324b676964a",
+        "tx_hash": "6ae1e4c45654867fc70c2433e1da46806e4a81de4306547a969e0d0ad47ec85a",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/6ae1e4c45654867fc70c2433e1da46806e4a81de4306547a969e0d0ad47ec85a"
+      }
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "ccpa",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'ccpa' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "d45135e41a5f1f3e6ac5e1b6cfaf52e34bb91422b95250ec9b7363d627ce55ae",
+        "metadata_hash_hex": "f73b0435098431bab68f4aef653042eba38e6971fd846996a9451898bf4c8348",
+        "tx_hash": "cf280597f2d92dd38666687e086ebb74ada8d194968a131d79177b4a101d2505",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/cf280597f2d92dd38666687e086ebb74ada8d194968a131d79177b4a101d2505"
+      }
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "pipeda",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'pipeda' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "law25",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'law25' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "appi",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'appi' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "pipa",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'pipa' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "pdp",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'pdp' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "pdpa",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'pdpa' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "dpdp",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'dpdp' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "uae",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'uae' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "popia",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'popia' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "ndpa",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'ndpa' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "mexico",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'mexico' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "vietnam",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'vietnam' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "malaysia",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'malaysia' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ]
+    }
+  ],
+  "attested_alerts": [
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "lgpd",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'lgpd' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "9ca1366f86050de6f73a2e14315ba99a69ac83d0c9f428d7fff40e918a0691cf",
+        "metadata_hash_hex": "914c093b3a64b0ddf088e9f38b674357ae035e0c6640771d1cec75a2f71989c9",
+        "tx_hash": "7d2000fb1db185bdf15b6ef34302cdf9e425f7ae534c1f393cd5d25776450a34",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/7d2000fb1db185bdf15b6ef34302cdf9e425f7ae534c1f393cd5d25776450a34"
+      }
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "gdpr",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'gdpr' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "b30aaf85b1717a9c297b511fc452c61e3c87b71187178897d074062cb09009fa",
+        "metadata_hash_hex": "3c0bbbdb36f52cf8e0cb7af71dc42a1e8fc30a01667398932b525324b676964a",
+        "tx_hash": "6ae1e4c45654867fc70c2433e1da46806e4a81de4306547a969e0d0ad47ec85a",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/6ae1e4c45654867fc70c2433e1da46806e4a81de4306547a969e0d0ad47ec85a"
+      }
+    },
+    {
+      "use_case": "compliance_attestation_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "organization": "DPO2U",
+        "has_officer": true,
+        "has_dsr_process": true,
+        "has_impact_assessment": true,
+        "jurisdiction": "ccpa",
+        "attestation_kind": "self-attestation",
+        "source": "DPO2U self-DPIA 2026-05-11"
+      },
+      "predicate_results": [
+        {
+          "id": "j1_jurisdiction_recognized",
+          "verdict": "PASS",
+          "reason": "Jurisdição 'ccpa' reconhecida no catálogo."
+        },
+        {
+          "id": "j2_org_identifiable",
+          "verdict": "PASS",
+          "reason": "Organização identificável."
+        },
+        {
+          "id": "j3_officer_designated",
+          "verdict": "PASS",
+          "reason": "Encarregado / DPO designado — presente."
+        },
+        {
+          "id": "j4_lawful_basis",
+          "verdict": "REVIEW",
+          "reason": "Base legal de tratamento registrada — não informado; revisar."
+        },
+        {
+          "id": "j5_dsr_process",
+          "verdict": "PASS",
+          "reason": "Processo de direitos do titular — presente."
+        },
+        {
+          "id": "j6_impact_assessment",
+          "verdict": "PASS",
+          "reason": "Avaliação de impacto (DPIA/RIPD) — presente."
+        },
+        {
+          "id": "j7_breach_procedure",
+          "verdict": "REVIEW",
+          "reason": "Procedimento de notificação de violação — não informado; revisar."
+        },
+        {
+          "id": "j8_transfer_safeguards",
+          "verdict": "REVIEW",
+          "reason": "Salvaguardas de transferência internacional — não informado; revisar."
+        }
+      ],
+      "attestation": {
+        "status": "COMPLETED",
+        "evidence_hash_hex": "d45135e41a5f1f3e6ac5e1b6cfaf52e34bb91422b95250ec9b7363d627ce55ae",
+        "metadata_hash_hex": "f73b0435098431bab68f4aef653042eba38e6971fd846996a9451898bf4c8348",
+        "tx_hash": "cf280597f2d92dd38666687e086ebb74ada8d194968a131d79177b4a101d2505",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/cf280597f2d92dd38666687e086ebb74ada8d194968a131d79177b4a101d2505"
+      }
+    }
+  ],
+  "attestation_run_at": "2026-05-22T00:12:35.373Z"
+}
