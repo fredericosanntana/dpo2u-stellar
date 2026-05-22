@@ -15,3 +15,5 @@ export {
   decodeAddress,
   hexToBytes32,
 } from './decoder.js';
+export type { UseCaseLayer, UseCaseInfo } from './use-cases.js';
+export { USE_CASES, useCasesByLayer, findUseCase } from './use-cases.js';

@@ -61,16 +61,27 @@ genérico + o mcp-server compartilhado já absorvem a camada B2B. Solana intacto
 - 7 `configure_use_case` confirmados on-chain (txs acima).
 - Demo B2B (GDPR) atestada e verificada via `verify_attestation`.
 
-## Resta da Fase 1 (workstream G — superfície de produto)
+## Workstream G — superfície de produto ✅
 
-- **SDK** `dpo2u-stellar/sdk/` — já genérico (`verify` aceita qualquer
-  `use_case_id`); nenhuma mudança necessária.
-- **Ferramentas MCP `onchain/`** — re-apontar o alvo de submissão para o Soroban
-  ao lado do Solana (hoje só Solana). Trabalho moderado.
-- **Painel B2B** — uma view de produto B2B separada do `/pilot/alertas` (B2G).
-  Trabalho de frontend dedicado.
+- **SDK** `dpo2u-stellar/sdk/` — `use-cases.ts` novo: catálogo dos 13 use cases
+  agrupados por camada (`USE_CASES`, `useCasesByLayer`, `findUseCase`),
+  exportado pelo `index.ts`. O `verify` já era genérico. SDK compila.
+- **Painel B2B** — nova rota `/pilot/compliance` no `dpo2u-landing-page`:
+  apresenta a camada B2B (os 7 use cases), o contraste B2G/B2B (13 use cases,
+  um contrato) e a prova on-chain da auto-atestação GDPR. Adicionado ao
+  `PilotNav`. Build de produção verde, **deployado e verificado**.
+- **Ferramentas MCP `onchain/`** — a superfície canônica de submissão ao Soroban
+  **já é o `pilot-gateway`** (`POST /api/v1/attestation/submit`, aceita qualquer
+  `use_case_id` → `evaluate()` → `StellarDriver` → `register_attestation`). Um
+  wrapper MCP fino que chama o gateway é follow-up pequeno (depende da API key
+  do gateway, gerida por SOPS) — não bloqueia o B2B-on-Stellar, que já funciona
+  fim-a-fim pela rota do gateway.
 
-Workstream A + B (os use cases) estão entregues. G (superfície) é a fatia final.
+## Fase 1 — fechada
+
+A camada B2B está no `dpo2u-stellar`: 7 use cases configurados on-chain,
+atestação real selada e verificada, SDK expõe o catálogo, painel B2B no ar.
+O Solana segue intacto (dual-chain).
 
 ## Próximo: Fase 2 — ZK preservado
 
