@@ -65,8 +65,6 @@ O substrato funciona. Para produção falta:
 3. **Circuito v2 — binding ao compromisso** — hoje o circuito prova só
    `score >= threshold`; falta amarrar a prova a um compromisso da atestação
    (`commitment = hash(score, salt)`) para impedir reuso de prova.
-4. **Wiring `zk_compliance_v1`** — um use case de atestação em que o gateway
-   exige uma prova ZK verificada (chamada ao `zk-verifier`) antes de selar.
 
 ## Wiring — use case `zk_compliance_v1` ✅
 
@@ -80,19 +78,21 @@ zk-prover (prova)  →  contrato zk-verifier (verifica ON-CHAIN)  →
 
 - PredicateSet `zk_compliance_v1` (Z1 organização+jurisdição · Z2 prova presente
   · Z3 prova verificada on-chain) + evaluator `evaluateZkCompliance`.
-- `pilot-gateway/src/lib/zk-verify.ts` — a ponte: `verifyZkProof()` invoca o
-  contrato `zk-verifier`. O `evidence.zk_verified` **só** vem daqui — nunca do
-  cliente (senão a prova seria forjável).
-- `scripts/run-zk-compliance.ts` — orquestrador E2E.
+- `pilot-gateway/src/lib/zk-verify.ts` — a ponte `verifyZkProof()`, **via
+  `@stellar/stellar-sdk`** (RPC `simulateTransaction`, sem subprocesso, sem
+  chave secreta — a chamada é read-only). Funciona dentro do container.
+- **Plugado na rota** `routes/attestation.ts` — `POST /api/v1/attestation/submit`,
+  para `use_case_id = zk_compliance_v1`, chama `resolveZkCompliance`: verifica a
+  prova on-chain, **remove o proof bruto**, sela só o `proof_hash` + o
+  `zk_verified`. O `zk_verified` **só** vem do gateway — nunca do cliente.
+- `scripts/run-zk-compliance.ts` — orquestrador E2E; `scripts/verify-zk-route.ts`
+  — exercita a função exata da rota.
 - Configurado no contrato de atestação: tx `829de719…`.
 
 **Demo E2E (testnet):** a prova real (score=85 privado, threshold=70 público)
 foi verificada on-chain pelo `zk-verifier` → `zk_compliance_v1` avaliou **PASS**
 → atestação **selada** (tx [`aaf6b31c…`](https://stellar.expert/explorer/testnet/tx/aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2))
 → `verify_attestation` confirma `Pass`. O score nunca apareceu on-chain.
-
-Falta só plugar o `verifyZkProof` na rota `routes/attestation.ts` do gateway
-(o módulo já é gateway-usável) — mecânico, exige redeploy do container.
 
 ## Conclusão
 
