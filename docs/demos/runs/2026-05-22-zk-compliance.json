@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-05-22T00:45:58.408Z",
+  "use_case": "zk_compliance_v1",
+  "layer": "B2B",
+  "chain_flow": "zk-prover → zk-verifier (on-chain) → zk_compliance_v1 → attestation contract",
+  "zk_verifier_contract": "CBOOYCOU4USCWDKPRXFG4IVA7BLU6ILXD2OBTAMNBM3V3HKRVQC5FMNT",
+  "attestation_contract": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+  "zk_verified": true,
+  "verdict": "PASS",
+  "evidence": {
+    "organization": "DPO2U",
+    "jurisdiction": "lgpd",
+    "threshold": 70,
+    "proof_system": "groth16-bls12-381",
+    "proof_hash": "01398716b139910c3c45531a7c3970435ae6a77096db25ec7c76fe2ce00d6fd5",
+    "zk_verifier_contract": "CBOOYCOU4USCWDKPRXFG4IVA7BLU6ILXD2OBTAMNBM3V3HKRVQC5FMNT",
+    "zk_verified": true,
+    "attestation_kind": "zk-self-attestation"
+  },
+  "predicate_results": [
+    {
+      "id": "z1_org_jurisdiction",
+      "verdict": "PASS",
+      "reason": "Organização e jurisdição (lgpd) identificáveis."
+    },
+    {
+      "id": "z2_proof_present",
+      "verdict": "PASS",
+      "reason": "Prova groth16-bls12-381, threshold 70."
+    },
+    {
+      "id": "z3_zk_proof_verified",
+      "verdict": "PASS",
+      "reason": "Prova ZK verificada on-chain (zk-verifier CBOOYCOU4U…) — score ≥ threshold sem revelar o score."
+    }
+  ],
+  "attestation": {
+    "tx_hash": "aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2",
+    "evidence_hash_hex": "53a2b99edf0a2d6e83267301a7105ef7a7c89626c3637a5eedb3f68ec017d90b",
+    "metadata_hash_hex": "b20c481b909c143585ad982ef61ecf1825a4915aa29f1c854b26bfa6e061682b",
+    "explorer_url": "https://stellar.expert/explorer/testnet/tx/aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2"
+  }
+}

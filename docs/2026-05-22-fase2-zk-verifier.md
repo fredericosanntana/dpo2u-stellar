@@ -68,8 +68,35 @@ O substrato funciona. Para produção falta:
 4. **Wiring `zk_compliance_v1`** — um use case de atestação em que o gateway
    exige uma prova ZK verificada (chamada ao `zk-verifier`) antes de selar.
 
+## Wiring — use case `zk_compliance_v1` ✅
+
+O verificador foi conectado ao fluxo de atestação. O use case `zk_compliance_v1`
+(UC-B9) fecha a cadeia inteira:
+
+```
+zk-prover (prova)  →  contrato zk-verifier (verifica ON-CHAIN)  →
+   predicado zk_compliance_v1  →  contrato de atestação (sela o veredito)
+```
+
+- PredicateSet `zk_compliance_v1` (Z1 organização+jurisdição · Z2 prova presente
+  · Z3 prova verificada on-chain) + evaluator `evaluateZkCompliance`.
+- `pilot-gateway/src/lib/zk-verify.ts` — a ponte: `verifyZkProof()` invoca o
+  contrato `zk-verifier`. O `evidence.zk_verified` **só** vem daqui — nunca do
+  cliente (senão a prova seria forjável).
+- `scripts/run-zk-compliance.ts` — orquestrador E2E.
+- Configurado no contrato de atestação: tx `829de719…`.
+
+**Demo E2E (testnet):** a prova real (score=85 privado, threshold=70 público)
+foi verificada on-chain pelo `zk-verifier` → `zk_compliance_v1` avaliou **PASS**
+→ atestação **selada** (tx [`aaf6b31c…`](https://stellar.expert/explorer/testnet/tx/aaf6b31c5acd88f81bd6872b2d7f24c8d6bdf12cbb0ea51e70dd7c9e0f175ca2))
+→ `verify_attestation` confirma `Pass`. O score nunca apareceu on-chain.
+
+Falta só plugar o `verifyZkProof` na rota `routes/attestation.ts` do gateway
+(o módulo já é gateway-usável) — mecânico, exige redeploy do container.
+
 ## Conclusão
 
 A questão de risco da Fase 2 — "dá para verificar ZK on-chain no Soroban?" —
 está respondida com um artefato funcionando em testnet. O caminho BLS12-381 é
-viável, o budget cabe, a ponte de codificação arkworks→Soroban está resolvida.
+viável, o budget cabe, a ponte arkworks→Soroban está resolvida, e o use case
+`zk_compliance_v1` sela atestações de "score privado, prova pública" ponta-a-ponta.

@@ -99,16 +99,31 @@ fn main() {
     assert!(ok, "prova não verifica off-chain");
 
     // Saída — hex uncompressed, consumível por G1Affine/G2Affine::from_array.
+    let alpha = hex_uncompressed(&vk.alpha_g1);
+    let beta = hex_uncompressed(&vk.beta_g2);
+    let gamma = hex_uncompressed(&vk.gamma_g2);
+    let delta = hex_uncompressed(&vk.delta_g2);
+    let ic: Vec<String> = vk.gamma_abc_g1.iter().map(hex_uncompressed).collect();
+    let pa = hex_uncompressed(&proof.a);
+    let pb = hex_uncompressed(&proof.b);
+    let pc = hex_uncompressed(&proof.c);
+
     println!("# DPO2U zk-prover — score>=threshold  (score={score} PRIVADO, threshold={threshold} PÚBLICO)");
-    println!("VK_ALPHA={}", hex_uncompressed(&vk.alpha_g1));
-    println!("VK_BETA={}", hex_uncompressed(&vk.beta_g2));
-    println!("VK_GAMMA={}", hex_uncompressed(&vk.gamma_g2));
-    println!("VK_DELTA={}", hex_uncompressed(&vk.delta_g2));
-    for (i, ic) in vk.gamma_abc_g1.iter().enumerate() {
-        println!("VK_IC{}={}", i, hex_uncompressed(ic));
+    println!("VK_ALPHA={alpha}\nVK_BETA={beta}\nVK_GAMMA={gamma}\nVK_DELTA={delta}");
+    for (i, v) in ic.iter().enumerate() {
+        println!("VK_IC{i}={v}");
     }
-    println!("PROOF_A={}", hex_uncompressed(&proof.a));
-    println!("PROOF_B={}", hex_uncompressed(&proof.b));
-    println!("PROOF_C={}", hex_uncompressed(&proof.c));
-    println!("PUBLIC_THRESHOLD={threshold}");
+    println!("PROOF_A={pa}\nPROOF_B={pb}\nPROOF_C={pc}\nPUBLIC_THRESHOLD={threshold}");
+
+    // Artefato JSON — consumido pelo runner de wiring do zk_compliance_v1.
+    let ic_json = ic
+        .iter()
+        .map(|v| format!("\"{v}\""))
+        .collect::<Vec<_>>()
+        .join(",");
+    let json = format!(
+        "{{\n  \"proof_system\": \"groth16-bls12-381\",\n  \"statement\": \"score >= threshold\",\n  \"public_threshold\": {threshold},\n  \"score_is_private\": true,\n  \"vk\": {{ \"alpha\": \"{alpha}\", \"beta\": \"{beta}\", \"gamma\": \"{gamma}\", \"delta\": \"{delta}\", \"ic\": [{ic_json}] }},\n  \"proof\": {{ \"a\": \"{pa}\", \"b\": \"{pb}\", \"c\": \"{pc}\" }}\n}}\n"
+    );
+    std::fs::write("proof.json", &json).expect("write proof.json");
+    println!("# artefato: zk-prover/proof.json");
 }

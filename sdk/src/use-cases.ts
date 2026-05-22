@@ -33,6 +33,7 @@ export const USE_CASES: readonly UseCaseInfo[] = [
   { id: 'pipeda_consent_v1', layer: 'B2B', label: 'Consentimento PIPEDA', description: 'Selo de um registro de consentimento PIPEDA (Canadá).' },
   { id: 'pipa_identity_v1', layer: 'B2B', label: 'Identidade PIPA', description: 'Selo de identidade alternativa ao RRN (PIPA, Coreia do Sul).' },
   { id: 'compliance_attestation_v1', layer: 'B2B', label: 'Atestação de conformidade (16 jurisdições)', description: 'Atesta a conformidade de uma organização contra qualquer uma das 16 jurisdições de proteção de dados do catálogo DPO2U — parametrizado por jurisdição.' },
+  { id: 'zk_compliance_v1', layer: 'B2B', label: 'Atestação de conformidade ZK', description: 'Score privado, prova pública: atesta que o score de conformidade atinge um threshold via prova Groth16/BLS12-381 verificada on-chain — sem revelar o score.' },
 ];
 
 /** Os 16 códigos de jurisdição de proteção de dados aceitos por `compliance_attestation_v1`. */
