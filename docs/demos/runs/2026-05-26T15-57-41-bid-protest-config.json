@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-26T15-57-41",
+  "network": "testnet",
+  "contract_id": "CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "use_case_id": "bid_protest_overpricing_v1",
+  "predicate_set": "bid_protest_overpricing_v1",
+  "predicate_version": 1,
+  "legal_basis": "Lei 14.133/2021 Art. 165 — recurso administrativo (3 dias úteis)",
+  "configure_use_case_tx": "b179d0842bbdaaeae49ac5bce764b06607a0740dc05f79c9ac02f1fe76b6ce8a",
+  "explorer_links": {
+    "contract": "https://stellar.expert/explorer/testnet/contract/CC4TJGDRWZOPGBWOOHBJF3N2VKUQRNIW6C6PTYHD7ZI3D42GBQRRZHM5",
+    "configure_use_case_tx": "https://stellar.expert/explorer/testnet/tx/b179d0842bbdaaeae49ac5bce764b06607a0740dc05f79c9ac02f1fe76b6ce8a"
+  },
+  "completed_at": "2026-05-26T15:57:41Z"
+}

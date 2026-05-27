@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-05-26T17:06:13.437Z",
+  "z_threshold": 5,
+  "pncp_healthy": true,
+  "summary": {
+    "market_baskets": 134,
+    "licitacoes_with_outlier": 239,
+    "alerts_total": 0,
+    "alerts_open": 0,
+    "alerts_expired": 0,
+    "total_losers_addressable": 0
+  },
+  "alerts": []
+}

@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-05-26T15:38:08.033Z",
+  "z_threshold": 5,
+  "pncp_healthy": false,
+  "summary": {
+    "market_baskets": 1,
+    "licitacoes_with_outlier": 1,
+    "alerts_total": 1,
+    "alerts_open": 1,
+    "alerts_expired": 0,
+    "total_losers_addressable": 3
+  },
+  "alerts": [
+    {
+      "licitacaoId": "153031-05-000001/2026",
+      "uasg": "153031",
+      "uasgName": "HOSPITAL UNIVERSITARIO BRASILIA",
+      "orgao": "MINISTERIO DA EDUCACAO",
+      "estado": "DF",
+      "municipio": "BRASILIA",
+      "objeto": "Aquisicao de medicamentos - Pregao Eletronico SRP 05/2026",
+      "dataCompra": "2026-05-24",
+      "dataPublicacaoAta": null,
+      "triggerDateSource": "fallback_dataCompra",
+      "prazoRecursoFinal": "2026-05-27",
+      "hoursRemaining": 8.4,
+      "scoreSobrepreco": 100,
+      "catmat": 268523,
+      "itemDesc": "DIPIRONA SODICA 500MG/ML AMPOLA 2ML",
+      "unidadeFornecimento": "AMPOLA 2",
+      "unitPriceVencedora": 12.5,
+      "basketMedian": 1.925,
+      "basketN": 10,
+      "zModificado": 158.51,
+      "percentualSobrepreco": 549.4,
+      "vencedora": {
+        "cnpj": "11222333000181",
+        "nome": "PHARMA WINNER LTDA"
+      },
+      "losers": [
+        {
+          "cnpj": "99888777000122",
+          "nome": "PERDEDORA 1 LTDA (dry-run)"
+        },
+        {
+          "cnpj": "55444333000166",
+          "nome": "PERDEDORA 2 SA (dry-run)"
+        },
+        {
+          "cnpj": "22111000000122",
+          "nome": "PERDEDORA 3 ME (dry-run)"
+        }
+      ],
+      "losersSource": "dry_run_fixture",
+      "attestation": {
+        "attempt_id": "att-76e1c6c6-7029-4b09-b4d8-25579ffc14fa",
+        "status": "COMPLETED",
+        "tx_hash": "a75db1259a6f4d32285c921e07e16ce8a5f876614def28a40f843e23448e4393",
+        "explorer_url": "https://stellar.expert/explorer/testnet/tx/a75db1259a6f4d32285c921e07e16ce8a5f876614def28a40f843e23448e4393"
+      }
+    }
+  ]
+}
