@@ -91,3 +91,4 @@ impl ZkVerifier {
 }
 
 mod test;
+mod test_ceremony;

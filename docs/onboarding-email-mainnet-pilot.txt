@@ -1,0 +1,44 @@
+DPO2U — Piloto mainnet Stellar (cópia de revisão; [Nome] = primeiro nome do integrante)
+
+Olá [Nome],
+
+Vamos colocar o pipeline de atestação (anticorrupção/compliance) do DPO2U na
+mainnet da Stellar e rodar um piloto real com 5 integrantes da equipe usando
+carteiras próprias. Você é um dos 5. Há dois trilhos.
+
+TRILHO 1 — SUA CARTEIRA (FREIGHTER)
+Cada atestação que você registrar é assinada pela SUA carteira (autocustódia
+real, ninguém segura sua chave).
+  1. Instale a extensão Freighter (freighter.app) e crie uma carteira na rede
+     Public/Mainnet.
+  2. Copie seu endereço público (começa com "G...") e responda este email com ele.
+  3. Eu autorizo seu endereço como submitter no contrato e financio sua conta
+     com um pouco de XLM para as taxas.
+  4. Quando houver uma atestação para você assinar, envio uma transação pronta
+     (um texto XDR). Você abre lab.stellar.org -> Sign Transaction, cola o XDR,
+     confere, assina no Freighter e envia. Fica registrado on-chain no seu nome.
+  >> Nunca compartilhe sua chave secreta / frase de recuperação — nem comigo.
+
+TRILHO 2 — CERIMÔNIA DE TRUSTED SETUP DO ZK
+Parte do pipeline usa prova de conhecimento zero (score privado, prova pública).
+Para ser seguro, precisamos de uma cerimônia com >=3 participantes — basta UM ser
+honesto e descartar sua parcela. Você seria contribuidor: numa data combinada
+roda um comando (snarkjs) que recebe o arquivo do anterior, adiciona
+aleatoriedade fresca sua, gera o próximo, destrói essa aleatoriedade e publica o
+resultado + hash. Mando o passo-a-passo exato. Sua contribuição honesta é o que
+impede provas falsas.
+
+SEGURANÇA / PRIVACIDADE
+  - Nada de dado pessoal vai à blockchain — só hashes, veredito e metadados.
+    A evidência fica off-chain.
+  - O veredito é computado pelo gateway (lógica auditável); sua carteira apenas
+    autoriza o registro on-chain.
+  - Sua chave secreta nunca sai do Freighter. Se pedirem sua seed, recuse.
+
+PRÓXIMO PASSO
+Responda com seu endereço Freighter (G...) e confirme se topa ser contribuidor
+da cerimônia ZK. Com os 5 endereços, agendo deploy + cerimônia.
+
+Abraço,
+Chairman — DPO2U
+mainnet · Stellar · dpo2u.com

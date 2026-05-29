@@ -120,3 +120,35 @@ export function testnetClient(overrides: Partial<ClientConfig> = {}): ClientConf
     ...overrides,
   };
 }
+
+/**
+ * Contract ID do attestation em MAINNET. Preenchido APÓS o deploy a partir de
+ * `scripts/deploy-mainnet.json` (contracts.anticorruption_attestation.contract_id).
+ * Vazio até lá — `mainnetClient()` exige `overrides.contractId` enquanto isso.
+ */
+export const MAINNET_ATTESTATION_CONTRACT_ID = '';
+
+/**
+ * Preset para o contrato de attestation em MAINNET (rede public).
+ * `viewerAccount` deve ser uma conta mainnet existente (o deployer ou qualquer
+ * membro) — a verificação é só simulação, não gasta fee, mas o RPC precisa de
+ * uma conta-fonte válida para montar a tx de simulação.
+ */
+export function mainnetClient(overrides: Partial<ClientConfig> = {}): ClientConfig {
+  const contractId = overrides.contractId ?? MAINNET_ATTESTATION_CONTRACT_ID;
+  if (!contractId) {
+    throw new SdkError(
+      'mainnet contractId não configurado — passe overrides.contractId ou preencha ' +
+        'MAINNET_ATTESTATION_CONTRACT_ID após o deploy (scripts/deploy-mainnet.json).',
+      'INVALID_INPUT',
+    );
+  }
+  return {
+    rpcUrl: 'https://soroban-mainnet.stellar.org',
+    networkPassphrase: Networks.PUBLIC,
+    contractId,
+    viewerAccount: overrides.viewerAccount ?? '',
+    explorerBaseUrl: 'https://stellar.expert/explorer/public',
+    ...overrides,
+  };
+}

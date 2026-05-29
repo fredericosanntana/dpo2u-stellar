@@ -98,6 +98,10 @@ fn main() {
 
     // Seed fixa — determinístico para reprodutibilidade da demo (DEV-ONLY;
     // produção exige cerimônia de trusted setup — ver docs/zk-trusted-setup-runbook.md).
+    // ⚠️ A cerimônia REAL já rodou (2026-05-29): a VK de produção está em
+    // packages/pilot-gateway/src/lib/canonical-vk.ts e o pipeline em scripts/zk-ceremony/.
+    // Este prover de seed fixa NÃO deve gerar provas de produção.
+    eprintln!("⚠️  zk-prover DEV-ONLY (seed fixa, forjável). Provas de produção: cerimônia em scripts/zk-ceremony/ + VK em canonical-vk.ts.");
     let mut rng = StdRng::seed_from_u64(0x44504f3255);
 
     let circuit = ScoreThreshold {

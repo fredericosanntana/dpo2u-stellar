@@ -1,0 +1,9 @@
+# Toolchain PINADO para reprodutibilidade do comprovante de atestação técnica.
+# O hash do wasm é toolchain-dependente — d706a07161…d7595 (attestation) e
+# 4af767bb…a9a0 (zk) foram produzidos com rustc 1.95.0 e BATEM com a testnet.
+# NÃO atualizar sem re-atestar os hashes (ver docs/2026-05-29-mainnet-pilot-wasm-attestation.md).
+[toolchain]
+channel = "1.95.0"
+components = ["rustfmt", "clippy"]
+targets = ["wasm32v1-none", "wasm32-unknown-unknown"]
+profile = "minimal"

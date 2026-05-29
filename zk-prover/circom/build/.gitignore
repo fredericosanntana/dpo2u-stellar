@@ -1,0 +1,16 @@
+# Artefatos da cerimônia (pesados/binários) — regeneráveis. Não commitar.
+# A transcrição (zkey + hashes + beacon) é publicada separadamente p/ auditoria.
+*.ptau
+*.zkey
+*.wtns
+*.r1cs
+*.sym
+score_threshold_js/
+input.json
+proof.json
+public.json
+verification_key.json
+witness.wtns
+
+# artefatos snarkjs de contexto/teste
+*_gw.json

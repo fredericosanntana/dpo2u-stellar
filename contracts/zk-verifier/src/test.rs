@@ -74,3 +74,18 @@ fn rejects_proof_for_wrong_threshold() {
     let res = client.verify_proof(&vk(&env), &proof(&env), &threshold_signal(&env, 71));
     assert_eq!(res, false, "sinal público adulterado deveria ser rejeitado");
 }
+
+// Defensivo (shake-down): contagem de sinais ≠ |ic|-1 ⇒ Err(MalformedVerifyingKey),
+// nunca panic. A vk de teste tem ic.len()=2 (1 sinal esperado); passar 2 sinais dispara o erro.
+#[test]
+fn rejects_malformed_vk_signal_count_mismatch() {
+    let env = Env::default();
+    let client = ZkVerifierClient::new(&env, &env.register(ZkVerifier {}, ()));
+    let two = vec![
+        &env,
+        Fr::from_u256(U256::from_u32(&env, 70)),
+        Fr::from_u256(U256::from_u32(&env, 1)),
+    ];
+    let res = client.try_verify_proof(&vk(&env), &proof(&env), &two);
+    assert!(res.is_err(), "contagem de sinais desalinhada deveria retornar Err, não panic");
+}

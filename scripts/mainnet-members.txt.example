@@ -1,0 +1,9 @@
+# Pubkeys Freighter dos 5 membros do piloto (um por linha, formato G...).
+# Preencher quando os membros responderem o email de onboarding.
+# Uso: ./scripts/authorize-members-mainnet.sh --file scripts/mainnet-members.txt
+#
+# GAAA...   # membro 1 — nome
+# GBBB...   # membro 2 — nome
+# GCCC...   # membro 3 — nome
+# GDDD...   # membro 4 — nome
+# GEEE...   # membro 5 — nome

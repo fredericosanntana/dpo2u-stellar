@@ -7,6 +7,8 @@ export { SdkError } from './types.js';
 export {
   AttestationClient,
   testnetClient,
+  mainnetClient,
+  MAINNET_ATTESTATION_CONTRACT_ID,
 } from './AttestationClient.js';
 export type { SorobanRpcLike, VerifyResult } from './AttestationClient.js';
 export {
@@ -20,5 +22,8 @@ export {
   USE_CASES,
   useCasesByLayer,
   findUseCase,
+  deployableUseCases,
   DATA_PROTECTION_JURISDICTIONS,
+  AI_GOVERNANCE_FRAMEWORKS,
+  SECTORAL_FRAMEWORKS,
 } from './use-cases.js';
