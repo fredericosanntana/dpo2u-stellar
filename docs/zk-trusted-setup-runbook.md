@@ -1,9 +1,13 @@
 # Runbook — cerimônia de trusted setup do circuito ZK DPO2U (A1)
 
-> Estado: **planejado**. O `zk-prover` hoje usa um setup de **seed fixa**
-> (`StdRng::seed_from_u64`) — reprodutível e bom para desenvolvimento/demo, mas
-> **inseguro para produção**: quem conhece a seed conhece o "toxic waste" e pode
-> forjar provas. Este runbook define a cerimônia que substitui isso.
+> Estado: **EXECUTADA — 2026-05-29** ✅. A cerimônia multi-party (Circom + snarkjs,
+> bls12381, 3 contribuições + beacon drand round 6153120) foi concluída; a VK real está
+> fixada em `packages/pilot-gateway/src/lib/canonical-vk.ts` (sha256 do `circuit_final.zkey`
+> = `5ee14f05b0ea006b8d77a5371d44dfc53af3e02df7de5f139bef588bf5a53324`) e validada on-chain
+> por `contracts/zk-verifier/src/test_ceremony.rs` (3/3 verde). **A transcrição auditável
+> está em `scripts/zk-ceremony/TRANSCRIPT.md`.** O caminho de seed fixa do `zk-prover` ficou
+> marcado DEV-ONLY. Este documento descreve a cerimônia que foi executada (mantido como
+> referência de metodologia e para futuras re-cerimônias do circuito).
 
 ## Por que é necessário
 
@@ -67,19 +71,23 @@ do mesmo jeito (mesma serialização uncompressed dos pontos).
 - O **beacon** garante que nem todos os contribuidores em conluio comprometem o
   resultado.
 
-## Critério de pronto
+## Critério de pronto — TODOS ATENDIDOS (2026-05-29) ✅
 
-- [ ] Circuito portado para Circom, em paridade com o arkworks (mesmos sinais
-      públicos: `[threshold, context]`).
-- [ ] `.ptau` público escolhido e seu hash registrado.
-- [ ] ≥ 3 contribuições independentes + beacon, transcrição publicada.
-- [ ] `verification_key.json` final → vk do verificador Soroban; redeploy do
-      `zk-verifier` **não** é necessário (vk é parâmetro de `verify_proof`), mas
-      o gateway deve **fixar** a vk canônica (ver `zk-verifier-threat-model.md`).
-- [ ] Seed fixa removida do `zk-prover` (ou mantida só atrás de uma flag `--dev`).
+- [x] Circuito portado para Circom, em paridade com o arkworks (mesmos sinais
+      públicos: `[threshold, context]`). Validado por `test_ceremony.rs`.
+- [x] `.ptau` público escolhido e seu hash registrado (Powers of Tau bls12381 pow 12).
+- [x] ≥ 3 contribuições independentes + beacon, transcrição publicada
+      (`scripts/zk-ceremony/TRANSCRIPT.md` — beacon drand round 6153120).
+- [x] `verification_key.json` final → vk canônica fixada em
+      `packages/pilot-gateway/src/lib/canonical-vk.ts` (hash esperado travado em
+      `zk-verify.ts::EXPECTED_CANONICAL_VK_HASH`, fail-closed no boot). Sem redeploy do
+      `zk-verifier` (vk é parâmetro de `verify_proof`).
+- [x] Seed fixa do `zk-prover` marcada DEV-ONLY (`zk-prover/src/main.rs`, warning em runtime).
 
-## Enquanto a cerimônia não roda
+## Status pós-cerimônia
 
-O caminho de seed fixa permanece **explicitamente marcado como dev-only** no
-código (`zk-prover/src/main.rs`) e nos docs. Nenhuma atestação de produção deve
-depender dele.
+`zk_compliance_v1` é **confiável** e pode ser ativado on-chain. A verificação ZK em
+produção (gateway `verifyZkProof` + mcp-server `verify_agent_repo_zk_proof`) usa a VK
+canônica da cerimônia — nenhuma atestação de produção depende da seed dev. Para o go-live
+mainnet do `zk_compliance_v1`, ver o runbook de mainnet (`2026-05-29-mainnet-pilot-runbook.md`):
+basta habilitá-lo em `configure-mainnet-usecases.sh` quando o deploy mainnet acontecer.

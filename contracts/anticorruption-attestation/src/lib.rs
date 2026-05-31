@@ -31,6 +31,7 @@ pub enum DataKey {
     UseCaseConfig(Symbol),
     Authorized(Address),
     Attestation(Symbol, BytesN<32>),
+    Escrow(Symbol, Address), // use_case_id, target_company
 }
 
 #[contracttype]
@@ -58,6 +59,15 @@ pub struct AttestationRecord {
     pub submitted_by: Address,
     pub timestamp: u64,
     pub metadata_hash: BytesN<32>,
+}
+
+#[contracttype]
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct Escrow {
+    pub funder: Address,
+    pub target_company: Address,
+    pub token: Address,
+    pub amount: i128,
 }
 
 #[contract]
@@ -160,6 +170,88 @@ impl AntiCorruptionAttestation {
         env.storage()
             .persistent()
             .get(&DataKey::Attestation(use_case_id, evidence_hash))
+    }
+
+    /// Deposita fundos no contrato atrelados à conformidade futura de uma empresa alvo.
+    pub fn deposit_funds(
+        env: Env,
+        funder: Address,
+        target_company: Address,
+        token: Address,
+        amount: i128,
+        use_case_id: Symbol,
+    ) {
+        funder.require_auth();
+
+        if amount <= 0 {
+            panic!("Amount must be greater than zero");
+        }
+
+        let escrow_key = DataKey::Escrow(use_case_id.clone(), target_company.clone());
+        if env.storage().persistent().has(&escrow_key) {
+            panic!("Escrow already exists for this use case and target company");
+        }
+
+        // Transfere o dinheiro do funder para este Smart Contract
+        let client = soroban_sdk::token::Client::new(&env, &token);
+        client.transfer(&funder, &env.current_contract_address(), &amount);
+
+        let escrow = Escrow {
+            funder,
+            target_company,
+            token,
+            amount,
+        };
+
+        env.storage().persistent().set(&escrow_key, &escrow);
+        env.events().publish((symbol_short!("deposit"), use_case_id), escrow);
+    }
+
+    /// Registra a atestação e, baseado no veredito, destrava os fundos do Escrow.
+    pub fn attest_and_execute(
+        env: Env,
+        submitter: Address,
+        use_case_id: Symbol,
+        target_company: Address,
+        verdict: Verdict,
+        evidence_hash: BytesN<32>,
+        metadata_hash: BytesN<32>,
+    ) -> u32 {
+        // Primeiro, faz todo o registro normal da atestação
+        let seq = Self::register_attestation(
+            env.clone(),
+            submitter,
+            use_case_id.clone(),
+            verdict.clone(),
+            evidence_hash,
+            metadata_hash,
+        );
+
+        // Agora executa a lógica financeira de Custódia (Escrow)
+        let escrow_key = DataKey::Escrow(use_case_id.clone(), target_company.clone());
+        if let Some(escrow) = env.storage().persistent().get::<_, Escrow>(&escrow_key) {
+            let client = soroban_sdk::token::Client::new(&env, &escrow.token);
+
+            match verdict {
+                Verdict::Pass => {
+                    // Compliance comprovado: O dinheiro é liberado para o fornecedor
+                    client.transfer(&env.current_contract_address(), &escrow.target_company, &escrow.amount);
+                    env.storage().persistent().remove(&escrow_key);
+                    env.events().publish((symbol_short!("executed"), use_case_id), escrow.target_company);
+                }
+                Verdict::Fail => {
+                    // Quebra de compliance: O dinheiro é devolvido para a contratante/fundo
+                    client.transfer(&env.current_contract_address(), &escrow.funder, &escrow.amount);
+                    env.storage().persistent().remove(&escrow_key);
+                    env.events().publish((symbol_short!("refunded"), use_case_id), escrow.funder);
+                }
+                Verdict::Review => {
+                    // Fundos continuam travados aguardando auditoria manual
+                }
+            }
+        }
+
+        seq
     }
 
     pub fn admin(env: Env) -> Address {
