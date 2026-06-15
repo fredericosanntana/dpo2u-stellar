@@ -1,0 +1,12 @@
+{
+  "name": "dpo2u-xchain-relayer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DPO2U cross-chain relayer (#6-C) — carries a Groth16/BN254 proof from an EVM origin to Stellar, where xchain-attest re-verifies it on-chain. A trusted courier, NOT a trustless bridge.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "node --test",
+    "relay": "node relay.mjs"
+  }
+}

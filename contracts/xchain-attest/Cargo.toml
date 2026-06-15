@@ -1,0 +1,20 @@
+[package]
+name = "xchain-attest"
+description = "DPO2U — Soroban contract that verifies a Groth16/BN254 proof RELAYED from an EVM chain and attests the cross-chain verification (moonshot #6-C)."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+por-verifier = { path = "../por-verifier" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+hex = "0.4"

@@ -1,0 +1,43 @@
+{
+  "what": "DPO2U ZK Proof-of-Reserve (Cunha 1-B / seal_solvency) — BN254/Groth16 + Poseidon",
+  "network": "testnet",
+  "passphrase": "Test SDF Network ; September 2015",
+  "deployer": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "deployed_at": "2026-06-13",
+  "contracts": {
+    "por_verifier_bn254": "CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+    "por_filing": "CC73EARBPF2PQXILDXO7SG6PSKUAGTQNCERPXV6AMME7BJDGBAZUWC2Q"
+  },
+  "circuit": {
+    "file": "zk-prover/por/por_solvency.circom",
+    "curve": "bn128 (BN254)",
+    "statement": "sum(reserves) >= sum(liabilities), positions private, Poseidon commitment of totals, context anti-replay binding",
+    "public_signals_order": ["solvent", "commit", "context"],
+    "vk_sha256": "40d722bfe6f95ea245451a620d48b9b818654bc75b61ec8b0865dc0d5b878a42",
+    "ceremony": "coordinator (1-party + beacon) — DEV vk. Multi-party MPC ceremony = SCF Tranche #0 deliverable."
+  },
+  "live_evidence": {
+    "verify_proof_on_chain": "true (read-only simulation executed the BN254 pairing_check)",
+    "set_verifier_event": "verifier = CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+    "seal_solvency_tx": "1c4258c766c8c496385e5f8de20026d8b4fb7aa4a3345eb1b9b65a1ecc0976ba",
+    "get_solvency_readback": {
+      "solvent": true,
+      "zk_verified": true,
+      "ratio_bps": 10678,
+      "proof_context": "00000000000000000000000000000000000000000000000000000000075bcd15"
+    },
+    "register_psav_tx": "288f35aefff4ff4d9b2e627c52bdbd2df0f3d6cd5735e5263cfd65d4e9529aff",
+    "authorize_submitter_tx": "dfabc046d69e9daef2656dccc103e55e2da43e10fc58a06bef4102a3c29d3e3e"
+  },
+  "sample_input": {
+    "reserves": ["1000000", "500000", "2000000", "750000"],
+    "liabilities": ["900000", "480000", "1900000", "700000"],
+    "note": "balances PRIVATE (witness); never on-chain. ratio_bps=10678 is a disclosed aggregate."
+  },
+  "explorer": {
+    "por_verifier": "https://stellar.expert/explorer/testnet/contract/CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+    "por_filing": "https://stellar.expert/explorer/testnet/contract/CC73EARBPF2PQXILDXO7SG6PSKUAGTQNCERPXV6AMME7BJDGBAZUWC2Q",
+    "seal_tx": "https://stellar.expert/explorer/testnet/tx/1c4258c766c8c496385e5f8de20026d8b4fb7aa4a3345eb1b9b65a1ecc0976ba"
+  },
+  "honesty": "testnet; DEV vk from a 1-party coordinator ceremony; mainnet gated on multi-party ceremony + external audit (the SCF ask). Market-grade verifiable PoR, not the regulatory BCB 5710/5711 filing nor a substitute for the biennial auditor."
+}

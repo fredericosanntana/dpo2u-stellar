@@ -1,0 +1,19 @@
+[package]
+name = "por-verifier"
+description = "DPO2U — verificador Groth16/BN254 on-chain (ZK Proof-of-Reserve: solvência pública, posições privadas)"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+hex = "0.4"

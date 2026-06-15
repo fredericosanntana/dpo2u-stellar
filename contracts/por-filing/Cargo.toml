@@ -1,0 +1,20 @@
+[package]
+name = "por-filing"
+description = "DPO2U — Soroban seal for BCB 5710/5711 PoR filings (hash + metadata only, no PII)"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+por-verifier = { path = "../por-verifier" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+hex = "0.4"

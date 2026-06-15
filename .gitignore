@@ -8,3 +8,16 @@ sdk/dist/
 *.swp
 .DS_Store
 # scripts/deploy.json is committed as the canonical deploy artifact
+
+# ZK build artifacts (circuits / ceremony / witnesses / proofs) — large, regenerable
+# via zk-prover/por/build.sh and zk-prover/agg/build-jurisdictions.sh
+zk-prover/por/build/
+zk-prover/agg/build/
+node_modules/
+
+# EVM (Foundry) — deps + build output; regenerate via scripts/evm/install-foundry.sh
+# + `cd contracts-evm && forge install foundry-rs/forge-std`
+contracts-evm/lib/
+contracts-evm/out/
+contracts-evm/cache/
+contracts-evm/broadcast/

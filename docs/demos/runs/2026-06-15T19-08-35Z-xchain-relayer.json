@@ -1,0 +1,10 @@
+{
+  "what": "DPO2U cross-chain BN254 (#6-C) — proof relayed from an EVM origin and verified ON-CHAIN on Stellar",
+  "timestamp_utc": "2026-06-15T19-08-35Z",
+  "evm_origin": { "chain": "anvil", "rpc": "http://127.0.0.1:8545", "verifier": "0x5FbDB2315678afecb367f032d93F642f64180aa3", "proof_registry": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512", "proof_id": 0 },
+  "stellar": { "network": "testnet", "xchain_attest": "CCROBTVOGWKJCNDWWCMTG3STNMCUR7TYFHXVILBBFMEXQRPCRNDXWLR2", "por_verifier": "CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+    "verify_and_attest_tx": "dfc7e5b87ed165ce8a7c3cd3bd5273d7cf184b959e483e12df74e906965485a6", "explorer": "https://stellar.expert/explorer/testnet/tx/dfc7e5b87ed165ce8a7c3cd3bd5273d7cf184b959e483e12df74e906965485a6",
+    "claim_readback": {"origin_chain":"anvil","proof_context":"00000000000000000000000000000000000000000000000000000000075bcd15","relayed_by":"GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN","seq":3107537,"timestamp":1781550513,"zk_verified":true} },
+  "claim": "A proof minted+verified on an EVM chain, relayed to Stellar, and RE-VERIFIED on-chain (Groth16/BN254 pairing) — courier relayer, not a trustless bridge.",
+  "honesty": "EVM origin = anvil; relayer is a trusted courier (no EVM light client/state proof). Verification is trustless on-chain on Soroban. DEV vk; testnet."
+}

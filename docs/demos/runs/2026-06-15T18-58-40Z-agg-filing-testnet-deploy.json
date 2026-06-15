@@ -1,0 +1,18 @@
+{
+  "what": "DPO2U moonshot #5 — SnarkPack multi-jurisdiction aggregate sealed on Stellar testnet",
+  "timestamp_utc": "2026-06-15T18-58-40Z",
+  "network": "testnet",
+  "agg_filing_contract": "CCXTDJD46KNCV7YOZ4X3SNBICAN3TYXJPN4GAWMHDH6VI5XHNFJLMA4D",
+  "por_verifier": "CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+  "aggregate": {
+    "count": 4,
+    "verdict_all_compliant": true,
+    "agg_commitment": "7d76e850457003657d0bc8f7fd644e897fd0b28096f39192c99d22cfe5b348f0",
+    "context_root": "2d3b98acc0ae74d49a1a4b609a82fd64bcd5de6a319d1da1ae90665c33eff1a5"
+  },
+  "member_proof": "BR jurisdiction proof (threshold 60), verified ON-CHAIN via por-verifier",
+  "explorer": "https://stellar.expert/explorer/testnet/contract/CCXTDJD46KNCV7YOZ4X3SNBICAN3TYXJPN4GAWMHDH6VI5XHNFJLMA4D",
+  "honesty": "SnarkPack aggregate verified OFF-CHAIN (Soroban lacks GT arithmetic); on-chain seal attests the result + one constituent proof verified on-chain. DEV vk; testnet.",
+  "seal_aggregate_tx": "4e4d4a71c15555c6d5f1dc98409cf2babc236499444ebc27f764fc4dd14e4674",
+  "seal_tx_explorer": "https://stellar.expert/explorer/testnet/tx/4e4d4a71c15555c6d5f1dc98409cf2babc236499444ebc27f764fc4dd14e4674"
+}

@@ -1,0 +1,58 @@
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0 <0.9.0;
+
+import {Test} from "forge-std/Test.sol";
+import {Groth16Verifier} from "../src/Verifier.sol";
+
+/// DPO2U cross-chain BN254 (#6-B) — EVM half of "two chains, one proof".
+///
+/// The proof points and public signals below are the EXACT output of
+///   `snarkjs zkey export soliditycalldata public.json proof.json`
+/// for the PoR proof produced by zk-prover/por/build/por_final.zkey — the SAME
+/// proof that verifies on the Stellar Soroban por-verifier (CBM6…MVCAC) on-chain.
+/// public signals = [solvent=1, commit, context=0x075bcd15 (123456789)].
+contract VerifierTest is Test {
+    Groth16Verifier internal verifier;
+
+    uint256[2] PA = [
+        0x0fe600771466e1ed961c66c31837b7033a9e702007cf6135d0d5c7bdd4f248b1,
+        0x1b08dcd66196d5fca6de458c11cb135019735d8b6ac14b1e8644f64e5183a845
+    ];
+    uint256[2][2] PB = [
+        [
+            0x10384e6b4f2b14ce9159987cd3d1e736dcc6867ddff53cca6469c1b4f10a0efd,
+            0x1b9e1da8e4ed87b679f4a3e6606ee76d3e1b98e4bb182f6a51459a8c37ef55bb
+        ],
+        [
+            0x2cd22148dea491ff37a54b6c856a21d648bcc93d6b8e0863594202aac9e950f2,
+            0x29357b08c510dfafa0d197a22a778874ed0313a70abeff7a6c294261840dc8b5
+        ]
+    ];
+    uint256[2] PC = [
+        0x205ea7e4fb9703300bdb7093054f287f4c2ddf862315bcfbfb6608a6c37a26c1,
+        0x201992a74d98e0c3fef492c27fda23e9fcd6ef9bbacc89ee34a57a0ae0054e0d
+    ];
+    uint256[3] PUB = [
+        uint256(0x0000000000000000000000000000000000000000000000000000000000000001),
+        0x2e1015154eccba498ea60399e4a1f8fc264f0f1ca41643e359eb74fb12c39125,
+        0x00000000000000000000000000000000000000000000000000000000075bcd15
+    ];
+
+    function setUp() public {
+        verifier = new Groth16Verifier();
+    }
+
+    /// The real PoR proof verifies on the EVM verifier.
+    function test_VerifiesRealPorProof() public view {
+        bool ok = verifier.verifyProof(PA, PB, PC, PUB);
+        assertTrue(ok, "EVM verifier must accept the real PoR proof");
+    }
+
+    /// Tampering the context public signal (anti-replay) must reject — same
+    /// soundness property asserted on the Soroban side (rejects_tampered_context).
+    function test_RejectsTamperedContext() public view {
+        uint256[3] memory tampered = [PUB[0], PUB[1], PUB[2] + 1];
+        bool ok = verifier.verifyProof(PA, PB, PC, tampered);
+        assertFalse(ok, "EVM verifier must reject a tampered context");
+    }
+}

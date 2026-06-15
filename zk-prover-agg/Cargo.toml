@@ -1,0 +1,30 @@
+# Crate autônomo — FORA do workspace Soroban (depende de arkworks + ark-ip-proofs,
+# não é no_std). Mantém o build dos contratos Soroban (pin 1.95.0) intocado.
+[workspace]
+
+[package]
+name = "zk-prover-agg"
+version = "0.1.0"
+edition = "2021"
+description = "DPO2U — agregação SnarkPack (TIPP/MIPP) de N provas Groth16/BN254 de compliance jurisdicional (moonshot #5). Verifica off-chain; o resultado é selado on-chain."
+license = "Apache-2.0"
+
+[[bin]]
+name = "aggregate"
+path = "src/main.rs"
+
+[dependencies]
+ark-bn254 = { version = "0.4", features = ["curve"] }
+ark-groth16 = { version = "0.4", default-features = false }
+ark-crypto-primitives = { version = "0.4", features = ["snark"] }
+ark-relations = "0.4"
+ark-r1cs-std = "0.4"
+ark-ff = "0.4"
+ark-ec = "0.4"
+ark-std = "0.4"
+ark-serialize = "0.4"
+ark-ip-proofs = { git = "https://github.com/arkworks-rs/ripp" }
+blake2 = "0.9"
+sha2 = "0.10"
+serde_json = "1"
+hex = "0.4"

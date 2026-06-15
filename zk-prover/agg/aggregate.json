@@ -1,0 +1,22 @@
+{
+  "agg_commitment": "7d76e850457003657d0bc8f7fd644e897fd0b28096f39192c99d22cfe5b348f0",
+  "context_root": "2d3b98acc0ae74d49a1a4b609a82fd64bcd5de6a319d1da1ae90665c33eff1a5",
+  "count": 4,
+  "curve": "BN254 (bn128)",
+  "honesty": "DEV coordinator setup (not multi-party MPC). arkworks-native proofs over the same jurisdiction statement as the snarkjs proofs in zk-prover/agg/.",
+  "jurisdictions": [
+    "BR",
+    "EU",
+    "SG",
+    "UAE"
+  ],
+  "onchain_verification": "INFEASIBLE on Soroban today — SnarkPack verify needs GT arithmetic; bn254 host exposes only g1_*, pairing_check, Fr. The aggregate verifies OFF-CHAIN; the result is sealed on-chain by agg-filing. On-chain aggregate verify = roadmap (GT host fns).",
+  "public_signals_order": [
+    "compliant",
+    "threshold",
+    "context"
+  ],
+  "technique": "true recursive proof aggregation (ark-ip-proofs / arkworks-rs ripp), NOT a batch circuit",
+  "verdict_all_compliant": true,
+  "what": "DPO2U moonshot #5 — N jurisdiction Groth16/BN254 proofs aggregated via SnarkPack (TIPP/MIPP), verified off-chain"
+}

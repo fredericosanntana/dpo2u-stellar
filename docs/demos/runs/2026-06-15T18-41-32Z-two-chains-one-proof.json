@@ -1,0 +1,21 @@
+{
+  "what": "DPO2U cross-chain BN254 (#6-B) — one Groth16/BN254 proof, verified on two chains",
+  "timestamp_utc": "2026-06-15T18-41-32Z",
+  "shared_origin_zkey": "zk-prover/por/build/por_final.zkey",
+  "proof_sha256": "8b0e270b8fb3d867d8367447c600bb34d5c42e16ea9ce3011110affebdbfa457",
+  "public_signals": ["1","20834806098997449461222447730079429006413965184608890864493022757183274848549","123456789"],
+  "evm": {
+    "verifier_contract": "Groth16Verifier (snarkjs zkey export solidityverifier)",
+    "chain": "local anvil (EVM)",
+    "deployed_to": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "verifyProof_result": true
+  },
+  "stellar": {
+    "verifier_contract": "CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+    "network": "testnet",
+    "verify_proof_result": true,
+    "explorer": "https://stellar.expert/explorer/testnet/contract/CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC"
+  },
+  "claim": "The same BN254 proof bytes verify on an EVM verifier and on Stellar Soroban. BN254 = the cross-chain bridge primitive.",
+  "honesty": "EVM side = local anvil deploy; Stellar side = live testnet read-only simulation (executes the on-chain BN254 pairing_check). DEV vk; testnet."
+}

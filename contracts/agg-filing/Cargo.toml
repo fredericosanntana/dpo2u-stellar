@@ -1,0 +1,20 @@
+[package]
+name = "agg-filing"
+description = "DPO2U — Soroban seal for SnarkPack-aggregated multi-jurisdiction compliance (moonshot #5). Off-chain-verified aggregate, on-chain-attested result + one constituent proof verified on-chain."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+por-verifier = { path = "../por-verifier" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+hex = "0.4"
