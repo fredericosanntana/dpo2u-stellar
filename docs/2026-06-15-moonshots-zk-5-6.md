@@ -139,7 +139,27 @@ So the structural AI-governance predicate verifies on-chain on Solana too:
 - `VK_ID=1 ORIGIN=gov PROOF_JSON=…/soroban-gov-HIROSHIMA.json node relayer/solana.mjs`
 
 So `governance_predicate` (Hiroshima/EU-AIA) now verifies on-chain on **both Stellar and
-Solana** — the structural AI-governance vertical is cross-chain too.
+Solana** — the structural AI-governance vertical is cross-chain too. Both structural
+predicates run on Solana: Hiroshima tx `2RMbo3eq…` and **EU-AIA** tx
+`qhBJyAVZbjAaitySbKWFVje6vtKo3QvvGuZpurjUNgprAMREBJDMmDqWCCSEGY8ZfpNNkrpidJ1dTchwsBoyGMA`
+(claim PDA `AycnqHtEZRXE5p8xg3EwCLwFDDVcQt31CArcRZ5Qpk8L`, `framework_id=2`).
+
+### agg-filing seal ported to Solana — the aggregate sealed on a 3rd chain
+A separate Solana program `solana-agg-filing` (`6517E8HPkT9gHMgQdtydzrzz91RUejKxNLASPDjnQEaU`,
+three pinned vks: 0 PoR / 1 governance / 2 jurisdiction) seals the SnarkPack aggregate
+**result** (commitment + count + verdict + context_root) in a PDA and verifies one member
+proof **on-chain** (`alt_bn128`, fail-closed). Both aggregates are now sealed on Solana too:
+- **Scored (29 = 24 data + 5 AI):** scope `GLOBAL`, member = BR jurisdiction proof (vk_id=2),
+  seal tx `2RK1CpDwdv3TsBXT7StGBAxvFyLQHA41PdAzgrFxGpMyoPGMfTeuXARVfcnPKcAS3CckTN8ZnEwUCHpmykK4dYkZ`,
+  PDA `8xJ8NuEtt1RFtDefSAHHVNccGvFgVaNCuaFsW95iWw3H` (`agg_commitment` matches, `member_zk_verified=1`).
+- **Structural (4):** scope `AIGOV`, member = Hiroshima proof (vk_id=1), seal tx
+  `2FoXSrSVBvDkhUw76nupmgR28fjXQSGNz93YXQm4PXhh2ztBLEXTPShZvUShtFzqmG5VUNNt4q9jLpANPydQWJ1g`,
+  PDA `DDwDseCu7p2AKDHuaUoTHs2i57RhrhfyEHHyvgFm6bQZ`.
+```bash
+PROGRAM_ID=6517E8HP… AGG_JSON=…/aggregate.json MEMBER_JSON=…/soroban-jur-BR.json VK_ID=2 SCOPE=GLOBAL node relayer/solana-aggseal.mjs
+```
+Same honesty: SnarkPack aggregate verified OFF-CHAIN (no GT on alt_bn128 either); on-chain
+seal attests the result + one member proof verified on-chain. Registry `solana-agg-filing/devnet-deploy.json`.
 
 ## Tests
 - Soroban workspace: por-verifier 4 · por-filing 11 · **agg-filing 6** · **xchain-attest 6** (+ anticorruption/zk-verifier) — all green.

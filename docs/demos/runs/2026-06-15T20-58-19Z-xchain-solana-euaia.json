@@ -1,0 +1,14 @@
+{
+  "what": "DPO2U — EU-AIA structural governance proof verified ON-CHAIN on Solana devnet (governance_predicate framework_id=2)",
+  "network": "solana devnet",
+  "program_id": "9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib",
+  "vk_id": 1,
+  "framework": "EU-AIA (framework_id=2; tier=high-risk, red-line clear, obligations met)",
+  "public_signals": ["1","2","2000002"],
+  "origin": "euaia",
+  "verify_and_attest_tx": "qhBJyAVZbjAaitySbKWFVje6vtKo3QvvGuZpurjUNgprAMREBJDMmDqWCCSEGY8ZfpNNkrpidJ1dTchwsBoyGMA",
+  "claim_pda": "AycnqHtEZRXE5p8xg3EwCLwFDDVcQt31CArcRZ5Qpk8L",
+  "explorer_tx": "https://explorer.solana.com/tx/qhBJyAVZbjAaitySbKWFVje6vtKo3QvvGuZpurjUNgprAMREBJDMmDqWCCSEGY8ZfpNNkrpidJ1dTchwsBoyGMA?cluster=devnet",
+  "claim": "Both structural predicates (Hiroshima + EU-AIA) verify on-chain on Solana via the same pinned structural vk.",
+  "honesty": "DEV vk; devnet; predicate constants need legal review."
+}

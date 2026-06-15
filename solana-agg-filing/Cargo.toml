@@ -1,0 +1,19 @@
+# Standalone — NOT in the dpo2u-stellar Soroban workspace. Solana port of the agg-filing
+# seal: verifies one constituent member proof on-chain (alt_bn128) against a PINNED vk and
+# stores the SnarkPack aggregate RESULT (commitment + count + verdict) in a PDA.
+[workspace]
+
+[package]
+name = "solana-agg-filing"
+version = "0.1.0"
+edition = "2021"
+description = "DPO2U — Solana program sealing a SnarkPack aggregate result + verifying one member proof on-chain (moonshot #5 agg-filing, ported)."
+license = "Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+solana-program = "=2.1.6"
+groth16-solana = "0.2.0"
+hex-literal = "0.4"

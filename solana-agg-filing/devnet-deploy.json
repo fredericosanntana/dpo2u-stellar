@@ -1,0 +1,19 @@
+{
+  "what": "DPO2U agg-filing — Solana port (#5 seal). Verifies one member proof on-chain (alt_bn128, pinned vk) + seals the SnarkPack aggregate result (commitment+count+verdict+context_root) in a PDA.",
+  "network": "solana devnet",
+  "deployed_at": "2026-06-15",
+  "program_id": "6517E8HPkT9gHMgQdtydzrzz91RUejKxNLASPDjnQEaU",
+  "upgrade_authority": "HjpGXPWQF1PiqjdWtNNEbAxqNamXKGpJspRZm9Jv5LZj",
+  "pinned_vks": { "0": "PoR", "1": "structural governance (governance_predicate)", "2": "jurisdiction-compliance" },
+  "sealed_aggregates": {
+    "GLOBAL_scored": { "scope": "GLOBAL", "count": 29, "note": "24 data jurisdictions + 5 scored AI frameworks", "vk_id": 2,
+      "member_proof": "BR jurisdiction proof", "agg_commitment": "4ab355235daccf11bdb1b004eac68d5c53b7ea172ee8d259dea372b375b71aa6",
+      "seal_tx": "2RK1CpDwdv3TsBXT7StGBAxvFyLQHA41PdAzgrFxGpMyoPGMfTeuXARVfcnPKcAS3CckTN8ZnEwUCHpmykK4dYkZ",
+      "claim_pda": "8xJ8NuEtt1RFtDefSAHHVNccGvFgVaNCuaFsW95iWw3H" },
+    "AIGOV_structural": { "scope": "AIGOV", "count": 4, "note": "structural AI-governance (Hiroshima + EU-AIA)", "vk_id": 1,
+      "member_proof": "Hiroshima governance_predicate proof", "agg_commitment": "d78efd6e58cdfcbe2741803851c2f7f8478e811ce0d7de8d89543723acb097c6",
+      "seal_tx": "2FoXSrSVBvDkhUw76nupmgR28fjXQSGNz93YXQm4PXhh2ztBLEXTPShZvUShtFzqmG5VUNNt4q9jLpANPydQWJ1g",
+      "claim_pda": "DDwDseCu7p2AKDHuaUoTHs2i57RhrhfyEHHyvgFm6bQZ" }
+  },
+  "honesty": "SnarkPack aggregate verified OFF-CHAIN (no GT on alt_bn128 either); on-chain seal attests the result + one member proof verified on-chain. DEV vks; devnet."
+}
