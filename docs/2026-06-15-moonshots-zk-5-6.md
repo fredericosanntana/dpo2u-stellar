@@ -129,6 +129,18 @@ bash scripts/relayer/run-xchain-solana-demo.sh   # build-sbf → deploy devnet �
 can't re-verify foreign Groth16 on-chain — different proof system; it could only be a
 proof *origin* via the attestation pattern.)
 
+The Solana program holds **two pinned vks** (fail-closed; relayer selects via `vk_id` but
+never supplies one): `vk_id=0` PoR, `vk_id=1` **structural governance** (`governance_predicate`).
+So the structural AI-governance predicate verifies on-chain on Solana too:
+- **Live (devnet):** Hiroshima proof, `verify_and_attest` tx
+  `2RMbo3eqwyH7fCUphrEM5bqUERJ343pwRVbBrw631SEzLy4VVYqtUrCq2aaDJteoVj8R1nU57L2fonYk1p3p3KFH`,
+  claim PDA `GAiNJSskzvR1NvKbC3XSA4CfeQVFMxjLvdBQWVZtNQAP` (`origin=gov`, `zk_verified=true`,
+  98131 CU, log "STRUCTURAL AI-governance proof … verified ON-CHAIN").
+- `VK_ID=1 ORIGIN=gov PROOF_JSON=…/soroban-gov-HIROSHIMA.json node relayer/solana.mjs`
+
+So `governance_predicate` (Hiroshima/EU-AIA) now verifies on-chain on **both Stellar and
+Solana** — the structural AI-governance vertical is cross-chain too.
+
 ## Tests
 - Soroban workspace: por-verifier 4 · por-filing 11 · **agg-filing 6** · **xchain-attest 6** (+ anticorruption/zk-verifier) — all green.
 - Off-chain: `zk-prover-agg` 3 · relayer convert 2 · EVM `forge test` 2.

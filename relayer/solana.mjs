@@ -15,6 +15,7 @@ const PROGRAM_ID = new PublicKey(process.env.PROGRAM_ID || "9muJSDtxSsKLKML5SPLn
 const RPC = process.env.RPC || "https://api.devnet.solana.com";
 const ORIGIN = (process.env.ORIGIN || "evm").slice(0, 16);
 const PROOF_JSON = process.env.PROOF_JSON || "../zk-prover/por/build/soroban-bn254.json";
+const VK_ID = Number(process.env.VK_ID || "0"); // 0 = PoR vk, 1 = structural governance vk
 const KEYPAIR = process.env.KEYPAIR || `${process.env.HOME}/.config/solana/id.json`;
 const P = 21888242871839275222246405745257275088696311157297823662689037894645226208583n;
 
@@ -36,8 +37,8 @@ const origin = Buffer.alloc(16);
 Buffer.from(ORIGIN, "ascii").copy(origin);
 const proofContext = pub[2];                 // pub[2] = context
 
-const data = Buffer.concat([piA, piB, piC, pub[0], pub[1], pub[2], origin]); // 368B
-if (data.length !== 368) throw new Error(`bad instruction data length ${data.length}`);
+const data = Buffer.concat([Buffer.from([VK_ID]), piA, piB, piC, pub[0], pub[1], pub[2], origin]); // 369B
+if (data.length !== 369) throw new Error(`bad instruction data length ${data.length}`);
 
 const [claimPda] = PublicKey.findProgramAddressSync([Buffer.from("xclaim"), proofContext], PROGRAM_ID);
 

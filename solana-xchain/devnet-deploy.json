@@ -8,7 +8,11 @@
   "live_evidence": {
     "verify_and_attest_tx": "4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa",
     "claim_pda": "EpPgQzTVBJUbXedQorrPfwj5sj1STwxy5vQShhapsKUi",
-    "claim_readback": { "origin": "evm", "proof_context": "00000000000000000000000000000000000000000000000000000000075bcd15", "zk_verified": true },
+    "claim_readback": {
+      "origin": "evm",
+      "proof_context": "00000000000000000000000000000000000000000000000000000000075bcd15",
+      "zk_verified": true
+    },
     "compute_units": 97964,
     "program_log": "DPO2U xchain-attest: BN254 Groth16 verified ON-CHAIN (alt_bn128); cross-chain claim sealed. zk_verified=true"
   },
@@ -18,5 +22,15 @@
     "program": "https://explorer.solana.com/address/9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib?cluster=devnet",
     "tx": "https://explorer.solana.com/tx/4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa?cluster=devnet"
   },
-  "honesty": "Relayer = trusted courier (transport only); verification is trustless on-chain. DEV vk; devnet. The same BN254 proof verifies on-chain on Stellar, an EVM chain, AND Solana — BN254 as cross-chain lingua franca."
+  "honesty": "Relayer = trusted courier (transport only); verification is trustless on-chain. DEV vk; devnet. The same BN254 proof verifies on-chain on Stellar, an EVM chain, AND Solana — BN254 as cross-chain lingua franca.",
+  "pinned_vks": {
+    "0": "PoR vk",
+    "1": "structural governance vk (governance_predicate)"
+  },
+  "governance_evidence": {
+    "verify_and_attest_tx": "2RMbo3eqwyH7fCUphrEM5bqUERJ343pwRVbBrw631SEzLy4VVYqtUrCq2aaDJteoVj8R1nU57L2fonYk1p3p3KFH",
+    "claim_pda": "GAiNJSskzvR1NvKbC3XSA4CfeQVFMxjLvdBQWVZtNQAP",
+    "framework": "Hiroshima ICOC",
+    "program_log": "STRUCTURAL AI-governance proof (governance_predicate) verified ON-CHAIN (alt_bn128)"
+  }
 }

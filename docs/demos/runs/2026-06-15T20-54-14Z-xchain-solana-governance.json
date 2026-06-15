@@ -1,0 +1,16 @@
+{
+  "what": "DPO2U — governance_predicate (structural AI-governance) verified ON-CHAIN on Solana devnet (#6 + study #2, ported)",
+  "network": "solana devnet",
+  "program_id": "9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib",
+  "vk_id": 1,
+  "vk": "structural governance vk (governance_predicate: Hiroshima N-of-M / EU-AIA tier)",
+  "framework": "Hiroshima ICOC (framework_id=1, all 11 principles attested)",
+  "origin": "gov",
+  "verify_and_attest_tx": "2RMbo3eqwyH7fCUphrEM5bqUERJ343pwRVbBrw631SEzLy4VVYqtUrCq2aaDJteoVj8R1nU57L2fonYk1p3p3KFH",
+  "claim_pda": "GAiNJSskzvR1NvKbC3XSA4CfeQVFMxjLvdBQWVZtNQAP",
+  "claim_readback": { "origin": "gov", "proof_context": "00000000000000000000000000000000000000000000000000000000001e8481", "zk_verified": true },
+  "compute_units": 98131,
+  "explorer_tx": "https://explorer.solana.com/tx/2RMbo3eqwyH7fCUphrEM5bqUERJ343pwRVbBrw631SEzLy4VVYqtUrCq2aaDJteoVj8R1nU57L2fonYk1p3p3KFH?cluster=devnet",
+  "claim": "The structural AI-governance predicate (Hiroshima) verifies on-chain on Solana too. Same governance_predicate proof verifies on Stellar (por-verifier) AND Solana (alt_bn128).",
+  "honesty": "second PINNED vk (fail-closed; relayer selects vk_id but cannot supply a vk); DEV vk; devnet. Predicate constants need legal review."
+}
