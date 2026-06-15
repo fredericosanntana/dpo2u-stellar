@@ -11,9 +11,9 @@ import {
 
 const SYMBOL_RE = /^[a-zA-Z0-9_]{1,32}$/;
 
-describe('catálogo de use cases (estado da arte, 62)', () => {
-  it('tem exatamente 62 use cases', () => {
-    expect(USE_CASES.length).toBe(62);
+describe('catálogo de use cases (estado da arte, 66)', () => {
+  it('tem exatamente 66 use cases', () => {
+    expect(USE_CASES.length).toBe(66);
   });
 
   it('todos os ids são únicos', () => {
@@ -27,8 +27,8 @@ describe('catálogo de use cases (estado da arte, 62)', () => {
     }
   });
 
-  it('cobre as 22 jurisdições de proteção de dados (compliance_<code>_v1)', () => {
-    expect(DATA_PROTECTION_JURISDICTIONS.length).toBe(22);
+  it('cobre as 23 jurisdições de proteção de dados (compliance_<code>_v1)', () => {
+    expect(DATA_PROTECTION_JURISDICTIONS.length).toBe(23);
     for (const code of DATA_PROTECTION_JURISDICTIONS) {
       expect(findUseCase(`${code}_compliance_v1`), `falta ${code}`).toBeDefined();
     }
@@ -55,13 +55,19 @@ describe('catálogo de use cases (estado da arte, 62)', () => {
   it('contagem por camada', () => {
     expect(useCasesByLayer('B2G').length).toBe(6);
     expect(useCasesByLayer('AIGOV').length).toBe(12);
-    expect(useCasesByLayer('CRYPTO').length).toBe(13);
-    expect(useCasesByLayer('B2B').length).toBe(31);
+    expect(useCasesByLayer('CRYPTO').length).toBe(14);
+    expect(useCasesByLayer('B2B').length).toBe(32);
+    expect(useCasesByLayer('VALUE').length).toBe(2);
+  });
+
+  it('camada VALUE = Trilha de Conformidade de Valor (VASP + Agente)', () => {
+    expect(findUseCase('vasp_por_br_v1')?.layer).toBe('VALUE');
+    expect(findUseCase('agent_runtime_v1')?.layer).toBe('VALUE');
   });
 
   it('deployableUseCases exclui o ZK (ativado pós-cerimônia)', () => {
     const dep = deployableUseCases();
-    expect(dep.length).toBe(61);
+    expect(dep.length).toBe(65);
     expect(dep.find((u) => u.id === 'zk_compliance_v1')).toBeUndefined();
   });
 

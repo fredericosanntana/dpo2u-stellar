@@ -7,7 +7,7 @@
 //
 // `mcpTool` documenta qual ferramenta MCP computa o verdict do gateway para o use case.
 
-export type UseCaseLayer = 'B2G' | 'B2B' | 'AIGOV' | 'CRYPTO';
+export type UseCaseLayer = 'B2G' | 'B2B' | 'AIGOV' | 'CRYPTO' | 'VALUE';
 
 export interface UseCaseInfo {
   readonly id: string;
@@ -22,11 +22,11 @@ export interface UseCaseInfo {
   readonly mcpTool?: string;
 }
 
-/** 22 jurisdições de proteção de dados (canônico; MiCAR/CASP são cripto, ver abaixo). */
+/** 23 jurisdições de proteção de dados (canônico; MiCAR/CASP são cripto, ver abaixo). */
 export const DATA_PROTECTION_JURISDICTIONS: readonly string[] = [
   'lgpd', 'gdpr', 'ccpa', 'pipeda', 'law25', 'appi', 'pipa', 'pdp', 'pdpa', 'dpdp', 'uae',
   'popia', 'ndpa', 'mexico', 'vietnam', 'malaysia', 'kenya', 'ghana', 'colombia', 'tanzania',
-  'rwanda', 'uganda',
+  'rwanda', 'uganda', 'argentina',
 ];
 
 /** 8 frameworks de AI governance. */
@@ -50,6 +50,7 @@ const JURISDICTION_NAMES: Record<string, string> = {
   kenya: 'Quênia — Data Protection Act 2019', ghana: 'Gana — Data Protection Act 2012',
   colombia: 'Colômbia — Ley 1581/2012', tanzania: 'Tanzânia — PDPA 2022',
   rwanda: 'Ruanda — Law 058/2021', uganda: 'Uganda — DPPA 2019',
+  argentina: 'Argentina — Ley 25.326 + PSAV/CNV (Ley 27.739)',
 };
 
 const AI_FRAMEWORK_NAMES: Record<string, string> = {
@@ -102,6 +103,16 @@ const CRYPTO_CORE: readonly UseCaseInfo[] = [
   { id: 'micar_art_v1', layer: 'CRYPTO', label: 'MiCAR ART (Tít. III)', description: 'Proof of reserve + safeguards de Asset-Referenced Token (MiCAR Art.23/35/36/39).', framework: 'micar', mcpTool: 'audit_micar_art' },
   { id: 'micar_casp_v1', layer: 'CRYPTO', label: 'MiCA CASP (Tít. V)', description: 'Conformidade de Crypto-Asset Service Provider (MiCA Art.68-92).', framework: 'micar_casp', mcpTool: 'check_sectoral_framework' },
   { id: 'cvm_token_v1', layer: 'CRYPTO', label: 'CVM token (Brasil)', description: 'Regras de token de investimento CVM (Res. 175/88).', framework: 'cvm', mcpTool: 'validate_cvm_token_rules' },
+  { id: 'travel_rule_v1', layer: 'CRYPTO', label: 'Travel rule (FATF R.16 / BCB)', description: 'Transferência cripto entre VASPs com dados do par (IVMS-101) + triagem PLD-FT; selo só do hash da mensagem (BCB Res 519, ACAM212 mai/2026).', framework: 'fatf_tr', mcpTool: 'generate_travel_rule_message' },
+];
+
+// ── VALUE — Trilha de Conformidade de Valor (selo no Soroban) — 2 ─────────────
+// As 3 verticais de valor: VASP PoR (aqui), CVM tokenização (cvm_token_v1, em
+// CRYPTO_CORE) e Agente runtime (aqui). O gateway resolve a determinação real
+// (resolvers.ts) e sela o veredito; /verify dá a prova pública.
+const VALUE_WEDGES: readonly UseCaseInfo[] = [
+  { id: 'vasp_por_br_v1', layer: 'VALUE', label: 'VASP — PoR + segregação (BCB)', description: 'Proof of reserve verificável + segregação patrimonial de PSAV (BCB Res 519/520/521; estrutura ≡ MiCAR Art.36). NÃO substitui o arquivo 5710/5711.', framework: 'bcb_14478', mcpTool: 'audit_micar_art' },
+  { id: 'agent_runtime_v1', layer: 'VALUE', label: 'Agente — runtime governance', description: 'Sela que um agente foi avaliado (A1-A5), tem plano de enforcement de runtime, está livre de red-lines e seu score de governança.', framework: 'mgf_agentic', mcpTool: 'assess_agent_capability' },
 ];
 
 // ── ZK — score privado, prova pública — 1 (ativado pós-cerimônia) ─────────────
@@ -137,7 +148,8 @@ const SECTORAL: readonly UseCaseInfo[] = SECTORAL_FRAMEWORKS.map((code) => ({
   mcpTool: 'check_sectoral_framework',
 }));
 
-/** Catálogo canônico — 62 use cases (61 ativados no deploy; zk_compliance_v1 pós-cerimônia). */
+/** Catálogo canônico — 65 use cases (64 ativados no deploy; zk_compliance_v1 pós-cerimônia).
+ *  Inclui a camada VALUE (Trilha de Conformidade de Valor: VASP + Agente; CVM + travel-rule em CRYPTO). */
 export const USE_CASES: readonly UseCaseInfo[] = [
   ...B2G,
   ...DP_COMPLIANCE,
@@ -146,6 +158,7 @@ export const USE_CASES: readonly UseCaseInfo[] = [
   ...AI_CROSS,
   ...CRYPTO_CORE,
   ...SECTORAL,
+  ...VALUE_WEDGES,
   ...ZK,
 ];
 

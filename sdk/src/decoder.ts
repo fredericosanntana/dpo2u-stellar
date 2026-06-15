@@ -71,7 +71,8 @@ export function decodeAddress(scv: xdr.ScVal): string {
       return StrKey.encodeEd25519PublicKey(ed25519);
     }
     if (sc.switch().name === 'scAddressTypeContract') {
-      return StrKey.encodeContract(Buffer.from(sc.contractId()));
+      // stellar-sdk 16 types contractId() as `Hash`; at runtime it is a Buffer.
+      return StrKey.encodeContract(Buffer.from(sc.contractId() as unknown as Uint8Array));
     }
     throw new SdkError(
       `unsupported address sub-type`,
