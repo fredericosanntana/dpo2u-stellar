@@ -12,12 +12,16 @@ proofs (`score ≥ threshold`, bound to a per-jurisdiction `context`) are folded
 aggregate proof and verified **off-chain**.
 
 - Circuit: `zk-prover/agg/jurisdiction_compliance.circom` (BN254, public `[compliant, threshold, context]`).
-- Off-chain aggregator: `zk-prover-agg/` (Rust). The **full 24-jurisdiction corpus**
-  (canonical `JURISDICTION_CODES`: LGPD/GDPR/DPDP/MICAR/MICAR-CASP/PDPA/UAE/POPIA/NDPA/
-  CCPA/PIPEDA/LAW25/PIPA/PDP/APPI/MEXICO/VIETNAM/MALAYSIA/KENYA/GHANA/COLOMBIA/TANZANIA/
-  RWANDA/UGANDA) → 1 aggregate, `verify_aggregate == true`. All 24 share one circuit/vk
-  (only threshold/context differ); SnarkPack folds a power-of-two batch, so 24 is padded
-  to **32** internally.
+- Off-chain aggregator: `zk-prover-agg/` (Rust). **Dual-vertical batch of 29**: the full
+  **24-jurisdiction data-protection corpus** (canonical `JURISDICTION_CODES`: LGPD/GDPR/
+  DPDP/MICAR/MICAR-CASP/PDPA/UAE/POPIA/NDPA/CCPA/PIPEDA/LAW25/PIPA/PDP/APPI/MEXICO/VIETNAM/
+  MALAYSIA/KENYA/GHANA/COLOMBIA/TANZANIA/RWANDA/UGANDA) **+ 5 scored AI-governance
+  frameworks** (CAIDP, UNESCO-RAM, MGF-Agentic, Japan, Korea) → 1 aggregate,
+  `verify_aggregate == true`. All 29 share one generic circuit/vk ("private score ≥
+  threshold, bound to context") — data-protection AND AI-governance compliance in one
+  proof; SnarkPack folds a power-of-two batch, so 29 is padded to **32** internally.
+  (Structural AI frameworks — EU-AIA risk-tier, Hiroshima attestation, AI-Gov-Stack
+  methodology — need a separate predicate circuit; see the #2 study doc.)
 - On-chain seal: `agg-filing` Soroban contract — seals the aggregate **result** and verifies ONE
   jurisdiction-compliance proof (same circuit) **on-chain** via cross-call to `por-verifier`.
 
@@ -31,10 +35,10 @@ aggregate verification = roadmap, gated on Stellar adding GT host functions.
 
 **Live (testnet):**
 - `agg-filing`: `CCXTDJD46KNCV7YOZ4X3SNBICAN3TYXJPN4GAWMHDH6VI5XHNFJLMA4D`
-- `seal_aggregate` tx (24 jurisdictions): `c317f91495b77c2c666b164769a722cf656c8a9a2abacc6953e17af804b75356`
-- readback: `count=24, verdict=true, member_zk_verified=true, off_chain_verified=true`,
-  `agg_commitment=0x658ecd85…b358`, `context_root=0x012133ed…c328`
-- artifacts: `zk-prover/agg/aggregate.json` (count 24, padded_to 32), `docs/demos/runs/2026-06-15T18-58-40Z-agg-filing-testnet-deploy.json`
+- `seal_aggregate` tx (29 = 24 data + 5 AI): `ce44ed908968945ad03bb96ba030e10946916abd8f1aa6f41c033e70b9bf47d7`
+- readback: `count=29, verdict=true, member_zk_verified=true, off_chain_verified=true`,
+  `agg_commitment=0x4ab35523…1aa6`, `context_root=0xe2196c56…3632`
+- artifacts: `zk-prover/agg/aggregate.json` (count 29, data 24 + AI 5, padded_to 32), `docs/demos/runs/2026-06-15T18-58-40Z-agg-filing-testnet-deploy.json`
 
 **Reproduce:**
 ```bash

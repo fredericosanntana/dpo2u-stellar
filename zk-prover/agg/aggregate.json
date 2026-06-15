@@ -1,8 +1,11 @@
 {
-  "agg_commitment": "658ecd850e35242f997ce72ae43e58558934ea254a3c27fb659f19965cb0b358",
-  "context_root": "012133ed29f522fe9a0e3357de9e3bd338918003f95da8bc36bee55d4b8dc328",
-  "count": 24,
+  "agg_commitment": "4ab355235daccf11bdb1b004eac68d5c53b7ea172ee8d259dea372b375b71aa6",
+  "ai_governance_frameworks": 5,
+  "ai_note": "scored AI frameworks only (CAIDP/UNESCO-RAM/MGF/Japan/Korea). Structural ones (EU-AIA risk-tier, Hiroshima attestation) need a separate predicate circuit — see study doc.",
+  "context_root": "e2196c5608c4d83c264ab7c6859ea78e11e77491a03f3e5cfc5745e6b3be3632",
+  "count": 29,
   "curve": "BN254 (bn128)",
+  "data_jurisdictions": 24,
   "honesty": "DEV coordinator setup (not multi-party MPC). arkworks-native proofs over the same jurisdiction statement as the snarkjs proofs in zk-prover/agg/.",
   "jurisdictions": [
     "LGPD",
@@ -28,7 +31,12 @@
     "COLOMBIA",
     "TANZANIA",
     "RWANDA",
-    "UGANDA"
+    "UGANDA",
+    "CAIDP",
+    "UNESCO-RAM",
+    "MGF-AGENTIC",
+    "AI-JAPAN",
+    "AI-KOREA"
   ],
   "onchain_verification": "INFEASIBLE on Soroban today — SnarkPack verify needs GT arithmetic; bn254 host exposes only g1_*, pairing_check, Fr. The aggregate verifies OFF-CHAIN; the result is sealed on-chain by agg-filing. On-chain aggregate verify = roadmap (GT host fns).",
   "padded_to": 32,
@@ -39,5 +47,5 @@
   ],
   "technique": "true recursive proof aggregation (ark-ip-proofs / arkworks-rs ripp), NOT a batch circuit",
   "verdict_all_compliant": true,
-  "what": "DPO2U moonshot #5 — N jurisdiction Groth16/BN254 proofs aggregated via SnarkPack (TIPP/MIPP), verified off-chain"
+  "what": "DPO2U moonshot #5 — N compliance Groth16/BN254 proofs (data-protection + AI-governance) aggregated via SnarkPack (TIPP/MIPP), verified off-chain"
 }
