@@ -1,0 +1,22 @@
+{
+  "what": "DPO2U xchain-attest — Solana port (#6). Verifies a relayed BN254 Groth16 proof ON-CHAIN via alt_bn128 (groth16-solana) and seals a CrossChainClaim PDA.",
+  "network": "solana devnet",
+  "deployed_at": "2026-06-15",
+  "program_id": "9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib",
+  "deploy_signature": "aVqup4jctRes1sHmhn8DEaHxwaMpwD8HwhSEb1Ygb1NFqAwRAxzcvR9NaKcyQdEw34QowVxWiES3fCZR1z5Ajpx",
+  "upgrade_authority": "HjpGXPWQF1PiqjdWtNNEbAxqNamXKGpJspRZm9Jv5LZj",
+  "live_evidence": {
+    "verify_and_attest_tx": "4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa",
+    "claim_pda": "EpPgQzTVBJUbXedQorrPfwj5sj1STwxy5vQShhapsKUi",
+    "claim_readback": { "origin": "evm", "proof_context": "00000000000000000000000000000000000000000000000000000000075bcd15", "zk_verified": true },
+    "compute_units": 97964,
+    "program_log": "DPO2U xchain-attest: BN254 Groth16 verified ON-CHAIN (alt_bn128); cross-chain claim sealed. zk_verified=true"
+  },
+  "verifier": "groth16-solana 0.2.0 (Solana alt_bn128 syscalls), pinned vk (fail-closed)",
+  "pinned_vk": "PoR Groth16/BN254 vk (same proof verified on Stellar por-verifier + EVM Groth16Verifier)",
+  "explorer": {
+    "program": "https://explorer.solana.com/address/9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib?cluster=devnet",
+    "tx": "https://explorer.solana.com/tx/4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa?cluster=devnet"
+  },
+  "honesty": "Relayer = trusted courier (transport only); verification is trustless on-chain. DEV vk; devnet. The same BN254 proof verifies on-chain on Stellar, an EVM chain, AND Solana — BN254 as cross-chain lingua franca."
+}

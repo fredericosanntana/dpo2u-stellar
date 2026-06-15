@@ -27,3 +27,18 @@ REGISTRY=0x... XCHAIN_ID=C... RPC=http://127.0.0.1:8545 PROOF_ID=0 ORIGIN=anvil 
 Origin chain is configurable via `RPC`/`ORIGIN`: a local **anvil** (default, reliable
 for demos) or a public EVM testnet like **Base Sepolia** (set `RPC` + fund an EVM key).
 The cross-chain claim is identical either way — Stellar verifies an EVM-originated proof.
+
+## Solana target (`solana.mjs`)
+
+BN254 is also Solana's `alt_bn128` precompile curve, so the same proof verifies on-chain
+on **Solana** too. `solana.mjs` negates `pi_a`, builds the instruction, and submits to the
+`solana-xchain` program (devnet), which re-verifies via `groth16-solana` (fail-closed,
+pinned vk) and seals a `CrossChainClaim` PDA — same courier trust model.
+
+```bash
+npm install   # @solana/web3.js
+PROGRAM_ID=9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib ORIGIN=evm node solana.mjs
+# or: bash ../scripts/relayer/run-xchain-solana-demo.sh
+```
+
+**One BN254 proof, verified on-chain on three chains: Stellar, EVM, and Solana.**

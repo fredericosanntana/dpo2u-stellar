@@ -97,7 +97,8 @@ pub fn statement(j: &Jurisdiction) -> Vec<Fr> {
 /// Result of an aggregation run.
 pub struct AggregationOutput {
     pub verified: bool,
-    pub count: usize,
+    pub count: usize,     // REAL jurisdictions aggregated
+    pub padded_to: usize, // power-of-two batch size SnarkPack actually folded
     pub agg_commitment: [u8; 32],
     pub context_root: [u8; 32],
 }
@@ -129,25 +130,38 @@ pub fn prove_all<R: Rng + CryptoRng>(
     (proofs, statements)
 }
 
-/// SnarkPack-aggregate N proofs and verify the aggregate OFF-CHAIN. `n` (the SRS size)
-/// must be a power of two and >= proofs.len().
+/// SnarkPack-aggregate N proofs and verify the aggregate OFF-CHAIN. SnarkPack's GIPA
+/// folds over a power-of-two batch, so the real proofs are padded up to the next power
+/// of two by repeating the last real proof (a valid proof under the same vk). The
+/// reported `count` is the REAL jurisdiction count; the commitment/context_root bind
+/// only the real set.
 pub fn aggregate_and_verify<R: Rng + CryptoRng>(
     vk: &VerifyingKey<Bn254>,
     proofs: &[Proof<Bn254>],
     statements: &[Vec<Fr>],
     jurs: &[Jurisdiction],
-    srs_size: usize,
     rng: &mut R,
 ) -> AggregationOutput {
-    assert!(srs_size.is_power_of_two(), "SnarkPack SRS size must be a power of two");
-    assert!(srs_size >= proofs.len());
+    let real = proofs.len();
+    assert!(real >= 1);
+    let srs_size = real.next_power_of_two().max(2);
+
+    // Pad to the power-of-two batch with repeats of the last real proof/statement.
+    let mut padded_proofs: Vec<Proof<Bn254>> = proofs.to_vec();
+    let mut padded_stmts: Vec<Vec<Fr>> = statements.to_vec();
+    while padded_proofs.len() < srs_size {
+        padded_proofs.push(proofs[real - 1].clone());
+        padded_stmts.push(statements[real - 1].clone());
+    }
 
     let srs = setup_inner_product::<Bn254, Blake2b, _>(rng, srs_size).expect("ipp srs");
     let agg: AggregateProof<Bn254, Blake2b> =
-        aggregate_proofs::<Bn254, Blake2b>(&srs, proofs).expect("aggregate");
+        aggregate_proofs::<Bn254, Blake2b>(&srs, &padded_proofs).expect("aggregate");
+    let verified = verify_aggregate_proof(&srs.get_verifier_key(), vk, &padded_stmts, &agg)
+        .expect("verify agg");
+
+    // Bind only the REAL set in the commitment.
     let stmts: Vec<Vec<Fr>> = statements.to_vec();
-    let verified =
-        verify_aggregate_proof(&srs.get_verifier_key(), vk, &stmts, &agg).expect("verify agg");
 
     // agg_commitment = SHA-256( vk || each constituent proof || each statement ).
     // (AggregateProof is not CanonicalSerialize; the SnarkPack aggregate is
@@ -179,7 +193,8 @@ pub fn aggregate_and_verify<R: Rng + CryptoRng>(
 
     AggregationOutput {
         verified,
-        count: proofs.len(),
+        count: real,
+        padded_to: srs_size,
         agg_commitment,
         context_root,
     }
@@ -209,7 +224,7 @@ mod tests {
         for (p, s) in proofs.iter().zip(stmts.iter()) {
             assert!(Groth16::<Bn254>::verify(&vk, s, p).unwrap());
         }
-        let out = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, jurs.len(), &mut rng);
+        let out = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, &mut rng);
         assert!(out.verified, "SnarkPack aggregate must verify off-chain");
         assert_eq!(out.count, 4);
     }
@@ -222,7 +237,7 @@ mod tests {
         let (proofs, mut stmts) = prove_all(&pk, &jurs, &mut rng);
         // flip one jurisdiction's public threshold — aggregate verify must reject
         stmts[0][1] = Fr::from(999u64);
-        let out = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, jurs.len(), &mut rng);
+        let out = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, &mut rng);
         assert!(!out.verified, "tampered statement must fail aggregate verify");
     }
 
@@ -232,7 +247,7 @@ mod tests {
         let jurs = demo_jurs();
         let (pk, vk) = setup(&mut rng);
         let (proofs, stmts) = prove_all(&pk, &jurs, &mut rng);
-        let a = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, jurs.len(), &mut rng);
+        let a = aggregate_and_verify(&vk, &proofs, &stmts, &jurs, &mut rng);
         // context_root depends only on the jurisdiction contexts → deterministic
         let mut hc = Sha256::new();
         for j in &jurs { hc.update(j.context.to_be_bytes()); }

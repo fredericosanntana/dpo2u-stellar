@@ -12,9 +12,14 @@ proofs (`score ≥ threshold`, bound to a per-jurisdiction `context`) are folded
 aggregate proof and verified **off-chain**.
 
 - Circuit: `zk-prover/agg/jurisdiction_compliance.circom` (BN254, public `[compliant, threshold, context]`).
-- Off-chain aggregator: `zk-prover-agg/` (Rust). 4 jurisdictions (BR/EU/SG/UAE) → 1 aggregate, `verify_aggregate == true`.
+- Off-chain aggregator: `zk-prover-agg/` (Rust). The **full 24-jurisdiction corpus**
+  (canonical `JURISDICTION_CODES`: LGPD/GDPR/DPDP/MICAR/MICAR-CASP/PDPA/UAE/POPIA/NDPA/
+  CCPA/PIPEDA/LAW25/PIPA/PDP/APPI/MEXICO/VIETNAM/MALAYSIA/KENYA/GHANA/COLOMBIA/TANZANIA/
+  RWANDA/UGANDA) → 1 aggregate, `verify_aggregate == true`. All 24 share one circuit/vk
+  (only threshold/context differ); SnarkPack folds a power-of-two batch, so 24 is padded
+  to **32** internally.
 - On-chain seal: `agg-filing` Soroban contract — seals the aggregate **result** and verifies ONE
-  constituent jurisdiction proof **on-chain** via cross-call to `por-verifier`.
+  jurisdiction-compliance proof (same circuit) **on-chain** via cross-call to `por-verifier`.
 
 **⚠️ Honest gap (confirmed, fundamental):** on-chain verification of the SnarkPack
 *aggregate* is infeasible on Soroban today. The `bn254` host (`soroban-sdk 26.0.0`)
@@ -26,10 +31,10 @@ aggregate verification = roadmap, gated on Stellar adding GT host functions.
 
 **Live (testnet):**
 - `agg-filing`: `CCXTDJD46KNCV7YOZ4X3SNBICAN3TYXJPN4GAWMHDH6VI5XHNFJLMA4D`
-- `seal_aggregate` tx: `4e4d4a71c15555c6d5f1dc98409cf2babc236499444ebc27f764fc4dd14e4674`
-- readback: `count=4, verdict=true, member_zk_verified=true, off_chain_verified=true`,
-  `agg_commitment=0x7d76e850…48f0`, `context_root=0x2d3b98ac…f1a5`
-- artifacts: `zk-prover/agg/aggregate.json`, `docs/demos/runs/2026-06-15T18-58-40Z-agg-filing-testnet-deploy.json`
+- `seal_aggregate` tx (24 jurisdictions): `c317f91495b77c2c666b164769a722cf656c8a9a2abacc6953e17af804b75356`
+- readback: `count=24, verdict=true, member_zk_verified=true, off_chain_verified=true`,
+  `agg_commitment=0x658ecd85…b358`, `context_root=0x012133ed…c328`
+- artifacts: `zk-prover/agg/aggregate.json` (count 24, padded_to 32), `docs/demos/runs/2026-06-15T18-58-40Z-agg-filing-testnet-deploy.json`
 
 **Reproduce:**
 ```bash
@@ -78,6 +83,24 @@ cd relayer && npm test                                # EVM→Soroban conversion
 bash scripts/relayer/run-xchain-demo.sh               # anvil origin → relayer → Stellar live tx
 ```
 Origin defaults to local anvil; set `RPC`/`EVM_KEY`/`ORIGIN` for a public EVM testnet (Base Sepolia).
+
+### #6 ported to Solana — same proof, a THIRD chain (live on devnet)
+BN254 is also Solana's `alt_bn128` precompile curve, so the SAME proof verifies on-chain
+on Solana too. A native Solana program (`solana-xchain/`, using `groth16-solana` =
+`alt_bn128` syscalls, pinned vk, fail-closed) re-verifies the relayed BN254 proof and
+seals a `CrossChainClaim` PDA. The relayer's Solana target (`relayer/solana.mjs`) negates
+`pi_a`, builds the instruction, and submits it.
+- **Live (devnet):** program `9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib`,
+  `verify_and_attest` tx `4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa`,
+  claim PDA `EpPgQzTVBJUbXedQorrPfwj5sj1STwxy5vQShhapsKUi` (`origin=evm`, `zk_verified=true`,
+  97964 CU). Registry: `solana-xchain/devnet-deploy.json`; artifact `docs/demos/runs/…-xchain-solana.json`.
+```bash
+cargo run --features host --bin validate   # (solana-xchain/) host: our snarkjs bytes verify under groth16-solana
+bash scripts/relayer/run-xchain-solana-demo.sh   # build-sbf → deploy devnet → relayer verify_and_attest (live tx)
+```
+**One BN254 proof, verified on-chain on THREE chains: Stellar + EVM + Solana.** (Midnight
+can't re-verify foreign Groth16 on-chain — different proof system; it could only be a
+proof *origin* via the attestation pattern.)
 
 ## Tests
 - Soroban workspace: por-verifier 4 · por-filing 11 · **agg-filing 6** · **xchain-attest 6** (+ anticorruption/zk-verifier) — all green.

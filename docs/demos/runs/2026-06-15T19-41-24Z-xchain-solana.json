@@ -1,0 +1,13 @@
+{
+  "what": "DPO2U cross-chain BN254 (#6, Solana) — same proof verified ON-CHAIN on a 3rd chain (Solana devnet)",
+  "network": "solana devnet",
+  "program_id": "9muJSDtxSsKLKML5SPLn3XvKJoxaiZ6TzMjyGeFFtAib",
+  "origin": "evm",
+  "verify_and_attest_tx": "4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa",
+  "claim_pda": "EpPgQzTVBJUbXedQorrPfwj5sj1STwxy5vQShhapsKUi",
+  "claim_readback": { "origin": "evm", "proof_context": "00000000000000000000000000000000000000000000000000000000075bcd15", "zk_verified": true },
+  "compute_units": 97964,
+  "explorer_tx": "https://explorer.solana.com/tx/4s5CmdewD7t9yHLpsEq2bKTSZhxaEQrSBpGLeXphHnmTZgPtzSdKkHa5azJW4ZwqTWdDY7Szwt3Fr8KRsEXrdVBa?cluster=devnet",
+  "claim": "BN254 Groth16 verified on-chain via alt_bn128 (groth16-solana). One proof, three chains: Stellar + EVM + Solana.",
+  "honesty": "courier relayer (transport only); trustless on-chain verification; pinned PoR vk; devnet."
+}

@@ -12,14 +12,28 @@ fn main() {
     // Fixed seed → reproducible DEV run (coordinator setup; not multi-party MPC).
     let mut rng = StdRng::seed_from_u64(0xD9_02_2Eu64);
 
-    // Same N jurisdictions (codes/thresholds/contexts) as the snarkjs proofs in
-    // zk-prover/agg/ (BR/EU/SG/UAE). N=4 is a power of two (SnarkPack requirement).
-    let jurs = vec![
-        Jurisdiction { code: "BR".into(), threshold: 60, context: 1_000_001, score: 82 },
-        Jurisdiction { code: "EU".into(), threshold: 75, context: 1_000_002, score: 90 },
-        Jurisdiction { code: "SG".into(), threshold: 70, context: 1_000_003, score: 88 },
-        Jurisdiction { code: "UAE".into(), threshold: 65, context: 1_000_004, score: 79 },
+    // The full DPO2U 24-jurisdiction corpus (canonical JURISDICTION_CODES). All share
+    // the same generic compliance circuit/vk (score >= threshold, bound to context);
+    // only threshold/context differ per jurisdiction. SnarkPack folds a power-of-two
+    // batch, so 24 is padded to 32 internally (see aggregate_and_verify).
+    let codes = [
+        "LGPD", "GDPR", "DPDP", "MICAR", "MICAR-CASP", "PDPA", "UAE", "POPIA", "NDPA",
+        "CCPA", "PIPEDA", "LAW25", "PIPA", "PDP", "APPI", "MEXICO", "VIETNAM", "MALAYSIA",
+        "KENYA", "GHANA", "COLOMBIA", "TANZANIA", "RWANDA", "UGANDA",
     ];
+    let jurs: Vec<Jurisdiction> = codes
+        .iter()
+        .enumerate()
+        .map(|(i, c)| {
+            let threshold = 50 + (i as u64); // distinct per-jurisdiction limiar (8-bit safe)
+            Jurisdiction {
+                code: (*c).to_string(),
+                threshold,
+                context: 1_000_001 + i as u64,
+                score: threshold + 15, // org's private score clears the bar
+            }
+        })
+        .collect();
 
     println!("== [1/3] Groth16/BN254 setup (shared vk for all jurisdictions) ==");
     let (pk, vk) = setup(&mut rng);
@@ -35,9 +49,9 @@ fn main() {
     }
 
     println!("== [3/3] SnarkPack aggregate {} proofs → 1, verify off-chain ==", jurs.len());
-    let out = aggregate_and_verify(&vk, &proofs, &statements, &jurs, jurs.len(), &mut rng);
+    let out = aggregate_and_verify(&vk, &proofs, &statements, &jurs, &mut rng);
     assert!(out.verified, "aggregate verification failed");
-    println!("   verify_aggregate == {}", out.verified);
+    println!("   verify_aggregate == {} ({} jurisdictions, padded to {})", out.verified, out.count, out.padded_to);
 
     let agg_hex = hex::encode(out.agg_commitment);
     let ctx_hex = hex::encode(out.context_root);
@@ -48,6 +62,7 @@ fn main() {
         "technique": "true recursive proof aggregation (ark-ip-proofs / arkworks-rs ripp), NOT a batch circuit",
         "curve": "BN254 (bn128)",
         "count": out.count,
+        "padded_to": out.padded_to,
         "verdict_all_compliant": out.verified,
         "jurisdictions": codes,
         "public_signals_order": ["compliant", "threshold", "context"],

@@ -1,0 +1,31 @@
+# Standalone — NOT in the dpo2u-stellar Soroban workspace. The on-chain program
+# (src/lib.rs, built with cargo build-sbf) verifies our BN254 Groth16 proof on Solana
+# via groth16-solana (alt_bn128 syscalls) and attests it — moonshot #6 ported to a 3rd chain.
+[workspace]
+
+[package]
+name = "solana-xchain-attest"
+version = "0.1.0"
+edition = "2021"
+description = "DPO2U — Solana program that verifies a relayed BN254 Groth16 proof on-chain (alt_bn128) and attests it (moonshot #6, Solana port)."
+license = "Apache-2.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+# Host-only validation bin (nails the snarkjs->groth16-solana byte format off-chain).
+# required-features keeps `cargo build-sbf` (which builds the program lib) from touching it.
+[[bin]]
+name = "validate"
+path = "src/bin/validate.rs"
+required-features = ["host"]
+
+[dependencies]
+solana-program = "=2.1.6"
+groth16-solana = "0.2.0"
+hex-literal = "0.4"
+hex = { version = "0.4", optional = true }
+num-bigint = { version = "0.4", optional = true }
+
+[features]
+host = ["dep:hex", "dep:num-bigint"]
