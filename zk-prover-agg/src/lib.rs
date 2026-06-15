@@ -200,6 +200,97 @@ pub fn aggregate_and_verify<R: Rng + CryptoRng>(
     }
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// STRUCTURAL AI-governance predicate (study #2 implemented) — for frameworks that do
+// NOT reduce to score>=threshold. One circuit, selected by public framework_id:
+//   1 = Hiroshima ICOC  (N-of-M: all 11 principles attested)
+//   2 = EU-AIA          (risk tier ∈ {0,1,2}=not-prohibited, red-line clear, high-risk⇒obligations met)
+// Public shape [compliant, framework_id, context] (same as the scored circuit) ⇒ verifies
+// on the same generic por-verifier; aggregates in its OWN SnarkPack batch (structural vk).
+#[derive(Clone)]
+pub struct GovernancePredicateCircuit {
+    pub framework_id: u64,    // PUBLIC (1=Hiroshima, 2=EU-AIA)
+    pub context: u64,         // PUBLIC (anti-replay)
+    pub attested: [bool; 11], // PRIVATE (Hiroshima principle attestations)
+    pub tier: u64,            // PRIVATE (EU-AIA risk tier 0..3)
+    pub redline_clear: bool,  // PRIVATE (no prohibited use)
+    pub hr_met: bool,         // PRIVATE (high-risk obligations done)
+}
+
+impl ConstraintSynthesizer<Fr> for GovernancePredicateCircuit {
+    fn generate_constraints(self, cs: ConstraintSystemRef<Fr>) -> Result<(), SynthesisError> {
+        let compliant = FpVar::new_input(cs.clone(), || Ok(Fr::one()))?;
+        let fid = FpVar::new_input(cs.clone(), || Ok(Fr::from(self.framework_id)))?;
+        let context = FpVar::new_input(cs.clone(), || Ok(Fr::from(self.context)))?;
+
+        let is1 = fid.is_eq(&FpVar::constant(Fr::one()))?;
+        let is2 = fid.is_eq(&FpVar::constant(Fr::from(2u64)))?;
+
+        // Hiroshima: Σ attested == 11 (K=M) when framework_id==1.
+        let mut sum = FpVar::<Fr>::zero();
+        for b in self.attested.iter() {
+            let bit = Boolean::new_witness(cs.clone(), || Ok(*b))?;
+            sum += FpVar::from(bit);
+        }
+        sum.conditional_enforce_equal(&FpVar::constant(Fr::from(11u64)), &is1)?;
+
+        // EU-AIA (framework_id==2): red-line clear; tier∈{0,1,2}; tier==2 ⇒ hr_met.
+        let rc = Boolean::new_witness(cs.clone(), || Ok(self.redline_clear))?;
+        let hm = Boolean::new_witness(cs.clone(), || Ok(self.hr_met))?;
+        let tier = FpVar::new_witness(cs.clone(), || Ok(Fr::from(self.tier)))?;
+        rc.conditional_enforce_equal(&Boolean::constant(true), &is2)?;
+        let t1 = &tier - FpVar::constant(Fr::one());
+        let t2 = &tier - FpVar::constant(Fr::from(2u64));
+        let p1 = &tier * &t1;
+        let prod = &p1 * &t2; // tier*(tier-1)*(tier-2) == 0 ⇒ tier∈{0,1,2}
+        prod.conditional_enforce_equal(&FpVar::<Fr>::zero(), &is2)?;
+        let is_t2 = tier.is_eq(&FpVar::constant(Fr::from(2u64)))?;
+        let need_hm = is2.and(&is_t2)?;
+        hm.conditional_enforce_equal(&Boolean::constant(true), &need_hm)?;
+
+        // compliant public marker == 1; framework_id ∈ {1,2}.
+        compliant.enforce_equal(&FpVar::one())?;
+        is1.or(&is2)?.enforce_equal(&Boolean::constant(true))?;
+
+        let _ctx_sq = &context * &context; // bind context
+        Ok(())
+    }
+}
+
+/// Groth16 setup for the structural predicate (shared structural vk).
+pub fn setup_gov<R: Rng + CryptoRng>(rng: &mut R) -> (ProvingKey<Bn254>, VerifyingKey<Bn254>) {
+    let dummy = GovernancePredicateCircuit {
+        framework_id: 1,
+        context: 0,
+        attested: [true; 11],
+        tier: 0,
+        redline_clear: true,
+        hr_met: false,
+    };
+    Groth16::<Bn254>::setup(dummy, rng).expect("gov setup")
+}
+
+/// Public statement for a structural proof: [compliant=1, framework_id, context].
+pub fn statement_gov(framework_id: u64, context: u64) -> Vec<Fr> {
+    vec![Fr::one(), Fr::from(framework_id), Fr::from(context)]
+}
+
+/// Prove each structural framework instance over the shared structural vk.
+pub fn prove_gov_all<R: Rng + CryptoRng>(
+    pk: &ProvingKey<Bn254>,
+    items: &[GovernancePredicateCircuit],
+    rng: &mut R,
+) -> (Vec<Proof<Bn254>>, Vec<Vec<Fr>>) {
+    let mut proofs = Vec::new();
+    let mut statements = Vec::new();
+    for c in items {
+        let proof = Groth16::<Bn254>::prove(pk, c.clone(), rng).expect("gov prove");
+        proofs.push(proof);
+        statements.push(statement_gov(c.framework_id, c.context));
+    }
+    (proofs, statements)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -253,5 +344,70 @@ mod tests {
         for j in &jurs { hc.update(j.context.to_be_bytes()); }
         let expected: [u8; 32] = hc.finalize().into();
         assert_eq!(a.context_root, expected);
+    }
+
+    // ── structural governance predicate ──
+    use ark_relations::r1cs::ConstraintSystem;
+
+    fn gov_satisfied(c: GovernancePredicateCircuit) -> bool {
+        let cs = ConstraintSystem::<Fr>::new_ref();
+        c.generate_constraints(cs.clone()).unwrap();
+        cs.is_satisfied().unwrap()
+    }
+
+    #[test]
+    fn governance_hiroshima_all_attested_ok() {
+        assert!(gov_satisfied(GovernancePredicateCircuit {
+            framework_id: 1, context: 2_000_001, attested: [true; 11], tier: 0, redline_clear: true, hr_met: false,
+        }));
+    }
+
+    #[test]
+    fn governance_hiroshima_missing_principle_fails() {
+        let mut a = [true; 11];
+        a[3] = false; // only 10 attested ⇒ Σ != 11
+        assert!(!gov_satisfied(GovernancePredicateCircuit {
+            framework_id: 1, context: 2_000_001, attested: a, tier: 0, redline_clear: true, hr_met: false,
+        }));
+    }
+
+    #[test]
+    fn governance_euaia_highrisk_met_ok() {
+        assert!(gov_satisfied(GovernancePredicateCircuit {
+            framework_id: 2, context: 2_000_002, attested: [false; 11], tier: 2, redline_clear: true, hr_met: true,
+        }));
+    }
+
+    #[test]
+    fn governance_euaia_prohibited_tier_fails() {
+        assert!(!gov_satisfied(GovernancePredicateCircuit {
+            framework_id: 2, context: 2_000_002, attested: [false; 11], tier: 3, redline_clear: true, hr_met: true,
+        }));
+    }
+
+    #[test]
+    fn governance_euaia_highrisk_unmet_fails() {
+        assert!(!gov_satisfied(GovernancePredicateCircuit {
+            framework_id: 2, context: 2_000_002, attested: [false; 11], tier: 2, redline_clear: true, hr_met: false,
+        }));
+    }
+
+    #[test]
+    fn governance_structural_aggregate_succeeds() {
+        let mut rng = StdRng::seed_from_u64(99);
+        let items = vec![
+            GovernancePredicateCircuit { framework_id: 1, context: 2_000_001, attested: [true; 11], tier: 0, redline_clear: true, hr_met: false },
+            GovernancePredicateCircuit { framework_id: 2, context: 2_000_002, attested: [false; 11], tier: 2, redline_clear: true, hr_met: true },
+        ];
+        let (pk, vk) = setup_gov(&mut rng);
+        let (proofs, stmts) = prove_gov_all(&pk, &items, &mut rng);
+        for (p, s) in proofs.iter().zip(stmts.iter()) {
+            assert!(Groth16::<Bn254>::verify(&vk, s, p).unwrap());
+        }
+        let carriers: Vec<Jurisdiction> = items.iter()
+            .map(|c| Jurisdiction { code: String::new(), threshold: 0, context: c.context, score: 0 })
+            .collect();
+        let out = aggregate_and_verify(&vk, &proofs, &stmts, &carriers, &mut rng);
+        assert!(out.verified);
     }
 }

@@ -1,8 +1,19 @@
 # Study — ZK predicate circuit for STRUCTURAL AI-governance frameworks (#2)
 
-> 2026-06-15. Design study (no implementation). Companion to `2026-06-15-moonshots-zk-5-6.md`.
+> 2026-06-15. Companion to `2026-06-15-moonshots-zk-5-6.md`.
 > Goal: bring the AI-governance frameworks that do **not** reduce to "score ≥ threshold"
 > into the same on-chain ZK attestation pipeline as the scored ones (#1, already live).
+>
+> **STATUS: IMPLEMENTED 2026-06-15** (this study was greenlit and built). Live evidence:
+> circuit `zk-prover/agg/governance_predicate.circom` (Hiroshima N-of-M + EU-AIA tier);
+> Hiroshima proof verifies on-chain on `por-verifier` (`true`); structural SnarkPack batch
+> of 4 verifies off-chain; sealed on a 2nd `agg-filing` instance
+> `CBA3UVX754G62R4BPA5PZ43ZNR3OSWULQL54GUIZHKR56I57O45T3MJD` (scope `AIGOV`, count 4,
+> `member_zk_verified=true`), seal tx
+> `786285655171608fc26c0ff92618d6ba7c9b7eca988847d6d77b0f8030d170af`. Tests: 6 new
+> (constraint satisfaction: Hiroshima ok / missing-principle fail / EU-AIA high-risk ok /
+> prohibited-tier fail / high-risk-unmet fail / structural aggregate). The sections below
+> are the design that was implemented.
 
 ## 1. Why a second circuit
 

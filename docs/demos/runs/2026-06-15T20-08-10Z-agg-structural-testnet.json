@@ -1,0 +1,12 @@
+{
+  "what": "DPO2U study #2 implemented — STRUCTURAL AI-governance aggregate (Hiroshima + EU-AIA) sealed on Stellar testnet",
+  "timestamp_utc": "2026-06-15T20-08-10Z",
+  "network": "testnet",
+  "structural_agg_filing": "CBA3UVX754G62R4BPA5PZ43ZNR3OSWULQL54GUIZHKR56I57O45T3MJD",
+  "por_verifier": "CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC",
+  "aggregate": { "count": 4, "agg_commitment": "d78efd6e58cdfcbe2741803851c2f7f8478e811ce0d7de8d89543723acb097c6", "context_root": "d9848597f50b75926dd3eb2d2dd923f18ef672677a3b6f3f727e71027c8fc693" },
+  "member_proof": "Hiroshima N-of-M governance proof (framework_id=1), verified ON-CHAIN via por-verifier with the structural vk",
+  "seal_tx": "786285655171608fc26c0ff92618d6ba7c9b7eca988847d6d77b0f8030d170af",
+  "explorer": "https://stellar.expert/explorer/testnet/contract/CBA3UVX754G62R4BPA5PZ43ZNR3OSWULQL54GUIZHKR56I57O45T3MJD",
+  "honesty": "governance_predicate circuit (Hiroshima N-of-M + EU-AIA tier); structural predicates encode legal classifications needing legal review. DEV vk; testnet; aggregate verified off-chain (GT-host gap)."
+}

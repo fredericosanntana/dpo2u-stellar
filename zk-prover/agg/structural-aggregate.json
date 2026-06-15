@@ -1,0 +1,23 @@
+{
+  "agg_commitment": "d78efd6e58cdfcbe2741803851c2f7f8478e811ce0d7de8d89543723acb097c6",
+  "circuit": "governance_predicate (one structural vk; selected by framework_id)",
+  "context_root": "d9848597f50b75926dd3eb2d2dd923f18ef672677a3b6f3f727e71027c8fc693",
+  "count": 4,
+  "curve": "BN254 (bn128)",
+  "frameworks": [
+    "Hiroshima:orgA",
+    "EU-AIA:high-risk",
+    "Hiroshima:orgB",
+    "EU-AIA:limited"
+  ],
+  "honesty": "DEV coordinator setup; structural predicates encode legal classifications (K, allowed tiers, red-lines) that need legal review.",
+  "onchain_note": "Each structural proof verifies on-chain on the SAME generic por-verifier (IC=4) with the structural vk — zero contract change. Aggregate verify is off-chain (GT-host gap).",
+  "padded_to": 4,
+  "public_signals_order": [
+    "compliant",
+    "framework_id",
+    "context"
+  ],
+  "verdict_all_compliant": true,
+  "what": "DPO2U study #2 implemented — STRUCTURAL AI-governance proofs (Hiroshima N-of-M + EU-AIA tier) aggregated via SnarkPack, verified off-chain"
+}

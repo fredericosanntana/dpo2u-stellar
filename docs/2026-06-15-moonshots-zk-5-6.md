@@ -20,8 +20,31 @@ aggregate proof and verified **off-chain**.
   `verify_aggregate == true`. All 29 share one generic circuit/vk ("private score ≥
   threshold, bound to context") — data-protection AND AI-governance compliance in one
   proof; SnarkPack folds a power-of-two batch, so 29 is padded to **32** internally.
-  (Structural AI frameworks — EU-AIA risk-tier, Hiroshima attestation, AI-Gov-Stack
-  methodology — need a separate predicate circuit; see the #2 study doc.)
+  (Structural AI frameworks — EU-AIA risk-tier, Hiroshima attestation — get a separate
+  predicate circuit, now IMPLEMENTED; see below + the #2 study doc.)
+
+### Structural AI-governance predicate — `governance_predicate` (implemented, live)
+For frameworks that don't reduce to a score, `zk-prover/agg/governance_predicate.circom`
+proves — without revealing the private attestation/classification — one of two predicates
+selected by a public `framework_id`, same `[compliant, framework_id, context]` shape (IC=4):
+- **Hiroshima ICOC** (`framework_id=1`): N-of-M — all 11 principles attested.
+- **EU-AIA** (`framework_id=2`): risk tier ∈ {0,1,2} (not prohibited), red-line clear, and
+  high-risk ⇒ impact-assessment + red-teaming done.
+(AI-Gov-Stack is ordinal L1–L5 ⇒ already fits the scored batch.)
+- **On-chain:** the Hiroshima proof verifies on the SAME generic `por-verifier` (`true`) —
+  zero contract change, just the structural vk. A second `agg-filing` instance
+  `CBA3UVX754G62R4BPA5PZ43ZNR3OSWULQL54GUIZHKR56I57O45T3MJD` pins the structural vk and
+  seals the structural aggregate (scope `AIGOV`, count 4, `member_zk_verified=true`),
+  seal tx `786285655171608fc26c0ff92618d6ba7c9b7eca988847d6d77b0f8030d170af`.
+- **Off-chain:** 4 structural proofs (Hiroshima ×2 + EU-AIA ×2) → 1 SnarkPack aggregate,
+  `verify_aggregate==true`. Artifact `zk-prover/agg/structural-aggregate.json`.
+```bash
+POW=14 bash zk-prover/agg/build-governance.sh        # circom: Hiroshima + EU-AIA proofs
+cargo run --release --bin aggregate-structural        # (zk-prover-agg/) structural SnarkPack batch
+bash scripts/deploy-agg-structural-testnet.sh         # deploy 2nd agg-filing (structural vk) + live seal
+```
+Honest: the predicate constants (K, allowed tiers, red-lines) encode legal classifications
+— need DPO/legal review; the chain seals the encoded verdict, not the legal judgment.
 - On-chain seal: `agg-filing` Soroban contract — seals the aggregate **result** and verifies ONE
   jurisdiction-compliance proof (same circuit) **on-chain** via cross-call to `por-verifier`.
 
