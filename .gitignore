@@ -13,6 +13,11 @@ sdk/dist/
 # via zk-prover/por/build.sh and zk-prover/agg/build-jurisdictions.sh
 zk-prover/por/build/
 zk-prover/agg/build/
+zk-prover/membership/build/
+
+# External upstream worktrees / vendors — keep references in docs, not vendored blobs in this repo
+_external/
+
 node_modules/
 
 # EVM (Foundry) — deps + build output; regenerate via scripts/evm/install-foundry.sh
