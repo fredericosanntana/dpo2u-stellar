@@ -77,7 +77,11 @@
     }
     button:hover { background: rgba(255,255,255,.09); }
     .pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.05); }
-    .split-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; flex: 1; margin-top: 24px; }
+    .split-hero { display: grid; grid-template-columns: 1.32fr .68fr; gap: 28px; flex: 1; margin-top: 24px; align-items: stretch; }
+    .hero-title { font-size: 52px; max-width: none; }
+    .hero .split-hero { grid-template-columns: 1.5fr .5fr; gap: 24px; }
+    .hero p.lead { font-size: 19px; line-height: 1.42; max-width: 700px; }
+    .hero .quote { margin-top: 14px; font-size: 20px; }
     .big-number { font-size: 88px; font-weight: 800; letter-spacing: -.06em; margin: 0; }
     .mini { font-size: 16px; color: var(--muted); line-height: 1.5; }
     .checklist { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:22px; }
@@ -95,13 +99,12 @@
   <div class="app">
     <div class="viewport">
       <div class="deck-frame" id="deck">
-        <section class="slide active">
+        <section class="slide active hero">
           <div class="kicker">Pulso Hackathon · DPO2U</div>
           <div class="split-hero">
             <div>
-              <h1>Compliance vira uma <span class="accent">credencial positiva</span> para fluxos privados na Stellar.</h1>
+              <h1 class="hero-title">Credencial positiva para <span class="accent">private finance</span> na Stellar.</h1>
               <p class="lead">A DPO2U transforma o resultado de uma verificação regulatória em uma primitive verificável: privada, composable e acionável on-chain — sem expor PII.</p>
-              <div class="quote">“<span class="accent2">Prove, don’t perform.</span>”</div>
             </div>
             <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
               <div>

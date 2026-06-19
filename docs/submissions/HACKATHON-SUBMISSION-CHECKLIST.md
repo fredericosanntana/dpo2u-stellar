@@ -34,7 +34,7 @@ Resultado observado em 2026-06-19:
 
 ### Gaps restantes
 - [ ] gravar vídeo final de 90–120s;
-- [ ] transformar `PULSO-PITCH-DECK.md` / `PULSO-PITCH-DECK.html` em slides finais ou usar o HTML diretamente no pitch;
+- [x] transformar `PULSO-PITCH-DECK.md` / `PULSO-PITCH-DECK.html` em slides finais e publicar links em `PULSO-SUBMISSION-LINKS.md`;
 - [ ] decidir qual demo será gravada como canonical take;
 - [ ] anexar links finais do deck/vídeo na submissão.
 
