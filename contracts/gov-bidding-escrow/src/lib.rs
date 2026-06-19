@@ -1,6 +1,6 @@
 #![no_std]
 use soroban_sdk::{
-    contract, contractimpl, contracttype, symbol_short, Address, Env, String, Symbol, Vec, token
+    contract, contractimpl, contracttype, symbol_short, token, Address, Env, String, Symbol, Vec,
 };
 
 #[contracttype]
@@ -14,14 +14,14 @@ pub enum TenderStatus {
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct Tender {
-    pub gov: Address,             // Orgao publico criando o edital
-    pub token: Address,           // USDC ou XLM token address
-    pub max_price: i128,          // Teto do valor
-    pub requirements: String,     // Requisitos do edital (ex: "LGPD;ISO27001")
-    pub status: TenderStatus,     // Status atual
-    pub balance: i128,            // Fundos depositados no Escrow
-    pub winner: Option<Address>,  // Empresa ganhadora
-    pub winning_price: i128,      // Preço de fechamento
+    pub gov: Address,            // Orgao publico criando o edital
+    pub token: Address,          // USDC ou XLM token address
+    pub max_price: i128,         // Teto do valor
+    pub requirements: String,    // Requisitos do edital (ex: "LGPD;ISO27001")
+    pub status: TenderStatus,    // Status atual
+    pub balance: i128,           // Fundos depositados no Escrow
+    pub winner: Option<Address>, // Empresa ganhadora
+    pub winning_price: i128,     // Preço de fechamento
 }
 
 #[contracttype]
@@ -29,7 +29,7 @@ pub struct Tender {
 pub struct Bid {
     pub company: Address,
     pub price: i128,
-    pub evidence_hash: String,    // O ZK-Proof Hash emitido pela DPO2U atestando o compliance
+    pub evidence_hash: String, // O ZK-Proof Hash emitido pela DPO2U atestando o compliance
 }
 
 const TENDER_KEY: Symbol = symbol_short!("Tender");
@@ -70,7 +70,7 @@ impl GovBiddingEscrow {
         };
 
         env.storage().instance().set(&TENDER_KEY, &tender);
-        
+
         // Inicia a lista vazia de bids
         let bids: Vec<Bid> = Vec::new(&env);
         env.storage().instance().set(&BIDS_KEY, &bids);
@@ -85,8 +85,12 @@ impl GovBiddingEscrow {
     ) {
         company.require_auth();
 
-        let tender: Tender = env.storage().instance().get(&TENDER_KEY).expect("Tender not found");
-        
+        let tender: Tender = env
+            .storage()
+            .instance()
+            .get(&TENDER_KEY)
+            .expect("Tender not found");
+
         if tender.status != TenderStatus::AwaitingBids {
             panic!("Tender is not open for bids");
         }
@@ -102,7 +106,11 @@ impl GovBiddingEscrow {
             panic!("Valid DPO2U evidence hash is required");
         }
 
-        let mut bids: Vec<Bid> = env.storage().instance().get(&BIDS_KEY).expect("Bids not found");
+        let mut bids: Vec<Bid> = env
+            .storage()
+            .instance()
+            .get(&BIDS_KEY)
+            .expect("Bids not found");
         bids.push_back(Bid {
             company,
             price,
@@ -115,8 +123,12 @@ impl GovBiddingEscrow {
     /// O Governo (ou o próprio oráculo da DPO2U) avalia os Bids e liquida.
     /// Escolhe o menor preço.
     pub fn settle_winner(env: Env) {
-        let mut tender: Tender = env.storage().instance().get(&TENDER_KEY).expect("Tender not found");
-        
+        let mut tender: Tender = env
+            .storage()
+            .instance()
+            .get(&TENDER_KEY)
+            .expect("Tender not found");
+
         // Apenas o GOV ou um Admin pode liquidar
         tender.gov.require_auth();
 
@@ -124,7 +136,11 @@ impl GovBiddingEscrow {
             panic!("Tender already closed or settled");
         }
 
-        let bids: Vec<Bid> = env.storage().instance().get(&BIDS_KEY).expect("Bids not found");
+        let bids: Vec<Bid> = env
+            .storage()
+            .instance()
+            .get(&BIDS_KEY)
+            .expect("Bids not found");
 
         if bids.is_empty() {
             panic!("No valid bids received");
@@ -162,10 +178,16 @@ impl GovBiddingEscrow {
     }
 
     pub fn get_tender(env: Env) -> Tender {
-        env.storage().instance().get(&TENDER_KEY).expect("Tender not found")
+        env.storage()
+            .instance()
+            .get(&TENDER_KEY)
+            .expect("Tender not found")
     }
 
     pub fn get_bids(env: Env) -> Vec<Bid> {
-        env.storage().instance().get(&BIDS_KEY).expect("Bids not found")
+        env.storage()
+            .instance()
+            .get(&BIDS_KEY)
+            .expect("Bids not found")
     }
 }

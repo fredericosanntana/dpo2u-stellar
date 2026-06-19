@@ -1,0 +1,22 @@
+[package]
+name = "disclosure-helper"
+description = "DPO2U — bounded selective-disclosure helper: reviewer-authorized, hash-bound disclosure grants cross-checked against protocol-registry"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+readme.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+protocol-registry = { path = "../protocol-registry" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

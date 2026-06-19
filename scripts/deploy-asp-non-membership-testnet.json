@@ -1,0 +1,14 @@
+{
+  "network": "testnet",
+  "rpc_url": "https://soroban-testnet.stellar.org",
+  "deployer_identity": "dpo2u-deployer",
+  "deployer_pubkey": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "contract_name": "asp-non-membership",
+  "contract_id": "CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS",
+  "wasm_path": "/root/dpo2u-stellar/_external/spp/target/wasm32v1-none/release/asp_non_membership.wasm",
+  "wasm_sha256": "c4164fab85d1daf01113cd23bd8bf843de79a7bfd136d7886d1e642b45c5ecc4",
+  "upload_tx": "7238c831d142eb7fe5904bf5f19302eb8bf4994b7da7574a6d2cd7c23f3eb030",
+  "deploy_tx": "a6ef3baba1faca3581634386c562a9afed0db0b3c5e74c5406c2238b481dccc7",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "executed_at": "2026-06-18T21:14:44Z"
+}

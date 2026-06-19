@@ -1,0 +1,51 @@
+Você está executando a Fase A do sprint protocolar DPO2U dentro do repositório /root/dpo2u-stellar.
+
+Plano fonte obrigatório:
+- /root/dpo2u-stellar/.hermes/plans/2026-06-17_123119-protocol-registry-asp-pool-gating.md
+
+Escopo DESTE RUN (somente Fase A):
+- Executar apenas o que no plano corresponde ao protocol-registry.
+- Criar o novo contrato Soroban `contracts/protocol-registry`.
+- Implementar testes e código mínimo para:
+  - constructor/admin
+  - authorize_issuer
+  - set_claim_policy
+  - register_attestation
+  - get_attestation
+  - verify_attestation_proof
+- A semântica MVP deve ser honesta:
+  - registry canônico multi-issuer/policy
+  - sem vender trust model completo de issuer
+  - sem revogação no set
+  - sem ASP ainda
+- Atualizar `docs/asp-protocol-mvp.md` apenas se necessário para congelar baseline/escopo da Fase A.
+
+Fora de escopo absoluto neste run:
+- `contracts/asp-mvp`
+- `contracts/pool-adapter-mock`
+- revogação no set
+- trust model completo de issuer
+- docs amplas de marketing/composability além do mínimo necessário ao baseline
+- refactors não relacionados
+
+Instruções de execução:
+1. Leia primeiro o plano e os contratos existentes relevantes (`contracts/anticorruption-attestation`, `contracts/xchain-attest`).
+2. Implemente apenas a Fase A com testes reais em Rust.
+3. Mantenha o design simples e claramente MVP.
+4. Rode validação real ao final.
+
+Validação obrigatória:
+- cargo test -p protocol-registry
+
+Relatório obrigatório antes de parar:
+- Escreva um relatório humano em /root/dpo2u-stellar/.hermes/plans/2026-06-17_123542-claude-phase-a-protocol-registry-report.md
+- O relatório deve incluir:
+  - arquivos criados/modificados
+  - decisões de design tomadas
+  - comandos executados
+  - resultado real dos testes
+  - qualquer blocker ou limitação honesta
+
+Formato de saída deste processo:
+- Responda em JSON (`--output-format json`) com resumo curto do que fez.
+- Não faça commit, não faça push.

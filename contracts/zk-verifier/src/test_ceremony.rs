@@ -10,8 +10,8 @@
 extern crate std;
 
 use soroban_sdk::{
-    crypto::bls12_381::{Fr, G1Affine, G2Affine},
-    vec, Env, U256, Vec,
+    crypto::bls12_381::{Bls12381Fr, Bls12381G1Affine, Bls12381G2Affine},
+    vec, Env, Vec, U256,
 };
 
 use crate::{Proof, VerificationKey, ZkVerifier, ZkVerifierClient};
@@ -27,16 +27,16 @@ const PROOF_A: &str = "06581a566aaa13c17b621df45a5e6cc098f099d097858408cd37549e6
 const PROOF_B: &str = "018acd32cd89edee87c303de579a362ad2488125cdd15553e5111f8587d3f378e835f91a9452df6b751ff74fb4725c1e16337c44c03b8cffb915031599d5342a9bef3850626facabc17b7d320e46b848065cbf30a2e8b7d925062bb4bab9bee003e1de7c1099231512b0ae63471f35d28e24679a398c559a2a51e568af38106873e43d06be2dbddfd746c3fe537517f71086918f9bd79124c33cdff01aba72e24fc125d42441b1b6d8e544e69eedae1fb289b8943ec89b598e2b3db420677c38";
 const PROOF_C: &str = "0f6b15b6079a84a4b2673ae3ca18902b8e00680f5b1f1a9cbb0a650d66472f3fe05d0d26fbf7031ccc42e839b5f5021f07031a534a3d422084f0fc1d92e5ffb6e4016dff6a10ffe4eb0f76b413c6af0a760513a58ede50e565be027b4bbb4db5";
 
-fn g1(env: &Env, h: &str) -> G1Affine {
+fn g1(env: &Env, h: &str) -> Bls12381G1Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 96] = bytes.try_into().expect("G1 = 96 bytes uncompressed");
-    G1Affine::from_array(env, &arr)
+    Bls12381G1Affine::from_array(env, &arr)
 }
 
-fn g2(env: &Env, h: &str) -> G2Affine {
+fn g2(env: &Env, h: &str) -> Bls12381G2Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 192] = bytes.try_into().expect("G2 = 192 bytes uncompressed");
-    G2Affine::from_array(env, &arr)
+    Bls12381G2Affine::from_array(env, &arr)
 }
 
 fn vk(env: &Env) -> VerificationKey {
@@ -58,11 +58,11 @@ fn proof(env: &Env) -> Proof {
 }
 
 /// Sinais públicos [threshold, context].
-fn public_signals(env: &Env, threshold: u32, context: u32) -> Vec<Fr> {
+fn public_signals(env: &Env, threshold: u32, context: u32) -> Vec<Bls12381Fr> {
     vec![
         env,
-        Fr::from_u256(U256::from_u32(env, threshold)),
-        Fr::from_u256(U256::from_u32(env, context)),
+        Bls12381Fr::from_u256(U256::from_u32(env, threshold)),
+        Bls12381Fr::from_u256(U256::from_u32(env, context)),
     ]
 }
 
@@ -71,7 +71,10 @@ fn ceremony_proof_verifies_onchain() {
     let env = Env::default();
     let client = ZkVerifierClient::new(&env, &env.register(ZkVerifier {}, ()));
     let res = client.verify_proof(&vk(&env), &proof(&env), &public_signals(&env, 70, 1));
-    assert_eq!(res, true, "prova da cerimônia real deveria verificar on-chain");
+    assert_eq!(
+        res, true,
+        "prova da cerimônia real deveria verificar on-chain"
+    );
 }
 
 #[test]
@@ -87,5 +90,8 @@ fn ceremony_proof_rejects_wrong_context() {
     let env = Env::default();
     let client = ZkVerifierClient::new(&env, &env.register(ZkVerifier {}, ()));
     let res = client.verify_proof(&vk(&env), &proof(&env), &public_signals(&env, 70, 2));
-    assert_eq!(res, false, "context adulterado deveria ser rejeitado (anti-replay)");
+    assert_eq!(
+        res, false,
+        "context adulterado deveria ser rejeitado (anti-replay)"
+    );
 }

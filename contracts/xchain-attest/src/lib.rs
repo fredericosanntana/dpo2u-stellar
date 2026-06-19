@@ -17,12 +17,12 @@
 //!
 //! Model: `por-filing::seal_solvency` (set_verifier + cross-call + pinned vk).
 
+use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype,
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
     panic_with_error, symbol_short, Address, BytesN, Env, Symbol, Vec,
 };
-use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
@@ -50,10 +50,10 @@ pub enum DataKey {
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CrossChainClaim {
-    pub origin_chain: Symbol,       // e.g. "baseSepol" / "anvil"
-    pub proof_context: BytesN<32>,  // public anti-replay context signal
-    pub zk_verified: bool,          // true — Groth16/BN254 verified ON-CHAIN here
-    pub relayed_by: Address,        // the relayer (trust = transport only)
+    pub origin_chain: Symbol,      // e.g. "baseSepol" / "anvil"
+    pub proof_context: BytesN<32>, // public anti-replay context signal
+    pub zk_verified: bool,         // true — Groth16/BN254 verified ON-CHAIN here
+    pub relayed_by: Address,       // the relayer (trust = transport only)
     pub timestamp: u64,
     pub seq: u32,
 }
@@ -102,7 +102,9 @@ impl XChainAttest {
     pub fn set_verifier(env: Env, admin: Address, verifier: Address, vk: PorVk) {
         admin.require_auth();
         Self::assert_admin(&env, &admin);
-        env.storage().instance().set(&DataKey::VerifierAddr, &verifier);
+        env.storage()
+            .instance()
+            .set(&DataKey::VerifierAddr, &verifier);
         env.storage().instance().set(&DataKey::VerifierVk, &vk);
         env.events().publish((symbol_short!("verifier"),), verifier);
     }
@@ -146,7 +148,8 @@ impl XChainAttest {
         };
 
         // Trustless re-verification of the relayed proof, on-chain. Fail-closed.
-        let ok = PorVerifierClient::new(&env, &verifier).verify_proof(&zk_vk, &zk_proof, &pub_signals);
+        let ok =
+            PorVerifierClient::new(&env, &verifier).verify_proof(&zk_vk, &zk_proof, &pub_signals);
         if !ok {
             panic_with_error!(&env, Error::ZkVerifyFailed);
         }
@@ -160,15 +163,22 @@ impl XChainAttest {
             timestamp: env.ledger().timestamp(),
             seq: env.ledger().sequence(),
         };
-        env.storage()
-            .persistent()
-            .set(&DataKey::Claim(origin_chain.clone(), proof_context.clone()), &claim);
-        env.events()
-            .publish((symbol_short!("xchain"), origin_chain, proof_context), claim.clone());
+        env.storage().persistent().set(
+            &DataKey::Claim(origin_chain.clone(), proof_context.clone()),
+            &claim,
+        );
+        env.events().publish(
+            (symbol_short!("xchain"), origin_chain, proof_context),
+            claim.clone(),
+        );
         claim.seq
     }
 
-    pub fn get_claim(env: Env, origin_chain: Symbol, proof_context: BytesN<32>) -> Option<CrossChainClaim> {
+    pub fn get_claim(
+        env: Env,
+        origin_chain: Symbol,
+        proof_context: BytesN<32>,
+    ) -> Option<CrossChainClaim> {
         env.storage()
             .persistent()
             .get(&DataKey::Claim(origin_chain, proof_context))

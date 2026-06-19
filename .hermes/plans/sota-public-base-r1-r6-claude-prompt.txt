@@ -1,0 +1,55 @@
+You are working in /root/dpo2u-stellar.
+
+Goal: execute the roadmap block R1-R6 for the DPO2U Stellar/ZK protocol track, but ONLY within the honest public-base scope already documented. Do not overclaim production privacy pool, decentralized verifier network, mature MPC, anonymity at scale, or shared governance already achieved.
+
+Primary objective:
+1. Complete Sprint R1 (Public Truth Freeze) across central docs.
+2. Create the missing docs for R2-R6.
+3. Reconcile wording across touched docs so they consistently distinguish: real now / prototype-real / symbolic / roadmap.
+4. Keep changes narrowly scoped to the protocol-track docs and only make code/test edits if strictly necessary to align documented semantics with the actual implemented surface.
+
+Required outputs:
+- Update, if needed:
+  - docs/asp-protocol-mvp.md
+  - docs/hack-submission-latam-composability.md
+  - docs/composability-quickstart.md
+  - docs/FAQ-JUDGES-PARTNERS-AUDITORS.md
+- Create:
+  - docs/OPEN-STANDARD-DRAFT.md
+  - docs/CREDENTIAL-LIFECYCLE-SPEC.md
+  - docs/CROSS-CHAIN-CANONICAL-REGISTRY.md
+  - docs/SELECTIVE-DISCLOSURE-BOUNDARY.md
+  - docs/PRODUCTION-READINESS-GATES.md
+  - docs/SOTA-PUBLIC-BASE-R1-R6-REPORT.md
+
+Hard constraints:
+- Ground every claim in the current repo state.
+- Preserve the B-first boundary: own DPO2U-controlled ASP lane is operational; external audited lane is read/audit boundary unless governance/admin changes.
+- Preserve honest ZK scope: current privacy-pool is symbolic-stateful, real BN254/Groth16 membership verification, nullifier set, root history, but NOT token custody, production MPC, audited production verifier, or large-scale anonymity.
+- If you mention selective disclosure or view-key, frame it as bounded MVP / boundary doc unless there is actual code proving more.
+- If code changes are not strictly necessary, prefer docs/spec changes only.
+- Do not edit unrelated product docs, Kolibri materials, or broad marketing surfaces outside the files listed above.
+
+Required content guidance:
+- OPEN-STANDARD-DRAFT.md: glossary, roles, interfaces, verification invariants, revocation/freshness semantics, claim/jurisdiction/profile/stake semantics, conformance profiles demo/public-base/production-target.
+- CREDENTIAL-LIFECYCLE-SPEC.md: issue, verify, revoke, expire, freshness window, issuer-policy invalidation, status semantics, where nullifier/epoch semantics apply and where they do not.
+- CROSS-CHAIN-CANONICAL-REGISTRY.md: define what is canonical now, what is cross-chain evidence vs registry semantics, trust assumptions, accepted proof origins, replayable artifact references.
+- SELECTIVE-DISCLOSURE-BOUNDARY.md: authorized actors, what can be revealed, what remains sealed, trust model, revocation/rotation, explicit statement of what is NOT implemented yet.
+- PRODUCTION-READINESS-GATES.md: audit gates, MPC gates, custody/value-movement gates, governance authority gates, operational monitoring gates, incident response gates, mainnet/public rollout checklist.
+
+Validation requirements:
+- Re-read touched docs for consistency.
+- If you changed code/tests, run targeted cargo tests for touched packages and report exact commands/results.
+- If no code/tests changed, state that explicitly in the report.
+- In docs/SOTA-PUBLIC-BASE-R1-R6-REPORT.md include:
+  - files changed
+  - why each changed
+  - exact boundaries preserved
+  - whether code changed
+  - whether tests were run and exact outputs
+  - any remaining open gaps for R7
+
+Deliverable style:
+- concise, technical, honest
+- do not invent runtime results
+- write the report before stopping

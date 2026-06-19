@@ -1,0 +1,20 @@
+{
+  "request_id": "live_registry_bridge_001_revoke",
+  "status": "revoked-and-blocked",
+  "registry_contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+  "subject_commitment": "0x0707070707070707070707070707070707070707070707070707070707070707",
+  "claim_type": "kyc",
+  "jurisdiction": "BR",
+  "attestation_root": "0x0909090909090909090909090909090909090909090909090909090909090909",
+  "revoke_tx_hash": "0987dd69f909c7a4a0ec4270b53d8399e0d9032b8f75eccc6e5e4b4edeec101e",
+  "revoked_by": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "revoked_at_unix": 1781815740,
+  "post_revoke_registry_verified": false,
+  "post_revoke_attestation_active": false,
+  "bridge_reentry_result": "blocked",
+  "bridge_reentry_error": "registry decision is not verified",
+  "decision_snapshot": "/root/dpo2u-stellar/integration/spp-adapter/examples/live-registry-decision.revoked.json",
+  "target_non_membership_contract_id": "CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3",
+  "non_membership_action_status": "not-executed",
+  "non_membership_action_reason": "S4 fechou revogação canônica e bloqueio do bridge; execução blocked-lane fica para sprint seguinte"
+}

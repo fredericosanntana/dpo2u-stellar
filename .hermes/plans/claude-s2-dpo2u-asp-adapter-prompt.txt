@@ -1,0 +1,47 @@
+Você está executando a S2 do track DPO2U × SPP.
+
+# Objetivo
+Implementar a primeira versão do adapter admin-mediated entre o `protocol-registry`/`asp-mvp` da DPO2U e a landing zone real do SPP (`asp-membership.insert_leaf`).
+
+# Contexto obrigatório
+Leia antes de agir:
+1. `/root/dpo2u-stellar/docs/S2-DPO2U-ASP-ADAPTER-SPEC.md`
+2. `/root/dpo2u-stellar/docs/S2-DPO2U-ASP-ADAPTER-OPS-RUNBOOK.md`
+3. `/root/dpo2u-stellar/docs/SPP-INTEGRATION-LANDING-ZONE.md`
+4. `/root/dpo2u-stellar/contracts/protocol-registry/src/lib.rs`
+5. `/root/dpo2u-stellar/contracts/asp-mvp/src/lib.rs`
+6. `/root/dpo2u-stellar/_external/spp/contracts/asp-membership/src/lib.rs`
+7. `/root/dpo2u-stellar/_external/spp/app/js/admin.js`
+8. `/root/dpo2u-stellar/_external/spp/circuits/src/policyTransaction.circom`
+
+# Restrições
+- não reescreva o SPP;
+- não invente um novo gateway generalizado;
+- não altere o `protocol-registry` sem necessidade forte;
+- foque no menor adapter honesto e executável;
+- mantenha wording sem overclaim.
+
+# Entregáveis obrigatórios
+1. criar o workspace mínimo em `/root/dpo2u-stellar/integration/spp-adapter/`
+2. produzir um schema legível para o `AdmissionDecisionInput`
+3. produzir um schema legível para o `AdmissionExecutionRecord`
+4. criar pelo menos um exemplo de payload de admissão
+5. criar um helper de derivação de membership leaf compatível com o SPP
+6. criar um helper de preparação de submissão para `insert_leaf`
+7. documentar claramente se a execução fica em modo `prepared` ou `executed`
+8. escrever um resumo final em markdown dizendo:
+   - o que foi implementado
+   - o que foi validado de fato
+   - o que ainda está pendente
+
+# Validação mínima
+Sua entrega só conta se houver evidência concreta de:
+- fórmula do leaf congelada no código/artefato
+- payload de saída utilizável
+- diretório `integration/spp-adapter/` materializado
+
+# Saída final obrigatória
+Escreva um relatório final em:
+`/root/dpo2u-stellar/docs/S2-DPO2U-ASP-ADAPTER-IMPLEMENTATION-REPORT.md`
+
+Se algo bloquear, diga exatamente o que bloqueou e o que ficou pronto mesmo assim.

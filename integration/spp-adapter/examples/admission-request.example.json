@@ -1,0 +1,14 @@
+{
+  "request_id": "adm_demo_001",
+  "subject_commitment": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "claim_type": "ac_cred",
+  "jurisdiction": "br",
+  "attestation_root": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "note_public_key": "0x1111111111111111111111111111111111111111111111111111111111111111",
+  "membership_blinding": "123456789",
+  "target_network": "testnet",
+  "membership_contract_id": "CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN",
+  "non_membership_contract_id": "CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3",
+  "operator_mode": "prepared",
+  "prepared_by": "hermes"
+}

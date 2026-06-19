@@ -1,0 +1,29 @@
+{
+  "request_id": "reg_bridge_demo_001",
+  "subject_commitment": "0x0707070707070707070707070707070707070707070707070707070707070707",
+  "claim_type": "kyc",
+  "jurisdiction": "BR",
+  "attestation_root": "0x0909090909090909090909090909090909090909090909090909090909090909",
+  "note_public_key": "0x2222222222222222222222222222222222222222222222222222222222222222",
+  "membership_blinding": "987654321",
+  "target_network": "testnet",
+  "membership_contract_id": "CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN",
+  "non_membership_contract_id": "CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3",
+  "operator_mode": "prepared",
+  "prepared_by": "hermes",
+  "registry_contract_id": "local-protocol-registry-demo",
+  "issuer": "issuer-demo-br-001",
+  "valid_until": 0,
+  "policy_min_trust_tier": 2,
+  "policy_min_stake": 1000,
+  "decision_source": "protocol-registry-shaped-example-from-contract-tests",
+  "decision_provenance": {
+    "repo_path": "/root/dpo2u-stellar/contracts/protocol-registry",
+    "evidence": [
+      "tests arm_structured + arm_staked lane",
+      "register_attestation",
+      "verify_attestation_proof",
+      "revoke_attestation"
+    ]
+  }
+}

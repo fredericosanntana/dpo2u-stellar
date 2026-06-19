@@ -7,8 +7,8 @@
 extern crate std;
 
 use soroban_sdk::{
-    crypto::bls12_381::{Fr, G1Affine, G2Affine},
-    vec, Env, U256, Vec,
+    crypto::bls12_381::{Bls12381Fr, Bls12381G1Affine, Bls12381G2Affine},
+    vec, Env, Vec, U256,
 };
 
 use crate::{Proof, VerificationKey, ZkVerifier, ZkVerifierClient};
@@ -23,16 +23,16 @@ const PROOF_A: &str = "172a30d59fe091addd32226a3a84edcdcd6330a22f16e46049329d600
 const PROOF_B: &str = "196a98c4a094d05be21b348a0e7350c6260433637ba8d6b2856f1b283bad28849792685e7dac938b8ba9a0df2ab9a63a11f7ade506c16d5ce2b64b2903ff06d1fb4f064a8caf4f3b021b9e01e97acdca6c93a126ce960bfd8504737269fe88f912c1aadfed042442226bf85bd2da52fc1336bee5b0609c19f3dc68cf358fcf977e122aab406ef4c60e29020e7c4c07ce0e583568321d332e6df45c7195420f092af37d0827df169e6d17e3cc1735dd9c9427a8ebf564a6ef06f96b440db5873e";
 const PROOF_C: &str = "17e831b5f18ae032b9ee4c5dd3b33f5e76cebf327098107e683b10894b0c15f5039459f6c1f678b04d69c98994690f060c112764ea9d84d73b7e368fd6aa2e218a679ccc9556d7f6bbbda267483a563cf17b8a38db38d66728f5136bfe465e02";
 
-fn g1(env: &Env, h: &str) -> G1Affine {
+fn g1(env: &Env, h: &str) -> Bls12381G1Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 96] = bytes.try_into().expect("G1 = 96 bytes uncompressed");
-    G1Affine::from_array(env, &arr)
+    Bls12381G1Affine::from_array(env, &arr)
 }
 
-fn g2(env: &Env, h: &str) -> G2Affine {
+fn g2(env: &Env, h: &str) -> Bls12381G2Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 192] = bytes.try_into().expect("G2 = 192 bytes uncompressed");
-    G2Affine::from_array(env, &arr)
+    Bls12381G2Affine::from_array(env, &arr)
 }
 
 fn vk(env: &Env) -> VerificationKey {
@@ -53,8 +53,8 @@ fn proof(env: &Env) -> Proof {
     }
 }
 
-fn threshold_signal(env: &Env, t: u32) -> Vec<Fr> {
-    vec![env, Fr::from_u256(U256::from_u32(env, t))]
+fn threshold_signal(env: &Env, t: u32) -> Vec<Bls12381Fr> {
+    vec![env, Bls12381Fr::from_u256(U256::from_u32(env, t))]
 }
 
 #[test]
@@ -83,9 +83,12 @@ fn rejects_malformed_vk_signal_count_mismatch() {
     let client = ZkVerifierClient::new(&env, &env.register(ZkVerifier {}, ()));
     let two = vec![
         &env,
-        Fr::from_u256(U256::from_u32(&env, 70)),
-        Fr::from_u256(U256::from_u32(&env, 1)),
+        Bls12381Fr::from_u256(U256::from_u32(&env, 70)),
+        Bls12381Fr::from_u256(U256::from_u32(&env, 1)),
     ];
     let res = client.try_verify_proof(&vk(&env), &proof(&env), &two);
-    assert!(res.is_err(), "contagem de sinais desalinhada deveria retornar Err, não panic");
+    assert!(
+        res.is_err(),
+        "contagem de sinais desalinhada deveria retornar Err, não panic"
+    );
 }

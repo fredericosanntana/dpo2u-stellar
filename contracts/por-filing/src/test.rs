@@ -1,11 +1,13 @@
 #![cfg(test)]
 
 use super::*;
+use por_verifier::PorVerifier;
 use soroban_sdk::{
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
-    symbol_short, testutils::Address as _, vec, Address, BytesN, Env, U256,
+    symbol_short,
+    testutils::Address as _,
+    vec, Address, BytesN, Env, U256,
 };
-use por_verifier::PorVerifier;
 
 fn setup() -> (Env, Address, Address, Symbol, PorFilingClient<'static>) {
     let env = Env::default();
@@ -15,7 +17,7 @@ fn setup() -> (Env, Address, Address, Symbol, PorFilingClient<'static>) {
     let client = PorFilingClient::new(&env, &contract_id);
     let submitter = Address::generate(&env);
     let psav = symbol_short!("Z1234567"); // psav_code Z+7 (público, não-PII)
-    // PSAV ativa + submitter autorizado.
+                                          // PSAV ativa + submitter autorizado.
     client.register_psav(&admin, &psav, &true);
     client.authorize_submitter(&admin, &submitter, &true);
     (env, admin, submitter, psav, client)
@@ -53,8 +55,22 @@ fn substituicao_increments_revision() {
     let (env, _a, submitter, psav, client) = setup();
     let h0 = BytesN::from_array(&env, &[1u8; 32]);
     let h1 = BytesN::from_array(&env, &[2u8; 32]); // hash novo = substituição
-    client.seal_filing(&submitter, &psav, &DocType::Custody5711, &20260301u32, &TipoRemessa::Inclusao, &h0);
-    client.seal_filing(&submitter, &psav, &DocType::Custody5711, &20260301u32, &TipoRemessa::Substituicao, &h1);
+    client.seal_filing(
+        &submitter,
+        &psav,
+        &DocType::Custody5711,
+        &20260301u32,
+        &TipoRemessa::Inclusao,
+        &h0,
+    );
+    client.seal_filing(
+        &submitter,
+        &psav,
+        &DocType::Custody5711,
+        &20260301u32,
+        &TipoRemessa::Substituicao,
+        &h1,
+    );
     let seal = client
         .get_filing(&psav, &DocType::Custody5711, &20260301u32)
         .unwrap();
@@ -66,10 +82,26 @@ fn substituicao_increments_revision() {
 fn identical_resend_is_idempotent_noop() {
     let (env, _a, submitter, psav, client) = setup();
     let h = BytesN::from_array(&env, &[9u8; 32]);
-    client.seal_filing(&submitter, &psav, &DocType::Por5710, &20260228u32, &TipoRemessa::Inclusao, &h);
+    client.seal_filing(
+        &submitter,
+        &psav,
+        &DocType::Por5710,
+        &20260228u32,
+        &TipoRemessa::Inclusao,
+        &h,
+    );
     // Reenvio idêntico (mesmo hash) → não incrementa revisão.
-    client.seal_filing(&submitter, &psav, &DocType::Por5710, &20260228u32, &TipoRemessa::Inclusao, &h);
-    let seal = client.get_filing(&psav, &DocType::Por5710, &20260228u32).unwrap();
+    client.seal_filing(
+        &submitter,
+        &psav,
+        &DocType::Por5710,
+        &20260228u32,
+        &TipoRemessa::Inclusao,
+        &h,
+    );
+    let seal = client
+        .get_filing(&psav, &DocType::Por5710, &20260228u32)
+        .unwrap();
     assert_eq!(seal.revision, 0);
 }
 
@@ -79,7 +111,14 @@ fn unauthorized_submitter_fails() {
     let (env, _a, _s, psav, client) = setup();
     let stranger = Address::generate(&env);
     let h = BytesN::from_array(&env, &[3u8; 32]);
-    client.seal_filing(&stranger, &psav, &DocType::Por5710, &20260228u32, &TipoRemessa::Inclusao, &h);
+    client.seal_filing(
+        &stranger,
+        &psav,
+        &DocType::Por5710,
+        &20260228u32,
+        &TipoRemessa::Inclusao,
+        &h,
+    );
 }
 
 #[test]
@@ -90,7 +129,14 @@ fn inactive_psav_fails() {
     // submitter já autorizado, mas PSAV 'other' nunca foi registrada/ativada.
     let _ = admin;
     let h = BytesN::from_array(&env, &[4u8; 32]);
-    client.seal_filing(&submitter, &other, &DocType::Por5710, &20260228u32, &TipoRemessa::Inclusao, &h);
+    client.seal_filing(
+        &submitter,
+        &other,
+        &DocType::Por5710,
+        &20260228u32,
+        &TipoRemessa::Inclusao,
+        &h,
+    );
 }
 
 #[test]
@@ -137,7 +183,10 @@ fn g2(env: &Env, h: &str) -> Bn254G2Affine {
 }
 fn fr(env: &Env, h: &str) -> Bn254Fr {
     let arr: [u8; 32] = hex::decode(h).unwrap().try_into().unwrap();
-    Bn254Fr::from_u256(U256::from_be_bytes(env, &soroban_sdk::Bytes::from_array(env, &arr)))
+    Bn254Fr::from_u256(U256::from_be_bytes(
+        env,
+        &soroban_sdk::Bytes::from_array(env, &arr),
+    ))
 }
 fn por_vk(env: &Env) -> PorVk {
     PorVk {
@@ -147,12 +196,21 @@ fn por_vk(env: &Env) -> PorVk {
         delta: g2(env, VK_DELTA),
         ic: soroban_sdk::Vec::from_array(
             env,
-            [g1(env, VK_IC0), g1(env, VK_IC1), g1(env, VK_IC2), g1(env, VK_IC3)],
+            [
+                g1(env, VK_IC0),
+                g1(env, VK_IC1),
+                g1(env, VK_IC2),
+                g1(env, VK_IC3),
+            ],
         ),
     }
 }
 fn por_proof(env: &Env) -> PorProof {
-    PorProof { a: g1(env, PROOF_A), b: g2(env, PROOF_B), c: g1(env, PROOF_C) }
+    PorProof {
+        a: g1(env, PROOF_A),
+        b: g2(env, PROOF_B),
+        c: g1(env, PROOF_C),
+    }
 }
 fn signals(env: &Env, solvent: &str, commit: &str, context: &str) -> soroban_sdk::Vec<Bn254Fr> {
     vec![env, fr(env, solvent), fr(env, commit), fr(env, context)]

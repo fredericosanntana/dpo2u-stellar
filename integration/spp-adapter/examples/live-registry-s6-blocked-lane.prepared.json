@@ -1,0 +1,20 @@
+{
+  "request_id": "live_registry_bridge_001_blocked_lane",
+  "status": "prepared",
+  "decision_source": "live-protocol-registry-testnet",
+  "registry_contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+  "subject_commitment": "0x0808080808080808080808080808080808080808080808080808080808080808",
+  "claim_type": "kyc",
+  "jurisdiction": "BR",
+  "attestation_root": "0x0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a",
+  "registry_verified": false,
+  "attestation_active": false,
+  "revoked": false,
+  "blocked_key_hex": "0x012108242248c06711d179bd459c5b1f1d37244d8de02f3c7641a555e2589703",
+  "blocked_key_dec": "510674989860353591028510149437186995841978718442233018268594652882555934467",
+  "blocked_value": "1",
+  "target_network": "testnet",
+  "asp_non_membership_contract_id": "CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS",
+  "source_account": "dpo2u-deployer",
+  "prepared_command": "stellar contract invoke --id CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS --source-account dpo2u-deployer --network testnet -- insert_leaf --key 510674989860353591028510149437186995841978718442233018268594652882555934467 --value 1"
+}

@@ -1,0 +1,56 @@
+Você está executando a Fase C do sprint protocolar DPO2U dentro do repositório /root/dpo2u-stellar.
+
+Plano fonte obrigatório:
+- /root/dpo2u-stellar/.hermes/plans/2026-06-17_123119-protocol-registry-asp-pool-gating.md
+
+Contexto já implementado e disponível:
+- `contracts/protocol-registry` existe e está verde.
+- `contracts/asp-mvp` existe e está verde.
+- Baseline congelado em `docs/asp-protocol-mvp.md`.
+
+Escopo DESTE RUN (somente Fase C):
+- Criar o novo contrato Soroban `contracts/pool-adapter-mock`.
+- Implementar testes e código mínimo para:
+  - constructor(admin, asp)
+  - `execute_if_member(...)` ou equivalente que prove gating
+  - bloqueio sem membership
+  - liberação com membership vinda do ASP
+- O contrato deve consumir o ASP por cross-contract call real (`contains(...)`) e provar a tese `registry -> asp -> pool-adapter`.
+- Atualizar docs de forma honesta para refletir o que agora é real vs mock:
+  - `docs/asp-protocol-mvp.md`
+  - `docs/composability-quickstart.md`
+  - `docs/hack-submission-latam-composability.md`
+  - `examples/README.md`
+  - `examples/pool-adapter-mock/README.md` (novo)
+- A documentação deve deixar explícito:
+  - real agora: protocol-registry MVP, asp-mvp, current_root, pool-adapter mock gating
+  - não implementado ainda: revogação no set, trust model completo de issuer, membership/ZK proof real de privacy pool, pool real
+
+Fora de escopo absoluto neste run:
+- revogação no set
+- trust model completo de issuer
+- transformar o mock em pool privada real
+- refactors não relacionados
+
+Instruções de execução:
+1. Leia primeiro o plano, `contracts/asp-mvp`, `contracts/protocol-registry`, e os docs atuais.
+2. Implemente apenas a Fase C com testes reais em Rust.
+3. Mantenha o design simples e claramente mock/honesto.
+4. Rode validação real ao final.
+
+Validação obrigatória:
+- cargo test -p pool-adapter-mock
+- cargo test -p protocol-registry -p asp-mvp -p pool-adapter-mock
+
+Relatório obrigatório antes de parar:
+- Escreva um relatório humano em /root/dpo2u-stellar/.hermes/plans/2026-06-17_123542-claude-phase-c-pool-adapter-report.md
+- O relatório deve incluir:
+  - arquivos criados/modificados
+  - decisões de design tomadas
+  - comandos executados
+  - resultado real dos testes
+  - qualquer blocker ou limitação honesta
+
+Formato de saída deste processo:
+- Responda em JSON (`--output-format json`) com resumo curto do que fez.
+- Não faça commit, não faça push.

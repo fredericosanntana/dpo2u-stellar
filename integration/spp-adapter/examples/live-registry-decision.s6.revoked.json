@@ -1,0 +1,54 @@
+{
+  "request_id": "live_registry_bridge_001",
+  "decision_source": "live-protocol-registry-testnet",
+  "registry": {
+    "contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+    "verify_function": "verify_attestation_proof"
+  },
+  "issuer": {
+    "address": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+    "profile_active": true,
+    "trust_tier": 2,
+    "credited_stake": 5000,
+    "claim_scope": {
+      "kyc": true
+    },
+    "jurisdiction_scope": {
+      "BR": true
+    }
+  },
+  "policy": {
+    "claim_type": "kyc",
+    "jurisdiction": "BR",
+    "lane_active": true,
+    "min_trust_tier": 2,
+    "min_stake": 1000
+  },
+  "attestation": {
+    "subject_commitment": "0x0808080808080808080808080808080808080808080808080808080808080808",
+    "claim_type": "kyc",
+    "jurisdiction": "BR",
+    "attestation_root": "0x0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a",
+    "valid_until": 0,
+    "registry_verified": false,
+    "attestation_active": false,
+    "revoked": false,
+    "registered_timestamp": 1781818954
+  },
+  "operator": {
+    "note_public_key": "0x012108242248c06711d179bd459c5b1f1d37244d8de02f3c7641a555e2589703",
+    "membership_blinding": "777777777",
+    "mode": "prepared",
+    "prepared_by": "hermes"
+  },
+  "target": {
+    "network": "testnet",
+    "asp_membership_contract_id": "CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN",
+    "asp_non_membership_contract_id": "CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3"
+  },
+  "decision_provenance": {
+    "extracted_from_live_registry": true,
+    "source_account": "dpo2u-deployer",
+    "network": "testnet"
+  }
+}

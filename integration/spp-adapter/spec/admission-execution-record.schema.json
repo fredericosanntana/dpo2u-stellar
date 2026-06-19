@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdmissionExecutionRecord",
+  "type": "object",
+  "required": [
+    "request_id",
+    "status",
+    "subject_commitment",
+    "claim_type",
+    "jurisdiction",
+    "attestation_root",
+    "note_public_key",
+    "membership_blinding",
+    "membership_leaf_hex",
+    "membership_leaf_dec",
+    "membership_contract_id",
+    "target_network",
+    "operator_mode"
+  ],
+  "properties": {
+    "request_id": {"type": "string"},
+    "status": {"type": "string", "enum": ["draft", "policy_verified", "prepared", "submitted", "confirmed", "failed"]},
+    "subject_commitment": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "claim_type": {"type": "string"},
+    "jurisdiction": {"type": "string"},
+    "attestation_root": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "note_public_key": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "membership_blinding": {"type": "string"},
+    "membership_leaf_hex": {"type": "string", "pattern": "^0x[a-fA-F0-9]+$"},
+    "membership_leaf_dec": {"type": "string", "pattern": "^[0-9]+$"},
+    "membership_contract_id": {"type": "string"},
+    "target_network": {"type": "string"},
+    "operator_mode": {"type": "string", "enum": ["prepared", "executed"]},
+    "root_before": {"type": "string"},
+    "root_after": {"type": "string"},
+    "tx_handle": {"type": "string"},
+    "prepared_command": {"type": "string"},
+    "executed_by": {"type": "string"},
+    "executed_at": {"type": "string", "format": "date-time"},
+    "failure_reason": {"type": "string"}
+  },
+  "additionalProperties": false
+}

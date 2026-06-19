@@ -1,0 +1,20 @@
+[package]
+name = "pool-adapter-mock"
+description = "DPO2U — pool adapter MOCK (Soroban, Phase C). Proves protocol gating by consuming asp-mvp via a fail-closed cross-contract `contains(...)` call: no membership ⇒ blocked, membership from the ASP ⇒ released. NOT a real or private pool."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+asp-mvp = { path = "../asp-mvp" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+protocol-registry = { path = "../protocol-registry" }

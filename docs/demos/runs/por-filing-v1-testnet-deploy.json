@@ -1,0 +1,22 @@
+{
+  "contract": "por_filing_v1",
+  "scope": "Cunha 1-A (seal_filing) — sela commitment 5710/5711, zero PII on-chain",
+  "network": "testnet",
+  "contract_id": "CCUYKSMQHQ6JKQGOL2XHRWRHMXHQAP4ZYQOZBLUPQZI7I7DR5WUJV4NV",
+  "deploy_tx": "3168d24a11e68a5cde356df5deeb18d172c175692c29cdaf8ef78a224f1a432e",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "authorized_submitter": "GAD3DAM5JTVWZSWTENR443Y6OKUKRX7EOZYCCN3JEWKEFUTEPY4LSI65",
+  "smoke": {
+    "psav_code": "Z1234567",
+    "doc_type": "Por5710",
+    "data_base": 20260228,
+    "tipo_remessa": "Inclusao",
+    "filing_hash": "c8105d0aa89145a8954be7d6aea8fa46e482c8e9129eaf866bb753c0c167f355",
+    "revision": 0,
+    "seq": 2984062,
+    "event": "filing"
+  },
+  "tests": "8/8 cargo test; wasm32v1-none 22613 bytes",
+  "next": "Cunha 1-B = seal_solvency (cross-call zk-verifier, pós-cerimônia vk PoR); rota gateway seal_filing + /verify FilingSeal",
+  "completed_at": "2026-06-08"
+}

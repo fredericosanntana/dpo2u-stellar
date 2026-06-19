@@ -1,0 +1,103 @@
+You are executing a bounded protocol sprint inside /root/dpo2u-stellar.
+
+Read these first:
+- /root/dpo2u-stellar/.hermes/plans/2026-06-18_014522-sprint-2-revocation-trust-proof.md
+- /root/dpo2u-stellar/contracts/protocol-registry/src/lib.rs
+- /root/dpo2u-stellar/contracts/asp-mvp/src/lib.rs
+- /root/dpo2u-stellar/contracts/pool-adapter-mock/src/lib.rs
+- /root/dpo2u-stellar/contracts/por-verifier/src/lib.rs
+- /root/dpo2u-stellar/zk-prover/por/snarkjs2soroban-bn254.js
+
+Founder direction changed. Execute the next sprint toward FOUR concrete deliverables:
+1) privacy pool real
+2) ZK membership proof
+3) nullifier real
+4) governance/staking/slashing de issuer
+
+Interpretation for this bounded sprint:
+- Build a REAL on-chain privacy-pool prototype, not just another mock gate.
+- A fixed-denomination pool with actual pool state and withdraw semantics is enough for this sprint.
+- Use a REAL ZK proof path on BN254/Groth16, pinned VK, and actual proof artifacts in tests.
+- Add a REAL nullifier set so the same note cannot withdraw twice.
+- Add issuer staking/slashing semantics strong enough to make the registry no longer just policy metadata.
+- Keep scope honest: prototype/testnet-quality is acceptable; fake cryptography is not.
+
+Required implementation scope
+
+A. New/updated contracts
+- Evolve `protocol-registry` so issuer trust can be stake-backed instead of only profile/policy-backed.
+  Minimum acceptable shape:
+  - issuer stake ledger in contract storage
+  - admin-configurable minimum stake requirement per claim policy (or equivalent global minimum if simpler)
+  - slash path that reduces issuer stake and can make verification fail if the issuer falls below minimum
+  - tests proving: stake required -> verify/register succeeds; insufficient stake -> blocked; slash drops issuer below threshold -> verify false
+- Add a REAL privacy-pool contract under `contracts/privacy-pool/` (or equivalently clear name) with:
+  - deposit path that records note commitments and increases pool state
+  - withdraw path gated by actual zk membership verification
+  - nullifier set checked and written on withdraw
+  - spent note cannot withdraw twice
+  - fixed denomination or equivalent simplification is fine
+  - if you need to treat “asset” symbolically instead of integrating Soroban token, document it honestly; but the pool itself must have real state transitions, not just a mock release counter
+- Add a BN254 verifier for membership proofs if `por-verifier` should not be reused directly. Reuse patterns from `por-verifier` where sensible.
+
+B. ZK proof plumbing must be real
+- Add a circuit / proving assets under `zk-prover/` for membership withdrawal proof.
+- Use real Groth16 artifacts and pin the VK in the contract path or consuming contract.
+- Public signals should bind at least the current root, the nullifier, and the withdraw recipient/context.
+- A simplified circuit is acceptable if it is honest and real. Example acceptable direction:
+  - membership proof for a small fixed-depth Merkle tree,
+  - note secret/private leaf witness,
+  - nullifier = deterministic hash/commitment of private secret + external context,
+  - recipient/context public to prevent replay.
+- If Poseidon is too much for the on-chain side, use a coherent compromise that still produces a real proof and can be verified on-chain with the pinned VK. Do not silently downgrade to plain Merkle proof and call it ZK.
+
+C. Tests and artifacts
+- Add/extend Rust tests that prove end-to-end:
+  1. issuer with sufficient stake can back a registry claim
+  2. slashing drops issuer below requirement and breaks the canonical verify path
+  3. deposit inserts a note into the real pool state
+  4. valid zk membership proof withdraws successfully
+  5. tampered public signal/proof fails
+  6. repeated withdraw with same nullifier fails
+- If needed, commit generated proof/vk/public fixtures into the repo in a sane location for deterministic tests.
+- Keep generated fixtures scoped and documented.
+
+D. Docs
+Update in the same pass:
+- /root/dpo2u-stellar/docs/asp-protocol-mvp.md
+- /root/dpo2u-stellar/docs/composability-quickstart.md
+- /root/dpo2u-stellar/docs/hack-submission-latam-composability.md
+- any new README for the privacy-pool path
+
+The docs must distinguish:
+- real now
+- prototype/testnet-quality constraints
+- anything still not done
+
+Explicit out-of-scope
+- no frontend/UI work
+- no mainnet claims
+- no token integration unless it is trivially clean; symbolic asset accounting inside the pool is acceptable if honestly documented
+- no unrelated refactors
+- do not break existing green contracts unless required; if APIs must change, update callers/tests/docs in the same sprint
+
+Validation you MUST run before stopping
+- cargo test -p protocol-registry
+- cargo test -p por-verifier
+- cargo test -p privacy-pool
+- cargo test --workspace
+- any zk-prover build/prove/verify commands needed to regenerate or validate the membership proof fixtures
+
+Required report file
+Write a concise execution report to:
+/root/dpo2u-stellar/.hermes/plans/2026-06-18_083500-claude-sprint3-privacy-pool-zk-nullifier-staking-report.md
+
+The report must include:
+- files changed
+- architecture decisions actually implemented
+- exact commands run
+- actual pass/fail results
+- honest limitations
+- whether the pool is value-moving or symbolic-stateful
+
+Also write raw JSON result to stdout only; Hermes is capturing it separately.

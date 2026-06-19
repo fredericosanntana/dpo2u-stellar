@@ -37,6 +37,39 @@ state. See `examples/remittance-gate` (gate a transfer) and `examples/rwa-attest
 `record.verdict ∈ { 'PASS', 'FAIL', 'REVIEW' }` · `predicate_set` (which rule) ·
 `predicate_version` · `submitted_by` (G…) · `timestamp` · `metadata_hash`.
 
+## Protocol track — on-chain gating `registry → ASP → pool-adapter` (real now)
+
+**Status labels used across the current public-base docs:**
+- **real now** — already implemented and evidenced in this repo,
+- **prototype-real** — real cryptographic/contract machinery with bounded scope,
+- **symbolic** — stateful model of a production concept without full value-moving/economic finality,
+- **roadmap** — not yet closed in the current stack.
+
+**Current operating mode:** the revocation-to-blocked-lane enforcement path currently executes on a **DPO2U-controlled own `asp-non-membership` lane**. The externally audited lane is readable and useful for comparability, but not currently writable by DPO2U without separate governance/admin authority.
+
+Beyond the SDK/verify surface above, a dedicated **protocol track** proves contract-to-contract
+composability on Soroban. Three contracts in `contracts/` chain via **real fail-closed
+cross-contract calls**:
+
+| Contract | Role | Real now |
+|---|---|---|
+| `protocol-registry` | canonical multi-issuer attestation registry; canonical verification now includes revocation + issuer profile/policy fit | ✅ |
+| `asp-mvp` | mutable association set; `add_to_set` admits only when the registry verifies; `remove_from_set` propagates invalidation; `current_root` is now a real Merkle root of the active set | ✅ |
+| `pool-adapter-mock` | gates a mock pool action by `asp.contains(...)` **or** plain Merkle membership proof against the ASP root | ✅ (mock pool) |
+| `privacy-pool` | symbolic fixed-denomination pool; deposits commitments, verifies BN254 ZK membership withdraws, records nullifiers | ✅ (symbolic pool) |
+
+```bash
+cargo test -p protocol-registry -p asp-mvp -p pool-adapter-mock   # the thesis, end-to-end
+```
+
+**Honest scope (real vs mock):** *real now* — registry revocation, issuer profile/policy plus
+symbolic stake/slash checks, mutable ASP membership, authenticated Merkle root, adapter proof
+plumbing, and a separate symbolic `privacy-pool` with real BN254 membership-proof verification
+and nullifier spend prevention. **Still not done** — token custody, production MPC/audit,
+decentralized issuer governance, and a value-moving private pool. The old pool adapter remains a
+**mock** (no value, no anonymity).
+Full real-vs-mock matrix: `docs/asp-protocol-mvp.md` · standard/lifecycle/gates: `docs/OPEN-STANDARD-DRAFT.md`, `docs/CREDENTIAL-LIFECYCLE-SPEC.md`, `docs/PRODUCTION-READINESS-GATES.md` · runnable demo: `examples/pool-adapter-mock/`.
+
 ## Who this is for at the hack
 
 Any team building **fintech / remittance / stablecoin / RWA** for Brazil, Argentina or

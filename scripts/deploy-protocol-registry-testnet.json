@@ -1,0 +1,18 @@
+{
+  "network": "testnet",
+  "rpc_url": "https://soroban-testnet.stellar.org",
+  "deployer_identity": "dpo2u-deployer",
+  "deployer_pubkey": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "contract_name": "protocol-registry",
+  "contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+  "wasm_path": "/root/dpo2u-stellar/target/wasm32v1-none/release/protocol_registry.wasm",
+  "wasm_hash": "be7be266cbcbdd92bb0bdbec45f9948cdb3a49fc886742e1080aa5158183717c",
+  "upload_tx_hash": "6d13d49e4115f0e9a6ad969473e68814006c4d06a81ad680aaabb0d6890ddf6e",
+  "deploy_tx_hash": "fe61dc28a86246318b4ca53df00d68e8d99db779686999b1eb1961522a60a988",
+  "deployed_at": "2026-06-18T20:49:19Z",
+  "explorer": {
+    "deploy_tx": "https://stellar.expert/explorer/testnet/tx/fe61dc28a86246318b4ca53df00d68e8d99db779686999b1eb1961522a60a988",
+    "upload_tx": "https://stellar.expert/explorer/testnet/tx/6d13d49e4115f0e9a6ad969473e68814006c4d06a81ad680aaabb0d6890ddf6e",
+    "contract": "https://stellar.expert/explorer/testnet/contract/CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP"
+  }
+}

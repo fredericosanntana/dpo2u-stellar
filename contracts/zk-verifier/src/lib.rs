@@ -17,7 +17,7 @@
 
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype,
-    crypto::bls12_381::{Fr, G1Affine, G2Affine},
+    crypto::bls12_381::{Bls12381Fr, Bls12381G1Affine, Bls12381G2Affine},
     vec, Env, Vec,
 };
 
@@ -33,21 +33,21 @@ pub enum ZkError {
 #[derive(Clone)]
 #[contracttype]
 pub struct VerificationKey {
-    pub alpha: G1Affine,
-    pub beta: G2Affine,
-    pub gamma: G2Affine,
-    pub delta: G2Affine,
+    pub alpha: Bls12381G1Affine,
+    pub beta: Bls12381G2Affine,
+    pub gamma: Bls12381G2Affine,
+    pub delta: Bls12381G2Affine,
     /// Coeficientes dos sinais públicos: ic[0] = constante, ic[i+1] = sinal i.
-    pub ic: Vec<G1Affine>,
+    pub ic: Vec<Bls12381G1Affine>,
 }
 
 /// Prova Groth16 (gerada off-chain pelo prover — ver zk-prover/).
 #[derive(Clone)]
 #[contracttype]
 pub struct Proof {
-    pub a: G1Affine,
-    pub b: G2Affine,
-    pub c: G1Affine,
+    pub a: Bls12381G1Affine,
+    pub b: Bls12381G2Affine,
+    pub c: Bls12381G1Affine,
 }
 
 #[contract]
@@ -66,7 +66,7 @@ impl ZkVerifier {
         env: Env,
         vk: VerificationKey,
         proof: Proof,
-        pub_signals: Vec<Fr>,
+        pub_signals: Vec<Bls12381Fr>,
     ) -> Result<bool, ZkError> {
         let bls = env.crypto().bls12_381();
 

@@ -1,0 +1,42 @@
+{
+  "request_id": "live_registry_bridge_s6_001",
+  "status": "confirmed",
+  "summary": "registry revoke coupled to live blocked-lane execution",
+  "registry": {
+    "contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+    "subject_commitment": "0x0808080808080808080808080808080808080808080808080808080808080808",
+    "claim_type": "kyc",
+    "jurisdiction": "BR",
+    "attestation_root": "0x0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a",
+    "register_tx": "145c083b758b3d27e3e8842f5de18f35b44467c89b2d285784e0d3176a257e2a",
+    "revoke_tx": "056f3930bad0ad72fa78ce953392256f6aa7ca9a8aca770646aa20dfa4158f54",
+    "post_revoke_registry_verified": false,
+    "post_revoke_attestation_active": false
+  },
+  "operator": {
+    "note_public_key_hex": "0x012108242248c06711d179bd459c5b1f1d37244d8de02f3c7641a555e2589703",
+    "note_public_key_dec": "510674989860353591028510149437186995841978718442233018268594652882555934467",
+    "membership_blinding": "777777777"
+  },
+  "non_membership": {
+    "contract_id": "CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS",
+    "prepared_action": "/root/dpo2u-stellar/integration/spp-adapter/examples/live-registry-s6-blocked-lane.prepared.json",
+    "insert_tx": "2abe3083ffa7a63a53307ac22b3d82da90c9b71c6486d6cb9d9b64396f33593c",
+    "root_after_insert": "12167638434740738412350459348713108078053694686908743555288356863478133228669",
+    "find_key": {
+      "found": true,
+      "found_value": "1",
+      "is_old0": false,
+      "not_found_key": "0",
+      "not_found_value": "0",
+      "siblings": []
+    },
+    "verify_non_membership": false
+  },
+  "artifacts": {
+    "active_decision": "/root/dpo2u-stellar/integration/spp-adapter/examples/live-registry-decision.s6.active.json",
+    "revoked_decision": "/root/dpo2u-stellar/integration/spp-adapter/examples/live-registry-decision.s6.revoked.json",
+    "prepared_blocked_lane": "/root/dpo2u-stellar/integration/spp-adapter/examples/live-registry-s6-blocked-lane.prepared.json"
+  },
+  "executed_at": "2026-06-18T21:24:20Z"
+}

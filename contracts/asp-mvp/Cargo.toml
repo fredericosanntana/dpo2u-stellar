@@ -1,0 +1,19 @@
+[package]
+name = "asp-mvp"
+description = "DPO2U — association-set provider MVP (Soroban, Phase B). Admits a member only when the protocol-registry canonically verifies its claim (cross-contract, fail-closed); exposes a deterministic append-only root."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+protocol-registry = { path = "../protocol-registry" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

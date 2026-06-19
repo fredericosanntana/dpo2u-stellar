@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPO2U × Pulso Hackathon Deck</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0d1b2d;
+      --panel-2: #11243d;
+      --ink: #eef4ff;
+      --muted: #a7b8d6;
+      --line: rgba(255,255,255,0.12);
+      --accent: #3dd9b2;
+      --accent-2: #7ab8ff;
+      --danger: #ff8f8f;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #020814; color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { overflow: hidden; }
+    .app { height: 100%; display: grid; grid-template-rows: 1fr auto; }
+    .viewport { display: grid; place-items: center; padding: 20px; }
+    .deck-frame {
+      width: min(100vw - 40px, calc((100vh - 96px) * 16 / 9));
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(circle at top left, rgba(122,184,255,.18), transparent 35%),
+        radial-gradient(circle at right 20% bottom 15%, rgba(61,217,178,.16), transparent 28%),
+        linear-gradient(135deg, #08111d 0%, #0d1b2d 55%, #081522 100%);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .slide { position: absolute; inset: 0; padding: 64px 72px; display: none; }
+    .slide.active { display: flex; flex-direction: column; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 14px; }
+    .kicker::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 24px rgba(61,217,178,.6); }
+    h1 { margin: 18px 0 14px; font-size: 56px; line-height: 1.02; letter-spacing: -0.04em; max-width: 980px; }
+    h2 { margin: 12px 0 14px; font-size: 42px; line-height: 1.05; letter-spacing: -0.03em; }
+    p.lead { margin: 0; max-width: 880px; font-size: 22px; line-height: 1.5; color: var(--muted); }
+    .two-col { display: grid; grid-template-columns: 1.05fr .95fr; gap: 28px; margin-top: 34px; flex: 1; }
+    .card, .metric, .quote, .list-panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+    }
+    ul { margin: 0; padding-left: 20px; color: var(--ink); }
+    li { margin: 12px 0; font-size: 21px; line-height: 1.35; }
+    .muted { color: var(--muted); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+    .metric .label { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .metric .value { font-size: 36px; font-weight: 800; margin-top: 10px; }
+    .quote { margin-top: auto; font-size: 28px; line-height: 1.35; max-width: 920px; }
+    .accent { color: var(--accent); }
+    .accent2 { color: var(--accent-2); }
+    .danger { color: var(--danger); }
+    .timeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 28px; }
+    .step { padding: 18px 16px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07); }
+    .step .n { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .step .t { margin-top: 10px; font-size: 18px; line-height: 1.25; font-weight: 700; }
+    .footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 22px; border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(4,12,24,.9);
+      color: var(--muted); font-size: 14px;
+    }
+    .controls { display: flex; gap: 10px; align-items: center; }
+    button {
+      appearance: none; border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--ink);
+      border-radius: 12px; padding: 10px 14px; font: inherit; cursor: pointer; min-height: 44px;
+    }
+    button:hover { background: rgba(255,255,255,.09); }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.05); }
+    .split-hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; flex: 1; margin-top: 24px; }
+    .big-number { font-size: 88px; font-weight: 800; letter-spacing: -.06em; margin: 0; }
+    .mini { font-size: 16px; color: var(--muted); line-height: 1.5; }
+    .checklist { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:22px; }
+    .checklist .item { padding:18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.04); }
+    .item strong { display:block; font-size:18px; margin-bottom:8px; }
+    @media print {
+      body { overflow: visible; background: white; }
+      .viewport { padding: 0; }
+      .deck-frame { width: 1920px; height: 1080px; border-radius: 0; box-shadow: none; }
+      .footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="viewport">
+      <div class="deck-frame" id="deck">
+        <section class="slide active">
+          <div class="kicker">Pulso Hackathon · DPO2U</div>
+          <div class="split-hero">
+            <div>
+              <h1>Compliance vira uma <span class="accent">credencial positiva</span> para fluxos privados na Stellar.</h1>
+              <p class="lead">A DPO2U transforma o resultado de uma verificação regulatória em uma primitive verificável: privada, composable e acionável on-chain — sem expor PII.</p>
+              <div class="quote">“<span class="accent2">Prove, don’t perform.</span>”</div>
+            </div>
+            <div class="card" style="display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div class="pill">Track de vitória: <strong>Integração load-bearing</strong></div>
+                <p class="big-number">3</p>
+                <p class="mini">camadas trabalhando juntas: <strong>registry canônico</strong>, <strong>ASP de credencial positiva</strong> e <strong>lane operacional em Stellar</strong>.</p>
+              </div>
+              <div class="mini">Submissão calibrada para mostrar que o resultado da atestação realmente muda o que o usuário pode fazer.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Problema</div>
+          <h2>Privacidade e compliance ainda são tratados como opostos.</h2>
+          <div class="two-col">
+            <div class="list-panel">
+              <ul>
+                <li>Chains públicas expõem informação demais.</li>
+                <li>Fluxos tradicionais de compliance reexpõem dado pessoal a cada integração.</li>
+                <li>Privacy pools precisam de uma camada crível de admissão para uso institucional.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="lead">O mercado ficou preso numa falsa escolha: <span class="danger">privacidade sem controle</span> ou <span class="danger">controle que destrói privacidade</span>.</p>
+              <p class="lead" style="margin-top:18px;">A DPO2U resolve isso com <span class="accent">credencial positiva</span>: provar que você qualifica, sem revelar quem você é.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Solução</div>
+          <h2>Uma primitive de credencial positiva sobre Stellar.</h2>
+          <div class="grid-3">
+            <div class="metric"><div class="label">Registry</div><div class="value">Verifica</div><div class="mini">Se a atestação ainda é válida, dentro da policy canônica.</div></div>
+            <div class="metric"><div class="label">ASP</div><div class="value">Admite</div><div class="mini">Ou remove membros do conjunto positivo com root Merkle real.</div></div>
+            <div class="metric"><div class="label">Lane</div><div class="value">Executa</div><div class="mini">A admissão ou bloqueio operacional em Stellar.</div></div>
+          </div>
+          <div class="quote">A pool preserva a privacidade. A DPO2U define <span class="accent">quem pode pertencer ao conjunto conforme</span>.</div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Por que Stellar</div>
+          <h2>O lugar certo para private finance com superfície institucional.</h2>
+          <div class="two-col">
+            <div class="card">
+              <ul>
+                <li>Ecossistema real de settlement e stablecoins.</li>
+                <li>Composability do Soroban para policy + gating + proof path.</li>
+                <li>Stack ZK emergindo de forma séria no protocolo.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="lead">Não é uma demo genérica de smart contract. É uma tese específica: <span class="accent2">private flows precisam de uma primitive de compliance que não recoloque PII no centro</span>.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Load-bearing integration</div>
+          <h2>O resultado da atestação muda diretamente o comportamento da lane.</h2>
+          <div class="checklist">
+            <div class="item"><strong>Admissão</strong> Se a atestação verifica, o leaf entra no conjunto positivo.</div>
+            <div class="item"><strong>Revogação</strong> Se a atestação deixa de verificar, o conjunto pode ser atualizado.</div>
+            <div class="item"><strong>Enforcement</strong> Re-entry é bloqueado após revogação.</div>
+            <div class="item"><strong>Fail-closed</strong> Sem verificação canônica, não há passagem.</div>
+          </div>
+          <div class="quote">Isto não é integração cosmética. É <span class="accent">composability que carrega política</span>.</div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Demo flow</div>
+          <h2>Happy path replayável para judges.</h2>
+          <div class="timeline">
+            <div class="step"><div class="n">01</div><div class="t">Configurar policy viva no registry</div></div>
+            <div class="step"><div class="n">02</div><div class="t">Registrar atestação viva</div></div>
+            <div class="step"><div class="n">03</div><div class="t">Extrair decisão canônica</div></div>
+            <div class="step"><div class="n">04</div><div class="t">Gerar payload de admissão</div></div>
+            <div class="step"><div class="n">05</div><div class="t">Inserir leaf / admitir</div></div>
+            <div class="step"><div class="n">06</div><div class="t">Executar revogação</div></div>
+            <div class="step"><div class="n">07</div><div class="t">Provar bloqueio de re-entry</div></div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Evidence</div>
+          <h2>O que já está provado no repo.</h2>
+          <div class="grid-3">
+            <div class="metric"><div class="label">Registry</div><div class="value">21/21</div><div class="mini">Testes passando no `protocol-registry`.</div></div>
+            <div class="metric"><div class="label">ASP</div><div class="value">11/11</div><div class="mini">`asp-mvp` com root real e revogação.</div></div>
+            <div class="metric"><div class="label">Adapter</div><div class="value">11/11</div><div class="mini">`pool-adapter-mock` com gating fail-closed.</div></div>
+          </div>
+          <div class="two-col" style="margin-top:18px;">
+            <div class="card"><strong>S4</strong><p class="mini">`docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md` prova registry vivo, extração live, admissão executada e revogação canônica.</p></div>
+            <div class="card"><strong>S8</strong><p class="mini">`docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md` fecha o boundary honesto da instância externa auditada.</p></div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Boundary honesto</div>
+          <h2>O gap remanescente é de <span class="danger">governança</span>, não de viabilidade técnica.</h2>
+          <div class="two-col">
+            <div class="card">
+              <p class="lead">Nós conseguimos ler publicamente a instância externa auditada, mas <span class="danger">não podemos mutá-la sem a signing key do admin</span>.</p>
+            </div>
+            <div class="card">
+              <ul>
+                <li>Lane própria da DPO2U já é operável e automatizável.</li>
+                <li>Convergência para instância externa compartilhada depende de autorização/governança.</li>
+                <li>Isso reforça a honestidade da submissão em vez de enfraquecê-la.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Why we win</div>
+          <h2>Porque unimos integração real, tese forte e caso institucional.</h2>
+          <div class="checklist">
+            <div class="item"><strong>Integração real</strong> A política altera a operação na Stellar.</div>
+            <div class="item"><strong>Composability</strong> Registry + ASP + lane replayável, não só contrato isolado.</div>
+            <div class="item"><strong>Caso de uso</strong> Private payments e settlement regulado com compliance-preserving privacy.</div>
+            <div class="item"><strong>Honestidade</strong> Claims calibradas, boundary explícito e evidência pública.</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">After the hackathon</div>
+          <h2>A primitive de admissão conforme para private finance em Stellar.</h2>
+          <div class="two-col">
+            <div class="card">
+              <ul>
+                <li>private payments;</li>
+                <li>compliant stablecoin flows;</li>
+                <li>regulated settlement;</li>
+                <li>RWA movement com privacidade preservada.</li>
+              </ul>
+            </div>
+            <div class="quote">DPO2U faz a ponte entre <span class="accent2">privacidade usável</span> e <span class="accent">compliance verificável</span>.</div>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div class="kicker">Closing</div>
+          <h1>DPO2U torna fluxos privados na Stellar <span class="accent">credibly compliant</span> sem colocar dado pessoal on-chain.</h1>
+          <p class="lead">Pulso julga integração. É exatamente isso que estamos mostrando: policy vira comportamento operacional verificável.</p>
+          <div class="quote">Próximo passo: gravar o vídeo em cima desta narrativa e anexar os links finais na submissão.</div>
+        </section>
+      </div>
+    </div>
+    <div class="footer">
+      <div>DPO2U × Pulso Hackathon deck · teclado: ← → · status salvo localmente</div>
+      <div class="controls">
+        <button id="prev">← Anterior</button>
+        <div class="pill"><span id="counter">1 / 11</span></div>
+        <button id="next">Próximo →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const key = 'dpo2u-pulso-deck-slide';
+    let index = Number(localStorage.getItem(key) || 0);
+    if (!Number.isFinite(index) || index < 0 || index >= slides.length) index = 0;
+
+    function render() {
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      document.getElementById('counter').textContent = `${index + 1} / ${slides.length}`;
+      localStorage.setItem(key, String(index));
+    }
+
+    function go(delta) {
+      index = (index + delta + slides.length) % slides.length;
+      render();
+    }
+
+    document.getElementById('prev').addEventListener('click', () => go(-1));
+    document.getElementById('next').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(1); }
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+      if (e.key === 'Home') { index = 0; render(); }
+      if (e.key === 'End') { index = slides.length - 1; render(); }
+    });
+    render();
+  </script>
+</body>
+</html>

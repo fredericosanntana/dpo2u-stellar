@@ -1,11 +1,13 @@
 #![cfg(test)]
 
 use super::*;
+use por_verifier::PorVerifier;
 use soroban_sdk::{
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
-    symbol_short, testutils::Address as _, vec, Address, BytesN, Env, U256,
+    symbol_short,
+    testutils::Address as _,
+    vec, Address, BytesN, Env, U256,
 };
-use por_verifier::PorVerifier;
 
 fn setup() -> (Env, Address, Address, Symbol, AggFilingClient<'static>) {
     let env = Env::default();
@@ -46,7 +48,10 @@ fn g2(env: &Env, h: &str) -> Bn254G2Affine {
 }
 fn fr(env: &Env, h: &str) -> Bn254Fr {
     let arr: [u8; 32] = hex::decode(h).unwrap().try_into().unwrap();
-    Bn254Fr::from_u256(U256::from_be_bytes(env, &soroban_sdk::Bytes::from_array(env, &arr)))
+    Bn254Fr::from_u256(U256::from_be_bytes(
+        env,
+        &soroban_sdk::Bytes::from_array(env, &arr),
+    ))
 }
 fn member_vk(env: &Env) -> PorVk {
     PorVk {
@@ -56,14 +61,28 @@ fn member_vk(env: &Env) -> PorVk {
         delta: g2(env, VK_DELTA),
         ic: soroban_sdk::Vec::from_array(
             env,
-            [g1(env, VK_IC0), g1(env, VK_IC1), g1(env, VK_IC2), g1(env, VK_IC3)],
+            [
+                g1(env, VK_IC0),
+                g1(env, VK_IC1),
+                g1(env, VK_IC2),
+                g1(env, VK_IC3),
+            ],
         ),
     }
 }
 fn member_proof(env: &Env) -> PorProof {
-    PorProof { a: g1(env, PROOF_A), b: g2(env, PROOF_B), c: g1(env, PROOF_C) }
+    PorProof {
+        a: g1(env, PROOF_A),
+        b: g2(env, PROOF_B),
+        c: g1(env, PROOF_C),
+    }
 }
-fn member_signals(env: &Env, compliant: &str, commit: &str, context: &str) -> soroban_sdk::Vec<Bn254Fr> {
+fn member_signals(
+    env: &Env,
+    compliant: &str,
+    commit: &str,
+    context: &str,
+) -> soroban_sdk::Vec<Bn254Fr> {
     vec![env, fr(env, compliant), fr(env, commit), fr(env, context)]
 }
 fn wire_verifier(env: &Env, admin: &Address, client: &AggFilingClient) {
@@ -98,8 +117,8 @@ fn seal_aggregate_happy_path() {
         &scope,
         &202606u32,
         &agg_commitment,
-        &4u32,            // N jurisdictions
-        &true,            // all compliant (off-chain SnarkPack verify)
+        &4u32, // N jurisdictions
+        &true, // all compliant (off-chain SnarkPack verify)
         &context_root,
         &member_proof(&env),
         &member_signals(&env, PUB_COMPLIANT, PUB_COMMIT, PUB_CONTEXT),

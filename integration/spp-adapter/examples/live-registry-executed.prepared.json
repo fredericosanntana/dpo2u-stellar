@@ -1,0 +1,17 @@
+{
+  "request_id": "live_registry_bridge_001",
+  "status": "prepared",
+  "subject_commitment": "0x0707070707070707070707070707070707070707070707070707070707070707",
+  "claim_type": "kyc",
+  "jurisdiction": "BR",
+  "attestation_root": "0x0909090909090909090909090909090909090909090909090909090909090909",
+  "note_public_key": "0x3333333333333333333333333333333333333333333333333333333333333333",
+  "membership_blinding": "555555555",
+  "membership_leaf_hex": "0x088ef46c51a3b8c480fc6f6a606ae18dddb0b36ea1e8ee1177661bb2b312c6eb",
+  "membership_leaf_dec": "3871082018245165477559437847806445936377965106787990480414602868505781126891",
+  "membership_contract_id": "CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN",
+  "target_network": "testnet",
+  "operator_mode": "prepared",
+  "prepared_command": "stellar contract invoke --id CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN --source-account <ASP_ADMIN_ACCOUNT> --network testnet -- insert_leaf --leaf 3871082018245165477559437847806445936377965106787990480414602868505781126891",
+  "executed_by": "hermes"
+}

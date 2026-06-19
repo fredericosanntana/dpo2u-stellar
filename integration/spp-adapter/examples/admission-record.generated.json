@@ -1,0 +1,17 @@
+{
+  "request_id": "adm_demo_001",
+  "status": "prepared",
+  "subject_commitment": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "claim_type": "ac_cred",
+  "jurisdiction": "br",
+  "attestation_root": "0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "note_public_key": "0x1111111111111111111111111111111111111111111111111111111111111111",
+  "membership_blinding": "123456789",
+  "membership_leaf_hex": "0x0795d86e93aabb2983b9ae1f896a03155cc2abe60991303af80a964f33087dfa",
+  "membership_leaf_dec": "3430943911091025709039044333567034968056565094593323194790479257846562717178",
+  "membership_contract_id": "CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN",
+  "target_network": "testnet",
+  "operator_mode": "prepared",
+  "prepared_command": "stellar contract invoke --id CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN --source-account <ASP_ADMIN_ACCOUNT> --network testnet -- insert_leaf --leaf 3430943911091025709039044333567034968056565094593323194790479257846562717178",
+  "executed_by": "hermes"
+}

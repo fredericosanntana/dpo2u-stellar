@@ -1,0 +1,42 @@
+{
+  "request_id": "watcher_0d0d0d0d0d0d0d0d",
+  "status": "confirmed",
+  "registry": {
+    "contract_id": "CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP",
+    "subject_commitment": "0x0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d0d",
+    "claim_type": "kyc",
+    "jurisdiction": "BR",
+    "post_revoke_registry_verified": false,
+    "post_revoke_attestation_active": false
+  },
+  "operator": {
+    "note_public_key_hex": "0x1104db8aeb04f20209069956ab4840fa943672e17c9ba7f878439d097538bb02",
+    "note_public_key_dec": "7697901041847652278373069429766641116678382066147338054927251606026390649602",
+    "membership_blinding": "999999999"
+  },
+  "non_membership": {
+    "contract_id": "CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS",
+    "root_before": "9861249458501117131279585441979904682512680416410122145997957174983865950610",
+    "root_after": "9861249458501117131279585441979904682512680416410122145997957174983865950610",
+    "blocked_before": true,
+    "insert_executed": false,
+    "insert_tx": null,
+    "find_after": {
+      "found": true,
+      "found_value": "1",
+      "is_old0": false,
+      "not_found_key": "0",
+      "not_found_value": "0",
+      "siblings": [
+        "12167638434740738412350459348713108078053694686908743555288356863478133228669"
+      ]
+    },
+    "verify_non_membership_after": false
+  },
+  "artifacts": {
+    "active_decision": "/root/dpo2u-stellar/integration/spp-adapter/examples/watcher-0d0d0d0d0d0d0d0d-kyc-br.active.json",
+    "revoked_decision": "/root/dpo2u-stellar/integration/spp-adapter/examples/watcher-0d0d0d0d0d0d0d0d-kyc-br.revoked.json",
+    "prepared_blocked_lane": "/root/dpo2u-stellar/integration/spp-adapter/examples/watcher-0d0d0d0d0d0d0d0d-kyc-br.blocked.prepared.json"
+  },
+  "executed_at": "2026-06-18T22:01:29Z"
+}

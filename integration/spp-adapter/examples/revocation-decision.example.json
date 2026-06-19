@@ -1,0 +1,13 @@
+{
+  "request_id": "reg_bridge_demo_001_revoke",
+  "decision_source": "protocol-registry-shaped-example-from-contract-tests",
+  "subject_commitment": "0x0707070707070707070707070707070707070707070707070707070707070707",
+  "claim_type": "kyc",
+  "jurisdiction": "BR",
+  "revoked": true,
+  "revoked_by": "issuer-demo-br-001",
+  "revocation_reason": "issuer_withdrew_attestation",
+  "revocation_mode": "deny_future_and_prepare_blocked_lane",
+  "target_network": "testnet",
+  "asp_non_membership_contract_id": "CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3"
+}

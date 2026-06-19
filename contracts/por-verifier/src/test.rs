@@ -10,7 +10,7 @@ extern crate std;
 
 use soroban_sdk::{
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
-    vec, Bytes, Env, U256, Vec,
+    vec, Bytes, Env, Vec, U256,
 };
 
 use crate::{PorVerifier, PorVerifierClient, Proof, VerificationKey};
@@ -40,7 +40,9 @@ fn g1(env: &Env, h: &str) -> Bn254G1Affine {
 
 fn g2(env: &Env, h: &str) -> Bn254G2Affine {
     let bytes = hex::decode(h).unwrap();
-    let arr: [u8; 128] = bytes.try_into().expect("G2 = 128 bytes (Fp2 = be(c1)||be(c0))");
+    let arr: [u8; 128] = bytes
+        .try_into()
+        .expect("G2 = 128 bytes (Fp2 = be(c1)||be(c0))");
     Bn254G2Affine::from_array(env, &arr)
 }
 
@@ -58,7 +60,12 @@ fn vk(env: &Env) -> VerificationKey {
         delta: g2(env, VK_DELTA),
         ic: Vec::from_array(
             env,
-            [g1(env, VK_IC0), g1(env, VK_IC1), g1(env, VK_IC2), g1(env, VK_IC3)],
+            [
+                g1(env, VK_IC0),
+                g1(env, VK_IC1),
+                g1(env, VK_IC2),
+                g1(env, VK_IC3),
+            ],
         ),
     }
 }
@@ -99,7 +106,10 @@ fn rejects_tampered_context() {
         &proof(&env),
         &signals(&env, PUB_SOLVENT, PUB_COMMIT, tampered),
     );
-    assert_eq!(res, false, "context adulterado deveria ser rejeitado (anti-replay)");
+    assert_eq!(
+        res, false,
+        "context adulterado deveria ser rejeitado (anti-replay)"
+    );
 }
 
 #[test]
@@ -122,5 +132,8 @@ fn rejects_malformed_vk_signal_count_mismatch() {
     // ic.len()=4 ⇒ espera 3 sinais; passar 2 dispara Err, nunca panic.
     let two = vec![&env, fr(&env, PUB_SOLVENT), fr(&env, PUB_COMMIT)];
     let res = client.try_verify_proof(&vk(&env), &proof(&env), &two);
-    assert!(res.is_err(), "contagem de sinais desalinhada deveria retornar Err");
+    assert!(
+        res.is_err(),
+        "contagem de sinais desalinhada deveria retornar Err"
+    );
 }

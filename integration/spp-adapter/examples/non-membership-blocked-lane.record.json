@@ -1,0 +1,60 @@
+{
+  "request_id": "blocked_lane_live_001",
+  "status": "executed-and-reverted",
+  "network": "testnet",
+  "contract_id": "CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "derived_from": {
+    "private_key_hex": "0000000000000000000000000000000000000000000000000000000000000007",
+    "public_key_hex": "012108242248c06711d179bd459c5b1f1d37244d8de02f3c7641a555e2589703",
+    "public_key_decimal": "510674989860353591028510149437186995841978718442233018268594652882555934467"
+  },
+  "pre_state": {
+    "root": "0",
+    "find_key": {
+      "found": false,
+      "found_value": "0",
+      "is_old0": true,
+      "not_found_key": "510674989860353591028510149437186995841978718442233018268594652882555934467",
+      "not_found_value": "0",
+      "siblings": []
+    },
+    "verify_non_membership": true
+  },
+  "block_action": {
+    "insert_tx": "538026824852d7ddf718661db100ae1d66233eb96aee2516f20e7dc0a7bb0d0e",
+    "value": "1",
+    "root_after_insert": "12167638434740738412350459348713108078053694686908743555288356863478133228669"
+  },
+  "blocked_state": {
+    "find_key": {
+      "found": true,
+      "found_value": "1",
+      "is_old0": false,
+      "not_found_key": "0",
+      "not_found_value": "0",
+      "siblings": []
+    },
+    "verify_non_membership": false
+  },
+  "unblock_action": {
+    "delete_tx": "39034e29f52a6219f0ed6f0ae3be1722bc92e08b10666a5d1d58b876c5b1772c",
+    "root_after_delete": "0"
+  },
+  "post_state": {
+    "find_key": {
+      "found": false,
+      "found_value": "0",
+      "is_old0": true,
+      "not_found_key": "510674989860353591028510149437186995841978718442233018268594652882555934467",
+      "not_found_value": "0",
+      "siblings": []
+    },
+    "verify_non_membership": true
+  },
+  "notes": [
+    "A instância auditada em deployments/testnet exigia admin externo e não pôde ser operada a partir deste host.",
+    "A execução acima prova a lane blocked/non-membership em uma instância própria testnet controlada localmente."
+  ],
+  "executed_at": "2026-06-18T21:14:44Z"
+}

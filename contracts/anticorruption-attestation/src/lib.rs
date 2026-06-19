@@ -204,7 +204,8 @@ impl AntiCorruptionAttestation {
         };
 
         env.storage().persistent().set(&escrow_key, &escrow);
-        env.events().publish((symbol_short!("deposit"), use_case_id), escrow);
+        env.events()
+            .publish((symbol_short!("deposit"), use_case_id), escrow);
     }
 
     /// Registra a atestação e, baseado no veredito, destrava os fundos do Escrow.
@@ -235,15 +236,27 @@ impl AntiCorruptionAttestation {
             match verdict {
                 Verdict::Pass => {
                     // Compliance comprovado: O dinheiro é liberado para o fornecedor
-                    client.transfer(&env.current_contract_address(), &escrow.target_company, &escrow.amount);
+                    client.transfer(
+                        &env.current_contract_address(),
+                        &escrow.target_company,
+                        &escrow.amount,
+                    );
                     env.storage().persistent().remove(&escrow_key);
-                    env.events().publish((symbol_short!("executed"), use_case_id), escrow.target_company);
+                    env.events().publish(
+                        (symbol_short!("executed"), use_case_id),
+                        escrow.target_company,
+                    );
                 }
                 Verdict::Fail => {
                     // Quebra de compliance: O dinheiro é devolvido para a contratante/fundo
-                    client.transfer(&env.current_contract_address(), &escrow.funder, &escrow.amount);
+                    client.transfer(
+                        &env.current_contract_address(),
+                        &escrow.funder,
+                        &escrow.amount,
+                    );
                     env.storage().persistent().remove(&escrow_key);
-                    env.events().publish((symbol_short!("refunded"), use_case_id), escrow.funder);
+                    env.events()
+                        .publish((symbol_short!("refunded"), use_case_id), escrow.funder);
                 }
                 Verdict::Review => {
                     // Fundos continuam travados aguardando auditoria manual

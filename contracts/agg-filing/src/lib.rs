@@ -18,12 +18,12 @@
 //!
 //! Model: `por-filing/src/lib.rs` (set_verifier + cross-call + pinned vk, fail-closed).
 
+use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype,
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
     panic_with_error, symbol_short, Address, BytesN, Env, Symbol, Vec, U256,
 };
-use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
@@ -32,33 +32,33 @@ pub enum Error {
     NotAuthorized = 1,
     AdminOnly = 5,
     AlreadyInitialized = 6,
-    VerifierNotSet = 7,  // seal_aggregate before set_verifier (fail-closed)
-    ZkVerifyFailed = 8,  // member proof did not verify on-chain
-    NotCompliant = 9,    // member public signal compliant != 1
-    BadSignals = 10,     // member signals count != 3 ([compliant, threshold, context])
+    VerifierNotSet = 7, // seal_aggregate before set_verifier (fail-closed)
+    ZkVerifyFailed = 8, // member proof did not verify on-chain
+    NotCompliant = 9,   // member public signal compliant != 1
+    BadSignals = 10,    // member signals count != 3 ([compliant, threshold, context])
 }
 
 #[contracttype]
 #[derive(Clone)]
 pub enum DataKey {
     Admin,
-    Authorized(Address),    // submitter authorized to seal
-    Agg(Symbol, u32),       // (scope_code, period AAAAMM) -> AggregateClaim
-    VerifierAddr,           // por-verifier (BN254) address — admin-set
-    VerifierVk,             // jurisdiction VerificationKey PINNED (fail-closed)
+    Authorized(Address), // submitter authorized to seal
+    Agg(Symbol, u32),    // (scope_code, period AAAAMM) -> AggregateClaim
+    VerifierAddr,        // por-verifier (BN254) address — admin-set
+    VerifierVk,          // jurisdiction VerificationKey PINNED (fail-closed)
 }
 
 /// Public, non-sensitive aggregate result. No PII, no per-jurisdiction scores.
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct AggregateClaim {
-    pub period: u32,                 // AAAAMM
-    pub count: u32,                  // N jurisdictions aggregated
-    pub verdict: bool,               // all compliant (off-chain SnarkPack verify)
-    pub agg_commitment: BytesN<32>,  // SHA-256(aggregate proof || statements)
-    pub context_root: BytesN<32>,    // anti-replay binding over jurisdiction contexts
-    pub off_chain_verified: bool,    // true — SnarkPack aggregate verified OFF-CHAIN (GT gap)
-    pub member_zk_verified: bool,    // true — one constituent proof verified ON-CHAIN here
+    pub period: u32,                // AAAAMM
+    pub count: u32,                 // N jurisdictions aggregated
+    pub verdict: bool,              // all compliant (off-chain SnarkPack verify)
+    pub agg_commitment: BytesN<32>, // SHA-256(aggregate proof || statements)
+    pub context_root: BytesN<32>,   // anti-replay binding over jurisdiction contexts
+    pub off_chain_verified: bool,   // true — SnarkPack aggregate verified OFF-CHAIN (GT gap)
+    pub member_zk_verified: bool,   // true — one constituent proof verified ON-CHAIN here
     pub submitted_by: Address,
     pub timestamp: u64,
     pub seq: u32,
@@ -114,7 +114,9 @@ impl AggFiling {
     pub fn set_verifier(env: Env, admin: Address, verifier: Address, vk: PorVk) {
         admin.require_auth();
         Self::assert_admin(&env, &admin);
-        env.storage().instance().set(&DataKey::VerifierAddr, &verifier);
+        env.storage()
+            .instance()
+            .set(&DataKey::VerifierAddr, &verifier);
         env.storage().instance().set(&DataKey::VerifierVk, &vk);
         env.events().publish((symbol_short!("verifier"),), verifier);
     }
@@ -194,8 +196,10 @@ impl AggFiling {
         env.storage()
             .persistent()
             .set(&DataKey::Agg(scope_code.clone(), period), &claim);
-        env.events()
-            .publish((symbol_short!("aggregate"), scope_code, period), claim.clone());
+        env.events().publish(
+            (symbol_short!("aggregate"), scope_code, period),
+            claim.clone(),
+        );
         claim.seq
     }
 

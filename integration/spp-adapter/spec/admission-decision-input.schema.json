@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AdmissionDecisionInput",
+  "type": "object",
+  "required": [
+    "request_id",
+    "subject_commitment",
+    "claim_type",
+    "jurisdiction",
+    "attestation_root",
+    "note_public_key",
+    "membership_blinding",
+    "target_network",
+    "membership_contract_id",
+    "operator_mode"
+  ],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "subject_commitment": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "claim_type": {"type": "string", "minLength": 1},
+    "jurisdiction": {"type": "string", "minLength": 1},
+    "attestation_root": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "note_public_key": {"type": "string", "pattern": "^0x[a-fA-F0-9]{64}$"},
+    "membership_blinding": {"type": "string", "minLength": 1},
+    "target_network": {"type": "string", "minLength": 1},
+    "membership_contract_id": {"type": "string", "minLength": 1},
+    "non_membership_contract_id": {"type": "string"},
+    "operator_mode": {"type": "string", "enum": ["prepared", "executed"]},
+    "prepared_by": {"type": "string"},
+    "registry_contract_id": {"type": "string"},
+    "issuer": {"type": "string"},
+    "valid_until": {"type": "integer", "minimum": 0},
+    "policy_min_trust_tier": {"type": "integer", "minimum": 0},
+    "policy_min_stake": {"type": "integer", "minimum": 0},
+    "decision_source": {"type": "string"},
+    "decision_provenance": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

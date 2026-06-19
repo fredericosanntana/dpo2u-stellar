@@ -1,0 +1,18 @@
+[package]
+name = "protocol-registry"
+description = "DPO2U — canonical multi-issuer attestation registry (Soroban MVP). Neutral protocol surface for claim verification; consumed later by ASP / pool adapters."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

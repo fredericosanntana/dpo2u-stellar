@@ -18,12 +18,12 @@
 //! verificação que não existe. O tipo `SolvencyClaim` + `get_solvency` já nascem
 //! no schema para forward-compat (reader devolve `None` até a 1-B).
 
+use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype,
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
     panic_with_error, symbol_short, Address, BytesN, Env, Symbol, Vec, U256,
 };
-use por_verifier::{PorVerifierClient, Proof as ZkProof, VerificationKey as ZkVk};
 
 #[contracterror]
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
@@ -33,10 +33,10 @@ pub enum Error {
     PsavInactive = 2,
     AdminOnly = 5,
     AlreadyInitialized = 6,
-    VerifierNotSet = 7,  // seal_solvency antes de set_verifier (fail-closed)
-    ZkVerifyFailed = 8,  // prova ZK não verificou on-chain
-    NotSolvent = 9,      // sinal público solvent != 1
-    BadSignals = 10,     // contagem de sinais públicos != 3 ([solvent, commit, context])
+    VerifierNotSet = 7, // seal_solvency antes de set_verifier (fail-closed)
+    ZkVerifyFailed = 8, // prova ZK não verificou on-chain
+    NotSolvent = 9,     // sinal público solvent != 1
+    BadSignals = 10,    // contagem de sinais públicos != 3 ([solvent, commit, context])
 }
 
 /// 5710 = prova de reservas (mensal) · 5711 = custódia (diária).
@@ -64,7 +64,7 @@ pub enum DataKey {
     Filing(Symbol, DocType, u32), // (psav_code, doc_type, data_base AAAAMMDD) -> FilingSeal (current)
     Solvency(Symbol, u32),        // (psav_code, data_base) -> SolvencyClaim (Cunha 1-B)
     VerifierAddr,                 // Address do por-verifier (BN254) — admin-set
-    VerifierVk,                   // VerificationKey PoR PINADA (fail-closed; submitter nunca fornece)
+    VerifierVk, // VerificationKey PoR PINADA (fail-closed; submitter nunca fornece)
 }
 
 /// Selo de uma remessa. NENHUM campo pode carregar PII (só hash/código/data/enum).
@@ -87,9 +87,9 @@ pub struct FilingSeal {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SolvencyClaim {
     pub data_base: u32,
-    pub solvent: bool,           // reservas >= obrigações
-    pub ratio_bps: u32,          // reserva/obrigação em bps (cap 65535) — agregado, não sensível
-    pub zk_verified: bool,       // true só se o zk-verifier retornou true
+    pub solvent: bool,             // reservas >= obrigações
+    pub ratio_bps: u32,            // reserva/obrigação em bps (cap 65535) — agregado, não sensível
+    pub zk_verified: bool,         // true só se o zk-verifier retornou true
     pub proof_context: BytesN<32>, // binding anti-replay (H(psav,"BCB-PoR",data_base,nonce))
     pub submitted_by: Address,
     pub timestamp: u64,
@@ -188,8 +188,10 @@ impl PorFiling {
             seq: env.ledger().sequence(),
         };
         env.storage().persistent().set(&key, &seal);
-        env.events()
-            .publish((symbol_short!("filing"), psav_code, filing_hash), seal.clone());
+        env.events().publish(
+            (symbol_short!("filing"), psav_code, filing_hash),
+            seal.clone(),
+        );
         seal.seq
     }
 
@@ -227,8 +229,7 @@ impl PorFiling {
             .instance()
             .set(&DataKey::VerifierAddr, &verifier);
         env.storage().instance().set(&DataKey::VerifierVk, &vk);
-        env.events()
-            .publish((symbol_short!("verifier"),), verifier);
+        env.events().publish((symbol_short!("verifier"),), verifier);
     }
 
     /// Cunha 1-B — sela a declaração pública de solvência APÓS verificar a prova ZK
@@ -283,11 +284,8 @@ impl PorFiling {
         };
 
         // Cross-call: verifica a prova Groth16/BN254 on-chain. Fail-closed.
-        let ok = PorVerifierClient::new(&env, &verifier).verify_proof(
-            &zk_vk,
-            &zk_proof,
-            &pub_signals,
-        );
+        let ok =
+            PorVerifierClient::new(&env, &verifier).verify_proof(&zk_vk, &zk_proof, &pub_signals);
         if !ok {
             panic_with_error!(&env, Error::ZkVerifyFailed);
         }

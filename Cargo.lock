@@ -197,6 +197,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 
 [[package]]
+name = "asp-mvp"
+version = "0.1.0"
+dependencies = [
+ "protocol-registry",
+ "soroban-sdk",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -514,6 +522,14 @@ dependencies = [
  "const-oid",
  "crypto-common",
  "subtle",
+]
+
+[[package]]
+name = "disclosure-helper"
+version = "0.1.0"
+dependencies = [
+ "protocol-registry",
+ "soroban-sdk",
 ]
 
 [[package]]
@@ -1047,6 +1063,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "pool-adapter-mock"
+version = "0.1.0"
+dependencies = [
+ "asp-mvp",
+ "protocol-registry",
+ "soroban-sdk",
+]
+
+[[package]]
 name = "por-filing"
 version = "0.1.0"
 dependencies = [
@@ -1098,12 +1123,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "privacy-pool"
+version = "0.1.0"
+dependencies = [
+ "hex",
+ "serde",
+ "serde_json",
+ "soroban-sdk",
+]
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.106"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8fd00f0bb2e90d81d1044c2b32617f68fcb9fa3bb7640c23e9c748e53fb30934"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "protocol-registry"
+version = "0.1.0"
+dependencies = [
+ "soroban-sdk",
 ]
 
 [[package]]

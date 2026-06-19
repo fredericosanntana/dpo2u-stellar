@@ -1,0 +1,47 @@
+Continue the same sprint in /root/dpo2u-stellar, but tighten scope and finish with working code.
+
+Important context:
+- A prior attempt already created:
+  - /root/dpo2u-stellar/zk-prover/membership/membership_withdraw.circom
+  - /root/dpo2u-stellar/zk-prover/membership/gen-input.js
+  - /root/dpo2u-stellar/zk-prover/membership/build.sh
+- Those files are the intended ZK membership path. Reuse them instead of redesigning.
+- The previous run likely stalled. Do not spend cycles on broad re-planning.
+
+Your job now is to FINISH the vertical slice with the minimum clean implementation that satisfies the founder request.
+
+Required outcome
+1) `protocol-registry` gains real issuer staking/slashing semantics used by verification.
+2) A new contract `contracts/privacy-pool` exists and compiles/tests green.
+3) The pool has real deposit state, real withdraw state transition, real nullifier set.
+4) Withdraw is gated by a real BN254 Groth16 membership proof tied to root + nullifier + recipient + context.
+5) Docs updated honestly.
+
+Implementation guidance (follow this unless code reality blocks it)
+- Keep the current `protocol-registry` API shape mostly stable; add the minimum new surface:
+  - issuer stake deposit/credit path (admin-controlled credit is acceptable for testnet prototype)
+  - slash path
+  - minimum stake requirement per claim policy or a global minimum if that is materially simpler
+  - `verify_attestation_proof` must fail when issuer stake is below the required threshold
+- Create `contracts/privacy-pool` as a symbolic fixed-denomination pool:
+  - `deposit(commitment)` inserts a commitment if unique and increments `pool_balance` / `deposit_count`
+  - maintain an authenticated root over active commitments compatible with the membership circuit fixtures
+  - `withdraw(proof, public_signals, recipient, context, nullifier_hash)` verifies proof, rejects reused nullifier, decrements pool state, marks nullifier spent
+  - no Soroban token integration required; symbolic stateful accounting is acceptable if honest in docs
+- Reuse the `por-verifier` contract pattern or clone it into privacy-pool test helpers if simpler. Do not fake proof verification.
+- Keep tree depth fixed at 4 if that matches the circuit.
+- If needed, pin deterministic test fixtures under `zk-prover/membership/build/` and/or a JSON fixture file committed in repo.
+- Reduce proving ceremony cost if necessary for runtime. If the generated `build.sh` is too heavy, lower POW conservatively (e.g. 14) but keep Groth16 real and document dev-ceremony limitations.
+
+Validation required before stopping
+- cargo test -p protocol-registry
+- cargo test -p por-verifier
+- cargo test -p privacy-pool
+- cargo test --workspace
+- zk-prover/membership/build.sh (or equivalent commands) must actually run successfully and produce proof/vk/public artifacts used by tests or documented fixtures
+
+Write report to:
+/root/dpo2u-stellar/.hermes/plans/2026-06-18_085200-claude-privacy-pool-finish-report.md
+
+Report must include exact commands and actual pass/fail outputs.
+Return raw JSON to stdout.

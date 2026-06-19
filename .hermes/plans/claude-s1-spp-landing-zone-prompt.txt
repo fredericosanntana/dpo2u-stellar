@@ -1,0 +1,93 @@
+Você está executando a sprint S1 do track ASP × SPP da DPO2U.
+
+# Objetivo
+Auditar a landing zone exata do SPP (Stellar Private Payments) antes de qualquer implementação nova do Gateway DPO2U.
+
+# Leia antes de agir
+- /root/dpo2u-stellar/docs/PULSO-DPO2U-ASP-PRD-v1.1-reviewed.md
+- /root/dpo2u-stellar/docs/PULSO-DPO2U-ASP-SPP-roadmap-executivo.md
+- /root/dpo2u-stellar/docs/LIONEL-BRIEF-S1-SPP-LANDING-ZONE.md
+- /root/dpo2u-stellar/docs/asp-protocol-mvp.md
+
+# Entregável obrigatório
+Escreva um relatório em:
+/root/dpo2u-stellar/docs/SPP-INTEGRATION-LANDING-ZONE.md
+
+# O que você deve descobrir e fechar
+1. Qual é a função exata de admissão no conjunto de membership do SPP?
+2. Qual é o modelo de auth dessa função?
+3. Qual é o formato exato do leaf esperado pelo circuito/contrato do SPP?
+4. Quais pontos de deploy/frontend precisam ser tocados para fechar o happy path?
+
+# Escopo permitido
+- Clonar/vendor o repo exato do SPP se ele ainda não estiver no workspace
+- Inspecionar contratos, circuitos, scripts, frontend e docs do SPP
+- Citar caminhos reais de arquivo
+- Validar entendimento com comandos e leitura de código
+
+# Fora de escopo
+- Não reescrever circuito
+- Não abrir nova ceremony
+- Não implementar o Gateway ainda
+- Não fazer polish visual
+- Não expandir para múltiplas credenciais/jurisdições
+
+# Qualidade exigida
+O relatório final precisa conter, no mínimo:
+
+## 1. Repo / commit / versão alvo
+- URL do repo
+- commit / tag / branch usada
+- caminho local no workspace
+
+## 2. Contratos e superfícies relevantes
+- contrato de membership
+- contrato de pool
+- verifier relacionado
+- frontend/admin pages relevantes
+
+## 3. Hook de admissão
+- função exata
+- assinatura
+- auth exigida
+- efeitos colaterais
+- restrições
+
+## 4. Formato do leaf
+- tipo exato
+- origem dos campos
+- onde isso é definido (código/circuito)
+- o que DPO2U terá de derivar
+
+## 5. Implicação para o Gateway DPO2U
+- qual input o Gateway precisa receber
+- o que ele precisa verificar
+- qual call ele precisa fazer no SPP
+- se dá para fazer on-chain direto ou se o fallback admin-mediated é mais seguro para o prazo
+
+## 6. Caminho mínimo de demo
+- passos exatos do happy path
+- dependências externas
+- pontos frágeis
+
+## 7. Recomendação executiva
+Escolha objetivamente uma das duas:
+- A: Gateway on-chain direto
+- B: admin-mediated insert como v1
+
+Não entregar "depende" sem recomendação.
+
+# Regras de execução
+- Trabalhe a partir de /root/dpo2u-stellar
+- Se precisar clonar o SPP, faça isso dentro de /root/dpo2u-stellar/_external/
+- Mantenha o relatório curto e preciso
+- Não faça claims sem evidência
+- No final, além do relatório, imprima um resumo curto com:
+  - repo usado
+  - hook de admissão
+  - auth
+  - formato do leaf
+  - recomendação A ou B
+
+# Definição de pronto
+A sprint só está pronta se, após ler o relatório, Fred/Hermes puderem começar a S2 sem novo discovery relevante.

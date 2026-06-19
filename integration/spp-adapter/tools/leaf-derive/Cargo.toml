@@ -1,0 +1,11 @@
+[package]
+name = "leaf-derive"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+hex = "0.4"
+num-bigint = "0.4"
+zkhash = { path = "/root/dpo2u-stellar/_external/spp/poseidon2" }

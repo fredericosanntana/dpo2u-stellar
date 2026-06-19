@@ -1,11 +1,13 @@
 #![cfg(test)]
 
 use super::*;
+use por_verifier::PorVerifier;
 use soroban_sdk::{
     crypto::bn254::{Bn254Fr, Bn254G1Affine, Bn254G2Affine},
-    symbol_short, testutils::Address as _, vec, Address, BytesN, Env, U256,
+    symbol_short,
+    testutils::Address as _,
+    vec, Address, BytesN, Env, U256,
 };
-use por_verifier::PorVerifier;
 
 fn setup() -> (Env, Address, Address, Symbol, XChainAttestClient<'static>) {
     let env = Env::default();
@@ -43,7 +45,10 @@ fn g2(env: &Env, h: &str) -> Bn254G2Affine {
 }
 fn fr(env: &Env, h: &str) -> Bn254Fr {
     let arr: [u8; 32] = hex::decode(h).unwrap().try_into().unwrap();
-    Bn254Fr::from_u256(U256::from_be_bytes(env, &soroban_sdk::Bytes::from_array(env, &arr)))
+    Bn254Fr::from_u256(U256::from_be_bytes(
+        env,
+        &soroban_sdk::Bytes::from_array(env, &arr),
+    ))
 }
 fn vkey(env: &Env) -> PorVk {
     PorVk {
@@ -53,12 +58,21 @@ fn vkey(env: &Env) -> PorVk {
         delta: g2(env, VK_DELTA),
         ic: soroban_sdk::Vec::from_array(
             env,
-            [g1(env, VK_IC0), g1(env, VK_IC1), g1(env, VK_IC2), g1(env, VK_IC3)],
+            [
+                g1(env, VK_IC0),
+                g1(env, VK_IC1),
+                g1(env, VK_IC2),
+                g1(env, VK_IC3),
+            ],
         ),
     }
 }
 fn relayed_proof(env: &Env) -> PorProof {
-    PorProof { a: g1(env, PROOF_A), b: g2(env, PROOF_B), c: g1(env, PROOF_C) }
+    PorProof {
+        a: g1(env, PROOF_A),
+        b: g2(env, PROOF_B),
+        c: g1(env, PROOF_C),
+    }
 }
 fn sigs(env: &Env, ctx: &str) -> soroban_sdk::Vec<Bn254Fr> {
     vec![env, fr(env, PUB_0), fr(env, PUB_1), fr(env, ctx)]
@@ -87,7 +101,12 @@ fn get_claim_none_until_attested() {
 fn verify_and_attest_happy_path() {
     let (env, admin, relayer, origin, client) = setup();
     wire(&env, &admin, &client);
-    client.verify_and_attest(&relayer, &origin, &relayed_proof(&env), &sigs(&env, PUB_CONTEXT));
+    client.verify_and_attest(
+        &relayer,
+        &origin,
+        &relayed_proof(&env),
+        &sigs(&env, PUB_CONTEXT),
+    );
     let claim = client.get_claim(&origin, &ctx32(&env)).unwrap();
     assert_eq!(claim.zk_verified, true);
     assert_eq!(claim.origin_chain, origin);
@@ -101,14 +120,24 @@ fn unauthorized_relayer_fails() {
     let (env, admin, _r, origin, client) = setup();
     wire(&env, &admin, &client);
     let stranger = Address::generate(&env);
-    client.verify_and_attest(&stranger, &origin, &relayed_proof(&env), &sigs(&env, PUB_CONTEXT));
+    client.verify_and_attest(
+        &stranger,
+        &origin,
+        &relayed_proof(&env),
+        &sigs(&env, PUB_CONTEXT),
+    );
 }
 
 #[test]
 #[should_panic(expected = "Error(Contract, #7)")] // VerifierNotSet (fail-closed)
 fn fails_without_verifier() {
     let (env, _a, relayer, origin, client) = setup();
-    client.verify_and_attest(&relayer, &origin, &relayed_proof(&env), &sigs(&env, PUB_CONTEXT));
+    client.verify_and_attest(
+        &relayer,
+        &origin,
+        &relayed_proof(&env),
+        &sigs(&env, PUB_CONTEXT),
+    );
 }
 
 #[test]
@@ -117,5 +146,10 @@ fn rejects_tampered_proof() {
     let (env, admin, relayer, origin, client) = setup();
     wire(&env, &admin, &client);
     let tampered = "00000000000000000000000000000000000000000000000000000000075bcd16";
-    client.verify_and_attest(&relayer, &origin, &relayed_proof(&env), &sigs(&env, tampered));
+    client.verify_and_attest(
+        &relayer,
+        &origin,
+        &relayed_proof(&env),
+        &sigs(&env, tampered),
+    );
 }
