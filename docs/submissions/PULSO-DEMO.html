@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DPO2U × Pulso — Live Positive-Credential Walkthrough</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0d1b2d;
+      --panel-2: #11243d;
+      --ink: #eef4ff;
+      --muted: #a7b8d6;
+      --line: rgba(255,255,255,0.12);
+      --accent: #3dd9b2;
+      --accent-2: #7ab8ff;
+      --danger: #ff8f8f;
+      --warn: #ffd08a;
+      --ok: #3dd9b2;
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% -5%, rgba(122,184,255,.16), transparent 32%),
+        radial-gradient(circle at 92% 4%, rgba(61,217,178,.14), transparent 30%),
+        linear-gradient(180deg, #060f1c 0%, #07111f 40%, #050d18 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    a { color: var(--accent-2); }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(10px);
+      background: rgba(5,12,22,.72);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .inner { display: flex; align-items: center; gap: 16px; padding: 12px 24px; max-width: 1180px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -.02em; }
+    .brand .dot { width: 11px; height: 11px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 22px rgba(61,217,178,.7); }
+    .brand small { font-weight: 600; color: var(--muted); letter-spacing: .04em; }
+    .topbar .spacer { flex: 1; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,.05); font-size: 13px; color: var(--muted);
+      white-space: nowrap;
+    }
+    .chip b { color: var(--ink); font-weight: 700; }
+    .chip .led { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+
+    button, .btn {
+      appearance: none; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--ink);
+      border-radius: 12px; padding: 10px 14px; font: inherit; cursor: pointer; min-height: 42px;
+      display: inline-flex; align-items: center; gap: 8px; transition: background .15s, border-color .15s, transform .05s;
+    }
+    button:hover, .btn:hover { background: rgba(255,255,255,.11); }
+    button:active { transform: translateY(1px); }
+    button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+    .btn-accent { border-color: rgba(61,217,178,.5); background: rgba(61,217,178,.14); color: #d7fff4; }
+    .btn-accent:hover { background: rgba(61,217,178,.22); }
+
+    /* ---------- hero ---------- */
+    .hero { padding: 64px 0 28px; }
+    .kicker { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+    .kicker::before { content: ""; width: 9px; height: 9px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 20px rgba(61,217,178,.6); }
+    h1.hero-title { margin: 16px 0 14px; font-size: clamp(34px, 5vw, 58px); line-height: 1.02; letter-spacing: -.04em; max-width: 16ch; }
+    .lead { margin: 0; max-width: 70ch; font-size: clamp(16px, 1.6vw, 20px); color: var(--muted); }
+    .accent { color: var(--accent); }
+    .accent2 { color: var(--accent-2); }
+    .danger { color: var(--danger); }
+    .warn { color: var(--warn); }
+    .proof-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .proof {
+      display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 16px;
+      border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      min-width: 150px;
+    }
+    .proof .pv { font-size: 15px; font-weight: 800; letter-spacing: -.01em; }
+    .proof .pl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+
+    /* ---------- section scaffolding ---------- */
+    section.block { padding: 40px 0; }
+    .sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+    h2.sec-title { margin: 6px 0 4px; font-size: clamp(24px, 3vw, 34px); letter-spacing: -.03em; }
+    .sec-sub { color: var(--muted); max-width: 78ch; margin: 0 0 6px; }
+    .divider { height: 1px; background: var(--line); border: 0; margin: 6px 0 0; }
+
+    /* ---------- architecture rail ---------- */
+    .rail { display: grid; grid-template-columns: repeat(4, 1fr) ; gap: 14px; margin-top: 24px; align-items: stretch; }
+    .node {
+      position: relative; padding: 18px; border-radius: 18px; border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .node h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -.01em; }
+    .node .role { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; }
+    .node p { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); }
+    .node.boundary { border-color: rgba(255,143,143,.35); background: linear-gradient(180deg, rgba(255,143,143,.08), rgba(255,255,255,.02)); }
+    .node.boundary .role { color: var(--danger); }
+    .node .arrow {
+      position: absolute; right: -11px; top: 50%; transform: translateY(-50%);
+      width: 22px; height: 22px; display: grid; place-items: center; color: var(--muted); font-size: 18px; z-index: 2;
+    }
+    .node:last-child .arrow { display: none; }
+
+    /* ---------- walkthrough ---------- */
+    .walk { display: grid; grid-template-columns: 320px 1fr; gap: 20px; margin-top: 22px; align-items: start; }
+    .steplist { display: flex; flex-direction: column; gap: 8px; position: sticky; top: 76px; }
+    .steplist .toolbar { display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+    .step-btn {
+      width: 100%; text-align: left; align-items: flex-start; flex-direction: column; gap: 4px;
+      border-radius: 14px; padding: 12px 14px; min-height: 0; border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .step-btn .sb-top { display: flex; align-items: center; gap: 10px; width: 100%; }
+    .step-btn .num {
+      width: 26px; height: 26px; border-radius: 999px; display: grid; place-items: center; flex: none;
+      font-size: 13px; font-weight: 800; border: 1px solid var(--line); background: rgba(255,255,255,.06); color: var(--muted);
+    }
+    .step-btn .sb-title { font-weight: 700; font-size: 14.5px; }
+    .step-btn .sb-state { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-left: 36px; }
+    .step-btn[aria-selected="true"] { border-color: rgba(61,217,178,.55); background: rgba(61,217,178,.12); }
+    .step-btn[aria-selected="true"] .num { background: var(--accent); color: #042018; border-color: transparent; }
+    .step-btn[data-tone="danger"][aria-selected="true"] { border-color: rgba(255,143,143,.5); background: rgba(255,143,143,.12); }
+    .step-btn[data-tone="danger"][aria-selected="true"] .num { background: var(--danger); color: #2a0d0d; }
+
+    .panel-host { min-height: 420px; }
+    .panel {
+      display: none; border: 1px solid var(--line); border-radius: 20px; padding: 22px 22px 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+      box-shadow: var(--shadow);
+    }
+    .panel.active { display: block; animation: fade .22s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .panel .p-head { display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+    .panel .p-head h3 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+    .panel .p-head .p-sub { color: var(--muted); margin: 6px 0 0; font-size: 14.5px; max-width: 70ch; }
+    .badge {
+      font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+      padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap;
+    }
+    .badge.ok { color: #062018; background: var(--ok); border-color: transparent; }
+    .badge.prep { color: #06203a; background: var(--accent-2); border-color: transparent; }
+    .badge.bad { color: #2a0d0d; background: var(--danger); border-color: transparent; }
+    .badge.warn { color: #2a1e06; background: var(--warn); border-color: transparent; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    .card {
+      border: 1px solid var(--line); border-radius: 16px; padding: 16px;
+      background: rgba(255,255,255,.03);
+    }
+    .card h4 { margin: 0 0 12px; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .kv { display: grid; grid-template-columns: minmax(0,140px) 1fr; gap: 6px 14px; align-items: baseline; }
+    .kv dt { color: var(--muted); font-size: 13px; }
+    .kv dd { margin: 0; font-size: 13.5px; }
+    .mono { font-family: var(--mono); font-size: 12.5px; word-break: break-all; line-height: 1.45; }
+    .copy {
+      cursor: pointer; border: 1px solid var(--line); background: rgba(255,255,255,.05); color: var(--ink);
+      border-radius: 8px; padding: 1px 7px; font-size: 11px; min-height: 0; margin-left: 6px; vertical-align: middle;
+    }
+    .copy:hover { background: rgba(255,255,255,.12); }
+    .truth { font-size: 13px; }
+    .truth.pos { color: var(--accent); }
+    .truth.neg { color: var(--danger); }
+
+    pre.code {
+      margin: 16px 0 0; padding: 14px 16px; border-radius: 14px; overflow-x: auto;
+      background: #050d18; border: 1px solid var(--line); font-family: var(--mono); font-size: 12.5px; line-height: 1.55;
+      color: #cfe0f7;
+    }
+    pre.code .k { color: var(--accent-2); }
+    pre.code .s { color: var(--accent); }
+    pre.code .n { color: var(--warn); }
+    pre.code .b-true { color: var(--accent); font-weight: 700; }
+    pre.code .b-false { color: var(--danger); font-weight: 700; }
+    .term { background: #05060a; }
+    .term .err { color: var(--danger); }
+    .term .cmd { color: var(--ink); }
+    .term .out { color: var(--muted); }
+
+    .note { margin-top: 16px; padding: 12px 14px; border-radius: 12px; font-size: 13.5px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--muted); }
+    .note.flag { border-color: rgba(255,143,143,.35); background: rgba(255,143,143,.07); }
+    .note b { color: var(--ink); }
+
+    /* ---------- evidence ledger ---------- */
+    .ledger { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 13px; }
+    .ledger th, .ledger td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .ledger th { color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 11.5px; }
+    .ledger td.l { color: var(--muted); white-space: nowrap; }
+    .ledger td .mono { font-size: 12px; }
+    .ledger tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* ---------- boundary + summary ---------- */
+    .two-instance { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+    .inst { border-radius: 18px; padding: 18px; border: 1px solid var(--line); }
+    .inst.controlled { border-color: rgba(61,217,178,.4); background: linear-gradient(180deg, rgba(61,217,178,.08), rgba(255,255,255,.02)); }
+    .inst.external { border-color: rgba(255,143,143,.4); background: linear-gradient(180deg, rgba(255,143,143,.08), rgba(255,255,255,.02)); }
+    .inst h3 { margin: 0 0 4px; font-size: 18px; }
+    .inst .tag { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; font-weight: 700; }
+    .inst.controlled .tag { color: var(--accent); }
+    .inst.external .tag { color: var(--danger); }
+    .inst ul { margin: 12px 0 0; padding-left: 18px; }
+    .inst li { margin: 7px 0; font-size: 13.5px; color: var(--ink); }
+    .inst li.no::marker { content: "✕  "; }
+
+    .summary3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 22px; }
+    .sumcard { border-radius: 18px; padding: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+    .sumcard h3 { margin: 0 0 10px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+    .sumcard.proven h3 { color: var(--accent); }
+    .sumcard.infra h3 { color: var(--accent-2); }
+    .sumcard.immutable h3 { color: var(--danger); }
+    .sumcard ul { margin: 0; padding-left: 18px; }
+    .sumcard li { margin: 8px 0; font-size: 13.5px; color: var(--muted); }
+    .sumcard li b { color: var(--ink); font-weight: 600; }
+
+    /* ---------- closing ---------- */
+    .closing { margin: 30px 0 60px; padding: 30px; border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(122,184,255,.12), rgba(61,217,178,.08)); }
+    .closing h2 { margin: 0 0 10px; font-size: clamp(22px, 3vw, 30px); letter-spacing: -.02em; max-width: 28ch; }
+    .closing p { margin: 0; max-width: 72ch; color: var(--muted); }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+
+    footer.foot { border-top: 1px solid var(--line); padding: 20px 0 40px; color: var(--muted); font-size: 13px; }
+
+    /* live region */
+    .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    @media (max-width: 880px) {
+      .rail { grid-template-columns: 1fr 1fr; }
+      .node .arrow { display: none; }
+      .walk { grid-template-columns: 1fr; }
+      .steplist { position: static; }
+      .grid2, .two-instance, .summary3 { grid-template-columns: 1fr; }
+      .kv { grid-template-columns: 1fr; }
+      .kv dt { color: var(--muted); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .panel.active { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="visually-hidden" href="#walkthrough">Skip to interactive walkthrough</a>
+
+  <!-- ================= TOP BAR ================= -->
+  <div class="topbar">
+    <div class="inner">
+      <div class="brand"><span class="dot"></span> DPO2U <small>× Pulso · Positive Credential</small></div>
+      <div class="spacer"></div>
+      <span class="chip"><span class="led"></span> network <b>testnet</b></span>
+      <button id="judgeBtn" class="btn-accent" aria-pressed="false" title="Auto-advance through the 6 steps">▶ Judge mode</button>
+    </div>
+  </div>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero wrap">
+    <div class="kicker">Live walkthrough · interactive demo</div>
+    <h1 class="hero-title">An attestation result that <span class="accent">changes what the lane allows</span>.</h1>
+    <p class="lead">
+      DPO2U turns a canonical registry decision into an actionable, privacy-preserving admission primitive on Stellar.
+      This is not a slide deck — click (or arrow-key) through the six on-chain steps below, each backed by a real
+      testnet transaction, Merkle root, or contract read. No PII is placed on-chain.
+    </p>
+    <div class="proof-row">
+      <div class="proof"><span class="pv accent">verify = true</span><span class="pl">Registry decision</span></div>
+      <div class="proof"><span class="pv accent">leaf inserted</span><span class="pl">ASP membership</span></div>
+      <div class="proof"><span class="pv danger">verify = false</span><span class="pl">After revocation</span></div>
+      <div class="proof"><span class="pv warn">read-only for us</span><span class="pl">External audited lane</span></div>
+    </div>
+  </header>
+
+  <!-- ================= ARCHITECTURE RAIL ================= -->
+  <section class="block wrap" id="architecture">
+    <div class="sec-head"><div class="kicker">Architecture</div></div>
+    <h2 class="sec-title">Four layers, one policy carried end to end</h2>
+    <p class="sec-sub">The registry decides validity; the ASP membership set admits; the DPO2U-controlled blocked lane enforces revocation; the external audited instance stays publicly readable but not writable by us.</p>
+    <div class="rail">
+      <div class="node">
+        <div class="role">Registry</div>
+        <h3>protocol-registry</h3>
+        <p>Canonical <span class="mono">verify_attestation_proof</span> over issuer profile, claim/jurisdiction scope, stake &amp; policy.</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="node">
+        <div class="role">ASP membership</div>
+        <h3>asp-membership</h3>
+        <p>Admits the positive-set leaf with a real Merkle root transition on a DPO2U-operated instance.</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="node">
+        <div class="role">Blocked lane</div>
+        <h3>asp-non-membership <span class="accent">(DPO2U)</span></h3>
+        <p>Registry revoke is coupled to a non-membership insert on the instance we control &amp; automate.</p>
+        <div class="arrow">→</div>
+      </div>
+      <div class="node boundary">
+        <div class="role">External boundary</div>
+        <h3>asp-non-membership <span class="danger">(audited)</span></h3>
+        <p>Public reads work; mutation requires the external admin key we do not hold. Honest, not hidden.</p>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WALKTHROUGH ================= -->
+  <section class="block wrap" id="walkthrough">
+    <div class="sec-head"><div class="kicker">Interactive walkthrough</div></div>
+    <h2 class="sec-title">Six steps, each grounded in a real artifact</h2>
+    <p class="sec-sub">Use the list, the <b>← →</b> arrow keys, number keys <b>1–6</b>, or <b>Judge mode</b> to auto-advance. Your position is saved locally.</p>
+
+    <div class="walk">
+      <!-- step list -->
+      <div class="steplist" role="tablist" aria-label="Demo steps" id="steplist">
+        <div class="toolbar">
+          <button id="prevBtn" aria-label="Previous step">←</button>
+          <button id="nextBtn" aria-label="Next step">→</button>
+        </div>
+        <!-- buttons injected/declared below -->
+        <button class="step-btn" role="tab" id="tab-0" aria-controls="panel-0" data-step="0" data-tone="ok">
+          <span class="sb-top"><span class="num">1</span><span class="sb-title">Registry decision is valid</span></span>
+          <span class="sb-state">verify_attestation_proof → true</span>
+        </button>
+        <button class="step-btn" role="tab" id="tab-1" aria-controls="panel-1" data-step="1" data-tone="ok">
+          <span class="sb-top"><span class="num">2</span><span class="sb-title">Admission payload generated</span></span>
+          <span class="sb-state">live → SPP bridge · prepared</span>
+        </button>
+        <button class="step-btn" role="tab" id="tab-2" aria-controls="panel-2" data-step="2" data-tone="ok">
+          <span class="sb-top"><span class="num">3</span><span class="sb-title">Membership insertion executes</span></span>
+          <span class="sb-state">insert_leaf · root changes</span>
+        </button>
+        <button class="step-btn" role="tab" id="tab-3" aria-controls="panel-3" data-step="3" data-tone="danger">
+          <span class="sb-top"><span class="num">4</span><span class="sb-title">Revocation flips the decision</span></span>
+          <span class="sb-state">verify → false · fail-closed</span>
+        </button>
+        <button class="step-btn" role="tab" id="tab-4" aria-controls="panel-4" data-step="4" data-tone="danger">
+          <span class="sb-top"><span class="num">5</span><span class="sb-title">Blocked lane on DPO2U instance</span></span>
+          <span class="sb-state">revoke → non-membership insert</span>
+        </button>
+        <button class="step-btn" role="tab" id="tab-5" aria-controls="panel-5" data-step="5" data-tone="danger">
+          <span class="sb-top"><span class="num">6</span><span class="sb-title">External audited lane: read-only</span></span>
+          <span class="sb-state">write needs admin key</span>
+        </button>
+      </div>
+
+      <!-- panels -->
+      <div class="panel-host">
+
+        <!-- PANEL 1 -->
+        <div class="panel" role="tabpanel" id="panel-0" aria-labelledby="tab-0" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>1 · Registry decision is valid</h3>
+              <p class="p-sub">A live <span class="mono">protocol-registry</span> deployed on this testnet verifies the attestation against issuer profile, scope, stake and the active policy lane. The decision package is extracted from the live registry — not a fixture.</p>
+            </div>
+            <span class="badge ok">verify = true</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Live registry</h4>
+              <dl class="kv">
+                <dt>contract_id</dt><dd class="mono">CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP</dd>
+                <dt>verify fn</dt><dd class="mono">verify_attestation_proof</dd>
+                <dt>deploy tx</dt><dd class="mono">fe61dc28a86246318b4ca53df00d68e8d99db779686999b1eb1961522a60a988</dd>
+                <dt>register tx</dt><dd class="mono">6cccfcd60ff1a818730c287e92729f98f9c425d911d3601ac3e02cdb86caac00</dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>Issuer &amp; policy</h4>
+              <dl class="kv">
+                <dt>issuer</dt><dd class="mono">GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN</dd>
+                <dt>trust_tier</dt><dd>2 &nbsp;·&nbsp; min 2</dd>
+                <dt>credited_stake</dt><dd>5000 &nbsp;·&nbsp; min 1000</dd>
+                <dt>scope</dt><dd>claim <b>kyc</b> · jurisdiction <b>BR</b> · lane active</dd>
+              </dl>
+            </div>
+          </div>
+          <pre class="code"><span class="k">"attestation"</span>: {
+  <span class="k">"subject_commitment"</span>: <span class="s">"0x0707…0707"</span>,
+  <span class="k">"claim_type"</span>: <span class="s">"kyc"</span>, <span class="k">"jurisdiction"</span>: <span class="s">"BR"</span>,
+  <span class="k">"attestation_root"</span>: <span class="s">"0x0909…0909"</span>,
+  <span class="k">"registry_verified"</span>: <span class="b-true">true</span>,
+  <span class="k">"attestation_active"</span>: <span class="b-true">true</span>,
+  <span class="k">"revoked"</span>: <span class="b-false">false</span>
+}</pre>
+          <div class="note"><b>Source:</b> <span class="mono">live-registry-decision.json</span> · <span class="mono">docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md</span>. Subject commitment is a 32-byte hash — the underlying identity never goes on-chain.</div>
+        </div>
+
+        <!-- PANEL 2 -->
+        <div class="panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>2 · Admission payload is generated</h3>
+              <p class="p-sub">The bridge converts the canonical decision into a minimal admission payload targeting the ASP membership contract. Provenance records that it was extracted from the live registry.</p>
+            </div>
+            <span class="badge prep">prepared</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Admission payload</h4>
+              <dl class="kv">
+                <dt>request_id</dt><dd class="mono">live_registry_bridge_001</dd>
+                <dt>note_public_key</dt><dd class="mono">0x3333…3333</dd>
+                <dt>membership_blinding</dt><dd class="mono">555555555</dd>
+                <dt>operator_mode</dt><dd>prepared · by <span class="mono">hermes</span></dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>Targets</h4>
+              <dl class="kv">
+                <dt>membership</dt><dd class="mono">CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN</dd>
+                <dt>non-membership</dt><dd class="mono">CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3</dd>
+                <dt>provenance</dt><dd>extracted_from_live_registry: <span class="truth pos">true</span></dd>
+              </dl>
+            </div>
+          </div>
+          <pre class="code"><span class="k">"request_id"</span>: <span class="s">"live_registry_bridge_001"</span>,
+<span class="k">"subject_commitment"</span>: <span class="s">"0x0707…0707"</span>,
+<span class="k">"attestation_root"</span>: <span class="s">"0x0909…0909"</span>,
+<span class="k">"membership_contract_id"</span>: <span class="s">"CBULZZIA…BTKN"</span>,
+<span class="k">"decision_source"</span>: <span class="s">"live-protocol-registry-testnet"</span></pre>
+          <div class="note"><b>Source:</b> <span class="mono">live-registry-admission.json</span>. The payload carries commitments and a Merkle root only — never the raw claim.</div>
+        </div>
+
+        <!-- PANEL 3 -->
+        <div class="panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>3 · Membership insertion executes</h3>
+              <p class="p-sub">The leaf is computed from the admission payload and inserted into the ASP membership tree. The on-chain Merkle root moves from <i>before</i> to <i>after</i> — proof the positive set actually changed.</p>
+            </div>
+            <span class="badge ok">confirmed</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Leaf</h4>
+              <dl class="kv">
+                <dt>leaf (hex)</dt><dd class="mono">0x088ef46c51a3b8c480fc6f6a606ae18dddb0b36ea1e8ee1177661bb2b312c6eb</dd>
+                <dt>leaf (dec)</dt><dd class="mono">3871082018245165477559437847806445936377965106787990480414602868505781126891</dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>On-chain execution</h4>
+              <dl class="kv">
+                <dt>insert tx</dt><dd class="mono">070ac69a39fc394d7f162b392e1868c16a9aed26b48f9ff785ebbb90977de8f9</dd>
+                <dt>event_index</dt><dd>9</dd>
+                <dt>executed_by</dt><dd class="mono">dpo2u-deployer</dd>
+                <dt>executed_at</dt><dd>2026-06-18T20:49:19Z</dd>
+              </dl>
+            </div>
+          </div>
+          <pre class="code"><span class="k">"root_before"</span>: <span class="n">31124934…45738659</span>,
+<span class="k">"root_after"</span>:  <span class="n">63645759…78662774</span>,
+<span class="k">"tx_handle"</span>:   <span class="s">"070ac69a…77de8f9"</span>,
+<span class="k">"status"</span>:      <span class="s">"confirmed"</span></pre>
+          <div class="note"><b>Source:</b> <span class="mono">live-registry-executed.prepared.json</span> · <span class="mono">live-registry-executed.record.json</span>. The prepared command targets <span class="mono">insert_leaf</span> on the membership contract.</div>
+        </div>
+
+        <!-- PANEL 4 -->
+        <div class="panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>4 · Revocation flips the registry decision</h3>
+              <p class="p-sub">A canonical revoke on the live registry makes the same attestation stop verifying. A fresh bridge attempt is rejected — the system is fail-closed: no canonical verification, no passage.</p>
+            </div>
+            <span class="badge bad">verify = false</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Revocation</h4>
+              <dl class="kv">
+                <dt>revoke tx</dt><dd class="mono">0987dd69f909c7a4a0ec4270b53d8399e0d9032b8f75eccc6e5e4b4edeec101e</dd>
+                <dt>verify result</dt><dd class="truth neg">false</dd>
+                <dt>active result</dt><dd class="truth neg">false</dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>Re-entry attempt</h4>
+              <p class="mono" style="color:var(--danger)">registry decision is not verified</p>
+              <p style="color:var(--muted); font-size:13px; margin:8px 0 0;">The bridge refuses to emit a new admission once the canonical decision no longer verifies.</p>
+            </div>
+          </div>
+          <pre class="code"><span class="k">"attestation"</span>: {
+  <span class="k">"registry_verified"</span>: <span class="b-false">false</span>,
+  <span class="k">"attestation_active"</span>: <span class="b-false">false</span>,
+  <span class="k">"revoked"</span>: <span class="b-false">false</span>
+}
+<span class="out">// re-bridge → rejected: "registry decision is not verified"</span></pre>
+          <div class="note flag"><b>Source:</b> <span class="mono">live-registry-decision.revoked.json</span> · <span class="mono">S4</span>. The decision object now reports <span class="mono">verified=false / active=false</span>, the same fields that were <span class="accent">true</span> in step 1.</div>
+        </div>
+
+        <!-- PANEL 5 -->
+        <div class="panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>5 · Blocked-lane action on the DPO2U-controlled instance</h3>
+              <p class="p-sub">For a separate subject, a registry revoke is coupled to a non-membership <span class="mono">insert_leaf</span> on the <b>asp-non-membership instance DPO2U operates</b>. After insert, the key is found and <span class="mono">verify_non_membership</span> returns false — the subject is provably blocked.</p>
+            </div>
+            <span class="badge bad">confirmed · DPO2U lane</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Coupled registry revoke</h4>
+              <dl class="kv">
+                <dt>subject</dt><dd class="mono">0x0808…0808</dd>
+                <dt>register tx</dt><dd class="mono">145c083b758b3d27e3e8842f5de18f35b44467c89b2d285784e0d3176a257e2a</dd>
+                <dt>revoke tx</dt><dd class="mono">056f3930bad0ad72fa78ce953392256f6aa7ca9a8aca770646aa20dfa4158f54</dd>
+                <dt>post-revoke</dt><dd>verified <span class="truth neg">false</span> · active <span class="truth neg">false</span></dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>Non-membership insert (DPO2U-controlled)</h4>
+              <dl class="kv">
+                <dt>contract_id</dt><dd class="mono">CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS</dd>
+                <dt>source_account</dt><dd class="mono">dpo2u-deployer</dd>
+                <dt>insert tx</dt><dd class="mono">2abe3083ffa7a63a53307ac22b3d82da90c9b71c6486d6cb9d9b64396f33593c</dd>
+                <dt>find_key</dt><dd>found <span class="truth pos">true</span> · value 1</dd>
+                <dt>verify_non_membership</dt><dd class="truth neg">false (blocked)</dd>
+              </dl>
+            </div>
+          </div>
+          <pre class="code"><span class="k">"blocked_key_dec"</span>: <span class="n">51067498…55934467</span>,
+<span class="k">"root_after_insert"</span>: <span class="n">12167638…33228669</span>,
+<span class="k">"insert_tx"</span>: <span class="s">"2abe3083…6f33593c"</span>,
+<span class="k">"verify_non_membership"</span>: <span class="b-false">false</span>   <span class="out">// non-membership no longer holds → blocked</span></pre>
+          <div class="note"><b>Source:</b> <span class="mono">live-registry-s6-blocked-lane.prepared.json</span> · <span class="mono">live-registry-s6-blocked-lane.record.json</span>. This runs on <b>contract <span class="mono">CAEJBGQD…EUUS</span></b>, the instance DPO2U controls — distinct from the external audited instance in step 6.</div>
+        </div>
+
+        <!-- PANEL 6 -->
+        <div class="panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5" tabindex="0">
+          <div class="p-head">
+            <div style="flex:1; min-width:240px;">
+              <h3>6 · External audited lane: readable, not writable by us</h3>
+              <p class="p-sub">The externally audited <span class="mono">asp-non-membership</span> instance answers public reads, but mutation requires its admin key — which we do not hold. This is the honest boundary of the track: a governance gap, not a technical one.</p>
+            </div>
+            <span class="badge warn">boundary confirmed</span>
+          </div>
+          <div class="grid2">
+            <div class="card">
+              <h4>Public reads work</h4>
+              <dl class="kv">
+                <dt>instance</dt><dd class="mono">CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3</dd>
+                <dt>get_root</dt><dd class="mono">"0"</dd>
+                <dt>find_key --key 1</dt><dd>found <span class="truth neg">false</span></dd>
+              </dl>
+            </div>
+            <div class="card">
+              <h4>Write requires admin auth</h4>
+              <dl class="kv">
+                <dt>required admin</dt><dd class="mono">GDF4BXPQY5N4BEO24UIHM4NVB62MW7HDWH7SVHKLVZAMLP5IIHCFQORC</dd>
+                <dt>insert_leaf</dt><dd>requires <span class="mono">admin.require_auth()</span></dd>
+                <dt>delete_leaf</dt><dd>requires <span class="mono">admin.require_auth()</span></dd>
+              </dl>
+            </div>
+          </div>
+          <pre class="code term"><span class="cmd">$ stellar contract invoke --id CDREZXZI…K3O3 -- insert_leaf --key 1 --value 1</span>
+<span class="err">❌ error: Missing signing key for account</span>
+<span class="err">   GDF4BXPQY5N4BEO24UIHM4NVB62MW7HDWH7SVHKLVZAMLP5IIHCFQORC</span></pre>
+          <div class="note flag"><b>Source:</b> <span class="mono">docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md</span> · <span class="mono">_external/spp/contracts/asp-non-membership/src/lib.rs</span>. We <span class="danger">do not claim permissionless mutation</span> of this audited instance.</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="visually-hidden" id="live" aria-live="polite"></div>
+  </section>
+
+  <!-- ================= EVIDENCE LEDGER ================= -->
+  <section class="block wrap" id="evidence">
+    <div class="sec-head"><div class="kicker">Evidence ledger</div></div>
+    <h2 class="sec-title">Every claim above maps to a real value</h2>
+    <p class="sec-sub">Contract IDs, transaction handles and Merkle roots taken verbatim from the S4 / S8 reports and the bridge artifacts. Network: testnet. <button class="copy" id="copyAll" type="button">copy all</button></p>
+    <div style="overflow-x:auto;">
+    <table class="ledger" id="ledger">
+      <thead>
+        <tr><th>Artifact</th><th>Kind</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="l">Live registry</td><td class="l">contract_id</td><td><span class="mono">CAUDSMRKMZPZNCVHJZ3JFYVV2ZNK7TC7MFZCJNN75QUBZ2W4AYTEWTYP</span></td></tr>
+        <tr><td class="l">Registry deploy</td><td class="l">tx</td><td><span class="mono">fe61dc28a86246318b4ca53df00d68e8d99db779686999b1eb1961522a60a988</span></td></tr>
+        <tr><td class="l">Registry wasm</td><td class="l">hash</td><td><span class="mono">be7be266cbcbdd92bb0bdbec45f9948cdb3a49fc886742e1080aa5158183717c</span></td></tr>
+        <tr><td class="l">Attestation register</td><td class="l">tx</td><td><span class="mono">6cccfcd60ff1a818730c287e92729f98f9c425d911d3601ac3e02cdb86caac00</span></td></tr>
+        <tr><td class="l">ASP membership</td><td class="l">contract_id</td><td><span class="mono">CBULZZIAHWL33XD5OBL2LBPYSFBYCNCOCIJITGJ74OSRRA7IZKIUBTKN</span></td></tr>
+        <tr><td class="l">Membership leaf</td><td class="l">dec</td><td><span class="mono">3871082018245165477559437847806445936377965106787990480414602868505781126891</span></td></tr>
+        <tr><td class="l">Root before insert</td><td class="l">root</td><td><span class="mono">3112493447093092447340008945066405796186336486671058006004419926999845738659</span></td></tr>
+        <tr><td class="l">Root after insert</td><td class="l">root</td><td><span class="mono">6364575985414069761033481363863949771522450256224246499636173165731378662774</span></td></tr>
+        <tr><td class="l">Membership insert</td><td class="l">tx</td><td><span class="mono">070ac69a39fc394d7f162b392e1868c16a9aed26b48f9ff785ebbb90977de8f9</span></td></tr>
+        <tr><td class="l">Attestation revoke</td><td class="l">tx</td><td><span class="mono">0987dd69f909c7a4a0ec4270b53d8399e0d9032b8f75eccc6e5e4b4edeec101e</span></td></tr>
+        <tr><td class="l">Blocked-lane (DPO2U)</td><td class="l">contract_id</td><td><span class="mono">CAEJBGQDGTFZ5DGRZZ5SYPSFUWRI4IX2V3KMDLS5ANUAI4TX52RTEUUS</span></td></tr>
+        <tr><td class="l">Blocked-lane revoke</td><td class="l">tx</td><td><span class="mono">056f3930bad0ad72fa78ce953392256f6aa7ca9a8aca770646aa20dfa4158f54</span></td></tr>
+        <tr><td class="l">Blocked-lane insert</td><td class="l">tx</td><td><span class="mono">2abe3083ffa7a63a53307ac22b3d82da90c9b71c6486d6cb9d9b64396f33593c</span></td></tr>
+        <tr><td class="l">Root after block</td><td class="l">root</td><td><span class="mono">12167638434740738412350459348713108078053694686908743555288356863478133228669</span></td></tr>
+        <tr><td class="l">External audited</td><td class="l">contract_id</td><td><span class="mono">CDREZXZILERCSD7VMS4SKVRQY4FNIYJCTYA2AY4TKFRV6Y3L3M2OK3O3</span></td></tr>
+        <tr><td class="l">External admin (required)</td><td class="l">account</td><td><span class="mono">GDF4BXPQY5N4BEO24UIHM4NVB62MW7HDWH7SVHKLVZAMLP5IIHCFQORC</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ================= HONEST BOUNDARY ================= -->
+  <section class="block wrap" id="boundary">
+    <div class="sec-head"><div class="kicker danger-kicker">Honest boundary</div></div>
+    <h2 class="sec-title">Two non-membership instances — only one is ours to write</h2>
+    <p class="sec-sub">The blocked lane is fully operable because it runs on the instance DPO2U controls. The externally audited instance is read-only to us. We surface this difference instead of blurring it.</p>
+    <div class="two-instance">
+      <div class="inst controlled">
+        <div class="tag">Operated by DPO2U</div>
+        <h3>asp-non-membership · <span class="mono">CAEJBGQD…EUUS</span></h3>
+        <ul>
+          <li>Insert / delete executed with <span class="mono">dpo2u-deployer</span>.</li>
+          <li>Registry revoke → blocked-lane insert coupled and confirmed on-chain.</li>
+          <li>Automatable with an idempotent revocation watcher.</li>
+        </ul>
+      </div>
+      <div class="inst external">
+        <div class="tag">External · audited</div>
+        <h3>asp-non-membership · <span class="mono">CDREZXZI…K3O3</span></h3>
+        <ul>
+          <li>Public reads work: <span class="mono">get_root</span>, <span class="mono">find_key</span>, <span class="mono">verify_non_membership</span>.</li>
+          <li class="no">We cannot <span class="mono">insert_leaf</span> / <span class="mono">delete_leaf</span> — both require the external admin's auth.</li>
+          <li class="no">No alternate public surface exists to mutate it without that key.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note flag" style="margin-top:18px;">
+      The remaining gap is <b>governance/authority</b>, not integration feasibility. Unifying the two would require delegated admin on the external instance, or redeploying to an instance governed by a key under our explicit operation. <b>Source:</b> <span class="mono">S8</span>.
+    </div>
+  </section>
+
+  <!-- ================= SUMMARY DISTINCTION ================= -->
+  <section class="block wrap" id="distinction">
+    <div class="sec-head"><div class="kicker">What this demo does and does not assert</div></div>
+    <h2 class="sec-title">Proven now · DPO2U-controlled · cannot be mutated externally</h2>
+    <div class="summary3">
+      <div class="sumcard proven">
+        <h3>✓ Proven now</h3>
+        <ul>
+          <li>Live registry deployed; <b>verify_attestation_proof = true</b> for a valid attestation.</li>
+          <li>Admission payload extracted from the live registry decision.</li>
+          <li>Membership <b>insert_leaf</b> executed; Merkle root changed on-chain.</li>
+          <li>Canonical revoke flips verify/active to <b>false</b>; re-entry rejected fail-closed.</li>
+        </ul>
+      </div>
+      <div class="sumcard infra">
+        <h3>⚙ DPO2U-controlled infra</h3>
+        <ul>
+          <li>Blocked-lane <b>insert_leaf</b> on instance <b>CAEJBGQD…EUUS</b>.</li>
+          <li>Registry revoke coupled to non-membership block, end to end.</li>
+          <li>Idempotent watcher can automate the coupling.</li>
+          <li>This is a <b>testnet</b> walkthrough — not a claim of production pool readiness.</li>
+        </ul>
+      </div>
+      <div class="sumcard immutable">
+        <h3>✕ Cannot mutate externally</h3>
+        <ul>
+          <li>External audited instance <b>CDREZXZI…K3O3</b> stays read-only to us.</li>
+          <li>Mutation requires admin <b>GDF4BXPQ…QORC</b>, which we do not hold.</li>
+          <li>We make <b>no claim</b> of permissionless mutation of the audited instance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING ================= -->
+  <div class="wrap">
+    <div class="closing">
+      <div class="kicker">Closing</div>
+      <h2>Policy becomes verifiable, operational behavior — without putting PII on-chain.</h2>
+      <p>Pulso judges integration. This walkthrough shows a registry decision changing what the lane allows: admit on verify, block on revoke, and an explicit, honest boundary at the audited instance. Use Judge mode to replay it for the recording.</p>
+      <div class="cta-row">
+        <button class="btn-accent" id="ctaJudge">▶ Replay in Judge mode</button>
+        <a class="btn" href="#walkthrough">Jump to walkthrough</a>
+        <a class="btn" href="#evidence">See evidence ledger</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot wrap">
+    DPO2U × Pulso Hackathon · interactive demo · keyboard: ← → · 1–6 · J = Judge mode · state saved locally · testnet evidence only
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+      var STEP_KEY = "dpo2u-pulso-demo-step";
+      var STEP_COUNT = 6;
+      var AUTOPLAY_MS = 6500;
+
+      var tabs = Array.prototype.slice.call(document.querySelectorAll(".step-btn"));
+      var panels = Array.prototype.slice.call(document.querySelectorAll(".panel"));
+      var live = document.getElementById("live");
+      var judgeBtn = document.getElementById("judgeBtn");
+      var ctaJudge = document.getElementById("ctaJudge");
+
+      var params = new URLSearchParams(window.location.search);
+      var stepParam = parseInt(params.get("step"), 10);
+      var autoplayParam = params.get("autoplay");
+      var saved = parseInt(localStorage.getItem(STEP_KEY), 10);
+      var index = (Number.isFinite(stepParam) && stepParam >= 1 && stepParam <= STEP_COUNT)
+        ? (stepParam - 1)
+        : ((Number.isFinite(saved) && saved >= 0 && saved < STEP_COUNT) ? saved : 0);
+      var autoTimer = null;
+
+      function render(focusPanel) {
+        tabs.forEach(function (t, i) {
+          var on = i === index;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.tabIndex = on ? 0 : -1;
+        });
+        panels.forEach(function (p, i) {
+          p.classList.toggle("active", i === index);
+        });
+        try { localStorage.setItem(STEP_KEY, String(index)); } catch (e) {}
+        var title = tabs[index].querySelector(".sb-title");
+        if (live && title) live.textContent = "Step " + (index + 1) + " of " + STEP_COUNT + ": " + title.textContent;
+        if (focusPanel) panels[index].focus();
+      }
+
+      function go(delta) {
+        index = (index + delta + STEP_COUNT) % STEP_COUNT;
+        render(false);
+      }
+      function set(i, focusPanel) {
+        if (i < 0 || i >= STEP_COUNT) return;
+        index = i;
+        render(focusPanel);
+      }
+
+      tabs.forEach(function (t) {
+        t.addEventListener("click", function () { stopAuto(); set(parseInt(t.dataset.step, 10), false); });
+      });
+      document.getElementById("prevBtn").addEventListener("click", function () { stopAuto(); go(-1); });
+      document.getElementById("nextBtn").addEventListener("click", function () { stopAuto(); go(1); });
+
+      // keyboard: arrows + number keys + J for judge mode
+      document.addEventListener("keydown", function (e) {
+        var tag = (e.target && e.target.tagName) || "";
+        if (tag === "INPUT" || tag === "TEXTAREA") return;
+        if (e.key === "ArrowRight") { e.preventDefault(); stopAuto(); go(1); }
+        else if (e.key === "ArrowLeft") { e.preventDefault(); stopAuto(); go(-1); }
+        else if (e.key === "Home") { e.preventDefault(); stopAuto(); set(0, false); }
+        else if (e.key === "End") { e.preventDefault(); stopAuto(); set(STEP_COUNT - 1, false); }
+        else if (e.key >= "1" && e.key <= "6") { e.preventDefault(); stopAuto(); set(parseInt(e.key, 10) - 1, false); }
+        else if (e.key === "j" || e.key === "J") { e.preventDefault(); toggleAuto(); }
+      });
+
+      // autoplay / judge mode
+      function startAuto() {
+        if (autoTimer) return;
+        judgeBtn.setAttribute("aria-pressed", "true");
+        judgeBtn.textContent = "❚❚ Judge mode";
+        autoTimer = setInterval(function () { go(1); }, AUTOPLAY_MS);
+      }
+      function stopAuto() {
+        if (!autoTimer) return;
+        clearInterval(autoTimer);
+        autoTimer = null;
+        judgeBtn.setAttribute("aria-pressed", "false");
+        judgeBtn.textContent = "▶ Judge mode";
+      }
+      function toggleAuto() { autoTimer ? stopAuto() : startAuto(); }
+      judgeBtn.addEventListener("click", toggleAuto);
+      if (ctaJudge) ctaJudge.addEventListener("click", function () {
+        set(0, false);
+        startAuto();
+        document.getElementById("walkthrough").scrollIntoView({ block: "start" });
+      });
+
+      // copy helpers
+      function copyText(text, btn) {
+        var done = function () { if (btn) { var o = btn.textContent; btn.textContent = "copied"; setTimeout(function () { btn.textContent = o; }, 1100); } };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () {});
+        }
+      }
+      var copyAll = document.getElementById("copyAll");
+      if (copyAll) copyAll.addEventListener("click", function () {
+        var rows = Array.prototype.slice.call(document.querySelectorAll("#ledger tbody tr"));
+        var lines = rows.map(function (r) {
+          var c = r.children;
+          return c[0].textContent.trim() + " | " + c[1].textContent.trim() + " | " + c[2].textContent.trim();
+        });
+        copyText(lines.join("\n"), copyAll);
+      });
+
+      render(false);
+      if (autoplayParam === "1" || autoplayParam === "true") startAuto();
+    })();
+  </script>
+</body>
+</html>
