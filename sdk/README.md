@@ -86,6 +86,59 @@ console.log(result.record);
 //   submitted_by: 'G...', timestamp: 1748..., metadata_hash_hex: '...' }
 ```
 
+### DeFindex operator-policy gateway
+
+```ts
+import {
+  AttestationClient,
+  DefindexPolicyGateway,
+  DefindexSdkAdapter,
+  testnetClient,
+} from '@dpo2u/stellar-sdk';
+import { SupportedNetworks } from '@defindex/sdk';
+
+const verifier = new AttestationClient(testnetClient());
+const defindex = new DefindexSdkAdapter({
+  config: {
+    apiKey: process.env.DEFINDEX_API_KEY,
+    baseUrl: 'https://api.defindex.io',
+    defaultNetwork: SupportedNetworks.TESTNET,
+  },
+});
+const gateway = new DefindexPolicyGateway(verifier, defindex);
+
+const evidenceHashHex = 'a'.repeat(64); // hash of the rebalance payload
+const outcome = await gateway.prepareRebalanceIfAuthorized(
+  {
+    vault: 'CVAULT...',
+    caller: 'GREBALANCE_MANAGER...',
+    instructions: [
+      { action: 'invest', strategy: 'CSTRAT1...', amount: '1000000' },
+      {
+        action: 'swapExactIn',
+        tokenIn: 'CTOKENIN...',
+        tokenOut: 'CTOKENOUT...',
+        amount: '250000',
+        slippageToleranceBps: 100,
+      },
+    ],
+  },
+  evidenceHashHex,
+);
+
+if (!outcome.decision.allowed) {
+  console.error(outcome.decision.reason);
+  process.exit(1);
+}
+
+console.log(outcome.prepared?.unsignedXdr);
+// -> unsigned DeFindex XDR, ready for operator signature + broadcast
+```
+
+This is the honest integration line: **DPO2U gates privileged DeFindex operator actions**
+(create, rebalance, rescue, fee distribution, pause/unpause). It does **not** claim
+retail deposit allowlisting on DeFindex.
+
 ### Custom RPC / mainnet (when L Sprint ships)
 
 ```ts

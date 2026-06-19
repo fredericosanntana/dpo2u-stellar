@@ -1,0 +1,94 @@
+Task: integrate the DeFindex thesis into dpo2u-stellar in an honest, load-bearing way.
+
+Workspace: /root/dpo2u-stellar
+Branch: current branch only
+
+Objective:
+1) Write a new PRD for Pulso x DeFindex with institutional framing.
+2) Add a real implementation slice inside the existing `sdk/` package that plugs DPO2U attestation verification into DeFindex operator flows.
+3) Keep claims honest: DeFindex vaults are open to deposits; our current credible integration point is privileged/operator actions and policy-gated orchestration, not a fake on-chain deposit allowlist.
+
+Authoritative facts to preserve:
+- Existing DPO2U repo reality is in README.md and docs/PULSO-DPO2U-ASP-PRD-v1.1-reviewed.md.
+- Existing live ASP/SPP boundary reality is in docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md and docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md.
+- DeFindex docs show:
+  - vaults expose roles: Manager, Emergency Manager, Rebalance Manager, Fee Receiver
+  - role addresses can be smart contracts
+  - create/manage/rebalance/rescue are role-gated
+  - deposits/withdrawals are user-facing and the docs do NOT describe an on-chain deposit allowlist
+  - DeFindex has a TypeScript SDK package `@defindex/sdk`
+  - useful surfaces include createVault, getVaultInfo, getVaultBalance, getVaultAPY, depositToVault, withdrawFromVault, rebalance, emergency rescue, pause/unpause strategy, sendTransaction
+- Therefore the strongest honest institutional thesis is: DPO2U as compliance/policy gate for DeFindex operator permissions and managed treasury workflows, not fake "retail KYC gate on every deposit" unless explicitly marked as off-chain/operator-surface only.
+
+Required deliverables:
+A) New doc:
+- docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md
+
+The PRD must include at least:
+- executive thesis
+- why DeFindex is stronger than Etherfuse for institutional Stellar framing
+- current truth / target / non-goals matrix
+- control-plane architecture: DPO2U registry + ASP/policy layer + DeFindex vault/operator layer
+- exact honest integration points (create vault, rebalance, rescue/emergency, fee receiver / managed treasury operations)
+- explicit note that DeFindex docs describe open user deposits while privileged vault ops are role-gated
+- moonshot section: DPO2U-managed compliant treasury rails / policy-controlled institutional vault fabric on Stellar
+- MVP slice for hackathon and follow-on phases
+- open questions to validate with DeFindex team
+
+B) SDK implementation slice INSIDE existing sdk package:
+- extend sdk/package.json with any necessary dependency (likely `@defindex/sdk`) if actually used
+- add one or more new source files in sdk/src/
+- add tests in sdk/src/__tests__/
+- export new public surface from sdk/src/index.ts
+
+Implementation target:
+Build a small but real TypeScript integration surface that combines DPO2U attestation verification with DeFindex operator actions. Prefer a class such as `DefindexPolicyGateway` or similar.
+
+Functional requirements for the implementation slice:
+1. It must accept/inject a DPO2U verifier (compatible with AttestationClient verify shape).
+2. It must accept/inject a DeFindex client interface (do not hard-wire network I/O in tests).
+3. It must encode honest policy around operation types, e.g. create-vault / rebalance / rescue / fee-distribution / pause-strategy.
+4. It must gate those operator actions on a successful attestation verdict and return structured allow/deny decisions with reasons.
+5. It should include one or two execution helpers that, when authorized, call the injected DeFindex client to prepare the action (for example create vault or rebalance).
+6. It must not claim user deposit allowlisting as a native on-chain DeFindex capability unless clearly marked as off-chain UX policy only.
+7. It must be documented in code comments/types well enough that Fred can hand it to DeFindex as a concrete integration direction.
+
+Testing requirements:
+- `npm test` in sdk must pass
+- `npm run build` in sdk must pass
+- tests should cover at least:
+  - PASS attestation authorizes an operator action
+  - FAIL or missing attestation denies it
+  - policy mapping for at least two operation types
+  - execution helper does not call DeFindex client when denied
+
+Suggested shape (adapt if a cleaner design emerges):
+- sdk/src/DefindexPolicyGateway.ts
+- sdk/src/defindex-policy-types.ts
+- sdk/src/__tests__/DefindexPolicyGateway.test.ts
+
+Possible domain model ideas:
+- operation enum: createVault | rebalanceVault | rescueVault | distributeFees | pauseStrategy | unpauseStrategy
+- policy decision result with fields like `allowed`, `reason`, `operation`, `requiredRole`, `attestationFound`, `verdict`
+- mapping from operation -> DeFindex role (Manager, Rebalance Manager, Emergency Manager, Fee Receiver)
+- executor methods like `prepareRebalanceIfAuthorized(...)`, `prepareVaultCreationIfAuthorized(...)`
+
+Important constraints:
+- do not rewrite existing attestation client behavior
+- do not overclaim live DeFindex integration beyond the code you actually add
+- if package names or method names from @defindex/sdk differ, inspect the installed package/types and adapt accordingly
+- prefer narrow, truthful scope over sprawling generic abstractions
+
+Validation commands you must run before stopping:
+1. cd /root/dpo2u-stellar/sdk && npm install
+2. cd /root/dpo2u-stellar/sdk && npm test
+3. cd /root/dpo2u-stellar/sdk && npm run build
+4. cd /root/dpo2u-stellar && git status --short docs sdk
+
+Write a short sprint report to:
+- /root/dpo2u-stellar/.hermes/reports/2026-06-19_defindex-prd-and-sdk-sprint.md
+
+The report must include:
+- files changed
+- exact validation commands run and whether they passed
+- honest limitations / follow-ups

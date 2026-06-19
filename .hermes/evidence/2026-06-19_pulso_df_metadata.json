@@ -1,0 +1,13 @@
+{
+  "binding_version": 1,
+  "description": "Pulso/DeFindex rebalance lane bound to exact invest payload",
+  "network": "stellar:testnet",
+  "policy": {
+    "gate_contract": "CAVLKG3KCRVURO354NDYRF3GQPOS6WC2AMD4QXRCGZQ6I6MZ4HTX4JUD",
+    "operator_must_be_authorized": true,
+    "use_case_id": "pulso_df",
+    "verdict_required": "Pass",
+    "vault_contract": "CDULZOS7UILDYPRPHUFJZJGPGK4QTRCVITZIDOIJZMXA7EXJZGSIFEIT"
+  },
+  "purpose": "Bind attestation semantics to exact rebalance payload instead of generic bank_chg evidence"
+}

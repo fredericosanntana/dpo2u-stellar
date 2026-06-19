@@ -27,3 +27,28 @@ export {
   AI_GOVERNANCE_FRAMEWORKS,
   SECTORAL_FRAMEWORKS,
 } from './use-cases.js';
+// DeFindex × DPO2U policy gateway (honest operator-surface integration).
+export { DefindexPolicyGateway } from './DefindexPolicyGateway.js';
+export type { AuthorizeArgs } from './DefindexPolicyGateway.js';
+export { DefindexSdkAdapter } from './DefindexSdkAdapter.js';
+export type { DefindexSdkAdapterOptions } from './DefindexSdkAdapter.js';
+export { DEFAULT_OPERATION_POLICIES } from './defindex-policy-types.js';
+export type {
+  DefindexOperation,
+  DefindexRole,
+  OperationPolicy,
+  PolicyDecision,
+  PreparedTransaction,
+  VaultRoles,
+  VaultStrategy,
+  VaultAssetAllocation,
+  CreateVaultRequest,
+  RebalanceInstruction,
+  RebalanceRequest,
+  RescueRequest,
+  StrategyToggleRequest,
+  DistributeFeesRequest,
+  DefindexOperatorClient,
+  DefindexAttestationVerifier,
+  AuthorizedActionResult,
+} from './defindex-policy-types.js';

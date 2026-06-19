@@ -1,0 +1,21 @@
+[package]
+name = "defindex-rebalance-gate"
+description = "DPO2U — Soroban role-gate that occupies the DeFindex RebalanceManager role and only forwards rebalance calls when a PASS attestation exists for the evidence hash."
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+por-verifier = { path = "../por-verifier" }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }
+anticorruption-attestation = { path = "../anticorruption-attestation" }
+hex = "0.4"

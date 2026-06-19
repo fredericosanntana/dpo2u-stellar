@@ -1,0 +1,93 @@
+Task: apply the DeFindex PRD in code by wiring a REAL adapter over @defindex/sdk into the existing dpo2u sdk package, with honest scope and passing validation.
+
+Workspace: /root/dpo2u-stellar
+Package in scope: sdk/
+Branch: current branch only
+
+Context already landed:
+- docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md exists
+- sdk/src/DefindexPolicyGateway.ts exists
+- sdk/src/defindex-policy-types.ts exists
+- sdk/src/__tests__/DefindexPolicyGateway.test.ts exists
+- current tests/build in sdk are green
+
+Authoritative DeFindex SDK surface (verified from @defindex/sdk@0.3.0 tarball):
+- package exports: DefindexSDK, DefindexSDKConfig, SupportedNetworks
+- createVault(vaultConfig: CreateVaultParams, network?) -> Promise<TransactionResponse>
+- rebalanceVault(vaultAddress: string, rebalanceData: RebalanceParams, network?) -> Promise<VaultTransactionResponse>
+- emergencyRescue(vaultAddress: string, rescueData: RescueFromVaultParams, network?) -> Promise<VaultTransactionResponse>
+- pauseStrategy(vaultAddress: string, strategyData: PauseStrategyParams, network?) -> Promise<VaultTransactionResponse>
+- unpauseStrategy(vaultAddress: string, strategyData: UnpauseStrategyParams, network?) -> Promise<VaultTransactionResponse>
+- distributeVaultFees(vaultAddress: string, distributeData: DistributeFeesParams, network?) -> Promise<VaultTransactionResponse>
+- TransactionResponse has xdr: string | null, simulationResponse, operationXDR?, isSmartWallet?
+- Rebalance instruction real shape:
+  type: 'Unwind'|'Invest'|'SwapExactIn'|'SwapExactOut'
+  Invest/Unwind use strategy_address + amount:number
+  SwapExactIn/Out use token_in/token_out/amount + slippageToleranceBps?/deadline?
+- CreateVaultParams assets use { address, strategies }
+- CreateVaultParams also requires upgradable:boolean
+
+Required deliverables:
+1) Add real dependency in sdk/package.json:
+- @defindex/sdk ^0.3.0
+
+2) Add a real adapter class, likely:
+- sdk/src/DefindexSdkAdapter.ts
+
+The adapter must:
+- import the real @defindex/sdk package and types
+- implement our DefindexOperatorClient interface
+- accept constructor options that allow either:
+  a) injecting an already-created DefindexSDK instance, OR
+  b) building one from config
+- support at least these methods:
+  - createVault
+  - rebalance
+  - emergencyRescue
+  - pauseStrategy
+  - unpauseStrategy
+  - distributeFees
+- map our internal request types to the real @defindex/sdk method signatures
+- convert returned XDR into our PreparedTransaction shape
+- fail honestly if xdr is null (throw a DPO2U SdkError with a network/integration code already supported by our sdk types, or another existing safe code if better)
+- allow optional default network config via SupportedNetworks
+- keep comments concise and truthful
+
+3) Extend our local policy types/interfaces if needed, but keep scope honest.
+- If distributeFees or pause/unpause need request shapes with vault, add minimal request interfaces.
+- Do NOT invent user deposit gating.
+
+4) Add tests for the adapter:
+- sdk/src/__tests__/DefindexSdkAdapter.test.ts
+- Tests must NOT hit the network.
+- Use a fake real-SDK-shaped object or injected instance.
+- Cover at least:
+  - createVault mapping + PreparedTransaction output
+  - rebalance mapping of Invest/Unwind and at least one swap form
+  - emergencyRescue mapping
+  - distributeFees mapping
+  - null xdr throws
+
+5) Export new public surface from sdk/src/index.ts.
+
+6) Optionally (only if cheap and clean), add one or two extra gateway helpers beyond create/rebalance if the adapter makes this straightforward; but this is secondary to the adapter.
+
+Validation you must run before stopping:
+1. cd /root/dpo2u-stellar/sdk && npm install
+2. cd /root/dpo2u-stellar/sdk && npm test
+3. cd /root/dpo2u-stellar/sdk && npm run build
+4. cd /root/dpo2u-stellar && git status --short sdk docs .hermes | sed -n '1,160p'
+
+Write a concise report to:
+- /root/dpo2u-stellar/.hermes/reports/2026-06-19_defindex-adapter-sprint.md
+
+The report must include:
+- files changed
+- exact validation commands run and pass/fail
+- honest limitations / next slice
+
+Constraints:
+- no broad refactor
+- no fake live API calls
+- preserve existing tests
+- prefer narrow truthful code over architecture theater
