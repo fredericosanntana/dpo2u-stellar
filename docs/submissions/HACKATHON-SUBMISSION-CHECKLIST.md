@@ -39,6 +39,7 @@ Resultado observado em 2026-06-19:
 - [x] transformar `PULSO-PITCH-DECK.md` / `PULSO-PITCH-DECK.html` em slides finais e publicar links em `PULSO-SUBMISSION-LINKS.md`;
 - [x] incorporar o novo slice live DeFindex × DPO2U no pack público de evidência;
 - [x] decidir a narrativa técnica de apoio: proof-bound execution como primitive institucional em Stellar;
+- [ ] subir o vídeo e preencher a URL final em `PULSO-SUBMISSION-LINKS.md`;
 - [ ] anexar links finais do deck/vídeo na submissão.
 
 ### Claim permitida

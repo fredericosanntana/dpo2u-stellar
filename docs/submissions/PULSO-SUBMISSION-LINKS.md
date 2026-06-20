@@ -1,11 +1,11 @@
 # Pulso Submission Links
 
 ## Deck
-- **Apresentação PDF (submission-friendly):** https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/615bfbfa9aad9f19757bb9205b46da45b5507896/docs/submissions/PULSO-PITCH-DECK.pdf
-- **Apresentação PPTX (submission-friendly):** https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/615bfbfa9aad9f19757bb9205b46da45b5507896/docs/submissions/PULSO-PITCH-DECK.pptx
-- **Slides markdown (source):** https://github.com/fredericosanntana/dpo2u-stellar/blob/615bfbfa9aad9f19757bb9205b46da45b5507896/docs/submissions/PULSO-PITCH-DECK-SLIDES.md
-- **Deck markdown (source outline):** https://github.com/fredericosanntana/dpo2u-stellar/blob/615bfbfa9aad9f19757bb9205b46da45b5507896/docs/submissions/PULSO-PITCH-DECK.md
-- **Deck HTML (fallback preview only):** https://htmlpreview.github.io/?https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/615bfbfa9aad9f19757bb9205b46da45b5507896/docs/submissions/PULSO-PITCH-DECK.html
+- **Apresentação PDF (submission-friendly):** https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-PITCH-DECK.pdf
+- **Apresentação PPTX (submission-friendly):** https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-PITCH-DECK.pptx
+- **Slides markdown (source):** https://github.com/fredericosanntana/dpo2u-stellar/blob/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-PITCH-DECK-SLIDES.md
+- **Deck markdown (source outline):** https://github.com/fredericosanntana/dpo2u-stellar/blob/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-PITCH-DECK.md
+- **Deck HTML (fallback preview only):** https://htmlpreview.github.io/?https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-PITCH-DECK.html
 
 ## Core evidence
 - **Repo público:** https://github.com/fredericosanntana/dpo2u-stellar/tree/feat/mainnet-shakedown-x402-zk
@@ -19,6 +19,8 @@
 
 ## Video/script support
 - **Pulso video script:** https://github.com/fredericosanntana/dpo2u-stellar/blob/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-VIDEO-SCRIPT.md
+- **Pulso demo page (optional visual support):** https://htmlpreview.github.io/?https://raw.githubusercontent.com/fredericosanntana/dpo2u-stellar/feat/mainnet-shakedown-x402-zk/docs/submissions/PULSO-DEMO.html
+- **Final video URL:** `TBD — preencher após upload`
 
 ## Notes for judges
 - The public claim is the Stellar load-bearing integration: canonical registry decision → admission or block in the positive set lane.
