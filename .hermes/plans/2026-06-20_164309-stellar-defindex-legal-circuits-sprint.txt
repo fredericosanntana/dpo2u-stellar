@@ -1,0 +1,73 @@
+You are working inside /root/dpo2u-stellar.
+
+Goal: close the strategic documentation gap around DPO2U as the Stellar/DeFindex compliance layer, grounded in the repo's current truth and without overclaiming.
+
+You must produce ALL of the following before stopping:
+
+1) New canonical memo:
+   docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md
+
+2) New canonical PRD:
+   docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md
+
+3) Minimal surface updates so the new docs are reachable from the existing hackathon/DeFindex narrative:
+   - update docs/submissions/PULSO-SUBMISSION-LINKS.md
+   - update docs/submissions/HACKATHON-SUBMISSION-CHECKLIST.md if needed
+   - update docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md with a pointer to the new canonical docs if that improves truth alignment
+
+4) Required report file:
+   .hermes/reports/2026-06-20_stellar-defindex-legal-circuits-sprint-report.md
+
+Grounding sources you MUST read before editing:
+- docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md
+- docs/PULSO-DPO2U-ASP-PRD-v1.1-reviewed.md
+- docs/PULSO-DPO2U-ASP-SPP-roadmap-executivo.md
+- docs/2026-05-29-state-of-the-art-catalog.md
+- docs/composability-quickstart.md
+- docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md
+- sdk/src/use-cases.ts
+
+Core thesis to preserve:
+- DPO2U is not "doing KYC"; it converts compliance outcomes into verifiable admission/execution conditions.
+- For Stellar/DeFindex, the right legal framing is not one law only; it is a stack.
+- LGPD is the privacy/disclosure boundary.
+- PSAV/VASP is the operational regime for admission/operator/safeguards and is broader than Travel Rule alone.
+- CVM 175 is the leading institutional anchor for vault mandate / management / rebalance governance.
+- Do NOT claim retail deposit gating on DeFindex if the protocol docs do not support it.
+- Do NOT claim multi-jurisdiction mega-circuit V1.
+
+What the memo must include:
+- executive thesis
+- legal stack by relationship (participant, operator, vault, asset, disclosure, reporting, cross-border, safeguards)
+- the regulatory “circuits” DPO2U must surround to enable everyday financial solutions via Stellar + DeFindex
+- clear distinction between admission loop and execution loop
+- suggested use_case_ids / policy surfaces for the main circuits
+- anti-overclaim section
+- explicit V1 scope and non-goals
+
+What the PRD must include:
+- objective
+- current truth / target / non-goals matrix
+- problem framing
+- product positioning
+- control-plane architecture
+- canonical actors
+- canonical circuits and state transitions
+- phased roadmap / sprints
+- validation / evidence standards
+- open questions
+
+Sprint behavior:
+- prefer narrow truthful docs over broad speculative platform design
+- reuse existing wording where consistent, but consolidate and upgrade to a cleaner canonical framing
+- keep names and paths exact
+- do not edit unrelated docs
+
+Validation required before stopping:
+- ensure all target files exist
+- run a quick grep/search proving the new docs mention LGPD, VASP/PSAV, CVM 175, Travel Rule, DeFindex, and circuits
+- include in the report: files changed, commands run, what is now true, and remaining manual/open items
+
+Important:
+- Write the report file before stopping.
+- If you hit uncertainty, choose the most conservative truthful wording.

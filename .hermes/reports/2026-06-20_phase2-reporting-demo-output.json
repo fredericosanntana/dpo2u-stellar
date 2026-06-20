@@ -1,0 +1,61 @@
+
+> @dpo2u/stellar-sdk@0.1.0 demo:defindex:reporting
+> npm run build && node ./scripts/defindex-reporting-evidence-demo.mjs
+
+
+> @dpo2u/stellar-sdk@0.1.0 build
+> tsc
+
+{
+  "phase2_demo": "defindex-reporting-evidence-loop",
+  "operation": "rebalanceVault",
+  "artifact": {
+    "artifactType": "operator_monthly_reporting",
+    "operatorId": "operator-001",
+    "period": "2026-06",
+    "metrics": {
+      "incidents_open": 0,
+      "reserve_ratio_bps": 10000,
+      "segregation_checks_passed": true
+    }
+  },
+  "artifactHashHex": "fce477d0ecb9b31f9562c51207465f0adf50b02f6f5737d14faa4a3f4862a19d",
+  "reporting": {
+    "schema": "dpo2u.defindex.reporting.v1",
+    "reportType": "operator_monthly_reporting",
+    "operatorId": "operator-001",
+    "artifactHashHex": "fce477d0ecb9b31f9562c51207465f0adf50b02f6f5737d14faa4a3f4862a19d",
+    "artifactState": "PRESENT",
+    "verdict": "PASS",
+    "producedAt": "2026-06-20T00:00:00Z",
+    "validUntil": "2099-07-20T00:00:00Z",
+    "deliveryChannel": "attestation_registry",
+    "evidenceRefs": [
+      "sha256:report-1"
+    ]
+  },
+  "verifyCalls": [
+    {
+      "useCaseId": "defindex_rebalance_v1",
+      "evidenceHashHex": "fce477d0ecb9b31f9562c51207465f0adf50b02f6f5737d14faa4a3f4862a19d"
+    }
+  ],
+  "decision": {
+    "allowed": true,
+    "operation": "rebalanceVault",
+    "requiredRole": "RebalanceManager",
+    "useCaseId": "defindex_rebalance_v1",
+    "evidenceHashHex": "fce477d0ecb9b31f9562c51207465f0adf50b02f6f5737d14faa4a3f4862a19d",
+    "attestationFound": true,
+    "verdict": "PASS",
+    "attestedBy": "GDPO2UTESTACCOUNTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "attestedAt": 1700000000,
+    "explorerUrl": "https://stellar.expert/explorer/testnet/contract/CTEST",
+    "reason": "ALLOW:PASS attestation verdict PASS authorizes 'rebalanceVault' (role RebalanceManager)"
+  },
+  "prepared": {
+    "unsignedXdr": "AAAAAgAAAACdemo-reporting-xdr",
+    "description": "rebalance DeFindex vault CVAULT",
+    "network": "testnet"
+  }
+}

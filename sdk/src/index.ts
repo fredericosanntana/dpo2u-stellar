@@ -29,7 +29,7 @@ export {
 } from './use-cases.js';
 // DeFindex × DPO2U policy gateway (honest operator-surface integration).
 export { DefindexPolicyGateway } from './DefindexPolicyGateway.js';
-export type { AuthorizeArgs } from './DefindexPolicyGateway.js';
+export type { AuthorizeArgs, PrepareRebalanceFromEvidenceArgs } from './DefindexPolicyGateway.js';
 export { DefindexSdkAdapter } from './DefindexSdkAdapter.js';
 export type { DefindexSdkAdapterOptions } from './DefindexSdkAdapter.js';
 export { DEFAULT_OPERATION_POLICIES } from './defindex-policy-types.js';
@@ -45,6 +45,25 @@ export type {
   CreateVaultRequest,
   RebalanceInstruction,
   RebalanceRequest,
+  RebalanceAssetScopeEntry,
+  RebalanceMandateControls,
+  RebalanceReview,
+  RebalancePrivacyBoundary,
+  RebalanceEvidencePayload,
+  OperatorAdmissionStatus,
+  OperatorAdmissionEvidencePayload,
+  SafeguardsVerdict,
+  SafeguardsControlStatus,
+  IncidentStatus,
+  IncidentSeverity,
+  SafeguardsEvidencePayload,
+  ReportingArtifactState,
+  ReportingVerdict,
+  ReportingEvidencePayload,
+  TravelRuleVerdict,
+  TravelRuleScreeningStatus,
+  TravelRuleMessageStatus,
+  TravelRuleEvidencePayload,
   RescueRequest,
   StrategyToggleRequest,
   DistributeFeesRequest,

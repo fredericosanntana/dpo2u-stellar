@@ -1,0 +1,71 @@
+You are working inside /root/dpo2u-stellar.
+
+Goal: close S1 from docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md by choosing ONE first public circuit and freezing a narrow predicate map.
+
+Decision already made by the orchestrator: choose **Governança de rebalance via CVM 175** as the first public partner circuit.
+
+You must produce ALL of the following before stopping:
+
+1) New canonical S1 artifact:
+   docs/S1-CVM175-REBALANCE-PREDICATE-MAP.md
+
+2) Update the canonical PRD:
+   docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md
+   - resolve the open question about the first public circuit
+   - add a short S1 decision section
+   - add exact S1 outputs / acceptance criteria
+
+3) Update the legal memo if useful:
+   docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md
+   - keep changes minimal; only if a pointer to the chosen S1 circuit improves canonical clarity
+
+4) Required report file:
+   .hermes/reports/2026-06-20_s1-cvm175-rebalance-predicate-map-report.md
+
+Grounding sources you MUST read before editing:
+- docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md
+- docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md
+- docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md
+- docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md
+- sdk/src/use-cases.ts
+- sdk/src/defindex-policy-types.ts
+- sdk/src/DefindexPolicyGateway.ts
+
+The S1 document must include:
+- why CVM 175 rebalance governance is the right first public circuit versus:
+  - PSAV/VASP safeguards
+  - Travel Rule settlement evidence
+- selected DeFindex action:
+  - rebalanceVault
+- selected role:
+  - Rebalance Manager
+- chosen primary legal anchor:
+  - sect_cvm_175_v1
+- chosen operator predicate:
+  - defindex_rebalance_v1
+- exact evidence-hash principle
+- a proposed evidence payload schema (truthful, narrow, implementable)
+- PASS / FAIL / REVIEW criteria
+- required anti-overclaim boundaries
+- dependencies for S2/S3
+
+Important scope rules:
+- keep this narrow and institutional
+- do not invent finalized legal advice
+- do not create a mega-schema spanning all laws
+- do not pretend that CVM 175 alone replaces all other checks; it is the first public anchor
+- keep Travel Rule and PSAV/VASP as adjacent later circuits, not the selected first lane
+- align wording with the repo's existing proof-bound execution truth
+
+Validation required before stopping:
+- ensure the new S1 doc exists
+- grep/search that the S1 doc mentions:
+  - CVM 175
+  - rebalanceVault
+  - Rebalance Manager
+  - sect_cvm_175_v1
+  - defindex_rebalance_v1
+  - PASS / FAIL / REVIEW
+- report must list files changed, commands run, what S1 is now, and what remains open
+
+If you hit uncertainty, choose the most conservative truthful wording.

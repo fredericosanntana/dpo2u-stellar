@@ -195,6 +195,133 @@ export interface RebalanceRequest {
   readonly caller: string;
 }
 
+/** One asset/strategy pair referenced by a rebalance mandate scope. */
+export interface RebalanceAssetScopeEntry {
+  readonly asset: string;
+  readonly strategy: string;
+}
+
+/** Narrow mandate/risk controls bound into the rebalance evidence payload. */
+export interface RebalanceMandateControls {
+  readonly mandateId: string;
+  readonly mandateVersion: string;
+  readonly allocationPolicyId: string;
+  readonly riskPolicyId: string;
+  readonly maxDeviationBps: number;
+  readonly assetAllowed: boolean;
+  readonly strategyAllowed: boolean;
+  readonly withinAllocationLimits: boolean;
+}
+
+/** Review metadata for the off-chain dossier behind a rebalance verdict. */
+export interface RebalanceReview {
+  readonly reviewer: string;
+  readonly reviewedAt: string;
+  readonly validUntil: string;
+  readonly sourceEvidenceRefs: readonly string[];
+}
+
+/** Privacy/disclosure boundary carried by the rebalance evidence payload. */
+export interface RebalancePrivacyBoundary {
+  readonly piiOnchain: boolean;
+  readonly publicFieldsOnly: boolean;
+  readonly disclosureBoundary: string;
+}
+
+/**
+ * Canonical payload hashed for the S1/S2 rebalance circuit.
+ *
+ * This is deliberately narrow: one privileged rebalance action, one operator
+ * predicate, one primary legal anchor, and opaque refs to the upstream dossier.
+ */
+export interface RebalanceEvidencePayload {
+  readonly schema: string;
+  readonly operation: 'rebalanceVault';
+  readonly operatorPredicate: string;
+  readonly primaryLegalAnchor: string;
+  readonly network: string;
+  readonly vault: string;
+  readonly requestedBy: string;
+  readonly requiredRole: DefindexRole;
+  readonly rebalanceIntent: {
+    readonly instructions: readonly RebalanceInstruction[];
+    readonly assetScope: readonly RebalanceAssetScopeEntry[];
+  };
+  readonly mandateControls: RebalanceMandateControls;
+  readonly review: RebalanceReview;
+  readonly privacy: RebalancePrivacyBoundary;
+}
+
+export type OperatorAdmissionStatus = 'PASS' | 'FAIL' | 'REVIEW';
+
+export interface OperatorAdmissionEvidencePayload {
+  readonly schema: string;
+  readonly operatorId: string;
+  readonly operatorCategory: string;
+  readonly serviceScope: string;
+  readonly jurisdiction: string;
+  readonly requiredRole: DefindexRole;
+  readonly status: OperatorAdmissionStatus;
+  readonly reviewedAt: string;
+  readonly validUntil: string;
+  readonly evidenceRefs: readonly string[];
+  readonly notes?: string;
+}
+
+export type SafeguardsVerdict = 'PASS' | 'FAIL' | 'REVIEW';
+export type SafeguardsControlStatus = 'PASS' | 'FAIL' | 'REVIEW';
+export type IncidentStatus = 'NONE' | 'OPEN' | 'RESOLVED';
+export type IncidentSeverity = 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+
+export interface SafeguardsEvidencePayload {
+  readonly schema: string;
+  readonly operatorId: string;
+  readonly vault: string;
+  readonly requiredRole: DefindexRole;
+  readonly verdict: SafeguardsVerdict;
+  readonly proofOfReserveStatus: SafeguardsControlStatus;
+  readonly segregationStatus: SafeguardsControlStatus;
+  readonly incidentStatus: IncidentStatus;
+  readonly incidentSeverity: IncidentSeverity;
+  readonly assessedAt: string;
+  readonly validUntil: string;
+  readonly evidenceRefs: readonly string[];
+}
+
+export type ReportingArtifactState = 'PRESENT' | 'MISSING' | 'EXPIRED';
+export type ReportingVerdict = 'PASS' | 'FAIL' | 'REVIEW';
+
+export interface ReportingEvidencePayload {
+  readonly schema: string;
+  readonly reportType: string;
+  readonly operatorId: string;
+  readonly artifactHashHex: string;
+  readonly artifactState: ReportingArtifactState;
+  readonly verdict: ReportingVerdict;
+  readonly producedAt: string;
+  readonly validUntil: string;
+  readonly deliveryChannel: string;
+  readonly evidenceRefs: readonly string[];
+}
+
+export type TravelRuleVerdict = 'PASS' | 'FAIL' | 'REVIEW';
+export type TravelRuleScreeningStatus = 'PASS' | 'FAIL' | 'REVIEW';
+export type TravelRuleMessageStatus = 'PRESENT' | 'MISSING' | 'REJECTED';
+
+export interface TravelRuleEvidencePayload {
+  readonly schema: string;
+  readonly transferContext: string;
+  readonly originatorRef: string;
+  readonly beneficiaryRef: string;
+  readonly jurisdictionPair: string;
+  readonly verdict: TravelRuleVerdict;
+  readonly screeningStatus: TravelRuleScreeningStatus;
+  readonly messageStatus: TravelRuleMessageStatus;
+  readonly assessedAt: string;
+  readonly validUntil: string;
+  readonly evidenceRefs: readonly string[];
+}
+
 /** Arguments for an emergency rescue / emergency withdraw. */
 export interface RescueRequest {
   readonly vault: string;

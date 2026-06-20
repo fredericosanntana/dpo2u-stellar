@@ -1,0 +1,46 @@
+
+> @dpo2u/stellar-sdk@0.1.0 demo:defindex:proof-bound
+> npm run build && node ./scripts/defindex-proof-bound-demo.mjs
+
+
+> @dpo2u/stellar-sdk@0.1.0 build
+> tsc
+
+{
+  "s3_demo": "defindex-proof-bound-rebalance",
+  "circuit": "Governança de rebalance via CVM 175",
+  "operation": "rebalanceVault",
+  "vault": "CVAULT",
+  "use_case_id": "defindex_rebalance_v1",
+  "primary_legal_anchor": "sect_cvm_175_v1",
+  "derivedEvidenceHashHex": "3ba2310525acdd99b634e880fd81d31e69ef5a86a30c65af00350dd5a443b66c",
+  "verifyCalls": [
+    {
+      "useCaseId": "defindex_rebalance_v1",
+      "evidenceHashHex": "3ba2310525acdd99b634e880fd81d31e69ef5a86a30c65af00350dd5a443b66c"
+    }
+  ],
+  "decision": {
+    "allowed": true,
+    "operation": "rebalanceVault",
+    "requiredRole": "RebalanceManager",
+    "useCaseId": "defindex_rebalance_v1",
+    "evidenceHashHex": "3ba2310525acdd99b634e880fd81d31e69ef5a86a30c65af00350dd5a443b66c",
+    "attestationFound": true,
+    "verdict": "PASS",
+    "attestedBy": "GDPO2UTESTACCOUNTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "attestedAt": 1700000000,
+    "explorerUrl": "https://stellar.expert/explorer/testnet/contract/CTEST",
+    "reason": "ALLOW:PASS attestation verdict PASS authorizes 'rebalanceVault' (role RebalanceManager)"
+  },
+  "prepared": {
+    "unsignedXdr": "AAAAAgAAAACdemo-proof-bound-xdr",
+    "description": "rebalance DeFindex vault CVAULT",
+    "network": "testnet"
+  },
+  "live_reference": {
+    "evidence_hash": "395ae02e84d72e73a18ded2818a40e30f48248fda85f2c2963ca7e2e7605228e",
+    "rebalance_tx": "cf790f4d96e7087c0c756531d2bea89f45b88a2e1389d579ed5f9ada5832e3d5",
+    "vault": "CB5YHBXELSXGNWGJURUD5W23C4VVRIN7CX4WMDNZ7FR5TUVNEJPEOF5W"
+  }
+}

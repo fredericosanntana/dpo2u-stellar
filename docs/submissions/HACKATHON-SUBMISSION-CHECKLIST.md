@@ -4,9 +4,9 @@
 
 | Frente | Status agora | Falta para submeter |
 |---|---|---|
-| **Pulso Hackathon** | **quase pronta** | README raiz alinhado, deck final, gravação do vídeo de 90–120s |
-| **Real-World ZK on Stellar** | **quase pronta** | vídeo de 2–3 min e write-up final com claims calibradas |
-| **GTM da solução** | **não é blocker de submissão** | definir wedge, ICP e narrativa de category creation pós-hackathon |
+| **Pulso Hackathon** | **quase pronta** | gravação do vídeo de 90–120s e anexar links finais na submissão |
+| **Real-World ZK on Stellar** | **quase pronta** | vídeo de 2–3 min; write-up final já ancorado no novo slice DeFindex live |
+| **GTM da solução** | **não é blocker de submissão** | condensar wedge, ICP e narrativa de category creation pós-hackathon |
 
 ## Evidência técnica já validada nesta auditoria
 
@@ -29,22 +29,27 @@ Resultado observado em 2026-06-19:
 - README público agora alinhado à tese atual;
 - integração Stellar load-bearing documentada;
 - live registry -> SPP lane com evidência e txs públicas;
+- supporting evidence adicional: slice live DeFindex × DPO2U com proof-bound execution real em Stellar;
+- memo e PRD canônicos para a tese Stellar/DeFindex como camada de compliance: `docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md` e `docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md`;
 - replayable runbook;
 - boundary honesto da instância externa já explicitado.
 
 ### Gaps restantes
 - [ ] gravar vídeo final de 90–120s;
 - [x] transformar `PULSO-PITCH-DECK.md` / `PULSO-PITCH-DECK.html` em slides finais e publicar links em `PULSO-SUBMISSION-LINKS.md`;
-- [ ] decidir qual demo será gravada como canonical take;
+- [x] incorporar o novo slice live DeFindex × DPO2U no pack público de evidência;
+- [x] decidir a narrativa técnica de apoio: proof-bound execution como primitive institucional em Stellar;
 - [ ] anexar links finais do deck/vídeo na submissão.
 
 ### Claim permitida
-> A DPO2U opera uma lane verificável em Stellar que transforma uma decisão canônica de atestação em admissão ou bloqueio operacional no conjunto positivo, com revogação efetiva e boundary honesto de governança.
+> A DPO2U opera uma lane verificável em Stellar que transforma uma decisão canônica de atestação em admissão ou bloqueio operacional no conjunto positivo, com revogação efetiva e boundary honesto de governança. Em paralelo, já provamos em um segundo slice live que uma ação financeira privilegiada em Stellar só executa quando uma prova ZK válida, bound ao intent exato, passa on-chain.
 
 ### Claim proibida
 - “integramos permissionlessly a instância externa oficial sem dependência de admin”;
 - “pool production-ready”;
 - “governança descentralizada completa”.
+- “DPO2U faz KYC dentro da DeFindex”;
+- “depósitos retail na DeFindex são nativamente allowlistados/on-chain gated por DPO2U”.
 
 ## 2. Real-World ZK on Stellar
 

@@ -1,0 +1,59 @@
+You are working inside /root/dpo2u-stellar.
+
+Goal: reframe the existing defindex-rebalance-gate ZK lane as proof-bound execution by replacing the current PoR solvency predicate with a narrow compliance/policy predicate, while preserving the same gate mechanics and making tests/build pass.
+
+Scope is STRICTLY limited to:
+- zk-prover/por/
+- contracts/defindex-rebalance-gate/
+- docs/PROOF-BOUND-EXECUTION-COMPLIANCE-REFRAME.md
+- .hermes/reports/2026-06-19_defindex-role-gate-live-slice.md (only if needed to reflect truth)
+
+Out of scope:
+- no git commit/push
+- no broad refactors outside the listed paths
+- no live testnet deployment in this sprint
+- no general policy engine / multi-jurisdiction expansion
+
+Ground truth you must preserve:
+1) The gate's real invariant is the lane, not PoR semantics.
+2) execute_rebalance_with_proof currently only depends semantically on:
+   - pub_signals len == 3
+   - pub_signals[0] == 1
+   - pub_signals[2] == expected_context derived from evidence_hash
+3) Keep the gate mostly stable; move semantic change into the circuit + fixtures.
+4) Preferred public signal shape remains 3 signals: [policy_pass, policy_commit, context].
+
+Implementation requirements:
+1) Create a new BN254 Circom circuit under zk-prover/por named compliance_intent_policy.circom.
+   - It should prove a minimal policy statement, not solvency.
+   - Keep it narrow and institutionally legible.
+   - Suggested private witness fields: policy_score, threshold, jurisdiction_code, policy_version, mandate_class, risk_bucket, counterparty_class.
+   - Suggested outputs/public shape: policy_pass, policy_commit, context.
+   - policy_pass must be enforced to 1 only when policy_score >= threshold.
+   - policy_commit should be a Poseidon commitment over compact policy descriptors.
+   - Bind context exactly as the current circuits do.
+2) Add a build script or adapt the existing build flow in zk-prover/por so the new circuit can be compiled/proven locally without breaking the old helper scripts more than necessary.
+   - Reuse existing snarkjs tooling patterns in this folder.
+3) Regenerate VK/proof/public-signal fixtures for the new circuit.
+4) Update contracts/defindex-rebalance-gate/src/test.rs constants/helpers to use the new circuit fixtures.
+   - Rename PoR-specific helper names/comments if appropriate.
+   - Preserve the same fail-closed matrix and happy path semantics.
+5) In contracts/defindex-rebalance-gate/src/lib.rs, only make minimal comment/naming adjustments if needed. Avoid structural changes unless tests demand them.
+6) Update docs/PROOF-BOUND-EXECUTION-COMPLIANCE-REFRAME.md if implementation truth needs tightening.
+7) If you touch the report, keep it honest: local predicate swap done; live policy redeploy not yet done unless actually executed (do not execute live here).
+
+Validation you MUST run before stopping:
+- cargo test -p defindex-rebalance-gate
+- stellar contract build --package defindex-rebalance-gate
+- the local Circom/snarkjs proof generation flow for the new circuit, including off-chain verify
+
+Mandatory deliverables before stopping:
+A) Write a concise markdown report to:
+   /root/dpo2u-stellar/.hermes/reports/2026-06-20_policy-proof-sprint-report.md
+B) The report must include:
+   - files changed
+   - exact validation commands run
+   - whether all validations passed
+   - honest limitations / what remains for the later live redeploy
+
+Do not stop at narrative only. Land the code, run validation, and write the report.

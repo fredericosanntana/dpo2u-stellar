@@ -139,6 +139,28 @@ This is the honest integration line: **DPO2U gates privileged DeFindex operator 
 (create, rebalance, rescue, fee distribution, pause/unpause). It does **not** claim
 retail deposit allowlisting on DeFindex.
 
+### DeFindex live connectivity probe
+
+To distinguish "SDK wired locally" from "real DeFindex connectivity available now", run:
+
+```bash
+cd sdk
+DEFINDEX_API_KEY=sk_... npm run probe:defindex
+```
+
+What it checks:
+- API health
+- factory address on testnet
+- factory address on mainnet
+
+What success means:
+- health is reachable, and
+- factory calls stop returning `403 Forbidden`
+
+What failure usually means:
+- missing/invalid `DEFINDEX_API_KEY`, or
+- DeFindex API/network side is not enabled for that environment yet.
+
 ### Custom RPC / mainnet (when L Sprint ships)
 
 ```ts

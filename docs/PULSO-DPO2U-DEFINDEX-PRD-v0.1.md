@@ -14,11 +14,13 @@
 | **Owner** | Fred (arquitetura / posicionamento) |
 | **Status** | Draft para validação com o time DeFindex; slice de SDK já implementado neste repo |
 | **Audiência** | Time interno + handoff técnico para DeFindex |
-| **Docs relacionados** | `README.md`, `docs/PULSO-DPO2U-ASP-PRD-v1.1-reviewed.md`, `docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md`, `docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md` |
+| **Docs relacionados** | `README.md`, `docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md`, `docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md`, `docs/PULSO-DPO2U-ASP-PRD-v1.1-reviewed.md`, `docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md`, `docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md` |
 | **Código** | `sdk/src/DefindexPolicyGateway.ts`, `sdk/src/defindex-policy-types.ts`, `sdk/src/__tests__/DefindexPolicyGateway.test.ts` |
 | **Entidade** | DPO2U (camada de infraestrutura de atestação verificável em Stellar/Soroman). |
 
 ---
+
+> **Canonical update:** the current canonical legal/product framing for DPO2U as the Stellar/DeFindex compliance layer is now split into `docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md` and `docs/DPO2U-STELLAR-DEFINDEX-COMPLIANCE-LAYER-PRD.md`. This draft remains useful for the original DeFindex gateway thesis and SDK slice, but the newer docs are the source of truth for the LGPD + PSAV/VASP + CVM 175 + Travel Rule legal-circuit framing and the explicit anti-overclaim boundaries.
 
 ## 1. Sumário executivo (tese)
 

@@ -24,15 +24,15 @@ On screen:
 Narration:
 "And this integration is load-bearing — it actually carries weight. The attestation result directly changes what a user can do inside the Stellar lane. This isn't decoration."
 
-## 80–100s — Honest boundary
-"Now, let me be honest about the boundary. On the external, audited instance, we can read the state publicly — but we can't change it without the admin key. That's a governance boundary by design. It's not a gap in the integration."
+## 80–100s — Honest boundary + supporting proof slice
+"Now, let me be honest about the boundary. On the external, audited instance, we can read the state publicly — but we can't change it without the admin key. That's a governance boundary by design. It's not a gap in the integration. And separately, we've already proven a second live Stellar slice where a privileged DeFindex rebalance only executes after a proof bound to that exact intent passes on-chain."
 
 ## 100–120s — Close
-"So that's DPO2U. We make private flows on Stellar credibly compliant, composable, and auditable — without ever putting personal data on-chain."
+"So that's DPO2U. We make private flows on Stellar credibly compliant, composable, and auditable — without ever putting personal data on-chain. For Pulso, that means the admission primitive is real. And for the broader Stellar story, proof-bound execution is already live."
 
 ## Recording notes
 - Prefer terminal + highlighted docs/tx hashes.
-- Show `docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md` and `docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md`.
+- Show `docs/S4-LIVE-REGISTRY-TO-SPP-REPORT.md`, `docs/S8-EXTERNAL-ASP-BOUNDARY-REPORT.md`, and `docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md`.
 - Avoid overclaiming production readiness.
 
 ## Delivery notes (narration)

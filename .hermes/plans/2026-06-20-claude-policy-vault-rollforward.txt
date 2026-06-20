@@ -1,0 +1,50 @@
+Workdir: /root/dpo2u-stellar
+
+Task: implement the smallest honest live-rollforward path for the new DeFindex vault using the already-live ZK gate, without redeploying unnecessary contracts.
+
+Current grounded state:
+- New direct-factory vault created live on testnet: CB5YHBXELSXGNWGJURUD5W23C4VVRIN7CX4WMDNZ7FR5TUVNEJPEOF5W
+- Existing live ZK gate: CDVOKZMLIAHSESPHH47K76X2OYYOSDFRHXSUHLXV6JRCQRYRE4SWNL3E
+- Existing verifier contract: CBM6WJTENB7MT6MZCGA4KOVEDBLOGHKOGFDHBCJRPQ5TINTU6EDMVCAC
+- Gate admin/operator/deployer: GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN via identity alias dpo2u-deployer
+- Current gate still points at old vault CDULZOS7UILDYPRPHUFJZJGPGK4QTRCVITZIDOIJZMXA7EXJZGSIFEIT
+- Policy proof artifacts were regenerated locally; no live verifier/VK rotation yet.
+
+Objective:
+Create a reusable runbook/script that performs the policy-proof rollforward with minimal moving parts:
+1. Reuse the existing live gate instead of redeploying a new gate.
+2. Point that gate at the new vault.
+3. Pin the regenerated compliance-policy VK into the gate using the existing verifier contract.
+4. Rotate the new vault's rebalance_manager to the gate.
+5. Keep operator authorization idempotent.
+6. Produce/consume the live proof artifacts needed for the first policy-bound rebalance on the new vault.
+7. Default to SEND=no / dry-run where possible; make live send opt-in via env.
+
+Deliverables you must write:
+A) A shell script under scripts/ (choose a precise name) that orchestrates the rollforward. It must:
+- use SEND=no by default
+- print all critical addresses and chosen artifacts
+- support separate phases where practical (readiness / admin wiring / optional execute)
+- avoid inventing unknown contract methods; inspect current ABI and artifact shapes first
+- if a file transformation is needed (e.g. extracting vk/proof/public shapes), implement it in the repo in the smallest clear way
+
+B) A short report at:
+/root/dpo2u-stellar/.hermes/reports/2026-06-20_policy-vault-rollforward-prep.md
+The report must state:
+- exact files added/changed
+- exact commands you ran
+- whether the script was validated in dry-run mode
+- any remaining blocker for the final live execute step
+
+Constraints:
+- Do not perform the final live rebalance execute.
+- Do not rotate the live old vault.
+- You may run local tests/builds and read-only or dry-run contract invocations.
+- Avoid broad refactors; this is a narrow execution-prep slice.
+
+Validation required before stopping:
+- bash -n on the new script
+- run the script in dry-run mode at least once
+- if you touched code beyond shell/docs, run the smallest relevant validation and report it honestly
+
+Important: do not stop without writing the report file, even if there is a blocker. If blocked, explain exactly where.

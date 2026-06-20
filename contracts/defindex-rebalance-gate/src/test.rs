@@ -164,20 +164,20 @@ fn register_pass_attestation(
     );
 }
 
-const VK_ALPHA: &str = "2cec5151e2fdedfcdbe288e824373bca017c15e0c956ad7e2ae1a19c71e55ddb1919755f45dc0e9e1b8d741fe603415a48bbd6ddaf4e47d840b3407b7750517e";
-const VK_BETA: &str = "0220b010d35eb26a60fe065ced7ea45d133f805f597fc9e69b3c3e2db266ebd316da8a35d9e89bf0df1ae6fe83197f832a70929d5f995f391cca8a778ec333472d04f6cec34536982004c719aff2f6fe7ecb2d538fc6dcf227beaf4b755f4cc110ea7bf90ae597d25684de7fa7b0e0451635eaaf03420ed7afe43b8f5f0544b3";
+const VK_ALPHA: &str = "25c0a9f50b8be4b19c6b63d8dd2a423c857d564afaf019e83564a3cbf09ff19d17e5cb6a2c2fbcb435b8b6e7ff78d84331b54902b6e8ae51610a9b83d6e16cea";
+const VK_BETA: &str = "2d376addea28e1bf7bf5a35017f1fc1c9cbfcc52759ea2e0ed6c7ebc15707d8f2c790120a05bb3e252f9a9e893a0d701c40eb1ea9b2ee0ade3ef591e7ff140550b516ffd50fd69eed72dc2b29c52c3a21aa67bdbd62e99d9eafabf792ba3a323218b4dab5dd7144d28f7e59fe2160d8e89e69155e077b2f140687e30421fcd9a";
 const VK_GAMMA: &str = "198e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c21800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6ed090689d0585ff075ec9e99ad690c3395bc4b313370b38ef355acdadcd122975b12c85ea5db8c6deb4aab71808dcb408fe3d1e7690c43d37b4ce6cc0166fa7daa";
-const VK_DELTA: &str = "1dc73e4d393b47d61fc6cd3492b68c4f6d143050f9ecf7c452df42e3e03f44db129b4023d9ab2a2d7b1507e847390a372b9efe9379441b7d5b6162c455d58b200e07518b96e69a9faa1f984ca2bebd3741bf39d18b555975bb95e37be1c4929e214cbef78ce932ee804b4956805d5ba7572b810fa097751aeab1467b0e7b0041";
-const VK_IC0: &str = "02a0e2865fa13db1115575f90d9ab27bd507e75b08bd4491ddc711ecf33cf2331fc4866cab4d7dbb3def3061e29852306f4d5c459bc21501d3361eb8bde7abc9";
-const VK_IC1: &str = "2797d0d429e5ad9ea9a67b08878921e71a19f4e3e5c563ceec4fc7ad23f15a6d24489c6f318cb2085dc608830ff60e1a1e7c28bfce2fecb5e1aa6eb41eaefbe2";
-const VK_IC2: &str = "2fa62a941ec345e793ac934d6a6a4227f94c3e81880fa2d03a1ecacd7f5f695e085134d9279694ed1adda33e5a7f3505649d43548951f97d7b7e56c692de8821";
-const VK_IC3: &str = "136d4cdb127c973a4c333c1d8706748355ae2e6341af682e677142f561f644c71bf98dadd9cb1d95a43607bcaa1e3eb7e4c0b1497c53317bea3d7680ed849b78";
-const PROOF_A: &str = "17fb939eb38db0c10a7e0b5a085693e60d6102139a84daba52327fa0f46cc7f811300a82bfeea13a2643159fc1e4c2693c0a579653aa4e13712504f971e0d8c9";
-const PROOF_B: &str = "065335e9ea6a003bf476c041851497fa7f38c347f5657811184afcd45ff749271d7ecce72791de0bf4c4f1d8e1c1ebd5713cfbdd9817c48c632c76e20f6f7de01bd4ce978bed8ed420a36af6236bc3198f0b04ecfb88c8e1e8dd01cf057b95d02447d67f948e31b4fe86726d9516926b1a82946d84d360fb1891d593b9a594e0";
-const PROOF_C: &str = "09b2d0f5bf320034b9e2166073d02961b503aeda5579bde14848f190b254479c1d1d07635544bdaab4511732162f4d3ae33c1fc1fe4e0e52fc2ffcc023ea666d";
-const PUB_SOLVENT_ONE: &str = "0000000000000000000000000000000000000000000000000000000000000001";
-const PUB_SOLVENT_ZERO: &str = "0000000000000000000000000000000000000000000000000000000000000000";
-const PUB_COMMIT: &str = "2e1015154eccba498ea60399e4a1f8fc264f0f1ca41643e359eb74fb12c39125";
+const VK_DELTA: &str = "0ceaf61f02a75d9dd8186621803066f0fd6d5d2d3fbe951ec79759f21a1a8ede13d47c30dd2d768f9542a61391c8db3dd3d92f081579b01037c8ef60abd6420820034f2c714ac8e35836a769f6820d2a3ea2cb80470283a641c5d7a4675be4d9255c557b13f31579756faa749b884b1f437caf18ce674953973951f68b05604c";
+const VK_IC0: &str = "01915bad62d407ad87907b0e7324f609e6e2ccea293244a6935393df069f8c9a1f1c51ddccb60d55a253f35fe798ac0d6cab9670c24b2cb3ca27dbb366ca185d";
+const VK_IC1: &str = "2a1455a07384ee30b8a6c08edc77465ace7523dbdbe8ba047e3e624f56fce7e9149480295950f11995a083be9ab46dad51f7d2d8b3dfc0438227efd6f427d6fe";
+const VK_IC2: &str = "2b6cde630f48341360966fe560d22af3343782885828ce1b53e085b4acfab1e322c932d41f51f79f83a133a10cd7a6619ce0712fb89a88ebfccb3e2df6f041d8";
+const VK_IC3: &str = "0cd610b8d45cb7522c59f004bf9e12208f1caaaf2c963220f4f1c25e656f31d125438e1c2e92f8de5fc567840ae20cb783248ab5a0332f6bb76d95889462f02f";
+const PROOF_A: &str = "0cacc8ea440d8d9ddfb4f8d5788420953047ce8aaa699bd06eaf9aefb7c475b11420227ef463449fbb5f6c8b26fb56a7988fcd63e841ce179605b2740ba4854a";
+const PROOF_B: &str = "2433cf1e541cb4a41535854059e9d6292fe9b232822642d9935d189c71becd6b13e6fc207aa4d91d746ee85d0c4e6835c14fe338f5bf82cefd6fc909061b7cf50a257752493c802dbd68db031d549add247fd773c93df9dc2d3cfaaa677f61b5059dac60d0634636e6b912458406804915b1fc66185b5b37f69d0e0f349ad2a4";
+const PROOF_C: &str = "21e612c87e3fc27a9db8abdfa2e0543aaee3065a3e20b0ba2314a27372e42b27180845f2b8f2aa128f2ece44430a919d5b3c5fba1e002069737a743a5fc66cfa";
+const PUB_POLICY_PASS_ONE: &str = "0000000000000000000000000000000000000000000000000000000000000001";
+const PUB_POLICY_PASS_ZERO: &str = "0000000000000000000000000000000000000000000000000000000000000000";
+const PUB_POLICY_COMMIT: &str = "0ad8765d851bf1d46866debe73a7ceb6b6cbef879d28d36da82c9c0c2c65ef32";
 const PUB_CONTEXT_SAMPLE: &str = "00a07a7e7f20e6f06d9692a8785fe7dc837f6094e817b3bbbe735be0c1db8ba0";
 
 fn g1(env: &Env, h: &str) -> Bn254G1Affine {
@@ -198,7 +198,7 @@ fn fr(env: &Env, h: &str) -> Bn254Fr {
     ))
 }
 
-fn por_vk(env: &Env) -> PorVk {
+fn policy_vk(env: &Env) -> PorVk {
     PorVk {
         alpha: g1(env, VK_ALPHA),
         beta: g2(env, VK_BETA),
@@ -216,7 +216,7 @@ fn por_vk(env: &Env) -> PorVk {
     }
 }
 
-fn por_proof(env: &Env) -> PorProof {
+fn policy_proof(env: &Env) -> PorProof {
     PorProof {
         a: g1(env, PROOF_A),
         b: g2(env, PROOF_B),
@@ -227,15 +227,15 @@ fn por_proof(env: &Env) -> PorProof {
 fn signals_for_context(env: &Env, context_hex: &str) -> Vec<Bn254Fr> {
     vec![
         env,
-        fr(env, PUB_SOLVENT_ONE),
-        fr(env, PUB_COMMIT),
+        fr(env, PUB_POLICY_PASS_ONE),
+        fr(env, PUB_POLICY_COMMIT),
         fr(env, context_hex),
     ]
 }
 
 fn wire_verifier(env: &Env, admin: &Address, gate: &DefindexRebalanceGateClient<'static>) {
     let verifier = env.register(PorVerifier, ());
-    gate.set_verifier(admin, &verifier, &por_vk(env));
+    gate.set_verifier(admin, &verifier, &policy_vk(env));
 }
 
 #[test]
@@ -389,8 +389,8 @@ fn execute_rebalance_with_proof_fails_closed_without_verifier() {
     let expected_ctx = gate.derive_zk_context(&evidence);
     let signals = vec![
         &env,
-        fr(&env, PUB_SOLVENT_ONE),
-        fr(&env, PUB_COMMIT),
+        fr(&env, PUB_POLICY_PASS_ONE),
+        fr(&env, PUB_POLICY_COMMIT),
         Bn254Fr::from_u256(U256::from_be_bytes(
             &env,
             &soroban_sdk::Bytes::from_array(&env, &expected_ctx.to_array()),
@@ -403,7 +403,7 @@ fn execute_rebalance_with_proof_fails_closed_without_verifier() {
         &expires_at,
         &evidence,
         &instructions,
-        &por_proof(&env),
+        &policy_proof(&env),
         &signals,
     );
 }
@@ -425,7 +425,7 @@ fn execute_rebalance_with_proof_happy_path_forwards_to_vault() {
         &expires_at,
         &evidence,
         &instructions,
-        &por_proof(&env),
+        &policy_proof(&env),
         &signals_for_context(&env, PUB_CONTEXT_SAMPLE),
     );
 
@@ -448,7 +448,7 @@ fn execute_rebalance_with_proof_rejects_wrong_context() {
         &expires_at,
         &evidence,
         &instructions,
-        &por_proof(&env),
+        &policy_proof(&env),
         &signals_for_context(&env, PUB_CONTEXT_SAMPLE),
     );
 }
@@ -464,8 +464,8 @@ fn execute_rebalance_with_proof_rejects_non_pass_signal() {
     let expected_ctx = gate.derive_zk_context(&evidence);
     let signals = vec![
         &env,
-        fr(&env, PUB_SOLVENT_ZERO),
-        fr(&env, PUB_COMMIT),
+        fr(&env, PUB_POLICY_PASS_ZERO),
+        fr(&env, PUB_POLICY_COMMIT),
         Bn254Fr::from_u256(U256::from_be_bytes(
             &env,
             &soroban_sdk::Bytes::from_array(&env, &expected_ctx.to_array()),
@@ -478,7 +478,7 @@ fn execute_rebalance_with_proof_rejects_non_pass_signal() {
         &expires_at,
         &evidence,
         &instructions,
-        &por_proof(&env),
+        &policy_proof(&env),
         &signals,
     );
 }

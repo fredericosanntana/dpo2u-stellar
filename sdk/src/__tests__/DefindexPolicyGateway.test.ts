@@ -5,8 +5,11 @@ import {
   type CreateVaultRequest,
   type DefindexAttestationVerifier,
   type DefindexOperatorClient,
+  type OperatorAdmissionEvidencePayload,
   type PreparedTransaction,
+  type RebalanceEvidencePayload,
   type RebalanceRequest,
+  type SafeguardsEvidencePayload,
 } from '../defindex-policy-types.js';
 import type { Verdict } from '../types.js';
 import type { VerifyResult } from '../AttestationClient.js';
@@ -91,6 +94,86 @@ const rebalanceReq: RebalanceRequest = {
   caller: 'GREBAL',
 };
 
+function rebalanceEvidencePayload(
+  overrides: Partial<RebalanceEvidencePayload> = {},
+): RebalanceEvidencePayload {
+  return {
+    schema: 'dpo2u.defindex.rebalance.cvm175.v1',
+    operation: 'rebalanceVault',
+    operatorPredicate: 'defindex_rebalance_v1',
+    primaryLegalAnchor: 'sect_cvm_175_v1',
+    network: 'testnet',
+    vault: rebalanceReq.vault,
+    requestedBy: rebalanceReq.caller,
+    requiredRole: 'RebalanceManager',
+    rebalanceIntent: {
+      instructions: rebalanceReq.instructions,
+      assetScope: [{ asset: 'CUSDC', strategy: 'CSTRAT' }],
+    },
+    mandateControls: {
+      mandateId: 'opaque-mandate-id',
+      mandateVersion: '2026-06-20',
+      allocationPolicyId: 'opaque-policy-id',
+      riskPolicyId: 'opaque-risk-id',
+      maxDeviationBps: 500,
+      assetAllowed: true,
+      strategyAllowed: true,
+      withinAllocationLimits: true,
+    },
+    review: {
+      reviewer: 'issuer-or-policy-engine-id',
+      reviewedAt: '2026-06-20T00:00:00Z',
+      validUntil: '2026-06-27T00:00:00Z',
+      sourceEvidenceRefs: ['sha256:abc'],
+    },
+    privacy: {
+      piiOnchain: false,
+      publicFieldsOnly: true,
+      disclosureBoundary: 'lgpd_minimized_hash_only',
+    },
+    ...overrides,
+  };
+}
+
+function operatorAdmissionPayload(
+  overrides: Partial<OperatorAdmissionEvidencePayload> = {},
+): OperatorAdmissionEvidencePayload {
+  return {
+    schema: 'dpo2u.defindex.operator-admission.v1',
+    operatorId: 'operator-001',
+    operatorCategory: 'institutional_operator',
+    serviceScope: 'defindex_rebalance_manager',
+    jurisdiction: 'BR',
+    requiredRole: 'RebalanceManager',
+    status: 'PASS',
+    reviewedAt: '2026-06-20T00:00:00Z',
+    validUntil: '2099-06-27T00:00:00Z',
+    evidenceRefs: ['sha256:operator-admission-1'],
+    notes: 'operator cleared for role-gated privileged actions',
+    ...overrides,
+  };
+}
+
+function safeguardsPayload(
+  overrides: Partial<SafeguardsEvidencePayload> = {},
+): SafeguardsEvidencePayload {
+  return {
+    schema: 'dpo2u.defindex.safeguards.v1',
+    operatorId: 'operator-001',
+    vault: rebalanceReq.vault,
+    requiredRole: 'RebalanceManager',
+    verdict: 'PASS',
+    proofOfReserveStatus: 'PASS',
+    segregationStatus: 'PASS',
+    incidentStatus: 'NONE',
+    incidentSeverity: 'LOW',
+    assessedAt: '2026-06-20T00:00:00Z',
+    validUntil: '2099-06-21T00:00:00Z',
+    evidenceRefs: ['sha256:safeguards-1'],
+    ...overrides,
+  };
+}
+
 describe('DefindexPolicyGateway.authorize', () => {
   it('PASS attestation authorizes a create-vault operation', async () => {
     const { verifier, calls } = fakeVerifier('PASS');
@@ -143,6 +226,156 @@ describe('DefindexPolicyGateway.authorize', () => {
 
     expect(d.allowed).toBe(false);
     expect(d.reason).toMatch(/^DENY:REVIEW/);
+  });
+
+  it('operator admission FAIL denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload({ status: 'FAIL' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_ADMISSION_FAIL/);
+    expect(d.attestationFound).toBe(false);
+    expect(calls).toEqual([]);
+  });
+
+  it('operator admission REVIEW denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload({ status: 'REVIEW' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_ADMISSION_REVIEW/);
+    expect(calls).toEqual([]);
+  });
+
+  it('expired operator admission denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload({ validUntil: '2000-01-01T00:00:00Z' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_ADMISSION_EXPIRED/);
+    expect(calls).toEqual([]);
+  });
+
+  it('role-mismatched operator admission denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload({ requiredRole: 'Manager' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_ROLE_MISMATCH/);
+    expect(calls).toEqual([]);
+  });
+
+  it('PASS operator admission still requires PASS attestation', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload(),
+    });
+
+    expect(d.allowed).toBe(true);
+    expect(d.reason).toMatch(/^ALLOW:PASS/);
+    expect(calls).toEqual([{ useCaseId: 'defindex_rebalance_v1', evidenceHashHex: HASH }]);
+  });
+
+  it('safeguards FAIL denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ verdict: 'FAIL' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_FAIL/);
+    expect(calls).toEqual([]);
+  });
+
+  it('safeguards REVIEW denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ verdict: 'REVIEW' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_REVIEW/);
+    expect(calls).toEqual([]);
+  });
+
+  it('missing proof-of-reserve attestation denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ proofOfReserveStatus: 'FAIL' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_PROOF_OF_RESERVE/);
+    expect(calls).toEqual([]);
+  });
+
+  it('open incident denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ incidentStatus: 'OPEN', incidentSeverity: 'HIGH' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_INCIDENT_OPEN/);
+    expect(calls).toEqual([]);
+  });
+
+  it('PASS safeguards still requires PASS attestation', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload(),
+    });
+
+    expect(d.allowed).toBe(true);
+    expect(calls).toEqual([{ useCaseId: 'defindex_rebalance_v1', evidenceHashHex: HASH }]);
   });
 
   it('maps distinct operations to distinct roles + use cases', async () => {
@@ -228,6 +461,71 @@ describe('DefindexPolicyGateway execution helpers', () => {
 
     expect(out.decision.allowed).toBe(true);
     expect(out.prepared).toEqual(prepared);
+    expect(spy.rebalance).toHaveBeenCalledWith(rebalanceReq);
+  });
+
+  it('derives a deterministic canonical evidence hash for rebalance payloads', () => {
+    const gw = new DefindexPolicyGateway(fakeVerifier('PASS').verifier, spyClient().client);
+    const payloadA = rebalanceEvidencePayload();
+    const payloadB = {
+      review: payloadA.review,
+      network: payloadA.network,
+      schema: payloadA.schema,
+      primaryLegalAnchor: payloadA.primaryLegalAnchor,
+      requiredRole: payloadA.requiredRole,
+      operation: payloadA.operation,
+      operatorPredicate: payloadA.operatorPredicate,
+      requestedBy: payloadA.requestedBy,
+      rebalanceIntent: payloadA.rebalanceIntent,
+      mandateControls: payloadA.mandateControls,
+      vault: payloadA.vault,
+      privacy: payloadA.privacy,
+    } satisfies RebalanceEvidencePayload;
+
+    const hashA = gw.hashRebalanceEvidencePayload(payloadA);
+    const hashB = gw.hashRebalanceEvidencePayload(payloadB);
+
+    expect(hashA).toMatch(/^[a-f0-9]{64}$/);
+    expect(hashB).toBe(hashA);
+  });
+
+  it('denies rebalance fail-closed on hash mismatch before verify/client calls', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const spy = spyClient();
+    const gw = new DefindexPolicyGateway(verifier, spy.client);
+
+    const out = await gw.prepareRebalanceFromEvidenceIfAuthorized({
+      request: rebalanceReq,
+      payload: rebalanceEvidencePayload(),
+      expectedEvidenceHashHex: HASH,
+    });
+
+    expect(out.decision.allowed).toBe(false);
+    expect(out.decision.reason).toMatch(/^DENY:HASH_MISMATCH/);
+    expect(out.prepared).toBeNull();
+    expect(calls).toEqual([]);
+    expect(spy.rebalance).not.toHaveBeenCalled();
+  });
+
+  it('uses the derived evidence hash for an authorized rebalance-from-payload flow', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const spy = spyClient();
+    const gw = new DefindexPolicyGateway(verifier, spy.client);
+    const payload = rebalanceEvidencePayload();
+    const expectedHash = gw.hashRebalanceEvidencePayload(payload);
+
+    const out = await gw.prepareRebalanceFromEvidenceIfAuthorized({
+      request: rebalanceReq,
+      payload,
+      expectedEvidenceHashHex: expectedHash,
+    });
+
+    expect(out.decision.allowed).toBe(true);
+    expect(out.decision.evidenceHashHex).toBe(expectedHash);
+    expect(out.prepared).toEqual(prepared);
+    expect(calls).toEqual([
+      { useCaseId: 'defindex_rebalance_v1', evidenceHashHex: expectedHash },
+    ]);
     expect(spy.rebalance).toHaveBeenCalledWith(rebalanceReq);
   });
 });
