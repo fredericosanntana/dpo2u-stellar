@@ -4,6 +4,7 @@
 **Produto:** layer de policy/attestation da DPO2U para Stellar + DeFindex  
 **Tese principal:** resultados de compliance viram condições verificáveis de admissão e execução  
 **Memo relacionado:** `docs/STELLAR-DEFINDEX-LEGAL-CIRCUITS-MEMO.md`  
+**Sinal de mercado relacionado:** `docs/MICA-BINANCE-SIGNAL-MEMO.md`  
 **S1 canônico:** `docs/S1-CVM175-REBALANCE-PREDICATE-MAP.md`  
 **Fase 2 relacionada:** `docs/PHASE2-OPERATOR-SAFEGUARDS-PRD.md`, `docs/PHASE2-CLAIM-BOUNDARY.md`, `docs/PHASE2-TRAVEL-RULE-ADJACENT-FLOW.md`, `docs/PHASE2-OPERATOR-SAFEGUARDS-DEMO-RUNBOOK.md`
 
@@ -26,6 +27,17 @@ Depois de S1–S5, a verdade do repo já evoluiu um passo adicional: hoje a tese
 | **Catálogo legal** | catálogo do SDK inclui LGPD, VASP/PSAV, CVM 175, Travel Rule, MiCAR/CASP e reporting | selecionar IDs de política por circuito e por ação | mega-circuito multi-lei/global no V1 |
 | **Fase 2 operator/safeguards/reporting** | docs, tipos, testes e demo parcial já existem no repo | endurecer fontes live e expandir só se houver demanda real de partner/GTM | chamar isso de `VASP full` ou retail/full-stack gating |
 | **Gating de depósito** | repo evita explicitamente alegar allowlist nativa de depósito retail DeFindex | política UX off-chain opcional, claramente marcada | alegar que depósitos DeFindex são nativamente KYC-gated |
+
+## Sinal de mercado que reforça o PRD
+
+O memo `docs/MICA-BINANCE-SIGNAL-MEMO.md` cristaliza um ponto útil para este PRD: sob MiCA, licença e admissibilidade deixam de ser “compliance overhead” e passam a funcionar como parte da própria infraestrutura de acesso ao mercado. Isso fortalece o positioning da DPO2U como **control plane operator-side**, especialmente em tudo que toca:
+
+- admissibilidade de operador;
+- safeguards posture;
+- reporting verificável;
+- boundary claro entre resultado regulatório e execution right.
+
+Em outras palavras: a evolução de Fase 2 não é cosmética. Ela aponta para a parte do stack que o mercado institucional realmente tende a pagar quando o enquadramento regulatório vira filtro binário de operação.
 
 ## Problema
 

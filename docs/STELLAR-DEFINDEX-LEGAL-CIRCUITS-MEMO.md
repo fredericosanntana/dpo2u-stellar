@@ -2,7 +2,7 @@
 
 **Status:** memo estratégico canônico  
 **Escopo:** DPO2U como layer de conformidade para Stellar/DeFindex  
-**Docs relacionados:** `docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md`, `docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md`, `docs/composability-quickstart.md`, `docs/PHASE2-OPERATOR-SAFEGUARDS-PRD.md`, `docs/PHASE2-CLAIM-BOUNDARY.md`, `docs/PHASE2-TRAVEL-RULE-ADJACENT-FLOW.md`
+**Docs relacionados:** `docs/PULSO-DPO2U-DEFINDEX-PRD-v0.1.md`, `docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md`, `docs/composability-quickstart.md`, `docs/PHASE2-OPERATOR-SAFEGUARDS-PRD.md`, `docs/PHASE2-CLAIM-BOUNDARY.md`, `docs/PHASE2-TRAVEL-RULE-ADJACENT-FLOW.md`, `docs/MICA-BINANCE-SIGNAL-MEMO.md`
 
 > **S1 canônico:** o primeiro circuito público escolhido é Governança de rebalance via CVM 175: `rebalanceVault` sob Rebalance Manager, predicado `defindex_rebalance_v1`, âncora principal `sect_cvm_175_v1`. Ver `docs/S1-CVM175-REBALANCE-PREDICATE-MAP.md`.
 
@@ -22,6 +22,17 @@ A tese de produto, portanto, é estreita e carregadora de peso:
 > **A DPO2U cerca as operações privilegiadas da DeFindex com circuitos legais/políticos, para que ações institucionais em vault só executem quando o resultado de compliance relevante já tiver sido atestado.**
 
 Este memo **não** alega gate nativo de depósito retail na DeFindex. A própria verdade atual do repo e das docs da DeFindex indica que depósitos/saques são superfícies user-facing, enquanto o ponto nativo de integração é o plano de operador role-gated: **Manager, Rebalance Manager, Emergency Manager e Fee Receiver**.
+
+## Sinal de mercado adicional — MiCA/Binance
+
+O caso Reuters/Binance consultado nesta sessão adiciona um sinal externo relevante ao framing deste memo: em regime MiCA, a licença deixa de ser ornamento reputacional e passa a funcionar como **filtro de existência operacional**. Em termos de tese, isso reforça que o ponto mais institucionalmente legível da DPO2U não é “UX regulatória” nem KYC decorativo; é **admissibilidade de operador + safeguards + reporting verificável**.
+
+Para este memo, a consequência prática é simples:
+
+- `operator admission` ganha peso como primitive central;
+- `safeguards` e `reporting` deixam de parecer extensões tardias e passam a parecer partes naturais do regime;
+- `Travel Rule` continua relevante, mas como circuito específico, não como resumo do regime inteiro;
+- o framing certo permanece `operator-side institutional execution`, e não `VASP full` horizontal.
 
 ## Estado reconciliado após a Fase 2
 

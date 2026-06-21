@@ -139,6 +139,14 @@ Essa vertente conversa melhor com:
 - operator/safeguards control primitive;
 - policy/attestation bridge entre dossiê regulatório e execução institucional.
 
+### Sinal de mercado que reforça o GTM
+O caso MiCA/Binance (`docs/MICA-BINANCE-SIGNAL-MEMO.md`) reforça a urgência desta vertente: quando licença e admissibilidade regulatória passam a determinar se um player pode ou não seguir atendendo um mercado inteiro, o budget institucional tende a migrar para primitives que tornam esse estado demonstrável, auditável e operacionalmente reutilizável.
+
+Isso favorece exatamente o nosso framing de GTM:
+- não vender “tooling de compliance” genérico;
+- vender `operator admission + safeguards + reporting-aware execution`;
+- tratar Travel Rule como peça específica da oferta, não como descrição total do produto.
+
 ### O que falta para GTM forte
 Para o GTM ficar mais forte, o principal não é mais engenharia profunda. É:
 
@@ -177,6 +185,9 @@ A vertente GTM está pronta quando existir:
 1. **Pulso**
 2. **GTM packaging mínimo**
 3. **ZK uplift focal**
+
+### Observação pós-sinal MiCA
+O sinal MiCA/Binance não muda a ordem; ele só aumenta a confiança de que a segunda vertente certa depois de Pulso é mesmo **GTM packaging** — porque o mercado está dando mais evidência de que operator-side compliance primitives podem deixar de ser “nice to have” e virar condição de acesso.
 
 ### Por quê
 Porque hoje o maior ganho marginal não vem de abrir mais engenharia. Vem de:
