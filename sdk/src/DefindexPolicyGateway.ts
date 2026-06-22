@@ -39,6 +39,11 @@ import {
   type SafeguardsEvidencePayload,
 } from './defindex-policy-types.js';
 
+export interface SafeguardsRequestContext {
+  readonly expectedVault?: string;
+  readonly expectedOperatorId?: string;
+}
+
 export interface AuthorizeArgs {
   /** Privileged DeFindex operation being requested. */
   readonly operation: DefindexOperation;
@@ -55,11 +60,21 @@ export interface AuthorizeArgs {
    */
   readonly operatorAdmission?: OperatorAdmissionEvidencePayload;
   /**
+   * Optional caller-requested jurisdiction binding. When present alongside
+   * operator admission, the operator admission jurisdiction must match exactly.
+   */
+  readonly requestedJurisdiction?: string;
+  /**
    * Optional Phase 2 safeguards payload. When present, the gateway short-
    * circuits fail-closed on non-PASS safeguards posture before any verifier read
    * or downstream DeFindex client call.
    */
   readonly safeguards?: SafeguardsEvidencePayload;
+  /**
+   * Optional caller/request binding for safeguards payloads. When present
+   * alongside safeguards, mismatched vault/operator scope denies fail-closed.
+   */
+  readonly safeguardsContext?: SafeguardsRequestContext;
   /**
    * Optional Phase 2 reporting payload. When present, the gateway short-
    * circuits fail-closed on missing/invalid/expired reporting posture before any
@@ -133,6 +148,7 @@ export class DefindexPolicyGateway {
       policy,
       args.evidenceHashHex,
       args.operatorAdmission,
+      args.requestedJurisdiction,
     );
     if (operatorAdmissionDecision) {
       return operatorAdmissionDecision;
@@ -141,6 +157,7 @@ export class DefindexPolicyGateway {
       policy,
       args.evidenceHashHex,
       args.safeguards,
+      args.safeguardsContext,
     );
     if (safeguardsDecision) {
       return safeguardsDecision;
@@ -190,12 +207,16 @@ export class DefindexPolicyGateway {
     operatorAdmission?: OperatorAdmissionEvidencePayload,
     safeguards?: SafeguardsEvidencePayload,
     reporting?: ReportingEvidencePayload,
+    requestedJurisdiction?: string,
+    safeguardsContext?: SafeguardsRequestContext,
   ): Promise<AuthorizedActionResult> {
     const decision = await this.authorize({
       operation: 'createVault',
       evidenceHashHex,
       operatorAdmission,
+      requestedJurisdiction,
       safeguards,
+      safeguardsContext,
       reporting,
     });
     if (!decision.allowed) {
@@ -215,12 +236,23 @@ export class DefindexPolicyGateway {
     operatorAdmission?: OperatorAdmissionEvidencePayload,
     safeguards?: SafeguardsEvidencePayload,
     reporting?: ReportingEvidencePayload,
+    requestedJurisdiction?: string,
+    safeguardsContext?: SafeguardsRequestContext,
   ): Promise<AuthorizedActionResult> {
+    const derivedSafeguardsContext = safeguards
+      ? {
+          ...safeguardsContext,
+          expectedVault: request.vault,
+          expectedOperatorId: request.caller,
+        }
+      : safeguardsContext;
     const decision = await this.authorize({
       operation: 'rebalanceVault',
       evidenceHashHex,
       operatorAdmission,
+      requestedJurisdiction,
       safeguards,
+      safeguardsContext: derivedSafeguardsContext,
       reporting,
     });
     if (!decision.allowed) {
@@ -263,12 +295,23 @@ export class DefindexPolicyGateway {
     operatorAdmission?: OperatorAdmissionEvidencePayload,
     safeguards?: SafeguardsEvidencePayload,
     reporting?: ReportingEvidencePayload,
+    requestedJurisdiction?: string,
+    safeguardsContext?: SafeguardsRequestContext,
   ): Promise<AuthorizedActionResult> {
+    const derivedSafeguardsContext = safeguards
+      ? {
+          ...safeguardsContext,
+          expectedVault: request.vault,
+          expectedOperatorId: request.caller,
+        }
+      : safeguardsContext;
     const decision = await this.authorize({
       operation: 'distributeFees',
       evidenceHashHex,
       operatorAdmission,
+      requestedJurisdiction,
       safeguards,
+      safeguardsContext: derivedSafeguardsContext,
       reporting,
     });
     if (!decision.allowed) {
@@ -288,6 +331,7 @@ export class DefindexPolicyGateway {
     policy: OperationPolicy,
     evidenceHashHex: string,
     operatorAdmission?: OperatorAdmissionEvidencePayload,
+    requestedJurisdiction?: string,
   ): PolicyDecision | null {
     if (!operatorAdmission) {
       return null;
@@ -298,6 +342,25 @@ export class DefindexPolicyGateway {
         evidenceHashHex,
         'OPERATOR_ROLE_MISMATCH',
         `operator admission role ${operatorAdmission.requiredRole} does not match required role ${policy.requiredRole}`,
+      );
+    }
+    if (operatorAdmission.serviceScope !== policy.requiredServiceScope) {
+      return this.denyOperatorAdmission(
+        policy,
+        evidenceHashHex,
+        'OPERATOR_SERVICE_SCOPE_MISMATCH',
+        `operator admission service scope ${operatorAdmission.serviceScope} does not match required service scope ${policy.requiredServiceScope}`,
+      );
+    }
+    if (
+      requestedJurisdiction &&
+      operatorAdmission.jurisdiction !== requestedJurisdiction
+    ) {
+      return this.denyOperatorAdmission(
+        policy,
+        evidenceHashHex,
+        'OPERATOR_JURISDICTION_MISMATCH',
+        `operator admission jurisdiction ${operatorAdmission.jurisdiction} does not match requested jurisdiction ${requestedJurisdiction}`,
       );
     }
     if (operatorAdmission.status === 'FAIL') {
@@ -334,7 +397,9 @@ export class DefindexPolicyGateway {
       | 'OPERATOR_ADMISSION_FAIL'
       | 'OPERATOR_ADMISSION_REVIEW'
       | 'OPERATOR_ADMISSION_EXPIRED'
-      | 'OPERATOR_ROLE_MISMATCH',
+      | 'OPERATOR_ROLE_MISMATCH'
+      | 'OPERATOR_SERVICE_SCOPE_MISMATCH'
+      | 'OPERATOR_JURISDICTION_MISMATCH',
     detail: string,
   ): PolicyDecision {
     return {
@@ -356,6 +421,7 @@ export class DefindexPolicyGateway {
     policy: OperationPolicy,
     evidenceHashHex: string,
     safeguards?: SafeguardsEvidencePayload,
+    safeguardsContext?: SafeguardsRequestContext,
   ): PolicyDecision | null {
     if (!safeguards) {
       return null;
@@ -366,6 +432,28 @@ export class DefindexPolicyGateway {
         evidenceHashHex,
         'SAFEGUARDS_ROLE_MISMATCH',
         `safeguards role ${safeguards.requiredRole} does not match required role ${policy.requiredRole}`,
+      );
+    }
+    if (
+      safeguardsContext?.expectedVault &&
+      safeguards.vault !== safeguardsContext.expectedVault
+    ) {
+      return this.denySafeguards(
+        policy,
+        evidenceHashHex,
+        'SAFEGUARDS_VAULT_MISMATCH',
+        `safeguards vault ${safeguards.vault} does not match expected vault ${safeguardsContext.expectedVault}`,
+      );
+    }
+    if (
+      safeguardsContext?.expectedOperatorId &&
+      safeguards.operatorId !== safeguardsContext.expectedOperatorId
+    ) {
+      return this.denySafeguards(
+        policy,
+        evidenceHashHex,
+        'SAFEGUARDS_OPERATOR_MISMATCH',
+        `safeguards operator ${safeguards.operatorId} does not match expected operator ${safeguardsContext.expectedOperatorId}`,
       );
     }
     if (safeguards.verdict === 'FAIL') {
@@ -429,7 +517,9 @@ export class DefindexPolicyGateway {
       | 'SAFEGUARDS_SEGREGATION'
       | 'SAFEGUARDS_INCIDENT_OPEN'
       | 'SAFEGUARDS_EXPIRED'
-      | 'SAFEGUARDS_ROLE_MISMATCH',
+      | 'SAFEGUARDS_ROLE_MISMATCH'
+      | 'SAFEGUARDS_VAULT_MISMATCH'
+      | 'SAFEGUARDS_OPERATOR_MISMATCH',
     detail: string,
   ): PolicyDecision {
     return {

@@ -289,6 +289,39 @@ describe('DefindexPolicyGateway.authorize', () => {
     expect(calls).toEqual([]);
   });
 
+  it('service-scope-mismatched operator admission denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload({
+        serviceScope: 'defindex_vault_manager',
+      }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_SERVICE_SCOPE_MISMATCH/);
+    expect(calls).toEqual([]);
+  });
+
+  it('requested-jurisdiction-mismatched operator admission denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      requestedJurisdiction: 'EU',
+      operatorAdmission: operatorAdmissionPayload({ jurisdiction: 'BR' }),
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:OPERATOR_JURISDICTION_MISMATCH/);
+    expect(calls).toEqual([]);
+  });
+
   it('PASS operator admission still requires PASS attestation', async () => {
     const { verifier, calls } = fakeVerifier('PASS');
     const gw = new DefindexPolicyGateway(verifier, spyClient().client);
@@ -296,6 +329,22 @@ describe('DefindexPolicyGateway.authorize', () => {
     const d = await gw.authorize({
       operation: 'rebalanceVault',
       evidenceHashHex: HASH,
+      operatorAdmission: operatorAdmissionPayload(),
+    });
+
+    expect(d.allowed).toBe(true);
+    expect(d.reason).toMatch(/^ALLOW:PASS/);
+    expect(calls).toEqual([{ useCaseId: 'defindex_rebalance_v1', evidenceHashHex: HASH }]);
+  });
+
+  it('PASS operator admission with matching scope and requested jurisdiction requires PASS attestation', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      requestedJurisdiction: 'BR',
       operatorAdmission: operatorAdmissionPayload(),
     });
 
@@ -364,6 +413,38 @@ describe('DefindexPolicyGateway.authorize', () => {
     expect(calls).toEqual([]);
   });
 
+  it('vault-mismatched safeguards context denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ vault: 'CVAULT_OTHER' }),
+      safeguardsContext: { expectedVault: rebalanceReq.vault },
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_VAULT_MISMATCH/);
+    expect(calls).toEqual([]);
+  });
+
+  it('operator-mismatched safeguards context denies before verifier is called', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ operatorId: 'operator-other' }),
+      safeguardsContext: { expectedOperatorId: 'operator-001' },
+    });
+
+    expect(d.allowed).toBe(false);
+    expect(d.reason).toMatch(/^DENY:SAFEGUARDS_OPERATOR_MISMATCH/);
+    expect(calls).toEqual([]);
+  });
+
   it('PASS safeguards still requires PASS attestation', async () => {
     const { verifier, calls } = fakeVerifier('PASS');
     const gw = new DefindexPolicyGateway(verifier, spyClient().client);
@@ -375,6 +456,25 @@ describe('DefindexPolicyGateway.authorize', () => {
     });
 
     expect(d.allowed).toBe(true);
+    expect(calls).toEqual([{ useCaseId: 'defindex_rebalance_v1', evidenceHashHex: HASH }]);
+  });
+
+  it('matching safeguards vault and operator still require PASS attestation', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const gw = new DefindexPolicyGateway(verifier, spyClient().client);
+
+    const d = await gw.authorize({
+      operation: 'rebalanceVault',
+      evidenceHashHex: HASH,
+      safeguards: safeguardsPayload({ operatorId: rebalanceReq.caller }),
+      safeguardsContext: {
+        expectedVault: rebalanceReq.vault,
+        expectedOperatorId: rebalanceReq.caller,
+      },
+    });
+
+    expect(d.allowed).toBe(true);
+    expect(d.reason).toMatch(/^ALLOW:PASS/);
     expect(calls).toEqual([{ useCaseId: 'defindex_rebalance_v1', evidenceHashHex: HASH }]);
   });
 
@@ -464,6 +564,25 @@ describe('DefindexPolicyGateway execution helpers', () => {
     expect(spy.rebalance).toHaveBeenCalledWith(rebalanceReq);
   });
 
+  it('derives safeguards vault and caller binding for rebalance helpers', async () => {
+    const { verifier, calls } = fakeVerifier('PASS');
+    const spy = spyClient();
+    const gw = new DefindexPolicyGateway(verifier, spy.client);
+
+    const out = await gw.prepareRebalanceIfAuthorized(
+      rebalanceReq,
+      HASH,
+      undefined,
+      safeguardsPayload({ vault: 'CVAULT_OTHER', operatorId: rebalanceReq.caller }),
+    );
+
+    expect(out.decision.allowed).toBe(false);
+    expect(out.decision.reason).toMatch(/^DENY:SAFEGUARDS_VAULT_MISMATCH/);
+    expect(out.prepared).toBeNull();
+    expect(calls).toEqual([]);
+    expect(spy.rebalance).not.toHaveBeenCalled();
+  });
+
   it('derives a deterministic canonical evidence hash for rebalance payloads', () => {
     const gw = new DefindexPolicyGateway(fakeVerifier('PASS').verifier, spyClient().client);
     const payloadA = rebalanceEvidencePayload();
@@ -548,6 +667,21 @@ describe('DEFAULT_OPERATION_POLICIES', () => {
     for (const p of DEFAULT_OPERATION_POLICIES) {
       expect(SYMBOL_RE.test(p.useCaseId), `invalid symbol: ${p.useCaseId}`).toBe(true);
     }
+  });
+
+  it('binds every operation to its canonical operator service scope', () => {
+    expect(
+      Object.fromEntries(
+        DEFAULT_OPERATION_POLICIES.map((p) => [p.operation, p.requiredServiceScope]),
+      ),
+    ).toEqual({
+      createVault: 'defindex_vault_manager',
+      rebalanceVault: 'defindex_rebalance_manager',
+      rescueVault: 'defindex_emergency_manager',
+      distributeFees: 'defindex_fee_receiver',
+      pauseStrategy: 'defindex_emergency_manager',
+      unpauseStrategy: 'defindex_emergency_manager',
+    });
   });
 
   it('listPolicies / policyFor expose the configured map', () => {

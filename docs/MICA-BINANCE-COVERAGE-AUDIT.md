@@ -56,7 +56,7 @@ A auditoria triangulou quatro fontes:
 
 ### SDK
 - `npm run build` → **ok**
-- `npm run test:run` → **96/96 testes verdes**
+- `npm run test:run` → **104/104 testes verdes**
 
 ## Matriz — o que a DPO2U oferece hoje para um recorte MiCA/CASP
 
@@ -64,8 +64,8 @@ A auditoria triangulou quatro fontes:
 |---|---|---|---|
 | catálogo MiCA/CASP | **real** | `sdk/src/use-cases.ts` expõe `micar_casp_v1`, `micar_art_v1`, `travel_rule_v1`, `vasp_por_br_v1` | o vocabulário regulatório já existe e está tipado/catalogado |
 | policy gate para ações privilegiadas | **real** | `DefindexPolicyGateway.ts` + `DefindexPolicyGateway.test.ts` | há enforcement fail-closed para ações role-gated |
-| operator admission posture | **real, narrow** | `OperatorAdmissionEvidencePayload`; deny paths `OPERATOR_*`; testes dedicados | oferece primitive de admissibilidade/revalidação/role scope, mas num seam estreito |
-| safeguards / reserve / segregation posture | **real, narrow** | `SafeguardsEvidencePayload`; deny paths para PoR, segregation, incident open, expiry; testes dedicados | oferece primitive útil de safeguards posture antes de ação privilegiada |
+| operator admission posture | **real, narrow** | `OperatorAdmissionEvidencePayload`; `requiredServiceScope`; deny paths `OPERATOR_*`; testes dedicados | oferece primitive de admissibilidade/revalidação/role/scope/jurisdição solicitada, mas num seam estreito |
+| safeguards / reserve / segregation posture | **real, narrow** | `SafeguardsEvidencePayload`; deny paths para PoR, segregation, incident open, expiry e bind de vault/operador; testes dedicados | oferece primitive útil de safeguards posture antes de ação privilegiada, sem virar custody stack |
 | reporting evidence loop | **real, narrow** | `ReportingEvidenceFlow.test.ts`; `defindex-reporting-evidence-demo.mjs` | já existe loop `artifact -> hash -> verdict -> allow/deny` |
 | real operator transaction preparation | **real** | `DefindexSdkAdapter.ts` | já há adapter para preparar unsigned tx contra `@defindex/sdk` |
 | proof-bound privileged execution live | **prototype-real** | `docs/DEFINDEX-PROOF-BOUND-EXECUTION-LIVE-SLICE.md` | prova um lane vivo e narrow de execução condicionada |
@@ -92,8 +92,8 @@ E explicitamente **não** cobre depósitos retail como gate nativo. Isso está c
 ### 2. Bloqueia antes do verify principal quando posture auxiliar falha
 O `DefindexPolicyGateway` já nega antes de consultar o verifier principal quando encontra:
 
-- operator admission `FAIL`, `REVIEW`, expirado ou role mismatch;
-- safeguards `FAIL`, `REVIEW`, PoR ≠ `PASS`, segregation ≠ `PASS`, incidente `OPEN`, expirado;
+- operator admission `FAIL`, `REVIEW`, expirado, role mismatch, service scope mismatch ou jurisdição divergente da jurisdição solicitada;
+- safeguards `FAIL`, `REVIEW`, PoR ≠ `PASS`, segregation ≠ `PASS`, incidente `OPEN`, expirado, ou divergente do vault/operador esperado pela requisição;
 - reporting artifact `MISSING`, `REVIEW`, `FAIL`, expirado.
 
 Isso é importante porque não é só modelagem sem consequência; há **deny path mecânico** coberto por teste.
@@ -215,6 +215,7 @@ Eles tenderiam a querer:
 
 **O que já oferecemos:**
 - `SafeguardsEvidencePayload` com PoR, segregation, incident status e expiry;
+- bind fail-closed opcional do payload ao vault/operador esperado pela ação;
 - deny paths mecânicos já testados;
 - compatibilidade conceitual forte com esse problema.
 
@@ -309,7 +310,7 @@ A ordem correta não é abrir uma plataforma nova. É:
 ### O que já oferecemos de verdade
 - catálogo MiCA/CASP / VASP / Travel Rule existente;
 - operator admission posture payload + fail-closed enforcement;
-- safeguards posture payload + fail-closed enforcement;
+- safeguards posture payload + fail-closed enforcement, incluindo bind narrow de vault/operador;
 - reporting evidence loop com hash/verdict/expiry;
 - real adapter para operator surface preparada;
 - live narrow slice de execução privilegiada evidence-bound.

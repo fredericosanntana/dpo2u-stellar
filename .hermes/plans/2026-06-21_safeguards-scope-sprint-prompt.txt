@@ -1,0 +1,51 @@
+Você está trabalhando no repo /root/dpo2u-stellar.
+
+Objetivo: executar a feature 2 planejada — safeguards scope binding — mantendo o mesmo padrão narrow, fail-closed e anti-overclaim.
+
+Escopo EXATO:
+1. Em `sdk/src/DefindexPolicyGateway.ts`, introduza um contexto opcional de safeguards, por exemplo `SafeguardsRequestContext`, com:
+   - `expectedVault?: string`
+   - `expectedOperatorId?: string`
+2. Inclua `safeguardsContext?: SafeguardsRequestContext` em `AuthorizeArgs`.
+3. Evolua `evaluateSafeguards(...)` para negar fail-closed quando:
+   - `safeguardsContext.expectedVault` existir e `safeguards.vault !== expectedVault`
+   - `safeguardsContext.expectedOperatorId` existir e `safeguards.operatorId !== expectedOperatorId`
+4. Adicione os códigos de deny adequados:
+   - `SAFEGUARDS_VAULT_MISMATCH`
+   - `SAFEGUARDS_OPERATOR_MISMATCH`
+5. Propague `safeguardsContext?` para os helpers públicos relevantes:
+   - `prepareVaultCreationIfAuthorized(...)` pode aceitar o contexto opcional, mas não derive `expectedVault` automaticamente (o vault ainda não existe)
+   - `prepareRebalanceIfAuthorized(...)` deve derivar automaticamente `expectedVault = request.vault` e `expectedOperatorId = request.caller` quando houver safeguards payload
+   - `prepareFeeDistributionIfAuthorized(...)` deve derivar automaticamente `expectedVault = request.vault` e `expectedOperatorId = request.caller` quando houver safeguards payload
+6. Atualize `sdk/src/__tests__/DefindexPolicyGateway.test.ts` usando TDD:
+   - adicionar RED/GREEN para safeguards vault mismatch
+   - adicionar RED/GREEN para safeguards operator mismatch
+   - adicionar caminho feliz mostrando que safeguards matching `vault + operator` ainda exigem attestation PASS
+   - adicionar teste no helper de rebalance provando que ele deriva corretamente o bind de `vault + caller`
+7. Atualize docs mínimas:
+   - `docs/PHASE2-OPERATOR-SAFEGUARDS-PRD.md`
+   - `docs/MICA-BINANCE-COVERAGE-AUDIT.md`
+   Somente para refletir que safeguards agora pode bindar vault/operador correto, sem inflar claims.
+8. Escreva relatório curto em `/root/dpo2u-stellar/.hermes/reports/2026-06-21_safeguards-scope-sprint-report.md` com:
+   - arquivos alterados
+   - testes adicionados
+   - validações rodadas
+   - limitações honestas
+
+Fora de escopo:
+- multi-entity safeguards platform
+- custody orchestration
+- MiCA/CASP full
+- retail deposit/withdraw gating
+- Travel Rule enforcement
+- commits ou push
+
+Modo obrigatório:
+- TDD estrito
+- mudança mínima necessária
+- manter compatibilidade pública além de novos parâmetros opcionais/contexto
+- preservar narrativa anti-overclaim
+
+Validação obrigatória no final:
+1. `npm run test:run` em `/root/dpo2u-stellar/sdk`
+2. `npm run build` em `/root/dpo2u-stellar/sdk`

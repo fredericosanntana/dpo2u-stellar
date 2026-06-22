@@ -63,6 +63,8 @@ export interface OperationPolicy {
   readonly operation: DefindexOperation;
   /** DeFindex role that natively authorizes this op on-chain. */
   readonly requiredRole: DefindexRole;
+  /** Canonical operator service scope required for this operation. */
+  readonly requiredServiceScope: string;
   /** DPO2U use_case_id whose PASS attestation gates this op. */
   readonly useCaseId: string;
   /** Human-readable rationale for the gate (for audit / handoff to DeFindex). */
@@ -397,6 +399,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'createVault',
     requiredRole: 'Manager',
+    requiredServiceScope: 'defindex_vault_manager',
     useCaseId: 'defindex_vault_create_v1',
     rationale:
       'New managed vault must clear treasury-mandate / MiCAR-ART / CVM-175 ' +
@@ -405,6 +408,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'rebalanceVault',
     requiredRole: 'RebalanceManager',
+    requiredServiceScope: 'defindex_rebalance_manager',
     useCaseId: 'defindex_rebalance_v1',
     rationale:
       'Reallocation across strategies must match the approved mandate/risk ' +
@@ -413,6 +417,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'rescueVault',
     requiredRole: 'EmergencyManager',
+    requiredServiceScope: 'defindex_emergency_manager',
     useCaseId: 'defindex_rescue_v1',
     rationale:
       'Emergency withdraw is high-impact; gate on an incident/authorization ' +
@@ -421,6 +426,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'distributeFees',
     requiredRole: 'FeeReceiver',
+    requiredServiceScope: 'defindex_fee_receiver',
     useCaseId: 'defindex_fee_distrib_v1',
     rationale:
       'Fee distribution to the receiver gated on a settlement/AML attestation ' +
@@ -429,6 +435,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'pauseStrategy',
     requiredRole: 'EmergencyManager',
+    requiredServiceScope: 'defindex_emergency_manager',
     useCaseId: 'defindex_pause_v1',
     rationale:
       'Pausing a strategy is a protective action; require an incident/risk ' +
@@ -437,6 +444,7 @@ export const DEFAULT_OPERATION_POLICIES: readonly OperationPolicy[] = [
   {
     operation: 'unpauseStrategy',
     requiredRole: 'EmergencyManager',
+    requiredServiceScope: 'defindex_emergency_manager',
     useCaseId: 'defindex_unpause_v1',
     rationale:
       'Resuming a paused strategy must re-clear the risk attestation that ' +

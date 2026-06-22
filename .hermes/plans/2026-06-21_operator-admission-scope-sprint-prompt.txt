@@ -1,0 +1,55 @@
+Você está trabalhando no repo /root/dpo2u-stellar.
+
+Objetivo: endurecer a feature de operator admission para ficar mais útil institucionalmente sem overengineering.
+
+Escopo EXATO da feature 1:
+1. Em `sdk/src/defindex-policy-types.ts`, evolua `OperationPolicy` para carregar `requiredServiceScope`.
+2. Preencha `requiredServiceScope` em `DEFAULT_OPERATION_POLICIES` com strings canônicas por operação:
+   - createVault -> defindex_vault_manager
+   - rebalanceVault -> defindex_rebalance_manager
+   - rescueVault -> defindex_emergency_manager
+   - distributeFees -> defindex_fee_receiver
+   - pauseStrategy -> defindex_emergency_manager
+   - unpauseStrategy -> defindex_emergency_manager
+3. Em `sdk/src/DefindexPolicyGateway.ts`, endureça `evaluateOperatorAdmission(...)` para negar fail-closed quando:
+   - `operatorAdmission.serviceScope !== policy.requiredServiceScope`
+   - `AuthorizeArgs.requestedJurisdiction` estiver presente e `operatorAdmission.jurisdiction !== requestedJurisdiction`
+4. Adicione os códigos de deny adequados nas reasons:
+   - `OPERATOR_SERVICE_SCOPE_MISMATCH`
+   - `OPERATOR_JURISDICTION_MISMATCH`
+5. Propague `requestedJurisdiction?: string` para os execution helpers públicos relevantes (`prepareVaultCreationIfAuthorized`, `prepareRebalanceIfAuthorized`, `prepareFeeDistributionIfAuthorized`) apenas como parâmetro opcional, mantendo compatibilidade.
+6. Atualize testes em `sdk/src/__tests__/DefindexPolicyGateway.test.ts` usando TDD de verdade:
+   - escreva primeiro testes que falhem para service scope mismatch
+   - depois para requested jurisdiction mismatch
+   - confirme que ainda passa quando scope/jurisdiction batem e o verifier retorna PASS
+7. Atualize docs mínimas, sem expandir narrativa:
+   - `docs/PHASE2-OPERATOR-SAFEGUARDS-PRD.md`
+   - `docs/MICA-BINANCE-COVERAGE-AUDIT.md`
+   Só para refletir que operator admission já não é apenas role/status/expiry; agora também pode bindar service scope e jurisdiction de forma mecânica.
+
+Fora de escopo:
+- multi-entity IAM platform
+- Travel Rule enforcement
+- custody stack
+- retail deposits/withdrawals
+- qualquer claim de MiCA/CASP full
+- commits ou push
+
+Modo de trabalho obrigatório:
+- TDD estrito
+- mínima mudança necessária
+- não quebre API pública além de adicionar parâmetros opcionais / campo novo de policy
+- mantenha naming consistente com o repo
+- preserve anti-overclaim
+
+Validação obrigatória no final:
+1. `npm run test:run` em `/root/dpo2u-stellar/sdk`
+2. `npm run build` em `/root/dpo2u-stellar/sdk`
+
+Entrega obrigatória:
+- faça as mudanças nos arquivos
+- escreva um relatório curto em `/root/dpo2u-stellar/.hermes/reports/2026-06-21_operator-admission-scope-sprint-report.md` com:
+  - arquivos alterados
+  - testes adicionados
+  - validações rodadas
+  - limitações honestas

@@ -76,6 +76,8 @@ Exemplos de elementos do circuito:
 - suspensão/revogação;
 - postura mínima para manter `Manager`, `Rebalance Manager`, `Emergency Manager` ou `Fee Receiver`.
 
+Implementação atual: o gateway já nega fail-closed quando a admissão do operador não bate com o role requerido, o `requiredServiceScope` canônico da operação, a jurisdição solicitada quando fornecida, o status `PASS` ou a janela de validade.
+
 ### 2. Safeguards / reserve / incident posture
 Pergunta respondida:
 
@@ -89,6 +91,8 @@ Exemplos de elementos do circuito:
 - incident controls;
 - resposta a evento excepcional;
 - bloqueio de ação quando posture crítica falha.
+
+Implementação atual: quando um payload de safeguards é fornecido, o gateway pode bindar esse payload ao `vault` e ao operador esperados pela requisição. Nos helpers de rebalance e distribuição de fees, esse bind é derivado de `request.vault` e `request.caller`; em criação de vault, o contexto é apenas opcional porque o vault ainda não existe.
 
 ### 3. Reporting evidence loop
 Pergunta respondida:
