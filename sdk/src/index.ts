@@ -34,6 +34,31 @@ export type {
   PrepareRebalanceFromEvidenceArgs,
   SafeguardsRequestContext,
 } from './DefindexPolicyGateway.js';
+// BCB/VASP + CVM (RCVM 88) compliance pack — Category-A proof-bound predicates.
+export {
+  evaluateBcbVasp,
+  evaluateCvmRcvm88,
+  PREDICATE_REGISTRY,
+  CVM_RETAIL_CAP_CENTAVOS,
+  CVM_ISSUER_CAP_CENTAVOS,
+  CVM_CAPTURE_MAX_DAYS,
+  CVM_COOLDOWN_DAYS,
+  BCB_COUNTERPARTY_CUTOFF_ISO,
+} from './bcb-policy.js';
+export type {
+  PredicateVerdict,
+  PredicateResult,
+  PolicyEvaluation,
+  PolicyAction,
+  BcbSegregationEvidence,
+  BcbBufferEvidence,
+  BcbAdmissionEvidence,
+  CvmInvestorProfile,
+  CvmRetailEvidence,
+  CvmIssuerEvidence,
+  BcbVaspEvidence,
+  CvmRcvm88Evidence,
+} from './bcb-policy.js';
 export { DefindexSdkAdapter } from './DefindexSdkAdapter.js';
 export type { DefindexSdkAdapterOptions } from './DefindexSdkAdapter.js';
 export { DEFAULT_OPERATION_POLICIES } from './defindex-policy-types.js';
