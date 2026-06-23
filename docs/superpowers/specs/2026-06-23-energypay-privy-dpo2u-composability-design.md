@@ -44,7 +44,9 @@ DeFindex for treasury," DPO2U disappears in the middle — that must not happen.
   Stellar envelope — covered at keypair level. **Pattern confirmed:** Privy exposes
   raw hash signing for Stellar (`useSignRawHash`), and Soroban supports auth-entry
   signing — so the operator signs the `SorobanAuthorizationEntry` hash while a
-  separate fee-payer sources the tx. End-to-end testnet proof is the Phase-0 spike.
+  separate fee-payer sources the tx. **Phase-0 spike PASSED live (2026-06-23):** a
+  Privy Stellar wallet raw-signed a hash and it verified as Stellar ed25519 — see
+  `scripts/spikes/privy-soroban-authentry/PHASE0-RESULT.md`.
 - **EnergyPay** already has: Stellar mainnet settlement, JWT + operator-role
   validation, server-side signing for `PLATFORM_MANAGED` wallets (`wallet_modes`),
   `pending_roles` for privileged roles, receipts (txHash + ledger + memo), PLD
@@ -201,10 +203,11 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
 
 ## 11. Open questions / assumptions to confirm in implementation
 
-- **Privy ↔ Soroban signing — pattern identified (validate in Phase-0 spike).**
-  Privy raw hash signing (`useSignRawHash`, chainType `stellar`) + Soroban auth-entry
-  signing: compute the `SorobanAuthorizationEntry` preimage hash, have Privy sign it,
-  a separate fee-payer sources the tx. Confirm end-to-end on testnet before the plan.
+- **Privy ↔ Soroban signing — CONFIRMED LIVE (2026-06-23).** A Privy Stellar wallet
+  raw-signs a 32-byte hash (`POST /v1/wallets/{id}/raw_sign`) and the signature
+  verifies as Stellar ed25519. Auth-entry signing = ed25519 over the entry preimage
+  hash, so this closes the Privy unknown. Remaining assembly (`authorizeEntry` +
+  fee-payer) is standard stellar-sdk. Evidence: `scripts/spikes/privy-soroban-authentry/PHASE0-RESULT.md`.
 - **EnergyPay signing seam — located.** `backend/src/routes/tokenRoutes.js` /
   `admin.js` sign via `Keypair.fromSecret(decryptSecret(...)).sign(...)` (classic txs,
   `PLATFORM_MANAGED`). `admit()` inserts before `.sign()`; the Privy embedded wallet

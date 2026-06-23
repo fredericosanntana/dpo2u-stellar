@@ -42,10 +42,12 @@ node spike.mjs
 - **Pattern:** confirmed by Privy + Stellar docs (see spec §4 / §11).
 - **Harness:** written, `node --check` clean. Encodes the exact `authorizeEntry` +
   raw-sign flow; `--mock` proves the Stellar half with zero Privy dependency.
-- **Not executed here:** the full run needs (a) Privy app credentials and (b) a
-  target Soroban contract whose method requires the operator's auth-entry — both
-  operator-side. The `--mock` run needs a funded testnet fee-payer + a target
-  contract.
+- **Privy raw-sign half: PASSED LIVE (2026-06-23)** — a Privy Stellar wallet
+  raw-signed a hash and it verified as Stellar ed25519. See `PHASE0-RESULT.md`.
+  This closes the only Privy-specific unknown.
+- **Remaining (low-risk):** the full `authorizeEntry`-against-a-contract run via
+  `spike.mjs` needs a target Soroban contract + funded fee-payer; the signer
+  callback calls the same Privy `raw_sign`. Standard stellar-sdk plumbing.
 
 ## Decision gate
 
