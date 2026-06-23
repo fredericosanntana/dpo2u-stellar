@@ -51,11 +51,18 @@ bound to the live intent's `derive_zk_context` (edit `CONTEXT` in
 `zk-prover/membership/gen-input.js`, re-run the prove/convert steps in
 `zk-prover/membership/build.sh`), and call `execute_rebalance_with_proof`.
 
+## Validated live
+
+A full proof-bound run was executed on testnet on 2026-06-23 — tampered intent
+rejected on-chain (`Error(Contract, #4)`), proof-bound `Unwind(1000)` executed
+(tx `1a2f08b1…`, `verify_proof ⇒ true`). Evidence + reproduce steps:
+[`docs/PULSO-LIVE-RUN-2026-06-23.md`](../../docs/PULSO-LIVE-RUN-2026-06-23.md).
+
 ## Honesty
 
-- Verified in this repo: SDK build + **107 SDK tests** + **23 gate tests** green
+- Verified in this repo: SDK build + **107 SDK tests** + **26 gate tests** green
   (incl. a real on-chain-verified membership proof); these scripts lint clean
-  (`bash -n`).
-- The **live** testnet run requires a funded `stellar` CLI identity and per-intent
-  proof regeneration; it is not executed by the build itself. See
+  (`bash -n`); proof-bound lane validated live on testnet (above).
+- The **live** run requires a funded `stellar` CLI identity and per-intent proof
+  regeneration; it is not executed by the build itself. See
   [`docs/KNOWN-GAPS.md`](../../docs/KNOWN-GAPS.md).

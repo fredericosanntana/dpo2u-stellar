@@ -12,6 +12,10 @@ anything externally.
 - On-chain **proof-bound execution**: `execute_rebalance_with_proof` verifies a
   real Groth16/BN254 proof via `por-verifier` (`CBM6WJ…`) before forwarding.
 - Live testnet rebalance: `Invest(1000)` tx `cf790f4d…` (invested 999 / total 1000).
+- **Live proof-bound run (2026-06-23):** tampered intent rejected on-chain
+  (`Error(Contract, #4)`); proof-bound `Unwind(1000)` executed live, tx
+  `1a2f08b1…`, `verify_proof ⇒ true` → vault rebalance. See
+  [`PULSO-LIVE-RUN-2026-06-23.md`](PULSO-LIVE-RUN-2026-06-23.md).
 - SDK over the real `@defindex/sdk@0.3.0`: build green, **107 tests**.
 
 ## Known gaps (do not overclaim)
@@ -40,7 +44,9 @@ anything externally.
    adapter now **refuses** amounts above `2^53-1` instead of silently rounding
    (fail-closed); the SDK's HTTP surface still caps precision at the JS
    safe-integer range. The on-chain gate uses `i128` and is unaffected.
-5. **Testnet only.** No mainnet; no governance/multisig over the gate's verifier
-   and operator set; no MiCA/CASP/Travel Rule enforcement.
+5. **Testnet only.** The proof-bound lane is **validated live on testnet** (see
+   `PULSO-LIVE-RUN-2026-06-23.md`), but there is no mainnet deployment; no
+   governance/multisig over the gate's verifier and operator set; no
+   MiCA/CASP/Travel Rule enforcement.
 6. **ZK ceremony.** The membership / policy circuits use a 1-party dev coordinator
    ceremony — fine for a demo, gated for mainnet.
