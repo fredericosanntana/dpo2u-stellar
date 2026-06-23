@@ -27,7 +27,11 @@ const DECOY_NOTE = {
   secret: 0x54545454545454545454545454545454545454545454545454545454n,
 };
 const RECIPIENT = 0x00a11ce0000000000000000000000000000000000000000000000000beef01n;
-const CONTEXT = 0x00c0ffee000000000000000000000000000000000000000000000000d0c0c0n;
+// Bound to the gate's derive_zk_context(evidence_hash) for the test payload —
+// this is PUB_CONTEXT_SAMPLE in the defindex-rebalance-gate tests. Setting the
+// membership proof's context to the on-chain-derived value is what binds the
+// admission proof to the exact live intent (host↔circuit parity).
+const CONTEXT = 0x00a07a7e7f20e6f06d9692a8785fe7dc837f6094e817b3bbbe735be0c1db8ba0n;
 const WITNESS_INDEX = 0;
 const ZERO_LEAF = 0n;
 

@@ -22,6 +22,13 @@ pub enum GateError {
     BadProofSignals = 9,
     BadProofContext = 10,
     ProofNotPass = 11,
+    /// Membership lane: the proof's root signal does not match the pinned
+    /// admitted positive-set root.
+    NonMemberRoot = 12,
+    /// Membership lane: this nullifier was already consumed (anti-replay).
+    NullifierReplay = 13,
+    /// Membership lane: no admitted root has been pinned by the admin yet.
+    AdmittedRootNotSet = 14,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -81,6 +88,13 @@ enum DataKey {
     ConsumedEvidence(BytesN<32>),
     VerifierAddr,
     VerifierVk,
+    /// Pinned root of the admitted positive-set for the ZK membership lane.
+    /// Admin-set (same trust model as the verifier). The demo / pin-first path.
+    AdmittedRoot,
+    /// Optional association-set provider contract. When set, the gate cross-calls
+    /// its `current_root()` for the live admitted root and the pinned root is
+    /// ignored. This is the mainnet upgrade over the admin-pinned root.
+    RootProvider,
 }
 
 #[contract]
@@ -198,6 +212,56 @@ impl DefindexRebalanceGate {
         env.events().publish((symbol_short!("verifier"),), verifier);
     }
 
+    /// Pin the admitted positive-set root that the ZK membership lane checks the
+    /// proof's `root` public signal against. Admin-gated, mirroring `set_verifier`.
+    pub fn set_admitted_root(env: Env, admin: Address, root: BytesN<32>) {
+        admin.require_auth();
+        Self::assert_admin(&env, &admin);
+        env.storage().instance().set(&DataKey::AdmittedRoot, &root);
+        env.events().publish((symbol_short!("adm_root"),), root);
+    }
+
+    pub fn admitted_root(env: Env) -> Option<BytesN<32>> {
+        env.storage().instance().get(&DataKey::AdmittedRoot)
+    }
+
+    /// Point the membership lane at a live association-set provider. Once set,
+    /// the gate cross-calls `provider.current_root()` for the admitted root
+    /// instead of using the pinned root. Admin-gated.
+    pub fn set_root_provider(env: Env, admin: Address, provider: Address) {
+        admin.require_auth();
+        Self::assert_admin(&env, &admin);
+        env.storage().instance().set(&DataKey::RootProvider, &provider);
+        env.events().publish((symbol_short!("rootprov"),), provider);
+    }
+
+    /// Remove the live root provider, falling back to the admin-pinned root.
+    pub fn clear_root_provider(env: Env, admin: Address) {
+        admin.require_auth();
+        Self::assert_admin(&env, &admin);
+        env.storage().instance().remove(&DataKey::RootProvider);
+    }
+
+    pub fn root_provider(env: Env) -> Option<Address> {
+        env.storage().instance().get(&DataKey::RootProvider)
+    }
+
+    /// Resolve the admitted positive-set root: the live provider's `current_root()`
+    /// when a provider is configured, else the admin-pinned root.
+    fn resolve_admitted_root(env: &Env) -> BytesN<32> {
+        if let Some(provider) = env.storage().instance().get::<_, Address>(&DataKey::RootProvider) {
+            return env.invoke_contract(
+                &provider,
+                &Symbol::new(env, "current_root"),
+                Vec::new(env),
+            );
+        }
+        match env.storage().instance().get(&DataKey::AdmittedRoot) {
+            Some(r) => r,
+            None => panic_with_error!(env, GateError::AdmittedRootNotSet),
+        }
+    }
+
     pub fn execute_rebalance(
         env: Env,
         operator: Address,
@@ -269,18 +333,49 @@ impl DefindexRebalanceGate {
             &instructions,
         );
 
-        if pub_signals.len() != 3 {
-            panic_with_error!(&env, GateError::BadProofSignals);
-        }
-        if pub_signals.get(0).unwrap().to_u256() != U256::from_u32(&env, 1) {
-            panic_with_error!(&env, GateError::ProofNotPass);
-        }
-
         let expected_context = Self::derive_zk_context_for_evidence_hash(&env, &evidence_hash);
-        let proof_context = pub_signals.get(2).unwrap().to_bytes();
-        if proof_context != expected_context {
-            panic_with_error!(&env, GateError::BadProofContext);
-        }
+
+        // Two ZK lanes, distinguished by public-signal count. The pinned VK must
+        // match the active circuit (re-pinned via `set_verifier`):
+        //   len 3 → legacy compliance-policy circuit: [pass, commit, context]
+        //   len 4 → admission membership circuit:      [root, nullifier, recipient, context]
+        // Yields the nullifier to burn after verify (membership lane only).
+        let nullifier: Option<BytesN<32>> = match pub_signals.len() {
+            3 => {
+                if pub_signals.get(0).unwrap().to_u256() != U256::from_u32(&env, 1) {
+                    panic_with_error!(&env, GateError::ProofNotPass);
+                }
+                if pub_signals.get(2).unwrap().to_bytes() != expected_context {
+                    panic_with_error!(&env, GateError::BadProofContext);
+                }
+                None
+            }
+            4 => {
+                // signal[0] = Merkle root of the admitted positive-set. Resolved
+                // from the live provider when configured, else the pinned root.
+                let admitted_root: BytesN<32> = Self::resolve_admitted_root(&env);
+                if pub_signals.get(0).unwrap().to_bytes() != admitted_root {
+                    panic_with_error!(&env, GateError::NonMemberRoot);
+                }
+                // signal[1] = nullifierHash; reuse the consumed-evidence set for
+                // anti-replay of the membership credential.
+                let nullifier_hash = pub_signals.get(1).unwrap().to_bytes();
+                if env
+                    .storage()
+                    .instance()
+                    .get(&DataKey::ConsumedEvidence(nullifier_hash.clone()))
+                    .unwrap_or(false)
+                {
+                    panic_with_error!(&env, GateError::NullifierReplay);
+                }
+                // signal[3] = context bound to the exact live intent.
+                if pub_signals.get(3).unwrap().to_bytes() != expected_context {
+                    panic_with_error!(&env, GateError::BadProofContext);
+                }
+                Some(nullifier_hash)
+            }
+            _ => panic_with_error!(&env, GateError::BadProofSignals),
+        };
 
         let verifier: Address = match env.storage().instance().get(&DataKey::VerifierAddr) {
             Some(a) => a,
@@ -307,6 +402,14 @@ impl DefindexRebalanceGate {
         let ok = PorVerifierClient::new(&env, &verifier).verify_proof(&zk_vk, &zk_proof, &pub_signals);
         if !ok {
             panic_with_error!(&env, GateError::ZkVerifyFailed);
+        }
+
+        // Burn the membership nullifier only AFTER the proof verifies, so a
+        // failed verify can't grief-lock someone else's nullifier.
+        if let Some(nullifier_hash) = nullifier {
+            env.storage()
+                .instance()
+                .set(&DataKey::ConsumedEvidence(nullifier_hash), &true);
         }
 
         let use_case_id = Self::use_case_id(env.clone());

@@ -184,9 +184,25 @@ function toPrepared(
 }
 
 function parseAmount(value: string | undefined, field: string): number {
+  // The DeFindex SDK types `amount` as a JS `number`, but these are i128 token
+  // base units on-chain. `Number(...)` silently rounds past 2^53-1 — for a
+  // compliance gate that means preparing an intent for a DIFFERENT value than
+  // was requested. We fail closed rather than coerce: require base-10 digits,
+  // then reject anything that cannot be represented exactly as a JS number.
+  if (value === undefined || !/^\d+$/.test(value)) {
+    throw new SdkError(
+      `${field} must be a non-negative integer string (base-10 digits only)`,
+      'INVALID_INPUT',
+    );
+  }
   const num = Number(value);
-  if (!Number.isFinite(num) || !Number.isInteger(num) || num < 0) {
-    throw new SdkError(`${field} must be a non-negative integer string`, 'INVALID_INPUT');
+  if (!Number.isSafeInteger(num)) {
+    throw new SdkError(
+      `${field} '${value}' exceeds the JS safe-integer range (2^53-1); the ` +
+        `DeFindex SDK amount field is a JS number and cannot represent it ` +
+        `precisely. Refusing to prepare a lossy transaction.`,
+      'INVALID_INPUT',
+    );
   }
   return num;
 }

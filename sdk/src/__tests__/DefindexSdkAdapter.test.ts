@@ -233,6 +233,48 @@ describe('DefindexSdkAdapter', () => {
     ).rejects.toBeInstanceOf(SdkError);
   });
 
+  it('accepts the maximum JS-safe-integer amount (2^53-1)', async () => {
+    const sdk = fakeSdk();
+    const adapter = new DefindexSdkAdapter({ sdk, defaultNetwork: 'testnet' as SupportedNetworks });
+
+    await adapter.rebalance({
+      ...rebalanceReq,
+      instructions: [{ action: 'invest', strategy: 'CSTRAT1', amount: '9007199254740991' }],
+    });
+
+    expect(sdk.rebalanceVault.mock.calls[0][1].instructions[0].amount).toBe(9007199254740991);
+  });
+
+  it('refuses amounts above the JS safe-integer range instead of silently rounding', async () => {
+    const sdk = fakeSdk();
+    const adapter = new DefindexSdkAdapter({ sdk });
+
+    // 2^53+1: Number() rounds this to 2^53, which would sign an intent for the
+    // WRONG value. The gate must fail closed, not coerce.
+    await expect(
+      adapter.rebalance({
+        ...rebalanceReq,
+        instructions: [{ action: 'invest', strategy: 'CSTRAT1', amount: '9007199254740993' }],
+      }),
+    ).rejects.toBeInstanceOf(SdkError);
+    expect(sdk.rebalanceVault).not.toHaveBeenCalled();
+  });
+
+  it('rejects non-decimal amount strings (scientific notation, signs, hex, whitespace)', async () => {
+    const sdk = fakeSdk();
+    const adapter = new DefindexSdkAdapter({ sdk });
+
+    for (const bad of ['1e10', '-5', '0x10', ' 10', '10 ', '']) {
+      await expect(
+        adapter.rebalance({
+          ...rebalanceReq,
+          instructions: [{ action: 'invest', strategy: 'CSTRAT1', amount: bad }],
+        }),
+      ).rejects.toBeInstanceOf(SdkError);
+    }
+    expect(sdk.rebalanceVault).not.toHaveBeenCalled();
+  });
+
   it('can be constructed from config without injected sdk', () => {
     const adapter = new DefindexSdkAdapter({
       config: {
