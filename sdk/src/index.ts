@@ -59,6 +59,15 @@ export type {
   BcbVaspEvidence,
   CvmRcvm88Evidence,
 } from './bcb-policy.js';
+// Energy (ANEEL/CCEE) sectoral pack — PLD-range oracle + signed attestations.
+export { evaluateEnergyAcl, ENERGY_PREDICATE_REGISTRY } from './energy-policy.js';
+export type {
+  EnergyPldEvidence,
+  EnergyComercializadoraEvidence,
+  EnergyConsumerEvidence,
+  EnergyLastroEvidence,
+  EnergyAclEvidence,
+} from './energy-policy.js';
 export { DefindexSdkAdapter } from './DefindexSdkAdapter.js';
 export type { DefindexSdkAdapterOptions } from './DefindexSdkAdapter.js';
 export { DEFAULT_OPERATION_POLICIES } from './defindex-policy-types.js';
