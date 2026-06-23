@@ -41,8 +41,10 @@ DeFindex for treasury," DPO2U disappears in the middle — that must not happen.
 
 - **Privy supports Stellar** embedded wallets and exposes the underlying keypair
   for signing Stellar transactions. Signing a Soroban/settlement tx is signing a
-  Stellar envelope — covered at keypair level. _Assumption to confirm in build:_
-  Soroban-auth-entry signing ergonomics via Privy (vs. plain payment/tx-envelope).
+  Stellar envelope — covered at keypair level. **Pattern confirmed:** Privy exposes
+  raw hash signing for Stellar (`useSignRawHash`), and Soroban supports auth-entry
+  signing — so the operator signs the `SorobanAuthorizationEntry` hash while a
+  separate fee-payer sources the tx. End-to-end testnet proof is the Phase-0 spike.
 - **EnergyPay** already has: Stellar mainnet settlement, JWT + operator-role
   validation, server-side signing for `PLATFORM_MANAGED` wallets (`wallet_modes`),
   `pending_roles` for privileged roles, receipts (txHash + ledger + memo), PLD
@@ -51,6 +53,24 @@ DeFindex for treasury," DPO2U disappears in the middle — that must not happen.
   in the dpo2u-stellar SDK) that reads an attestation/verdict and returns a
   structured allow/deny with an evidence hash; a compliance gateway/MCP; and a
   proof-bound execution gate validated live on testnet.
+
+## 4.1 Phase 0 — de-risking spike (BLOCKING gate before any plan)
+
+**Before writing an implementation plan, prove the single assumption that can
+sink Phase 1:** that a Privy operator-held embedded wallet can sign a **Soroban
+contract invocation** — i.e. a `SorobanAuthorizationEntry` (nonce + expiration
+ledger + invocation preimage), not just a classic payment/tx envelope.
+
+- **Do:** create a Privy embedded wallet on testnet, fund it, and have it sign a
+  real Soroban invocation (the PLD-pin call is a fine target), submit, and confirm
+  on-chain. No mock, no classic-envelope substitute.
+- **Pass →** the rest of Phase 1 is routine execution; proceed to the plan.
+- **Fail →** Privy cannot sign Soroban auth-entries; re-scope Phase 1 so signing
+  happens outside Privy (e.g. Privy authenticates + holds identity, a different
+  signer produces the Soroban auth-entry), before committing to a plan.
+
+This costs ~half a day and converts the biggest unknown into a fact. Plan after
+the spike, not before.
 
 ## 5. Phase-1 architecture — off-chain policy gateway
 
@@ -62,14 +82,20 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
 ```
 1. Operator authenticates into EnergyPay.
 2. Identity + wallet + signer resolved via Privy (operator-held embedded wallet).
-3. EnergyPay backend builds the settlement instruction (asset, amount, parties, memo).
-4. EnergyPay backend calls the DPO2U admission gateway with the action payload.
-5. DPO2U returns { decision: allow | deny | review, evidenceHash, expiresAt, reason }.
-6a. deny  → backend refuses to sign; surfaced to operator; logged.
-6b. review→ action parked in a review queue (reuses pending_roles semantics).
-6c. allow → operator signs the settlement via Privy; backend submits to Stellar.
+3. EnergyPay backend builds the EXACT settlement transaction and computes its
+   canonical digest (the tx signature base / hash, NOT a loose intent).
+4. EnergyPay backend calls the DPO2U admission gateway with the action payload
+   AND the tx digest.
+5. DPO2U returns { decision: allow | deny | review, evidenceHash, expiresAt, reason },
+   where evidenceHash is BOUND to the exact tx digest (not a generic intent).
+6a. deny / review → backend refuses to sign (F1 treats review as deny — parked,
+    no auto-approve); surfaced to operator; logged.
+6b. allow → operator signs THAT exact tx via Privy; backend submits to Stellar
+    ONLY IF the to-be-submitted tx digest still equals the admitted digest
+    (TOCTOU guard) and the decision has not expired.
 7. EnergyPay pins the DPO2U evidenceHash into the settlement receipt/memo
-   (reusing the existing PLD-pin mechanism) → on-chain-anchored evidence trail.
+   (reusing PLD-pin). Because the hash binds to the tx digest, the pinned evidence
+   is VERIFIABLE against the action actually admitted — not post-hoc only.
 ```
 
 ### Components & interfaces (each unit: purpose · interface · depends on)
@@ -82,13 +108,17 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
 
 - **DPO2U admission client** (EnergyPay backend)
   - _Purpose:_ ask DPO2U whether a built action is admissible, before signing.
-  - _Interface:_ `admit(action) → { decision, evidenceHash, expiresAt, reason }`
-    where `action = { operatorId, role, jurisdiction, instruction, threshold }`.
+  - _Interface:_ `admit(action, txDigest) → { decision, evidenceHash, expiresAt, reason }`
+    where `action = { operatorId, role, jurisdiction, instruction, threshold }` and
+    `txDigest` is the canonical digest of the exact transaction to be signed.
+    `evidenceHash` binds to `txDigest`, closing the off-chain TOCTOU at the
+    evidence level (on-chain enforcement of this binding is Phase 2's gate).
   - _Depends on:_ DPO2U gateway/MCP (reuse the `DefindexPolicyGateway` shape;
     a new `EnergyPaySettlementGateway` mirrors it for the settlement use case).
 
 - **Settlement orchestrator** (EnergyPay backend)
-  - _Purpose:_ sequence admit → sign → submit → pin-evidence; enforce fail-closed.
+  - _Purpose:_ sequence admit → sign → submit → pin-evidence; enforce fail-closed;
+    verify the to-be-submitted tx digest equals the admitted digest before submit.
   - _Interface:_ `settle(action, signer) → { txHash, ledger, receipt, evidenceHash }`.
   - _Depends on:_ DPO2U admission client, Privy signer, `@stellar/stellar-sdk`,
     EnergyPay receipt/PLD-pin module, Supabase audit.
@@ -112,10 +142,12 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
 
 - **deny / no decision / gateway unreachable** → backend does **not** sign. Fail
   closed is the correct posture for an admissibility gate.
-- **review** → action parked (review queue, `pending_roles`-style), no signature
-  until a human/secondary approval clears it.
+- **review** → F1 treats as `deny` (parked, no auto-approve); the human-approval
+  queue (`pending_roles`-style) is a documented Phase-2 stub.
 - **expired evidence** (`now > expiresAt`) → re-admit before signing; never sign on
-  a stale decision.
+  a stale decision. (Kept as a one-line guard — it is trivial and load-bearing.)
+- **tx digest mismatch** (to-be-submitted tx ≠ admitted digest) → refuse to submit;
+  the `allow` only authorizes the exact admitted transaction.
 - **post-allow signature failure** (Privy) → no submission; logged; evidence not pinned.
 
 ## 7. Guard-rails (the three risks, made explicit)
@@ -137,8 +169,12 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
    which signer, under which session.
 3. **Execution is conditioned** (DPO2U): can this operator execute? is the role
    valid? does the threshold need review? is it within mandate? is the window open?
-4. **Evidence is verifiable**: every settlement carries a DPO2U evidence hash pinned
-   to the receipt — "who approved and why" travels with "the transaction happened."
+4. **The verifiable receipt is the hero — and DPO2U owns it.** Every settlement
+   carries a DPO2U evidence hash bound to the exact tx and pinned to the receipt:
+   "who approved, why, for which exact action" travels with "it happened." Position
+   it as **"EnergyPay liquida; a DPO2U é o que você mostra na auditoria."** This is
+   the artifact that survives due diligence — make it DPO2U's face, or DPO2U
+   vanishes between the front door (EnergyPay) and the signer (Privy).
 5. **Depth on demand** (Phase 2): the same admission layer that gates settlement
    also gates treasury/privileged action via DeFindex — proof of depth, not the pitch.
 6. **Institutional posture**: due diligence, partners, auditors, enterprise buyers
@@ -154,18 +190,27 @@ No new Soroban contract in Phase 1; the on-chain gate is the Phase-2/DeFindex sh
 
 ## 10. Success criteria (Phase 1)
 
-- A settlement executes **only** after a DPO2U `allow`; a `deny` provably blocks the
-  signature (fail-closed), observable in the audit trail.
-- The operator signs via a Privy-held Stellar wallet bound to their identity.
-- Each settled tx carries a DPO2U evidence hash pinned to its receipt/memo,
-  re-auditable after the fact.
+- **PRIMARY:** a DPO2U `deny` provably PREVENTS the Privy signature from happening,
+  and the audit trail shows the blocked attempt with its evidence hash. (If nothing
+  can be denied, "settle only after allow" passes vacuously — the deny IS the proof.)
+- An `allow` lets the operator sign THAT exact tx via a Privy-held Stellar wallet
+  bound to their identity; the submitted tx digest equals the admitted one.
+- Each settled tx carries a DPO2U evidence hash bound to the tx and pinned to its
+  receipt/memo, re-auditable after the fact.
 - Demo-able end to end on testnet, with the deny/allow contrast visible.
 
 ## 11. Open questions / assumptions to confirm in implementation
 
-- Privy Soroban auth-entry signing ergonomics (vs. plain tx-envelope signing).
-- The exact seam in EnergyPay's backend where signing happens today (to insert the
-  `admit()` call before it) — confirm in `energypay-protocol-mainnet/backend`.
-- Whether `pending_roles` semantics can be reused directly for the `review` queue.
+- **Privy ↔ Soroban signing — pattern identified (validate in Phase-0 spike).**
+  Privy raw hash signing (`useSignRawHash`, chainType `stellar`) + Soroban auth-entry
+  signing: compute the `SorobanAuthorizationEntry` preimage hash, have Privy sign it,
+  a separate fee-payer sources the tx. Confirm end-to-end on testnet before the plan.
+- **EnergyPay signing seam — located.** `backend/src/routes/tokenRoutes.js` /
+  `admin.js` sign via `Keypair.fromSecret(decryptSecret(...)).sign(...)` (classic txs,
+  `PLATFORM_MANAGED`). `admit()` inserts before `.sign()`; the Privy embedded wallet
+  realizes a hardened `USER_CONTROLLED` mode (no stored secret). _Note:_ today's
+  signing is classic Stellar txs, so the Soroban auth-entry path is genuinely new —
+  which is why the Phase-0 spike matters.
+- Whether `pending_roles` semantics can be reused for the (Phase-2) `review` queue.
 - DPO2U use-case id + predicate set for "settlement admissibility" (new, mirrors
   `defindex_rebalance_v1`).
