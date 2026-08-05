@@ -1,0 +1,450 @@
+{
+  "generated_at": "2026-07-13T14:52:06.665Z",
+  "window_days": 316,
+  "max_compras": 500,
+  "z_threshold": 5,
+  "summary": {
+    "compras_processadas": 400,
+    "precos_coletados": 1600,
+    "cestas_distintas": 788,
+    "alerts": 15,
+    "dano_total_brl": 4766081.079999999
+  },
+  "alerts": [
+    {
+      "contratacaoId": "29115474000160-1-000382/2025",
+      "numeroItem": 3,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Assinatura de Entroncamento Digital Bidirecional E1",
+      "dataPublicacaoPncp": "2025-09-01T07:27:26",
+      "orgao": "MUNICIPIO DE MACAE",
+      "uasg": "985847",
+      "uf": "RJ",
+      "municipio": "Macaé",
+      "vencedora": {
+        "cnpj": "38045305000192",
+        "nome": "RS VOICE CLOUD LTDA"
+      },
+      "unit_price_vencedora": 203400,
+      "quantidade": 12,
+      "basket": {
+        "n": 8,
+        "median": 13390,
+        "mad": 10365,
+        "meanAbsDev": 43661.25
+      },
+      "z_modificado": 12.36,
+      "percentual_sobrepreco": 1419,
+      "dano_estimado_brl": 2280120,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/985847",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/29115474000160-1-000382%2F2025"
+    },
+    {
+      "contratacaoId": "29115474000160-1-000382/2025",
+      "numeroItem": 6,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Assinatura de Entroncamento Digital Bidirecional E1",
+      "dataPublicacaoPncp": "2025-09-01T07:27:26",
+      "orgao": "MUNICIPIO DE MACAE",
+      "uasg": "985847",
+      "uf": "RJ",
+      "municipio": "Macaé",
+      "vencedora": {
+        "cnpj": "38045305000192",
+        "nome": "RS VOICE CLOUD LTDA"
+      },
+      "unit_price_vencedora": 130000,
+      "quantidade": 12,
+      "basket": {
+        "n": 8,
+        "median": 13390,
+        "mad": 10365,
+        "meanAbsDev": 43661.25
+      },
+      "z_modificado": 7.59,
+      "percentual_sobrepreco": 870.9,
+      "dano_estimado_brl": 1399320,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/985847",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/29115474000160-1-000382%2F2025"
+    },
+    {
+      "contratacaoId": "95591764000105-1-000374/2025",
+      "numeroItem": 1,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Pacote de Serviços SMP (Voz, Dados, SMS, Etc)",
+      "dataPublicacaoPncp": "2025-09-01T07:16:28",
+      "orgao": "UNIVERSIDADE FEDERAL DE SANTA MARIA",
+      "uasg": "153164",
+      "uf": "RS",
+      "municipio": "Santa Maria",
+      "vencedora": {
+        "cnpj": "33519068000130",
+        "nome": "AVOIP TELECOM LTDA"
+      },
+      "unit_price_vencedora": 28000,
+      "quantidade": 12,
+      "basket": {
+        "n": 8,
+        "median": 1600,
+        "mad": 950,
+        "meanAbsDev": 4125
+      },
+      "z_modificado": 18.74,
+      "percentual_sobrepreco": 1650,
+      "dano_estimado_brl": 316800,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/153164",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/95591764000105-1-000374%2F2025"
+    },
+    {
+      "contratacaoId": "27080605001249-1-000167/2025",
+      "numeroItem": 1,
+      "ncm": "30069110",
+      "categoriaId": 3,
+      "descricao": "Sistema P/ Estomia",
+      "dataPublicacaoPncp": "2025-09-01T07:21:55",
+      "orgao": "SECRETARIA DE ESTADO DA SAUDE",
+      "uasg": "929691",
+      "uf": "ES",
+      "municipio": "Cariacica",
+      "vencedora": {
+        "cnpj": "27347244000100",
+        "nome": "REDALMUS COMERCIAL LTDA"
+      },
+      "unit_price_vencedora": 31,
+      "quantidade": 14580,
+      "basket": {
+        "n": 9,
+        "median": 11.9,
+        "mad": 1.1500000000000004,
+        "meanAbsDev": 3.3666666666666663
+      },
+      "z_modificado": 11.2,
+      "percentual_sobrepreco": 160.5,
+      "dano_estimado_brl": 278478,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/929691",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/27080605001249-1-000167%2F2025"
+    },
+    {
+      "contratacaoId": "15126437000305-1-002416/2025",
+      "numeroItem": 2,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Elaboração / análise projeto - engenharia",
+      "dataPublicacaoPncp": "2025-09-01T07:17:43",
+      "orgao": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+      "uasg": "155016",
+      "uf": "MS",
+      "municipio": "Dourados",
+      "vencedora": {
+        "cnpj": "25249754000100",
+        "nome": "S C SPADA  LTDA"
+      },
+      "unit_price_vencedora": 37,
+      "quantidade": 6000,
+      "basket": {
+        "n": 10,
+        "median": 3.22,
+        "mad": 1.185,
+        "meanAbsDev": 4.901999999999999
+      },
+      "z_modificado": 19.23,
+      "percentual_sobrepreco": 1049.1,
+      "dano_estimado_brl": 202680,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/155016",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/15126437000305-1-002416%2F2025"
+    },
+    {
+      "contratacaoId": "07954480000179-1-015359/2025",
+      "numeroItem": 5,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Conexão Hidráulica",
+      "dataPublicacaoPncp": "2025-09-01T07:32:05",
+      "orgao": "ESTADO DO CEARA",
+      "uasg": "943001",
+      "uf": "CE",
+      "municipio": "Fortaleza",
+      "vencedora": {
+        "cnpj": "69939239000128",
+        "nome": "HIDROPLAST INDUSTRIA E COMERCIO LTDA"
+      },
+      "unit_price_vencedora": 192,
+      "quantidade": 615,
+      "basket": {
+        "n": 15,
+        "median": 19,
+        "mad": 17.68,
+        "meanAbsDev": 34.49933333333333
+      },
+      "z_modificado": 6.6,
+      "percentual_sobrepreco": 910.5,
+      "dano_estimado_brl": 106395,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/943001",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/07954480000179-1-015359%2F2025"
+    },
+    {
+      "contratacaoId": "00394502000144-1-005982/2025",
+      "numeroItem": 9,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Manutenção de Sistemas de Proteção Contra Incêndio",
+      "dataPublicacaoPncp": "2025-09-01T07:29:13",
+      "orgao": "COMANDO DA MARINHA",
+      "uasg": "762600",
+      "uf": "RJ",
+      "municipio": "Rio de Janeiro",
+      "vencedora": {
+        "cnpj": "11574847000104",
+        "nome": "SYC SOLUCOES E GESTAO DE SEGURANCA LTDA"
+      },
+      "unit_price_vencedora": 1800,
+      "quantidade": 60,
+      "basket": {
+        "n": 10,
+        "median": 330,
+        "mad": 159,
+        "meanAbsDev": 368.6
+      },
+      "z_modificado": 6.24,
+      "percentual_sobrepreco": 445.5,
+      "dano_estimado_brl": 88200,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/762600",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/00394502000144-1-005982%2F2025"
+    },
+    {
+      "contratacaoId": "63025530000104-1-003675/2025",
+      "numeroItem": 6,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Confecção de Móvel de Madeira com / sem Revestimento de Fór-Mica",
+      "dataPublicacaoPncp": "2025-09-01T07:20:58",
+      "orgao": "UNIVERSIDADE DE SAO PAULO",
+      "uasg": "102116",
+      "uf": "SP",
+      "municipio": "Ribeirão Preto",
+      "vencedora": {
+        "cnpj": "28028781000141",
+        "nome": "V. L. BORGES MARCENARIA"
+      },
+      "unit_price_vencedora": 55000,
+      "quantidade": 1,
+      "basket": {
+        "n": 10,
+        "median": 22250,
+        "mad": 3250,
+        "meanAbsDev": 8880
+      },
+      "z_modificado": 6.8,
+      "percentual_sobrepreco": 147.2,
+      "dano_estimado_brl": 32750,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/102116",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/63025530000104-1-003675%2F2025"
+    },
+    {
+      "contratacaoId": "15126437000305-1-002420/2025",
+      "numeroItem": 6,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Cânula de traqueostomia",
+      "dataPublicacaoPncp": "2025-09-01T07:19:30",
+      "orgao": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+      "uasg": "155180",
+      "uf": "PE",
+      "municipio": "Petrolina",
+      "vencedora": {
+        "cnpj": "08675394000190",
+        "nome": "SAFE SUPORTE A VIDA E COMERCIO INTERNACIONAL LTDA"
+      },
+      "unit_price_vencedora": 449.41,
+      "quantidade": 60,
+      "basket": {
+        "n": 9,
+        "median": 75.93,
+        "mad": 17.930000000000007,
+        "meanAbsDev": 129.72777777777776
+      },
+      "z_modificado": 14.05,
+      "percentual_sobrepreco": 491.9,
+      "dano_estimado_brl": 22408.8,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/155180",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/15126437000305-1-002420%2F2025"
+    },
+    {
+      "contratacaoId": "15126437000305-1-002420/2025",
+      "numeroItem": 5,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Cânula de traqueostomia",
+      "dataPublicacaoPncp": "2025-09-01T07:19:30",
+      "orgao": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+      "uasg": "155180",
+      "uf": "PE",
+      "municipio": "Petrolina",
+      "vencedora": {
+        "cnpj": "00304559000105",
+        "nome": "HUNTER CIENTIFICA COMERCIAL E SERVICOS LTDA"
+      },
+      "unit_price_vencedora": 339,
+      "quantidade": 60,
+      "basket": {
+        "n": 9,
+        "median": 75.93,
+        "mad": 17.930000000000007,
+        "meanAbsDev": 129.72777777777776
+      },
+      "z_modificado": 9.9,
+      "percentual_sobrepreco": 346.5,
+      "dano_estimado_brl": 15784.2,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/155180",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/15126437000305-1-002420%2F2025"
+    },
+    {
+      "contratacaoId": "15126437000305-1-002422/2025",
+      "numeroItem": 9,
+      "ncm": "30061090",
+      "categoriaId": 3,
+      "descricao": "Fio De Sutura Agulhado",
+      "dataPublicacaoPncp": "2025-09-01T07:19:50",
+      "orgao": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+      "uasg": "156654",
+      "uf": "MG",
+      "municipio": "Uberlândia",
+      "vencedora": {
+        "cnpj": "03812429000171",
+        "nome": "POLYSUTURE INDUSTRIA E COMERCIO LTDA"
+      },
+      "unit_price_vencedora": 23.18,
+      "quantidade": 720,
+      "basket": {
+        "n": 8,
+        "median": 4.425,
+        "mad": 1.2099999999999997,
+        "meanAbsDev": 3.25875
+      },
+      "z_modificado": 10.45,
+      "percentual_sobrepreco": 423.8,
+      "dano_estimado_brl": 13503.6,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/156654",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/15126437000305-1-002422%2F2025"
+    },
+    {
+      "contratacaoId": "15126437000305-1-002420/2025",
+      "numeroItem": 7,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Cânula de traqueostomia",
+      "dataPublicacaoPncp": "2025-09-01T07:19:30",
+      "orgao": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
+      "uasg": "155180",
+      "uf": "PE",
+      "municipio": "Petrolina",
+      "vencedora": {
+        "cnpj": "08675394000190",
+        "nome": "SAFE SUPORTE A VIDA E COMERCIO INTERNACIONAL LTDA"
+      },
+      "unit_price_vencedora": 445,
+      "quantidade": 24,
+      "basket": {
+        "n": 9,
+        "median": 75.93,
+        "mad": 17.930000000000007,
+        "meanAbsDev": 129.72777777777776
+      },
+      "z_modificado": 13.88,
+      "percentual_sobrepreco": 486.1,
+      "dano_estimado_brl": 8857.68,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/155180",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/15126437000305-1-002420%2F2025"
+    },
+    {
+      "contratacaoId": "63025530000104-1-003677/2025",
+      "numeroItem": 10,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Confecção / Instalaçao / Manutenção - Vidraçaria",
+      "dataPublicacaoPncp": "2025-09-01T07:27:24",
+      "orgao": "UNIVERSIDADE DE SAO PAULO",
+      "uasg": "102121",
+      "uf": "SP",
+      "municipio": "São Paulo",
+      "vencedora": {
+        "cnpj": "16103876000101",
+        "nome": "EBVIDROS COMERCIO E SERVICOS LTDA"
+      },
+      "unit_price_vencedora": 730,
+      "quantidade": 1,
+      "basket": {
+        "n": 10,
+        "median": 340,
+        "mad": 40,
+        "meanAbsDev": 90
+      },
+      "z_modificado": 6.58,
+      "percentual_sobrepreco": 114.7,
+      "dano_estimado_brl": 390,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/102121",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/63025530000104-1-003677%2F2025"
+    },
+    {
+      "contratacaoId": "63025530000104-1-003677/2025",
+      "numeroItem": 8,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Confecção / Instalaçao / Manutenção - Vidraçaria",
+      "dataPublicacaoPncp": "2025-09-01T07:27:24",
+      "orgao": "UNIVERSIDADE DE SAO PAULO",
+      "uasg": "102121",
+      "uf": "SP",
+      "municipio": "São Paulo",
+      "vencedora": {
+        "cnpj": "16103876000101",
+        "nome": "EBVIDROS COMERCIO E SERVICOS LTDA"
+      },
+      "unit_price_vencedora": 637,
+      "quantidade": 1,
+      "basket": {
+        "n": 10,
+        "median": 340,
+        "mad": 40,
+        "meanAbsDev": 90
+      },
+      "z_modificado": 5.01,
+      "percentual_sobrepreco": 87.4,
+      "dano_estimado_brl": 297,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/102121",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/63025530000104-1-003677%2F2025"
+    },
+    {
+      "contratacaoId": "17955535000119-1-000236/2025",
+      "numeroItem": 5,
+      "ncm": "",
+      "categoriaId": 3,
+      "descricao": "Obras civis públicas ( construção )",
+      "dataPublicacaoPncp": "2025-09-01T07:29:20",
+      "orgao": "MUNICIPIO DE TRES CORACOES",
+      "uasg": "985385",
+      "uf": "MG",
+      "municipio": "Três Corações",
+      "vencedora": {
+        "cnpj": "39327884000129",
+        "nome": "HERICON FELIPE TRISTAO NASCIMENTO"
+      },
+      "unit_price_vencedora": 5.4,
+      "quantidade": 22,
+      "basket": {
+        "n": 9,
+        "median": 1,
+        "mad": 0.48,
+        "meanAbsDev": 0.9244444444444445
+      },
+      "z_modificado": 6.18,
+      "percentual_sobrepreco": 440,
+      "dano_estimado_brl": 96.8,
+      "evidence_url_gov": "https://compras.gov.br/sistema/comprasnet/consulta/uasg/985385",
+      "evidence_url_pncp": "https://pncp.gov.br/app/editais/17955535000119-1-000236%2F2025"
+    }
+  ]
+}

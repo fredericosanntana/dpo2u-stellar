@@ -137,7 +137,7 @@ artefato JSON:
 
 ### Alerta 5 — `overpricing_v1` · FAIL
 
-- **Sujeito:** MAURO ROBERTO RODRIGUES DE MOURA — CNPJ 04.385.090/0001-37
+- **Sujeito:** Pessoa física — nome removido (LGPD) — CNPJ removido
   *(razão social de pessoa física — ver §8)*
 - **Compra:** PREFEITURA MUNICIPAL DE FRANCISCO SANTOS/PI · 2023-04-27 · CIMETIDINA 200 mg
 - **Preço:** R$ 7,22 · mediana R$ 0,3661 (cesta n=126) · **+1.872 %** · Z-modificado **84,90**
@@ -243,7 +243,7 @@ Os Alertas 5 e 6 carregam sinais que o `overpricing_v1` sozinho não tipifica:
   **`cnae_mismatch_v1`**: cruza o CNAE declarado do fornecedor com a classe CATMAT
   do item. CNAE incompatível + sobrepreço = sinal combinado de **empresa de
   fachada**. Severidade `CRÍTICO` quando os dois sinais coincidem.
-- **Alerta 5 (MAURO ROBERTO… — razão social de pessoa física vendendo medicamento)**
+- **Alerta 5 (pessoa física [nome removido — LGPD] — razão social de pessoa física vendendo medicamento)**
   → **`regulatory_authorization_v1`**: para itens de setor regulado (medicamentos),
   cruza o fornecedor com o cadastro de Autorização de Funcionamento da ANVISA.
   Fornecedor sem AF vendendo medicamento é sinal forte, ainda mais combinado com

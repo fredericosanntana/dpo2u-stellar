@@ -1,0 +1,14 @@
+{
+  "generated_at": "2026-07-13T14:45:07.137Z",
+  "window_days": 30,
+  "max_compras": 200,
+  "z_threshold": 5,
+  "summary": {
+    "compras_processadas": 200,
+    "precos_coletados": 228,
+    "cestas_distintas": 172,
+    "alerts": 0,
+    "dano_total_brl": 0
+  },
+  "alerts": []
+}

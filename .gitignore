@@ -26,3 +26,9 @@ contracts-evm/lib/
 contracts-evm/out/
 contracts-evm/cache/
 contracts-evm/broadcast/
+
+# venv local do Pulso — 73MB / 2.895 arquivos, artefato de máquina (add 2026-08-04)
+.venv*/
+venv/
+__pycache__/
+*.pyc

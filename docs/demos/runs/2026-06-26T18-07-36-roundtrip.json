@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-06-26T18-07-36",
+  "network": "testnet",
+  "contract_id": "CDFF2WM4FGSE5DWVASYPZSSWDXEJIODWOHYNPSVB2RGMM5YY6I42UIUN",
+  "admin": "GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN",
+  "use_case_id": "bank_chg",
+  "predicate_set": "bank_chg",
+  "predicate_version": 1,
+  "request_id": "demo-1782497251",
+  "evidence_hash": "e0cb485a0e27dea325a656001a89287bd4161ad55b5452d84b7c90b36b1ffc7d",
+  "metadata_hash": "d0bcc7a3dbf78437955d6757419d50d741a8bb58493d6871b62366b2f30c7d8b",
+  "transactions": {
+    "configure_use_case": "c8f2f088a0c1b0173f91158bf87c20180d7ff04386a63425486b964634ffd4e3",
+    "authorize_submitter": "390fbecb2c6cda5d985231a227b77dc9e387d0f8e1bea5e2ec2b12726ba9d3f6",
+    "register_attestation": "69c07453048614ff7a9c6173862fa4e4d901f48a6a9cd8b7a1dbea6bd83965eb"
+  },
+  "ledger_seq": "3296615",
+  "verify_result": {"metadata_hash":"d0bcc7a3dbf78437955d6757419d50d741a8bb58493d6871b62366b2f30c7d8b","predicate_set":"bank_chg","predicate_version":1,"submitted_by":"GDJSDCHTRQYZNKJMUFZ76NAIZ3ZNMBWWAPQ5UHI3JUSOFPSB7NEGQ6UN","timestamp":1782497254,"verdict":"Pass"},
+  "explorer_links": {
+    "contract": "https://stellar.expert/explorer/testnet/contract/CDFF2WM4FGSE5DWVASYPZSSWDXEJIODWOHYNPSVB2RGMM5YY6I42UIUN",
+    "configure_use_case": "https://stellar.expert/explorer/testnet/tx/c8f2f088a0c1b0173f91158bf87c20180d7ff04386a63425486b964634ffd4e3",
+    "register_attestation": "https://stellar.expert/explorer/testnet/tx/69c07453048614ff7a9c6173862fa4e4d901f48a6a9cd8b7a1dbea6bd83965eb"
+  },
+  "completed_at": "2026-06-26T18:07:36Z"
+}

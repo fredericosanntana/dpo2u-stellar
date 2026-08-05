@@ -1,0 +1,2408 @@
+{
+  "generated_at": "2026-07-13T15:05:38.139Z",
+  "accept_requirement_met": true,
+  "sources": {
+    "sanctions": {
+      "ceis": 14000,
+      "cnep": 1659,
+      "cepim": 3550
+    },
+    "sanctions_source_dates": {
+      "ceis": "20260711",
+      "cnep": "20260711",
+      "cepim": "20260710"
+    },
+    "compras_gov_records": 14156,
+    "distinct_suppliers": 1712,
+    "scan_classes": [
+      {
+        "codigo": 6505,
+        "nome": "DROGAS E MEDICAMENTOS",
+        "catmats": 60
+      },
+      {
+        "codigo": 6510,
+        "nome": "CURATIVOS CIRÚRGICOS",
+        "catmats": 25
+      },
+      {
+        "codigo": 7510,
+        "nome": "ARTIGOS DE ESCRITÓRIO",
+        "catmats": 25
+      },
+      {
+        "codigo": 6515,
+        "nome": "INSTRUMENTOS E APARELHOS MÉDICOS",
+        "catmats": 40
+      },
+      {
+        "codigo": 6530,
+        "nome": "MOBILIÁRIO HOSPITALAR",
+        "catmats": 20
+      },
+      {
+        "codigo": 7920,
+        "nome": "MATERIAL DE LIMPEZA",
+        "catmats": 20
+      }
+    ]
+  },
+  "summary": {
+    "sanction_alerts": 234,
+    "sanction_fail": 55,
+    "sanction_review": 179,
+    "sanction_prospective_fail": 32,
+    "overpricing_alerts": 917,
+    "overpricing_groups_trimmed_out": 3,
+    "overpricing_with_damage": 876,
+    "overpricing_dano_total_brl": 37946630.06,
+    "overpricing_valor_contratado_brl": 56544191.08
+  },
+  "statistics": {
+    "sanction": {
+      "total": 234,
+      "fail": 55,
+      "review": 179,
+      "prospective_fail": 32,
+      "by_list": {
+        "ceis": 234,
+        "cnep": 2,
+        "cepim": 0
+      }
+    },
+    "overpricing": {
+      "total": 917,
+      "z_bands": {
+        "3.5-10": 627,
+        "10-30": 238,
+        "30-100": 51,
+        ">100": 1
+      },
+      "z_min": 3.5,
+      "z_max": 136.57,
+      "z_median": 6.64,
+      "basket_size": {
+        "min": 8,
+        "p25": 278,
+        "median": 559,
+        "p75": 819,
+        "max": 959
+      }
+    },
+    "coverage": {
+      "by_uf": {
+        "GO": 30,
+        "RJ": 229,
+        "MG": 70,
+        "DF": 26,
+        "MT": 23,
+        "PR": 85,
+        "PE": 25,
+        "BA": 68,
+        "PA": 92,
+        "TO": 6,
+        "SP": 135,
+        "MA": 33,
+        "RO": 13,
+        "PI": 16,
+        "RS": 52,
+        "CE": 54,
+        "RN": 13,
+        "AP": 13,
+        "AM": 59,
+        "MS": 22,
+        "SE": 8,
+        "RR": 18,
+        "PB": 23,
+        "AL": 10,
+        "SC": 11,
+        "ES": 9,
+        "AC": 8
+      },
+      "distinct_uf": 27,
+      "temporal": {
+        "earliest": "2021-12-02",
+        "latest": "2026-07-06"
+      }
+    }
+  },
+  "sanction_alerts": [
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15590405901622024",
+        "supplier_cnpj": "56795674000184",
+        "supplier_name": "G.O MEDICAL LTDA",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155904",
+        "uf": "GO",
+        "municipio": "GOIÂNIA",
+        "purchase_date": "2025-11-24",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 360,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15590405901622024, fornecedor 56795674000184."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-04-14, fim 2026-10-11)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98582905900502030",
+        "supplier_cnpj": "41340103000188",
+        "supplier_name": "EREMED DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CORDEIRO - RJ",
+        "uasg": "985829",
+        "uf": "RJ",
+        "municipio": "CORDEIRO",
+        "purchase_date": "2025-11-13",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 6000,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98582905900502030, fornecedor 41340103000188."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-25, fim 2027-03-25)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "92765805900092030",
+        "supplier_cnpj": "52787761000139",
+        "supplier_name": "MEDIC MAIS DISTRIBUIDORA DE MEDICAMENTOS E CORRELATOS LTDA",
+        "organ": "CONSÓRCIO INT.DE SAÚDE ALTO DAS VERTENTES-MG",
+        "uasg": "927658",
+        "uf": "MG",
+        "municipio": "RESSAQUINHA",
+        "purchase_date": "2025-05-28",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 1050,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92765805900092030, fornecedor 52787761000139."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-02-10, fim 2029-02-09)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "11240805000282024",
+        "supplier_cnpj": "42529374000149",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
+        "organ": "MINISTERIO DEFESA",
+        "uasg": "112408",
+        "uf": "DF",
+        "municipio": "BRASÍLIA",
+        "purchase_date": "2023-06-14",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 270,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 11240805000282024, fornecedor 42529374000149."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-05-04, fim 2027-05-03)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "25704005000052024",
+        "supplier_cnpj": "31151224000128",
+        "supplier_name": "ANJOMEDI DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "MINISTERIO DA SAUDE",
+        "uasg": "257040",
+        "uf": "MT",
+        "municipio": "BARRA DO GARÇAS",
+        "purchase_date": "2023-03-20",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 10925,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 25704005000052024, fornecedor 31151224000128."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-06-17, fim 2026-07-16)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15502105000542022",
+        "supplier_cnpj": "25279552000101",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS BACKES EIRELI",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155021",
+        "uf": "MG",
+        "municipio": "BELO HORIZONTE",
+        "purchase_date": "2023-01-27",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 1365,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15502105000542022, fornecedor 25279552000101."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2024-10-24, fim 2026-10-24)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "25704805000092024",
+        "supplier_cnpj": "20419709000133",
+        "supplier_name": "CIRURGICA ONIX - EIRELI",
+        "organ": "MINISTERIO DA SAUDE",
+        "uasg": "257048",
+        "uf": "PR",
+        "municipio": "CURITIBA",
+        "purchase_date": "2022-11-11",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 3276,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 25704805000092024, fornecedor 20419709000133."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2023-06-22, fim 2025-06-21)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "16022305000092022",
+        "supplier_cnpj": "00802002000102",
+        "supplier_name": "ALTERMED MATERIAL MEDICO HOSPITALAR LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uasg": "160223",
+        "uf": "PR",
+        "municipio": "CURITIBA",
+        "purchase_date": "2022-09-02",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 357,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 16022305000092022, fornecedor 00802002000102."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2024-11-11, fim 2026-11-10)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15518005000112022",
+        "supplier_cnpj": "03817043000152",
+        "supplier_name": "PHARMAPLUS LTDA",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155180",
+        "uf": "PE",
+        "municipio": "PETROLINA",
+        "purchase_date": "2022-08-18",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 825,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15518005000112022, fornecedor 03817043000152."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-16, fim 2026-09-15)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98326705000042020",
+        "supplier_cnpj": "05400006000170",
+        "supplier_name": "FABMED DISTRIBUIDORA HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL CABACEIRAS DO PARAGUAÇU",
+        "uasg": "983267",
+        "uf": "BA",
+        "municipio": "CABACEIRAS DO PARAGUAÇU",
+        "purchase_date": "2022-05-10",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 14000,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98326705000042020, fornecedor 05400006000170."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-05-27, fim 2026-11-27)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15502105000382020",
+        "supplier_cnpj": "03945035000191",
+        "supplier_name": "ACACIA COMERCIO DE MEDICAMENTOS EIRELI",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155021",
+        "uf": "MG",
+        "municipio": "BELO HORIZONTE",
+        "purchase_date": "2022-02-07",
+        "catmat": 267501,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 500 MG",
+        "value": 1800,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15502105000382020, fornecedor 03945035000191."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-02-11, fim 2027-02-11)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "16016605900012026",
+        "supplier_cnpj": "37676047000180",
+        "supplier_name": "ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uasg": "160166",
+        "uf": "PA",
+        "municipio": "BELÉM",
+        "purchase_date": "2026-07-06",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 520,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 16016605900012026, fornecedor 37676047000180."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — ROSAFARM DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo 00045.005161/2026."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "92615005907872030",
+        "supplier_cnpj": "06132785000132",
+        "supplier_name": "MEDVIDA DISTRIBUIDORA DE MEDICAMENTOS HOSPITALAR LTDA",
+        "organ": "EPE-SECRETARIA DE ADMINISTRAÇÃO DO GOVERNO",
+        "uasg": "926150",
+        "uf": "PE",
+        "municipio": "RECIFE",
+        "purchase_date": "2026-05-20",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 5724,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 92615005907872030, fornecedor 06132785000132."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — MEDVIDA DISTRIBUIDORA DE MEDICAMENTOS EIRELI — processo 093/2022."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "15590505900012026",
+        "supplier_cnpj": "32534969000139",
+        "supplier_name": "CK COMERCIO DE PRODUTOS E MEDICAMENTOS HOSPITALARES LTDA",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155905",
+        "uf": "TO",
+        "municipio": "ARAGUAÍNA",
+        "purchase_date": "2026-05-15",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 50,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15590505900012026, fornecedor 32534969000139."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — CK COMÉRCIO DE PRODUTOS E MEDICAMENTOS HOSPITALARES LTDA — processo 12/2025."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98233705930032030",
+        "supplier_cnpj": "26754510000148",
+        "supplier_name": "HORUS FARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BEZERROS - PE",
+        "uasg": "982337",
+        "uf": "PE",
+        "municipio": "BEZERROS",
+        "purchase_date": "2026-05-07",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 4500,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98233705930032030, fornecedor 26754510000148."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-06-18, fim 2027-12-18)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "18015505900032024",
+        "supplier_cnpj": "40274237000185",
+        "supplier_name": "CLM FARMA COMERCIO E DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "ESP-SECRETARIA DA SEGURANCA PUBLICA",
+        "uasg": "180155",
+        "uf": "SP",
+        "municipio": "SÃO JOSÉ DOS CAMPOS",
+        "purchase_date": "2026-03-09",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 865,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 18015505900032024, fornecedor 40274237000185."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — CLM FARMA COMERCIO E DISTRIBUIDORA DE MEDICAMENTOS LTDA — processo 08016026659202412."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "98748105900922030",
+        "supplier_cnpj": "29972416000153",
+        "supplier_name": "CIRURGICA SUL - DISTRIBUIDORA DE MATERIAIS MEDICOS HOSPITALARES LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CAMPO LARGO - PR",
+        "uasg": "987481",
+        "uf": "PR",
+        "municipio": "CAMPO LARGO",
+        "purchase_date": "2025-10-08",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 53280,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98748105900922030, fornecedor 29972416000153."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — CIRURGICA SUL - DISTRIBUIDORA DE MATERIAIS MEDICOS HOSPITALARES LTDA — processo 018."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "25703405900112024",
+        "supplier_cnpj": "58914251000161",
+        "supplier_name": "ITAPECURU SAUDE E MEDICAMENTOS LTDA",
+        "organ": "MINISTERIO DA SAUDE",
+        "uasg": "257034",
+        "uf": "MA",
+        "municipio": "SÃO LUÍS",
+        "purchase_date": "2025-08-27",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 2575.65,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 25703405900112024, fornecedor 58914251000161."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-06-30, fim 2028-06-30)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "45052205900032024",
+        "supplier_cnpj": "35753111000153",
+        "supplier_name": "NORD PRODUTOS EM SAUDE LTDA",
+        "organ": "PREFEITURA DE ARIQUEMES",
+        "uasg": "450522",
+        "uf": "RO",
+        "municipio": "ARIQUEMES",
+        "purchase_date": "2025-08-06",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 12000,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 45052205900032024, fornecedor 35753111000153."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-04-07, fim 2026-10-06)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "15500805900502024",
+        "supplier_cnpj": "32077848000105",
+        "supplier_name": "DISTRIBUIDORA MERCURY DE MEDICAMENTOS LTDA",
+        "organ": "EMPRESA BRASILEIRA DE SERVIÇOS HOSPITALARES",
+        "uasg": "155008",
+        "uf": "PI",
+        "municipio": "TERESINA",
+        "purchase_date": "2025-08-05",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 1132,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 15500805900502024, fornecedor 32077848000105."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-03-24, fim 2029-03-24)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "12006405900232024",
+        "supplier_cnpj": "18519219000167",
+        "supplier_name": "POUSO FARMA HOSPITALAR LTDA",
+        "organ": "COMANDO DA AERONÁUTICA",
+        "uasg": "120064",
+        "uf": "SP",
+        "municipio": "GUARATINGUETÁ",
+        "purchase_date": "2025-07-24",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 20,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 12006405900232024, fornecedor 18519219000167."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-05-05, fim 2029-05-05)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "contract_ref": "16035905900012024",
+        "supplier_cnpj": "94389400000184",
+        "supplier_name": "MCW PRODUTOS MEDICOS E HOSPITALARES LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uasg": "160359",
+        "uf": "RS",
+        "municipio": "ALEGRETE",
+        "purchase_date": "2025-08-20",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 231.3,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 16035905900012024, fornecedor 94389400000184."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "FAIL",
+          "reason": "CNPJ sancionado no CEIS (vigente): Impedimento/proibição de contratar com prazo determinado — MCW PRODUTOS MEDICOS E HOSPITALARES LTDA — processo 134/2023."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "16016605900052024",
+        "supplier_cnpj": "44656846000150",
+        "supplier_name": "DF MEDICAL LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uasg": "160166",
+        "uf": "PA",
+        "municipio": "",
+        "purchase_date": "2025-07-02",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 666,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 16016605900052024, fornecedor 44656846000150."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-12-11, fim 2026-12-11)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "98552905900602020",
+        "supplier_cnpj": "03652030000332",
+        "supplier_name": "CENTERMEDI-COMERCIO DE PRODUTOS HOSPITALARES LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE ENTRE RIOS DO OESTE",
+        "uasg": "985529",
+        "uf": "PR",
+        "municipio": "ENTRE RIOS DO OESTE",
+        "purchase_date": "2025-06-27",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 930,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 98552905900602020, fornecedor 03652030000332."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2025-12-03, fim 2026-08-03)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    },
+    {
+      "use_case": "sanction_check_v1",
+      "verdict": "REVIEW",
+      "evidence": {
+        "contract_ref": "95651806900322030",
+        "supplier_cnpj": "22525517000137",
+        "supplier_name": "JF COMERCIO DE MATERIAL E MEDICAMENTOS HOSPITALES LTDA",
+        "organ": "ESP-ASSEMBLEIA LEGISLATIVA DO EST. SAO PAULO",
+        "uasg": "956518",
+        "uf": "SP",
+        "municipio": "SÃO PAULO",
+        "purchase_date": "2025-05-26",
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "value": 7.2,
+        "source": "compras.gov.br/modulo-pesquisa-preco"
+      },
+      "predicate_results": [
+        {
+          "id": "o1_contract_identifiable",
+          "verdict": "PASS",
+          "reason": "Contratação 95651806900322030, fornecedor 22525517000137."
+        },
+        {
+          "id": "o2_not_in_ceis",
+          "verdict": "REVIEW",
+          "reason": "CNPJ consta no CEIS mas a sanção não está vigente na data da compra (início 2026-06-03, fim 2026-10-13)."
+        },
+        {
+          "id": "o3_not_in_cnep",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CNEP."
+        },
+        {
+          "id": "o4_not_in_cepim",
+          "verdict": "PASS",
+          "reason": "CNPJ ausente do CEPIM."
+        }
+      ]
+    }
+  ],
+  "overpricing_alerts": [
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268373,
+        "item_desc": "ACICLOVIR, DOSAGEM: 30 MG/G, USO: POMADA OFTÁLMICA ",
+        "unit": "BIS 10",
+        "contract_ref": "98030105000222020",
+        "supplier_cnpj": "05536092000142",
+        "supplier_name": "COMPANHIA HOSPITALAR LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE BOA VISTA - RR",
+        "uf": "RR",
+        "municipio": "BOA VISTA",
+        "purchase_date": "2022-05-30",
+        "unit_price": 45,
+        "basket": {
+          "n": 11,
+          "median": 2.48,
+          "mad": 0.20999999999999996,
+          "meanAbsDev": 5.15929090909091
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268373, preço unitário R$ 45.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 11 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.4800)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 136.57 (limite 3.5); 1715% vs. mediana R$ 2.4800."
+        }
+      ],
+      "damage": {
+        "quantidade": 450,
+        "unit_price": 45,
+        "basket_median": 2.48,
+        "dano_estimado_brl": 19134
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000122020",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "uf": "PI",
+        "municipio": "FRANCISCO SANTOS",
+        "purchase_date": "2023-04-27",
+        "unit_price": 7.22,
+        "basket": {
+          "n": 127,
+          "median": 0.3656,
+          "mad": 0.054400000000000004,
+          "meanAbsDev": 0.22359370078740165
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267627, preço unitário R$ 7.2200."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 127 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.3656)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 84.99 (limite 3.5); 1875% vs. mediana R$ 0.3656."
+        }
+      ],
+      "damage": {
+        "quantidade": 750,
+        "unit_price": 7.22,
+        "basket_median": 0.3656,
+        "dano_estimado_brl": 5140.8
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270556,
+        "item_desc": "AMPICILINA, APRESENTAÇÃO: ASSOCIADA COM SULBACTAM , DOSAGEM: 1G + 500MG , TIPO USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "19310506000032024",
+        "supplier_cnpj": "28423060000136",
+        "supplier_name": "SUPLY SOLUCOES EM TECNOLOGIA & TRANSPORTES LTDA",
+        "organ": "INST.BRAS.DO MEIO AMB.E DOS REC.NAT.RENOVAV.",
+        "uf": "AC",
+        "municipio": "RIO BRANCO",
+        "purchase_date": "2022-07-15",
+        "unit_price": 104,
+        "basket": {
+          "n": 223,
+          "median": 6.08,
+          "mad": 0.9199999999999999,
+          "meanAbsDev": 1.9589663677130047
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270556, preço unitário R$ 104.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 223 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 6.0800)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 71.79 (limite 3.5); 1611% vs. mediana R$ 6.0800."
+        }
+      ],
+      "damage": {
+        "quantidade": 2,
+        "unit_price": 104,
+        "basket_median": 6.08,
+        "dano_estimado_brl": 195.84
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98086905000162020",
+        "supplier_cnpj": "02537040000100",
+        "supplier_name": "JOSE A M SOARES",
+        "organ": "PREFEITURA MUNICIPAL DE PINHEIRO - MA",
+        "uf": "MA",
+        "municipio": "PINHEIRO",
+        "purchase_date": "2022-11-18",
+        "unit_price": 3.34,
+        "basket": {
+          "n": 959,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07454713242961436
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.3400."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 70.60 (limite 3.5); 1570% vs. mediana R$ 0.2000."
+        }
+      ],
+      "damage": {
+        "quantidade": 13500,
+        "unit_price": 3.34,
+        "basket_median": 0.2,
+        "dano_estimado_brl": 42390
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267627,
+        "item_desc": "CIMETIDINA, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000082020",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "uf": "PI",
+        "municipio": "FRANCISCO SANTOS",
+        "purchase_date": "2022-03-24",
+        "unit_price": 6,
+        "basket": {
+          "n": 127,
+          "median": 0.3656,
+          "mad": 0.054400000000000004,
+          "meanAbsDev": 0.22359370078740165
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267627, preço unitário R$ 6.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 127 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.3656)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.86 (limite 3.5); 1541% vs. mediana R$ 0.3656."
+        }
+      ],
+      "damage": {
+        "quantidade": 400,
+        "unit_price": 6,
+        "basket_median": 0.3656,
+        "dano_estimado_brl": 2253.76
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "25703605900042024",
+        "supplier_cnpj": "16553940000148",
+        "supplier_name": "MEDMAX COMERCIO DE MEDICAMENTOS LTDA",
+        "organ": "MINISTERIO DA SAUDE",
+        "uf": "MS",
+        "municipio": "CAMPO GRANDE",
+        "purchase_date": "2024-06-11",
+        "unit_price": 3.28,
+        "basket": {
+          "n": 959,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07454713242961436
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.2800."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.25 (limite 3.5); 1540% vs. mediana R$ 0.2000."
+        }
+      ],
+      "damage": {
+        "quantidade": 5900,
+        "unit_price": 3.28,
+        "basket_median": 0.2,
+        "dano_estimado_brl": 18172
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "16008805900132024",
+        "supplier_cnpj": "41934826000105",
+        "supplier_name": "ALTO URUGUAI DISTRIBUIDORA LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uf": "DF",
+        "municipio": "BRASÍLIA",
+        "purchase_date": "2026-03-05",
+        "unit_price": 3.27,
+        "basket": {
+          "n": 959,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07454713242961436
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 3.2700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 69.02 (limite 3.5); 1535% vs. mediana R$ 0.2000."
+        }
+      ],
+      "damage": {
+        "quantidade": 870,
+        "unit_price": 3.27,
+        "basket_median": 0.2,
+        "dano_estimado_brl": 2670.9
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268513,
+        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98217905000042020",
+        "supplier_cnpj": "32173778000199",
+        "supplier_name": "PN COMERCIO E SERVICO LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE SÃO BENTO - PB",
+        "uf": "PB",
+        "municipio": "SÃO BENTO",
+        "purchase_date": "2022-02-11",
+        "unit_price": 73.29,
+        "basket": {
+          "n": 750,
+          "median": 3.745,
+          "mad": 0.7450000000000001,
+          "meanAbsDev": 1.4199620000000004
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268513, preço unitário R$ 73.2900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 750 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7450)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 62.96 (limite 3.5); 1857% vs. mediana R$ 3.7450."
+        }
+      ],
+      "damage": {
+        "quantidade": 30,
+        "unit_price": 73.29,
+        "basket_median": 3.745,
+        "dano_estimado_brl": 2086.35
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267515,
+        "item_desc": "AMPICILINA, DOSAGEM: 500 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98985905900162020",
+        "supplier_cnpj": "15229287000101",
+        "supplier_name": "VIVRE COMERCIO DE PRODUTOS HOSPITALARES LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE JABORANDI - BA",
+        "uf": "BA",
+        "municipio": "JABORANDI",
+        "purchase_date": "2025-01-06",
+        "unit_price": 8.33,
+        "basket": {
+          "n": 100,
+          "median": 0.48105,
+          "mad": 0.08999999999999997,
+          "meanAbsDev": 0.32145499999999994
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267515, preço unitário R$ 8.3300."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 100 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.4810)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 58.82 (limite 3.5); 1632% vs. mediana R$ 0.4810."
+        }
+      ],
+      "damage": {
+        "quantidade": 50,
+        "unit_price": 8.33,
+        "basket_median": 0.48105,
+        "dano_estimado_brl": 392.45
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98350105900082030",
+        "supplier_cnpj": "01215643000115",
+        "supplier_name": "AVANCE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "uf": "BA",
+        "municipio": "DOM BASÍLIO",
+        "purchase_date": "2026-03-06",
+        "unit_price": 2.71,
+        "basket": {
+          "n": 959,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07454713242961436
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 2.7100."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 56.43 (limite 3.5); 1255% vs. mediana R$ 0.2000."
+        }
+      ],
+      "damage": {
+        "quantidade": 2500,
+        "unit_price": 2.71,
+        "basket_median": 0.2,
+        "dano_estimado_brl": 6275
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267515,
+        "item_desc": "AMPICILINA, DOSAGEM: 500 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98108305000122020",
+        "supplier_cnpj": "04385090000137",
+        "supplier_name": "MAURO ROBERTO RODRIGUES DE MOURA",
+        "organ": "PREFEITURA MUNICIPAL DE FRANCISCO SANTOS - PI",
+        "uf": "PI",
+        "municipio": "FRANCISCO SANTOS",
+        "purchase_date": "2023-04-27",
+        "unit_price": 7.59,
+        "basket": {
+          "n": 100,
+          "median": 0.48105,
+          "mad": 0.08999999999999997,
+          "meanAbsDev": 0.32145499999999994
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267515, preço unitário R$ 7.5900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 100 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.4810)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 53.28 (limite 3.5); 1478% vs. mediana R$ 0.4810."
+        }
+      ],
+      "damage": {
+        "quantidade": 2000,
+        "unit_price": 7.59,
+        "basket_median": 0.48105,
+        "dano_estimado_brl": 14217.9
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268370,
+        "item_desc": "ACICLOVIR, DOSAGEM: 200 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98904705900062030",
+        "supplier_cnpj": "55007465000166",
+        "supplier_name": "SANTANA FARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CACERES - MT",
+        "uf": "MT",
+        "municipio": "CÁCERES",
+        "purchase_date": "2025-04-14",
+        "unit_price": 2.55,
+        "basket": {
+          "n": 959,
+          "median": 0.2,
+          "mad": 0.03,
+          "meanAbsDev": 0.07454713242961436
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268370, preço unitário R$ 2.5500."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 959 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.2000)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 52.84 (limite 3.5); 1175% vs. mediana R$ 0.2000."
+        }
+      ],
+      "damage": {
+        "quantidade": 1100,
+        "unit_price": 2.55,
+        "basket_median": 0.2,
+        "dano_estimado_brl": 2585
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270616,
+        "item_desc": "BENZILPENICILINA, APRESENTAÇÃO: POTÁSSICA , DOSAGEM: 5.000.000UI , USO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98023005900102030",
+        "supplier_cnpj": "22778969000120",
+        "supplier_name": "DISTRIBUIDORA EXATA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE S.FRANCISCO DO BREJÃO",
+        "uf": "MA",
+        "municipio": "SÃO FRANCISCO DO BREJÃO",
+        "purchase_date": "2025-07-08",
+        "unit_price": 97.49,
+        "basket": {
+          "n": 559,
+          "median": 9.16,
+          "mad": 1.1400000000000006,
+          "meanAbsDev": 1.669667620751339
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270616, preço unitário R$ 97.4900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 559 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 9.1600)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 52.26 (limite 3.5); 964% vs. mediana R$ 9.1600."
+        }
+      ],
+      "damage": {
+        "quantidade": 6,
+        "unit_price": 97.49,
+        "basket_median": 9.16,
+        "dano_estimado_brl": 529.98
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "9013905901472024",
+        "supplier_cnpj": "14779687000110",
+        "supplier_name": "JOSE CARLOS DE SOUZA PRODUTOS FARMACEUTICOS LTDA",
+        "organ": "ESP-SECRETARIA DA SAUDE",
+        "uf": "SP",
+        "municipio": "SOROCABA",
+        "purchase_date": "2025-12-26",
+        "unit_price": 0.77,
+        "basket": {
+          "n": 943,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027354294803817753
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 943 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 49.24 (limite 3.5); 1825% vs. mediana R$ 0.0400."
+        }
+      ],
+      "damage": {
+        "quantidade": 240,
+        "unit_price": 0.77,
+        "basket_median": 0.04,
+        "dano_estimado_brl": 175.2
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 483365,
+        "item_desc": "CURATIVO CUTÂNEO, COMPONENTE 1: C/ ALMOFADA FIBRA SINTÉTICA , COMPONENTE 2: BASE ADESIVA , DIMENSÃO: CERCA DE  2,5 X 5,0 CM, ESTERILIDADE: USO ÚNICO ",
+        "unit": "UN 0",
+        "contract_ref": "98629105902612030",
+        "supplier_cnpj": "41340009000129",
+        "supplier_name": "VERIS PRODUTOS PARA SAUDE LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CAMPINAS - SP",
+        "uf": "SP",
+        "municipio": "CAMPINAS",
+        "purchase_date": "2025-01-22",
+        "unit_price": 138.17,
+        "basket": {
+          "n": 20,
+          "median": 10.555,
+          "mad": 1.75,
+          "meanAbsDev": 10.162999999999997
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 483365, preço unitário R$ 138.1700."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 20 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 10.5550)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 49.19 (limite 3.5); 1209% vs. mediana R$ 10.5550."
+        }
+      ],
+      "damage": {
+        "quantidade": 150,
+        "unit_price": 138.17,
+        "basket_median": 10.555,
+        "dano_estimado_brl": 19142.25
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 442727,
+        "item_desc": "AMPICILINA, CONCENTRAÇÃO: 500 MG, FORMA FARMACEUTICA: PÓ P/ SOLUÇÃO INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "98027305900222030",
+        "supplier_cnpj": "58956341000115",
+        "supplier_name": "AMAZONA PHARMA DISTRIBUIDORA DE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE STO ANTONIO DO ICA-AM",
+        "uf": "AM",
+        "municipio": "SANTO ANTÔNIO DO IÇÁ",
+        "purchase_date": "2025-11-14",
+        "unit_price": 50,
+        "basket": {
+          "n": 211,
+          "median": 3.58,
+          "mad": 0.6399999999999997,
+          "meanAbsDev": 1.3395843601895734
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 442727, preço unitário R$ 50.0000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 211 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.5800)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 48.92 (limite 3.5); 1297% vs. mediana R$ 3.5800."
+        }
+      ],
+      "damage": {
+        "quantidade": 1000,
+        "unit_price": 50,
+        "basket_median": 3.58,
+        "dano_estimado_brl": 46420
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268513,
+        "item_desc": "OXACILINA, DOSAGEM: 500 MG, COMPOSIÇÃO: INJETÁVEL ",
+        "unit": "FR-AM 0",
+        "contract_ref": "12006005010652020",
+        "supplier_cnpj": "26525513000100",
+        "supplier_name": "TURVOMED DISTRIBUIDORA E SERVICOS EIRELI",
+        "organ": "COMANDO DA AERONÁUTICA",
+        "uf": "SP",
+        "municipio": "PIRASSUNUNGA",
+        "purchase_date": "2021-12-14",
+        "unit_price": 56.89,
+        "basket": {
+          "n": 750,
+          "median": 3.745,
+          "mad": 0.7450000000000001,
+          "meanAbsDev": 1.4199620000000004
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268513, preço unitário R$ 56.8900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 750 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 3.7450)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 48.12 (limite 3.5); 1419% vs. mediana R$ 3.7450."
+        }
+      ],
+      "damage": {
+        "quantidade": 120,
+        "unit_price": 56.89,
+        "basket_median": 3.745,
+        "dano_estimado_brl": 6377.4
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "98350105900082030",
+        "supplier_cnpj": "01215643000115",
+        "supplier_name": "AVANCE MEDICAMENTOS LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "uf": "BA",
+        "municipio": "DOM BASÍLIO",
+        "purchase_date": "2026-03-06",
+        "unit_price": 28.36,
+        "basket": {
+          "n": 819,
+          "median": 2.51,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0410344322344316
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.3600."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 819 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5100)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 47.12 (limite 3.5); 1030% vs. mediana R$ 2.5100."
+        }
+      ],
+      "damage": {
+        "quantidade": 300,
+        "unit_price": 28.36,
+        "basket_median": 2.51,
+        "dano_estimado_brl": 7755
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "98350105900342030",
+        "supplier_cnpj": "08778201000126",
+        "supplier_name": "DROGAFONTE LTDA",
+        "organ": "PREFEITURA DE DOM BASILIO - BA",
+        "uf": "BA",
+        "municipio": "DOM BASÍLIO",
+        "purchase_date": "2025-06-02",
+        "unit_price": 28.08,
+        "basket": {
+          "n": 819,
+          "median": 2.51,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0410344322344316
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.0800."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 819 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5100)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.61 (limite 3.5); 1019% vs. mediana R$ 2.5100."
+        }
+      ],
+      "damage": {
+        "quantidade": 100,
+        "unit_price": 28.08,
+        "basket_median": 2.51,
+        "dano_estimado_brl": 2557
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 268375,
+        "item_desc": "ACICLOVIR, DOSAGEM: 50 MG/G, USO: CREME ",
+        "unit": "BIS 10",
+        "contract_ref": "15833506000122022",
+        "supplier_cnpj": "21104288000114",
+        "supplier_name": "DROGARIA ALMEIDA JUNIO LTDA",
+        "organ": "INSTITUTO FEDERAL DE MATO GROSSO",
+        "uf": "MT",
+        "municipio": "CAMPO VERDE",
+        "purchase_date": "2022-07-05",
+        "unit_price": 28.04,
+        "basket": {
+          "n": 819,
+          "median": 2.51,
+          "mad": 0.3700000000000001,
+          "meanAbsDev": 1.0410344322344316
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 268375, preço unitário R$ 28.0400."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 819 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 2.5100)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.54 (limite 3.5); 1017% vs. mediana R$ 2.5100."
+        }
+      ],
+      "damage": {
+        "quantidade": 5,
+        "unit_price": 28.04,
+        "basket_median": 2.51,
+        "dano_estimado_brl": 127.65
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "92660706000092030",
+        "supplier_cnpj": "30540358000178",
+        "supplier_name": "BIOGRAM COMERCIO DE INSUMOS FARMACEUTICOS LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE GOVERNADOR VALADARES",
+        "uf": "MG",
+        "municipio": "GOVERNADOR VALADARES",
+        "purchase_date": "2025-03-23",
+        "unit_price": 0.7267,
+        "basket": {
+          "n": 943,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027354294803817753
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7267."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 943 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 46.32 (limite 3.5); 1717% vs. mediana R$ 0.0400."
+        }
+      ],
+      "damage": {
+        "quantidade": 270,
+        "unit_price": 0.7267,
+        "basket_median": 0.04,
+        "dano_estimado_brl": 185.41
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98040305900092030",
+        "supplier_cnpj": "33341536000120",
+        "supplier_name": "A. F. A. COMERCIO DE MERCADORIAS EM GERAL LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE ACARÁ - PA",
+        "uf": "PA",
+        "municipio": "ACARÁ",
+        "purchase_date": "2024-08-27",
+        "unit_price": 0.71,
+        "basket": {
+          "n": 943,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027354294803817753
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7100."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 943 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 45.19 (limite 3.5); 1675% vs. mediana R$ 0.0400."
+        }
+      ],
+      "damage": {
+        "quantidade": 200000,
+        "unit_price": 0.71,
+        "basket_median": 0.04,
+        "dano_estimado_brl": 134000
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98506105900252030",
+        "supplier_cnpj": "42529374000149",
+        "supplier_name": "DISTRIBUIDORA DE MEDICAMENTOS INTRAMED LTDA",
+        "organ": "PREFEITURA DE PRESIDENTE BERNARDES - MG",
+        "uf": "MG",
+        "municipio": "PRESIDENTE BERNARDES",
+        "purchase_date": "2024-09-27",
+        "unit_price": 0.7,
+        "basket": {
+          "n": 943,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027354294803817753
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.7000."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 943 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 44.52 (limite 3.5); 1650% vs. mediana R$ 0.0400."
+        }
+      ],
+      "damage": {
+        "quantidade": 1200,
+        "unit_price": 0.7,
+        "basket_median": 0.04,
+        "dano_estimado_brl": 792
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 270612,
+        "item_desc": "BENZILPENICILINA, APRESENTAÇÃO: BENZATINA , DOSAGEM: 1.200.000UI , USO: INJETÁVEL ",
+        "unit": "FR 2",
+        "contract_ref": "16028806900012024",
+        "supplier_cnpj": "03339270000110",
+        "supplier_name": "THE BEST PHARMA LTDA",
+        "organ": "COMANDO DO EXERCITO",
+        "uf": "RJ",
+        "municipio": "RIO DE JANEIRO",
+        "purchase_date": "2024-04-15",
+        "unit_price": 19.5661,
+        "basket": {
+          "n": 8,
+          "median": 5.734999999999999,
+          "mad": 0.20999999999999908,
+          "meanAbsDev": 2.0132624999999997
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 270612, preço unitário R$ 19.5661."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 8 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 5.7350)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 44.42 (limite 3.5); 241% vs. mediana R$ 5.7350."
+        }
+      ],
+      "damage": {
+        "quantidade": 20,
+        "unit_price": 19.5661,
+        "basket_median": 5.734999999999999,
+        "dano_estimado_brl": 276.62
+      }
+    },
+    {
+      "use_case": "overpricing_v1",
+      "verdict": "FAIL",
+      "evidence": {
+        "catmat": 267502,
+        "item_desc": "ÁCIDO ACETILSALICÍLICO, DOSAGEM: 100 MG",
+        "unit": "COMPR 0",
+        "contract_ref": "98582905900612030",
+        "supplier_cnpj": "49539365000188",
+        "supplier_name": "GHC MED DISTRIBUIDORA LTDA",
+        "organ": "PREFEITURA MUNICIPAL DE CORDEIRO - RJ",
+        "uf": "RJ",
+        "municipio": "CORDEIRO",
+        "purchase_date": "2025-03-07",
+        "unit_price": 0.69,
+        "basket": {
+          "n": 943,
+          "median": 0.04,
+          "mad": 0.010000000000000002,
+          "meanAbsDev": 0.027354294803817753
+        }
+      },
+      "predicate_results": [
+        {
+          "id": "o1_item_identifiable",
+          "verdict": "PASS",
+          "reason": "Item CATMAT 267502, preço unitário R$ 0.6900."
+        },
+        {
+          "id": "o2_basket_sufficient",
+          "verdict": "PASS",
+          "reason": "Cesta com 943 preços comparáveis (mín. 8)."
+        },
+        {
+          "id": "o3_price_in_scale",
+          "verdict": "PASS",
+          "reason": "Preço dentro da escala plausível (mediana R$ 0.0400)."
+        },
+        {
+          "id": "o4_not_statistical_outlier",
+          "verdict": "FAIL",
+          "reason": "Preço é outlier: Z-modificado 43.84 (limite 3.5); 1625% vs. mediana R$ 0.0400."
+        }
+      ],
+      "damage": {
+        "quantidade": 1080,
+        "unit_price": 0.69,
+        "basket_median": 0.04,
+        "dano_estimado_brl": 702
+      }
+    }
+  ]
+}
