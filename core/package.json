@@ -1,0 +1,41 @@
+{
+  "name": "@dpo2u/core",
+  "version": "0.1.0",
+  "description": "Network-independent compliance core: versioned policy predicates, deterministic evaluation, attestations with validity and revocation, hash-linked audit trail, and the chain-adapter contract. Imports no blockchain SDK by design.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "no-chain-deps": "node scripts/no-chain-deps.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "4.1.6"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fredericosanntana/dpo2u-stellar.git",
+    "directory": "core"
+  },
+  "keywords": [
+    "compliance",
+    "attestation",
+    "aml",
+    "kyb",
+    "travel-rule",
+    "chain-agnostic"
+  ],
+  "license": "Apache-2.0"
+}
