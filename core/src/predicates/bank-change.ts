@@ -14,8 +14,8 @@
 
 import type { EvidenceView, Predicate, PredicateOutcome } from '../predicate.js';
 
-interface NoParams {
-}
+/** Predicates whose behaviour has nothing to configure. */
+type NoParams = Record<string, never>;
 
 const NO_PARAMS: NoParams = {};
 
