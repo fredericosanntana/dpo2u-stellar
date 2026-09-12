@@ -10,6 +10,14 @@ import {
   revoke,
 } from '../attestation.js';
 import { AuditTrail, GENESIS_HASH, type TrailEntry } from '../trail.js';
+import {
+  anchorFidelity,
+  assertAnchorable,
+  toAnchorRecord,
+  UnpreservableSemanticsError,
+  type NetworkCapabilities,
+  type NetworkDescriptor,
+} from '../adapter.js';
 import { predicateHash } from '../predicate.js';
 import type { EvidenceView } from '../predicate.js';
 import {
@@ -414,5 +422,97 @@ describe('audit trail', () => {
     expect(() => new AuditTrail([entries[0], { ...entries[1], actor: 'someone else' }])).toThrow(
       /broken trail/,
     );
+  });
+});
+
+describe('anchor capabilities — the core asks before it writes', () => {
+  const pack = definePolicyPack({
+    useCaseId: 'bank_change',
+    version: 1,
+    jurisdiction: 'BR',
+    basis: ['PRD §5.1'],
+    predicates: bankChangePredicates(),
+  });
+
+  const clean = {
+    holderMatchesSupplier: true,
+    sharesCnpjRoot: false,
+    hasPowerOfAttorney: false,
+    channel: 'official_portal',
+    strongAuthentication: true,
+    daysSinceLastBankChange: null,
+    hoursToNextScheduledPayment: null,
+    destinationIsRegulatedInstitution: true,
+  };
+
+  function att(validUntil?: Date) {
+    return attestationFromEvaluation(evaluate(pack, evidence(clean), T0), {
+      issuer: 'submitter:pilot',
+      ...(validUntil ? { validUntil } : {}),
+    });
+  }
+
+  function net(caps: Partial<NetworkCapabilities>): NetworkDescriptor {
+    return {
+      id: 'test-net',
+      displayName: 'Test',
+      publiclyVerifiable: true,
+      capabilities: {
+        validityWindow: false,
+        revocation: false,
+        packHash: false,
+        jurisdiction: false,
+        ...caps,
+      },
+    };
+  }
+
+  it('blocks an expiry the network cannot record', () => {
+    const fidelity = anchorFidelity(att(new Date('2027-01-01T00:00:00.000Z')), net({}));
+    expect(fidelity.blocking).toContain('validUntil');
+    expect(fidelity.faithful).toBe(false);
+  });
+
+  it('does not block when the network records validity', () => {
+    const fidelity = anchorFidelity(
+      att(new Date('2027-01-01T00:00:00.000Z')),
+      net({ validityWindow: true }),
+    );
+    expect(fidelity.blocking).toHaveLength(0);
+  });
+
+  it('treats lost detail as reduced fidelity, not as a blocker', () => {
+    const fidelity = anchorFidelity(att(), net({}));
+    expect(fidelity.blocking).toHaveLength(0);
+    expect(fidelity.reduced).toEqual(['packHash', 'jurisdiction']);
+    // Still not faithful — worth recording in the trail, not worth refusing.
+    expect(fidelity.faithful).toBe(false);
+  });
+
+  it('reports a fully faithful anchor when the network carries everything', () => {
+    const fidelity = anchorFidelity(
+      att(new Date('2027-01-01T00:00:00.000Z')),
+      net({ validityWindow: true, revocation: true, packHash: true, jurisdiction: true }),
+    );
+    expect(fidelity.faithful).toBe(true);
+  });
+
+  it('throws on a blocking gap and names the network', () => {
+    expect(() =>
+      assertAnchorable(att(new Date('2027-01-01T00:00:00.000Z')), net({})),
+    ).toThrow(UnpreservableSemanticsError);
+    expect(() =>
+      assertAnchorable(att(new Date('2027-01-01T00:00:00.000Z')), net({})),
+    ).toThrow(/test-net/);
+  });
+
+  it('omits fields the network cannot hold instead of defaulting them', () => {
+    const record = toAnchorRecord(att(), net({}));
+    expect(record.packHash).toBeUndefined();
+    expect(record.jurisdiction).toBeUndefined();
+
+    const full = toAnchorRecord(att(), net({ packHash: true, jurisdiction: true }));
+    expect(full.packHash).toMatch(/^[0-9a-f]{64}$/);
+    expect(full.jurisdiction).toBe('BR');
   });
 });

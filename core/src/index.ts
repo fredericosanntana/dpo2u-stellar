@@ -57,12 +57,17 @@ export {
 
 export {
   toAnchorRecord,
+  anchorFidelity,
+  assertAnchorable,
   DuplicateAttestationError,
   NotAuthorizedError,
+  UnpreservableSemanticsError,
   type ChainAdapter,
   type AnchorRecord,
   type AnchorReceipt,
+  type AnchorFidelity,
   type NetworkDescriptor,
+  type NetworkCapabilities,
 } from './adapter.js';
 
 export {
