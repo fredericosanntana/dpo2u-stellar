@@ -28,12 +28,18 @@ const FORBIDDEN_IMPORTS = [
   'viem',
 ];
 
-// Chain-native vocabulary. `Symbol` is deliberately absent: it is a JavaScript
-// builtin, and banning the word would produce noise rather than signal.
+// Chain-native vocabulary, kept deliberately narrow.
+//
+// The import ban above is the real protection; this list only catches a type
+// copied in by hand. So it holds names that mean nothing outside a chain SDK,
+// and excludes anything a compliance core might legitimately say. `Transaction`
+// and `PublicKey` were here and were removed: transaction monitoring is core
+// vocabulary in this domain, and signing code has honest reasons to name a
+// public key. A gate that cries wolf gets switched off.
+//
+// `Symbol` is absent for the same reason — it is a JavaScript builtin.
 const FORBIDDEN_TOKENS = [
-  'PublicKey',
   'Keypair',
-  'Transaction',
   'SorobanRpc',
   'contractId',
   'networkPassphrase',

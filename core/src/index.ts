@@ -73,10 +73,49 @@ export {
 export {
   AuditTrail,
   GENESIS_HASH,
+  checkpointPayload,
   type TrailAction,
   type TrailEntry,
   type TrailEntryInput,
+  type TrailCheckpoint,
   type ChainVerification,
+  type CheckpointVerification,
+  type CheckpointFailure,
 } from './trail.js';
+
+export {
+  generateSigningMaterial,
+  Ed25519Signer,
+  Ed25519Verifier,
+  UnknownKeyError,
+  type Signer,
+  type Verifier,
+  type KeyMaterial,
+} from './signing.js';
+
+export {
+  EXPORT_FORMAT,
+  buildExport,
+  serializeExport,
+  verifyExport,
+  type TrailExport,
+  type ExportKey,
+  type ExportVerification,
+  type BuildExportOptions,
+} from './export.js';
+
+export {
+  manifestPayload,
+  signPackManifest,
+  verifyPackManifest,
+  planInstall,
+  type PackManifest,
+  type PackManifestBody,
+  type ManifestVerification,
+  type ManifestProblem,
+  type InstalledPack,
+  type InstallDecision,
+  type InstallOptions,
+} from './distribution.js';
 
 export * from './predicates/index.js';

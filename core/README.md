@@ -35,7 +35,10 @@ strings e hashes hex — nunca importar o SDK aqui.
 | `policy-pack.ts` | P1 | Conjunto de predicados que uma instalação recebe e que a atestação cita. |
 | `engine.ts` | P3 | Avaliação determinística e agregação de veredito. |
 | `attestation.ts` | P3 | Registro com **validade e revogação** — não só carimbo de tempo. |
-| `trail.ts` | — | Trilha append-only encadeada por hash, com verificação. |
+| `trail.ts` | — | Trilha append-only encadeada por hash, com checkpoints assinados. |
+| `signing.ts` | — | Interface de assinatura, com Ed25519 como implementação padrão. |
+| `export.ts` | — | Pacote auto-verificável entregue ao supervisor. |
+| `distribution.ts` | — | Manifesto assinado do pacote, verificação offline e reversão. |
 | `adapter.ts` | P5 | O único contrato que sabe que blockchain existe. |
 
 ## Predicados incluídos
@@ -103,10 +106,57 @@ quebra todos os elos seguintes e `verify()` diz onde. É o que permite
 **demonstrar** — e não apenas afirmar — os "testes aplicados" que os arts. 62 a
 65 da Circular 3.978 exigem no relatório anual de efetividade.
 
-Um limite honesto, coberto por teste: encadeamento de hash prova que nada foi
-*alterado*, não que nada foi *omitido*. Truncar a cauda deixa uma cadeia
-internamente válida. Só publicar o hash da cabeça externamente fecha essa brecha
-— e é para isso que a âncora serve.
+Encadeamento sozinho tem uma brecha, e vale nomeá-la: prova que nada foi
+*alterado*, não que nada foi *omitido*. Truncar a cauda deixa uma cadeia que
+verifica perfeitamente. **Checkpoints assinados** fecham isso — um checkpoint
+afirma "na sequência N a cabeça era H", assinado, então uma trilha que depois
+apresenta menos de N entradas contradiz uma assinatura que não sabe forjar.
+
+Os dois checks dividem o trabalho, e o teste diz qual pega o quê:
+
+| Ataque | Quem pega |
+| --- | --- |
+| Editar conteúdo sem refazer o hash | `verify()` — a cadeia |
+| Editar conteúdo e refazer todos os hashes | checkpoint — a cabeça assinada não bate |
+| Omitir a cauda | checkpoint — cobre mais entradas do que existem |
+| Forjar um checkpoint | assinatura não verifica |
+
+O intervalo entre checkpoints é a exposição: é o máximo que um truncamento
+silencioso poderia esconder.
+
+## Exportação ao supervisor
+
+`buildExport` produz um pacote que o destinatário verifica **sem nós** — não sem
+nossa cooperação como cortesia, mas sem nosso software, nossos servidores ou
+nossa existência continuada. Leva as chaves de verificação em PEM, as entradas,
+os checkpoints e uma declaração em texto do que a verificação prova e do que não
+prova.
+
+`verifyExport(bundle)` confere contra as chaves que o pacote carrega;
+`verifyExport(bundle, minhasChaves)` responde a pergunta mais forte — *foi
+assinado pela chave que eu já confio?*
+
+Exportação por período preserva a numeração original das entradas: o
+destinatário confere a cadeia, então a janela não pode ser renumerada para
+parecer que começa na gênese.
+
+## Distribuição do pacote de política
+
+Instalação no cliente inverte a pergunta de confiança. A instituição não está
+pedindo que protejamos o dado dela — o dado nunca chega até nós. Está perguntando
+por que deveria rodar nossas regras dentro do perímetro. A resposta precisa ser
+conferível por ela, offline, antes de qualquer coisa executar.
+
+```ts
+const veredito = await verifyPackManifest(manifesto, pacote, verificador);
+const decisao = planInstall(instalado, manifesto);
+// { action: 'refuse', reason: 'refusing a silent downgrade from 2 to 1; …' }
+```
+
+`planInstall` decide sem agir, para que a decisão possa ser mostrada a um
+operador, escrita na trilha e — numa reversão — posta diante de um segundo
+aprovador antes de qualquer mudança. Reversão continua possível, porque às vezes
+o pacote novo é o problema; nunca em silêncio.
 
 ## Desenvolvimento
 
@@ -122,8 +172,10 @@ npm run build
 
 - Não coleta evidência: quem coleta é o plano 2, dentro do perímetro.
 - Não fala com rede nenhuma: isso é um adaptador, em pacote separado.
-- Não assina nem persiste a trilha: assinatura e retenção são da instalação, e
-  variam por banco.
+- Não persiste nada: armazenamento e retenção são da instalação, e variam por
+  banco.
+- Não guarda chave: `Signer` é interface justamente para que um HSM entre no
+  lugar do arquivo sem mudar o código que produz o material assinado.
 - Não gera prova de conhecimento zero: é o Marco 6, e depende deste núcleo estar
   estável primeiro.
 
