@@ -97,6 +97,19 @@ export const DEPLOYED_CONTRACT_CAPABILITIES = {
   jurisdiction: false,
 } as const;
 
+/**
+ * Capabilities of `contracts/attestation-registry` (v2), written but not yet
+ * deployed. Kept here so that switching this adapter over is a one-line change
+ * once the deploy ceremony runs — and so the difference between the two is
+ * visible in one place rather than inferred from two contracts.
+ */
+export const V2_CONTRACT_CAPABILITIES = {
+  validityWindow: true,
+  revocation: true,
+  packHash: true,
+  jurisdiction: true,
+} as const;
+
 export class StellarAdapter implements ChainAdapter {
   readonly network: NetworkDescriptor;
 

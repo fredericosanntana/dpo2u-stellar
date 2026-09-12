@@ -1,6 +1,6 @@
 # ADR-001 — Capacidades da âncora e o que o contrato atual não guarda
 
-**Status:** aceito
+**Status:** aceito — contrato v2 implementado em 2026-09-12
 **Data:** 2026-09-12
 **Contexto:** construção do primeiro adaptador do plano 5 (`@dpo2u/adapter-stellar`)
 
@@ -76,25 +76,39 @@ validade sumiria em silêncio.
 gravar o resultado de `anchorFidelity` na trilha interna. Numa inspeção, a
 pergunta "por que este registro não tem validade?" tem resposta datada.
 
-**O contrato v2 tem escopo definido.** Quando houver janela de implantação, o
-novo contrato precisa de:
+**O contrato v2 foi escrito** — `contracts/attestation-registry/`, crate
+separado, porque o v1 está implantado e é imutável. Campos acrescentados:
 
 | Campo | Tipo | Por quê |
 | --- | --- | --- |
 | `valid_until` | `Option<u64>` | Sem ele, atestação vencida lê como vigente. |
-| `revoked_at` | `Option<u64>` | Revogação precisa ser visível a quem lê só a cadeia. |
-| `revocation_reason` | `Option<Symbol>` | Motivo codificado, nunca texto livre — texto livre vaza. |
+| `revoked_at` | `u64` (em `Revocation`) | Revogação precisa ser visível a quem lê só a cadeia. |
+| `reason` | `Symbol` | Motivo codificado, nunca texto livre — texto livre vaza. |
+| `revoked_by` | `Address` | Quem retirou, não só que foi retirada. |
 | `pack_hash` | `BytesN<32>` | Identidade do conjunto de predicados, não só nome e versão. |
 | `jurisdiction` | `Symbol` | Qual regime a regra aplicou. |
 
-O registro Anchor do `dpo2u-solana` já carrega `expires_at`, `revoked_at` e
-`revocation_reason`. O modelo de dados correto já existe na casa; falta portá-lo
-para Soroban.
+Além dos campos, duas adições que só ficaram evidentes escrevendo:
 
-**A revogação exige uma decisão de autorização que ainda não foi tomada.** Quem
-pode revogar? O emissor original, o admin, ou ambos? A resposta muda o desenho
-do contrato v2 e tem implicação de segregação de funções. Fica em aberto
-deliberadamente, para não ser decidida por acidente de implementação.
+- **`status()`** devolve `NotFound | Valid | Expired | Revoked` numa única
+  chamada somente-leitura contra o relógio do ledger. É literalmente a pergunta
+  que a parte confiante faz, e deixá-la para o cliente montar a partir de três
+  leituras convida cada integrador a errar de um jeito diferente.
+- **`min_pack_version`** na configuração do caso de uso. É como o admin aposenta
+  um pacote superado sem tocar no contrato: publica o novo, sobe o piso.
+
+**Quem pode revogar: o emissor original e o admin.** Com uma condição que a
+implementação tornou necessária — o emissor precisa **continuar autorizado**.
+Uma chave removida da whitelist, seja por rotação ou por comprometimento, não
+pode retirar atestações válidas: isso transformaria uma chave roubada em negação
+de serviço contra o próprio registro da instituição. O admin sempre pode agir,
+então não há travamento. Há teste para os dois lados dessa regra.
+
+A primeira revogação vale. Re-revogar é recusado (`AlreadyRevoked`), porque
+permitir reescreveria *quando* a retirada aconteceu — o único fato que uma
+revogação existe para fixar. E `verify_attestation` continua devolvendo o
+registro depois de revogado: a revogação retira a asserção, não apaga que ela
+foi feita.
 
 ## Alternativas descartadas
 
