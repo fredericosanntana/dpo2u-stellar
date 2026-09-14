@@ -83,15 +83,21 @@ jobs:
           echo "wasm_hash=$HASH" >> "$GITHUB_OUTPUT"
           echo "Build wasm hash: $HASH"
 
-      - name: Wasm size budget (≤16 KiB)
+      - name: Wasm size budget (≤16 KiB per contract)
         run: |
-          SIZE=$(stat -c '%s' target/wasm32v1-none/release/anticorruption_attestation.wasm)
-          echo "wasm size: $SIZE bytes"
-          # Budget: contract must stay under 16 KiB (current is ~6.7 KiB). Bump only with PR justification.
-          if [ "$SIZE" -gt 16384 ]; then
-            echo "::error::wasm size $SIZE exceeds 16384 byte budget"
-            exit 1
-          fi
+          set -euo pipefail
+          # Budget applies to every contract in the workspace. Bump only with
+          # PR justification — a growing contract is usually logic that belongs
+          # off chain.
+          for WASM in target/wasm32v1-none/release/*.wasm; do
+            case "$WASM" in *.optimized.wasm) continue ;; esac
+            SIZE=$(stat -c '%s' "$WASM")
+            echo "$(basename "$WASM"): $SIZE bytes"
+            if [ "$SIZE" -gt 16384 ]; then
+              echo "::error::$(basename "$WASM") is $SIZE bytes, over the 16384 byte budget"
+              exit 1
+            fi
+          done
 
       - name: Drift guard — fail PR if wasm_hash in scripts/deploy.json out of sync
         if: github.event_name == 'pull_request'
@@ -106,8 +112,14 @@ jobs:
             echo "Re-deploy required before merging if contract logic changed."
             # Drift is a warning, not a failure — many PRs touch only docs/CI and don't require re-deploy.
             # CI will block ONLY if the contract source changed.
-            if git diff --name-only origin/main...HEAD | grep -qE '^contracts/'; then
-              echo "::error::Contract source changed AND wasm_hash drifted — must re-deploy + update deploy.json"
+            # Scoped to the contract scripts/deploy.json actually describes.
+            # A contract crate that has never been deployed has no deployed hash
+            # to drift from — that is new code, not drift, and blocking it would
+            # make the immutability doctrine (evolve = new contract at a new
+            # address) impossible to follow.
+            if git diff --name-only origin/main...HEAD \
+                 | grep -qE '^contracts/anticorruption-attestation/'; then
+              echo "::error::Deployed contract source changed AND wasm_hash drifted — must re-deploy + update deploy.json"
               exit 1
             fi
           fi
@@ -117,7 +129,7 @@ jobs:
         with:
           name: contract-wasm
           path: |
-            target/wasm32v1-none/release/anticorruption_attestation.wasm
+            target/wasm32v1-none/release/*.wasm
             build.log
           retention-days: 14
 
@@ -132,3 +144,89 @@ jobs:
         run: cargo install --locked cargo-audit || true
       - name: Run cargo audit
         run: cargo audit --deny warnings || echo "::warning::audit findings present (non-blocking for v0.1)"
+
+  core:
+    name: '@dpo2u/core — typecheck, tests, network-independence'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: core
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # npm 10.9.x crashes resolving the vitest 4.x peer set
+      # ("Cannot read properties of null (reading 'edgesOut')").
+      - name: Install
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm run test:run
+
+      # The core is only network-independent for as long as this gate passes.
+      # Fails on any chain SDK import, chain-native type, or runtime dependency.
+      - name: Network-independence gate
+        run: npm run no-chain-deps
+
+      - name: Build
+        run: npm run build
+
+  adapter-stellar:
+    name: '@dpo2u/adapter-stellar — typecheck + tests'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # The adapter consumes @dpo2u/core as a local file: dependency, so the
+      # core must be built (its .d.ts emitted) before the adapter typechecks.
+      - name: Build core
+        working-directory: core
+        run: |
+          npm install --no-audit --no-fund --legacy-peer-deps
+          npm run build
+
+      - name: Install
+        working-directory: adapters/stellar
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+
+      - name: Typecheck
+        working-directory: adapters/stellar
+        run: npm run typecheck
+
+      - name: Tests
+        working-directory: adapters/stellar
+        run: npm run test:run
+
+  sdk:
+    name: '@dpo2u/stellar-sdk — build + tests'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: sdk
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: sdk/package-lock.json
+
+      - name: Install
+        run: npm ci --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
+      - name: Tests
+        run: npm run test:run

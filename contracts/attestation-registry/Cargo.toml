@@ -1,0 +1,18 @@
+[package]
+name = "attestation-registry"
+description = "DPO2U attestation registry v2 — adds validity, revocation, pack identity and jurisdiction to the anchored record"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+doctest = false
+
+[dependencies]
+soroban-sdk = { workspace = true }
+
+[dev-dependencies]
+soroban-sdk = { workspace = true, features = ["testutils"] }

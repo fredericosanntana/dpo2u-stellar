@@ -3,6 +3,10 @@ Cargo.lock.bak
 .stellar/
 sdk/node_modules/
 sdk/dist/
+core/node_modules/
+core/dist/
+adapters/*/node_modules/
+adapters/*/dist/
 .env
 .env.local
 *.swp
