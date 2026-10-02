@@ -17,8 +17,8 @@ use crate::{PorVerifier, PorVerifierClient, Proof, VerificationKey};
 
 const VK_ALPHA: &str = "2cec5151e2fdedfcdbe288e824373bca017c15e0c956ad7e2ae1a19c71e55ddb1919755f45dc0e9e1b8d741fe603415a48bbd6ddaf4e47d840b3407b7750517e";
 const VK_BETA: &str = "0220b010d35eb26a60fe065ced7ea45d133f805f597fc9e69b3c3e2db266ebd316da8a35d9e89bf0df1ae6fe83197f832a70929d5f995f391cca8a778ec333472d04f6cec34536982004c719aff2f6fe7ecb2d538fc6dcf227beaf4b755f4cc110ea7bf90ae597d25684de7fa7b0e0451635eaaf03420ed7afe43b8f5f0544b3";
-const VK_GAMMA: &str = "198e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c21800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6ed090689d0585ff075ec9e99ad690c3395bc4b313370b38ef355acdadcd122975b12c85ea5db8c6deb4aab71808dcb408fe3d1e7690c43d37b4ce6cc0166fa7daa";
-const VK_DELTA: &str = "1dc73e4d393b47d61fc6cd3492b68c4f6d143050f9ecf7c452df42e3e03f44db129b4023d9ab2a2d7b1507e847390a372b9efe9379441b7d5b6162c455d58b200e07518b96e69a9faa1f984ca2bebd3741bf39d18b555975bb95e37be1c4929e214cbef78ce932ee804b4956805d5ba7572b810fa097751aeab1467b0e7b0041";
+pub(crate) const VK_GAMMA: &str = "198e9393920d483a7260bfb731fb5d25f1aa493335a9e71297e485b7aef312c21800deef121f1e76426a00665e5c4479674322d4f75edadd46debd5cd992f6ed090689d0585ff075ec9e99ad690c3395bc4b313370b38ef355acdadcd122975b12c85ea5db8c6deb4aab71808dcb408fe3d1e7690c43d37b4ce6cc0166fa7daa";
+pub(crate) const VK_DELTA: &str = "1dc73e4d393b47d61fc6cd3492b68c4f6d143050f9ecf7c452df42e3e03f44db129b4023d9ab2a2d7b1507e847390a372b9efe9379441b7d5b6162c455d58b200e07518b96e69a9faa1f984ca2bebd3741bf39d18b555975bb95e37be1c4929e214cbef78ce932ee804b4956805d5ba7572b810fa097751aeab1467b0e7b0041";
 const VK_IC0: &str = "02a0e2865fa13db1115575f90d9ab27bd507e75b08bd4491ddc711ecf33cf2331fc4866cab4d7dbb3def3061e29852306f4d5c459bc21501d3361eb8bde7abc9";
 const VK_IC1: &str = "2797d0d429e5ad9ea9a67b08878921e71a19f4e3e5c563ceec4fc7ad23f15a6d24489c6f318cb2085dc608830ff60e1a1e7c28bfce2fecb5e1aa6eb41eaefbe2";
 const VK_IC2: &str = "2fa62a941ec345e793ac934d6a6a4227f94c3e81880fa2d03a1ecacd7f5f695e085134d9279694ed1adda33e5a7f3505649d43548951f97d7b7e56c692de8821";
@@ -32,13 +32,13 @@ const PUB_SOLVENT: &str = "00000000000000000000000000000000000000000000000000000
 const PUB_COMMIT: &str = "2e1015154eccba498ea60399e4a1f8fc264f0f1ca41643e359eb74fb12c39125";
 const PUB_CONTEXT: &str = "00000000000000000000000000000000000000000000000000000000075bcd15";
 
-fn g1(env: &Env, h: &str) -> Bn254G1Affine {
+pub(crate) fn g1(env: &Env, h: &str) -> Bn254G1Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 64] = bytes.try_into().expect("G1 = 64 bytes (be(X)||be(Y))");
     Bn254G1Affine::from_array(env, &arr)
 }
 
-fn g2(env: &Env, h: &str) -> Bn254G2Affine {
+pub(crate) fn g2(env: &Env, h: &str) -> Bn254G2Affine {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 128] = bytes
         .try_into()
@@ -46,13 +46,13 @@ fn g2(env: &Env, h: &str) -> Bn254G2Affine {
     Bn254G2Affine::from_array(env, &arr)
 }
 
-fn fr(env: &Env, h: &str) -> Bn254Fr {
+pub(crate) fn fr(env: &Env, h: &str) -> Bn254Fr {
     let bytes = hex::decode(h).unwrap();
     let arr: [u8; 32] = bytes.try_into().expect("Fr = 32 bytes big-endian");
     Bn254Fr::from_u256(U256::from_be_bytes(env, &Bytes::from_array(env, &arr)))
 }
 
-fn vk(env: &Env) -> VerificationKey {
+pub(crate) fn vk(env: &Env) -> VerificationKey {
     VerificationKey {
         alpha: g1(env, VK_ALPHA),
         beta: g2(env, VK_BETA),
@@ -70,7 +70,7 @@ fn vk(env: &Env) -> VerificationKey {
     }
 }
 
-fn proof(env: &Env) -> Proof {
+pub(crate) fn proof(env: &Env) -> Proof {
     Proof {
         a: g1(env, PROOF_A),
         b: g2(env, PROOF_B),

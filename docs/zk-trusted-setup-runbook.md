@@ -91,3 +91,15 @@ produção (gateway `verifyZkProof` + mcp-server `verify_agent_repo_zk_proof`) u
 canônica da cerimônia — nenhuma atestação de produção depende da seed dev. Para o go-live
 mainnet do `zk_compliance_v1`, ver o runbook de mainnet (`2026-05-29-mainnet-pilot-runbook.md`):
 basta habilitá-lo em `configure-mainnet-usecases.sh` quando o deploy mainnet acontecer.
+
+## Circuito de solvência PoR (BN254) — pipeline próprio (2026-10-02)
+
+O runbook acima cobre o `score_threshold` (BLS12-381). A prova de solvência
+(`zk-prover/por/por_solvency.circom`, verificada por `contracts/por-verifier`) tem pipeline
+separado em `scripts/zk-ceremony-por/`: Phase 1 pública Hermez `powersOfTau28_hez_final_12`
+(blake2b publicado pelo snarkjs), Phase 2 encadeada, beacon commit-reveal, conversão BN254,
+e `verify-transcript.sh` para auditoria independente. **Estado: ENSAIADO** (3 contribuidores
+simulados na mesma máquina — `scripts/zk-ceremony-por/ensaio/`), **cerimônia de produção
+pendente** — depende de contribuidores independentes externos, beacon anunciado em público e
+auditoria de circuito + contrato por terceiro (lista em `scripts/zk-ceremony-por/README.md`).
+A VK em uso no testnet continua sendo a dev de 1 parte.

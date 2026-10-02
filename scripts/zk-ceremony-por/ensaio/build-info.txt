@@ -1,0 +1,5 @@
+circom=2.2.2
+snarkjs=snarkjs@0.7.6
+circomlib=2.0.5
+circuit_sha256=1c3cd58577c127f63da7e06c46ba4a289ded0461dee47416d1a0b344e6407ea4
+r1cs_sha256=e564b4119421cde9296d98cd52256b768a61a8cda64663ea5c7e983f6ab04313
