@@ -26,8 +26,14 @@ intacto; este diretório é separado porque curva, ptau, conversor e verificador
 | blake2b-512 **publicado** | `ded2694169b7b08e898f736d5de95af87c3f1a64594013351b1a796dbee393bd825f88f9468c84505ddd11eb0b1465ac9b43b9064aa8ec97f2b73e04758b8a4a` — tabela "Prepared (phase2) Ptau files for bn128" do README oficial do snarkjs (iden3/snarkjs) |
 | sha256 (medido) | `dcf4ea473bf14b971ce5f7b7c1d6ce1c41a8ed042cdb75b65ca9178e3a3c7c17` |
 
-`01-phase1.sh` recusa o arquivo se o blake2b não bater e roda `snarkjs powersoftau verify`
-(valida as 54 contribuições + beacon embutidos). Alternativa equivalente: PSE Perpetual
+`01-phase1.sh` e `verify-transcript.sh` recusam o arquivo se o blake2b não bater com o
+publicado (fonte: https://github.com/iden3/snarkjs — README, seção "Prepared (phase2) Ptau
+files for bn128"; conferido em 2026-10-02: `b2sum` = valor publicado). **Passo opcional —
+verificação completa do ptau (lenta, ~horas):** `FULL_PTAU_VERIFY=1` roda
+`snarkjs powersoftau verify`, que recalcula o hash inicial sobre as 2^28 potências da
+cerimônia original e valida as 54 contribuições + beacon. No ensaio ele foi interrompido
+após 34 min ainda no hash inicial (1 núcleo a ~97% CPU) — **não foi concluído aqui**; a
+confiança no ptau, neste ensaio, vem só do hash publicado. Alternativa equivalente: PSE Perpetual
 Powers of Tau `ppot_0080_12.ptau` (`https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_12.ptau`,
 80 contribuições, beacon = randao do slot 7.325.000 da Ethereum); o README da PSE **não**
 publica hash por arquivo truncado, por isso o padrão é o Hermez. `LOCAL_PHASE1=1` roda uma
@@ -51,8 +57,8 @@ Diretório de trabalho: `zk-prover/por/build/ceremony/` (gitignored; nunca cont�
 ## Verificação do transcript (credibilidade 1-of-N)
 `verify-transcript.sh` não confia em nada que o coordenador diga além dos arquivos públicos:
 1. recompila o circuito do fonte e compara `r1cs_sha256`;
-2. confere o blake2b do ptau contra o publicado pelo snarkjs e roda `powersoftau verify`
-   (`SKIP_PTAU_VERIFY=1` pula essa etapa lenta — ~minutos);
+2. confere o blake2b do ptau contra o publicado pelo snarkjs; opcional
+   `FULL_PTAU_VERIFY=1` = verificação completa do ptau (lenta, ~horas);
 3. regenera `por_0000.zkey` de (r1cs, ptau) e compara o sha256;
 4. para cada `por_i.zkey`: sha256 == manifest e `snarkjs zkey verify r1cs ptau por_i` = ZKey Ok
    (cada elo publicado estende o anterior);

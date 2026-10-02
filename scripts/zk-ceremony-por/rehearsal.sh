@@ -59,5 +59,5 @@ cp "$TRANSCRIPT_LOG" "$OUT/contributions.log"
 cp "$WORK"/{verification_key.json,proof.json,public.json,soroban-bn254.json,build-info.txt,ptau-info.txt} "$OUT/"
 echo
 echo "######## verificação independente da transcrição ########"
-SKIP_PTAU_VERIFY="${SKIP_PTAU_VERIFY:-1}" "$HERE/verify-transcript.sh" "$WORK" "$OUT/manifest.txt" | tee "$OUT/verify-transcript.log"
+"$HERE/verify-transcript.sh" "$WORK" "$OUT/manifest.txt" | tee "$OUT/verify-transcript.log"
 echo "✓ ENSAIO concluído — artefatos públicos em $OUT"

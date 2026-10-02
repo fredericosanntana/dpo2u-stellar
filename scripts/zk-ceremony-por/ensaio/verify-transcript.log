@@ -2,6 +2,7 @@
   ✓ r1cs sha256 = e564b4119421cde9296d98cd52256b768a61a8cda64663ea5c7e983f6ab04313
 [2] ptau público
   ✓ blake2b = publicado (snarkjs README)
+  · verificação completa do ptau pulada (opcional: FULL_PTAU_VERIFY=1, ~horas)
 [3] regenera por_0000 (determinístico)
   ✓ por_0000 sha256 confere
 [4] cadeia de contribuições

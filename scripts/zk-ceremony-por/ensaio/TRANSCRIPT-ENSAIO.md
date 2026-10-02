@@ -7,8 +7,7 @@
 > registrado as três entropias. A VK abaixo **não deve ser pinada** em contrato algum.
 > O objetivo foi provar que o pipeline funciona ponta a ponta e é verificável por terceiros.
 
-Comando: `SKIP_PTAU_VERIFY=1 scripts/zk-ceremony-por/rehearsal.sh` (o `powersoftau verify`
-completo do ptau foi rodado à parte — ver "Phase 1").
+Comando: `scripts/zk-ceremony-por/rehearsal.sh`.
 
 ## Circuito
 | | |
@@ -20,7 +19,11 @@ completo do ptau foi rodado à parte — ver "Phase 1").
 ## Phase 1 (pública, reusada)
 - `powersOfTau28_hez_final_12.ptau` de `https://circom.info/` — blake2b
   `ded26941…758b8a4a` **igual** ao publicado no README do snarkjs; sha256 `dcf4ea47…3c7c17`.
-- `snarkjs powersoftau verify` completo: ver `ptau-verify.log` (resultado registrado abaixo).
+- Fonte do hash: README do snarkjs (https://github.com/iden3/snarkjs, tabela "Prepared
+  (phase2) Ptau files for bn128", linha 12). `b2sum` medido = publicado.
+- `snarkjs powersoftau verify` completo (passo opcional `FULL_PTAU_VERIFY=1`): **NÃO
+  concluído** — interrompido após 34 min ainda no cálculo do hash inicial (2^28 potências).
+  Neste ensaio a confiança no ptau vem apenas do hash publicado.
 
 ## Phase 2 — cadeia
 | # | Contribuidor | sha256(entrada) | sha256(saída) | contribution hash (blake2b, prefixo) |

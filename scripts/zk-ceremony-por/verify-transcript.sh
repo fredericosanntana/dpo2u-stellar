@@ -6,7 +6,9 @@
 #   contrib_<i>_hash (blake2b do snarkjs, i=0001..N), beacon_hash, beacon_iter
 # Checagens (todas fail-closed):
 #   1. recompila o circuito do código-fonte e compara sha256(r1cs);
-#   2. ptau: blake2b == o publicado no README do snarkjs (Hermez) + `powersoftau verify`;
+#   2. ptau: blake2b == o publicado no README do snarkjs (Hermez, tabela "Prepared (phase2)
+#      Ptau files for bn128", https://github.com/iden3/snarkjs#7-prepare-phase-2);
+#      opcional FULL_PTAU_VERIFY=1: `powersoftau verify` completo (lento, ~horas);
 #   3. regenera por_0000 a partir de (r1cs, ptau) e compara o sha256 (setup é determinístico);
 #   4. cada por_i.zkey: sha256 == manifest e `snarkjs zkey verify r1cs ptau por_i` = ZKey Ok
 #      (prova que cada contribuição publicada estende a anterior, sem pular elo);
@@ -33,8 +35,11 @@ P="$PUB/$(basename "$PTAU_FILE")"
 [ -f "$P" ] || { curl -sSfL --retry 3 -o "$AUD/p.ptau" "$PTAU_URL" && P="$AUD/p.ptau"; }
 B2="$(b2sum "$P" | awk '{print $1}')"
 [ "$B2" = "$PTAU_B2" ] && [ "$B2" = "$(get ptau_b2sum)" ] && ok "blake2b = publicado (snarkjs README)" || bad "ptau blake2b diverge: $B2"
-if [ "${SKIP_PTAU_VERIFY:-0}" != "1" ]; then
+if [ "${FULL_PTAU_VERIFY:-0}" = "1" ]; then
+  echo "  … verificação completa do ptau (lenta, ~horas)"
   snarkjs powersoftau verify "$P" > "$AUD/ptau.log" 2>&1 && grep -q "Powers of Tau Ok" "$AUD/ptau.log" && ok "powersoftau verify = Ok" || bad "powersoftau verify falhou"
+else
+  echo "  · verificação completa do ptau pulada (opcional: FULL_PTAU_VERIFY=1, ~horas)"
 fi
 
 echo "[3] regenera por_0000 (determinístico)"

@@ -22,8 +22,11 @@ else
   echo "✓ blake2b confere com o publicado no README do snarkjs"
   { echo "ptau_source=$PTAU_URL"; echo "ptau_b2sum=$GOT"; echo "ptau_sha256=$(sha "$PTAU_FILE")"; } > "$WORK/ptau-info.txt"
 fi
-# Verificação completa da cadeia Phase 1 (contribuições + beacon embutidos no .ptau).
-if [ "${SKIP_PTAU_VERIFY:-0}" != "1" ]; then
+# Passo OPCIONAL — verificação completa da cadeia Phase 1 (`powersoftau verify`: recalcula
+# o hash inicial sobre 2^28 potências + as 54 contribuições + beacon). LENTA: ~horas
+# (o ensaio de 2026-10-02 interrompeu após 34 min ainda no hash inicial). O padrão é
+# conferir o blake2b publicado (acima); ligue com FULL_PTAU_VERIFY=1.
+if [ "${FULL_PTAU_VERIFY:-0}" = "1" ]; then
   snarkjs powersoftau verify "$PTAU_FILE" > "$WORK/ptau-verify.log" 2>&1 || { tail -20 "$WORK/ptau-verify.log"; die "powersoftau verify falhou"; }
   grep -q "Powers of Tau Ok" "$WORK/ptau-verify.log" || die "powersoftau verify sem 'Powers of Tau Ok'"
   echo "✓ snarkjs powersoftau verify = Powers of Tau Ok (log: $WORK/ptau-verify.log)"
