@@ -1,0 +1,29 @@
+[1] recompila o circuito e compara o r1cs
+  ✓ r1cs sha256 = e564b4119421cde9296d98cd52256b768a61a8cda64663ea5c7e983f6ab04313
+[2] ptau público
+  ✓ blake2b = publicado (snarkjs README)
+  · verificação completa do ptau pulada (opcional: FULL_PTAU_VERIFY=1, ~horas)
+[3] regenera por_0000 (determinístico)
+  ✓ por_0000 sha256 confere
+[4] cadeia de contribuições
+  ✓ por_0000 sha256 confere
+  ✓ por_0001 sha256 confere
+  ✓ por_0001 zkey verify = ZKey Ok
+  ✓ por_0002 sha256 confere
+  ✓ por_0002 zkey verify = ZKey Ok
+  ✓ por_0003 sha256 confere
+  ✓ por_0003 zkey verify = ZKey Ok
+  ✓ 3 contribuições publicadas = 3 no manifest
+[5] zkey final: cadeia completa + hashes + beacon
+  ✓ por_final sha256 confere
+  ✓ por_final zkey verify = ZKey Ok
+  ✓ contribuição #1: hash publicado = #1 da cadeia
+  ✓ contribuição #2: hash publicado = #2 da cadeia
+  ✓ contribuição #3: hash publicado = #3 da cadeia
+  ✓ cadeia final = 3 contribuições + 1 beacon (sem elo extra)
+  ✓ 3 contribution hashes distintos
+  ✓ beacon aplicado = 350fb9427ce2bfcd983044b66a0dab2dadce997c5ff2152ea1800f66df60d49b
+[6] VK
+  ✓ vk sha256 = 4b68403d964a117eab20ac14ef02fdc59eee2e1b89e4711ea42d6a9bb70d3da6
+
+TRANSCRIPT OK — cadeia íntegra (3 contribuições + beacon)
