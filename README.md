@@ -132,7 +132,8 @@ dpo2u-stellar/
 │   ├── Cargo.toml
 │   └── Makefile                            # build/test/optimize/deploy
 ├── docs/
-│   └── DPO2U_PRD_Piloto_Anticorrupcao_v0.3.docx
+│   ├── DPO2U_PRD_Piloto_Anticorrupcao_v0.3.docx
+│   └── TRAVEL-RULE-VASP-DESIGN.md              # desenho do sprint Instawards
 ├── scripts/
 │   └── deploy-testnet.sh                   # one-shot deploy
 ├── Cargo.toml                              # workspace
@@ -147,8 +148,36 @@ dpo2u-stellar/
 - [ ] **F2** — MCP tools `submit_public_attestation` + `verify_public_attestation`
 - [ ] **F2** — REST API (`POST /v1/attestation/submit`) + reverse webhook
 - [ ] **F2** — Passkey auth via Stellar SEP-30 recovery
+- [ ] **F2.5** — `travel-rule-gate` + `vasp-passport` em testnet (sprint Instawards, 30 dias)
 - [ ] **F3** — Mainnet deploy (após 90 dias de observer L1 com município piloto)
 - [ ] **F3** — Reflector oracle binding pra CEIS/CNEP (UC-2 P2.6)
+
+## Próxima fase — Travel Rule Gate e VASP Passport
+
+Sprint de 30 dias proposto ao programa Instawards (Stellar Ambassador Program,
+capítulo Brasil). Os dois contratos novos ficam **em cima deste registry**, sem
+redeploy do que já está no ar: o Travel Rule entra como um *use case* novo via
+`configure_use_case`. Desenho completo em
+[`docs/TRAVEL-RULE-VASP-DESIGN.md`](docs/TRAVEL-RULE-VASP-DESIGN.md).
+
+| Entregável | O que faz | Critério de pronto (dia 30) |
+| --- | --- | --- |
+| `travel-rule-gate` | Envolve o `transfer` de um token SEP-41 e só libera se o registry tiver um `PASS` para o *intent hash* daquela transferência | Deploy em testnet; uma transferência revertida (`FAIL`) e uma liberada (`PASS`) verificáveis no Stellar Expert |
+| `vasp-passport` | Credencial read-only: `is_valid(vasp)` retorna válido, expirado ou suspenso; emissão restrita a emissores autorizados; admin é conta multisig | Deploy em testnet; chamadas de exemplo para os três estados |
+| Driver Stellar no gateway + demo | O gateway DPO2U grava selos de Travel Rule na testnet; demo gravada e script de ponta a ponta; guia de integração de uma página para anchors e wallets | Demo reproduzível pelo script, com hashes das transações |
+
+Base regulatória: Resolução BCB 520 e IN 739/2026 (dever de Travel Rule para
+VASPs no Brasil). Originador e beneficiário aparecem só como hash.
+
+## Limitações conhecidas
+
+- **TTL de storage.** O contrato `anticorruption-attestation` não chama
+  `extend_ttl`. Entradas `persistent` (atestações) e a instância do contrato
+  são arquivadas pela rede se ninguém renovar o TTL. Enquanto isso, a renovação
+  é operacional (`stellar contract extend` / `stellar contract restore`, ver
+  [`docs/RUNBOOK.md`](docs/RUNBOOK.md)). Os contratos novos renovam o TTL nas
+  próprias chamadas.
+- **Testnet.** Sem valor econômico e sujeita a reset pela SDF.
 
 ## Por que isso importa
 

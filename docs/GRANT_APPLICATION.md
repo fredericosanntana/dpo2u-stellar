@@ -25,7 +25,7 @@ Plan for the Stellar Community Fund (SCF) and Instawards grant applications to f
 ## 2. Track record (mandatory section in SCF + Instawards)
 
 ### Built in 2 days during Stellar37° (2026-05-12 → 2026-05-13)
-- 1 Soroban contract live on testnet (`CC4TJGDR…QRRZHM5`, 6709 bytes wasm, 4 functions exported per PRD §F1)
+- 1 Soroban contract live on testnet (`CC4TJGDR…QRRZHM5`, 5,865 bytes optimized wasm, 4 functions exported per PRD §F1)
 - 17 PRs across 2 public repos (`dpo2u-stellar`, `DPO2U`)
 - 374+ unit tests new, 0 regression
 - 1 trustless CLI ready for npm publish (`@dpo2u/stellar-sdk` exposing `dpo2u-attest verify`)
