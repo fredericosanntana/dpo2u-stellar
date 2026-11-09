@@ -194,7 +194,7 @@ município — ele consulta a blockchain.
 ## Voz da casa
 
 Construído pela **DPO2U** — *Privacy & AI compliance protocol*, 17 jurisdições
-em produção, 14 programas Solana ao vivo, 70+ países cobertos, AdGM Foundation
+em produção, 70+ países cobertos, AdGM Foundation
 registrada. Contato: `fredericosanntana@gmail.com`.
 
 > *"Compliance is a protocol, not a PDF."*
