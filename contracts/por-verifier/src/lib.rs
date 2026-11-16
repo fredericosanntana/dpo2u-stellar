@@ -13,7 +13,8 @@
 //! be(c1)||be(c0) por coord Fp2 em G2) = o default do snarkjs/Circom (bn128).
 //!
 //! Produção ainda exige auditoria de segurança e uma cerimônia de trusted-setup
-//! multi-party por circuito (ver scripts/zk-ceremony/).
+//! multi-party por circuito (pipeline PoR/BN254: scripts/zk-ceremony-por/ — ensaiado,
+//! cerimônia de produção pendente; ver test_ceremony.rs).
 
 use soroban_sdk::{
     contract, contracterror, contractimpl, contracttype,
@@ -99,3 +100,4 @@ impl PorVerifier {
 }
 
 mod test;
+mod test_ceremony;

@@ -1,0 +1,45 @@
+{
+  "format": "dpo2u.mirror-config-evidence/1",
+  "network": "stellar:testnet",
+  "contract": "CCE5QO6V37YT4PBDNG54Y7QHPSC5OF3CAM3GM7PQ26ZPNDTZ5WAY2PLY",
+  "admin": "GCWFDWEHJVUMT5Y7FCXTBSWIEGSWWG7C6FFN3YJBPO6PX6EC75V6FXKB",
+  "date": "2026-11-16",
+  "changes": [
+    {
+      "call": "set_source(midnight:preview, fc80569d\u2026d4f5, true)",
+      "tx": "ccfc092ade37b55f056076f9a760296c6b04f96da506e1f86d0dbfad81c833d3"
+    },
+    {
+      "call": "set_policy(2838bc5a\u2026bfd51, true)",
+      "tx": "a3b91173b87e7148efba61d51bfed95fe54760b9428f501107ca22934e8a14b1"
+    },
+    {
+      "call": "set_policy(a473911d\u2026bd50, true)",
+      "tx": "366979279e38f5e76c89491163a15e52c463748cf5aadb3dd6014c27a6ea7dec"
+    }
+  ],
+  "relays": [
+    {
+      "transfer": "1ae337c3ae06bba9bac5d19ea5ad2fc897d46be02dfec934ee94fe2f80f70acb",
+      "verdict": "PASS, released",
+      "digest": "45343fb1c94112275d36f0e5268f1fd1383d28466e3fb4c1453292a6637db6c7",
+      "tx": "1820711f31b4a24c6e5609bc33b53825ca5556b7b002a3be4c6c2eafa3a18e30"
+    },
+    {
+      "transfer": "e335533689b19900de2518eb8fabadba980a33900bb16252164e3dd271f9b52a",
+      "verdict": "FAIL, reason 4 (sanctions hit)",
+      "digest": "d9d6d0846a78fd82acda87ad26618b244d8aba188a630b334ce31668b238e567",
+      "tx": "7f951fd4bc13a3b8c77cef010ca5f68c849f02c2f10d49b6aa1b9f59c396456a"
+    }
+  ],
+  "source_gate": {
+    "chain": "midnight:preview",
+    "contract": "fc80569d96a4555a51fd695d3f0e009eeb44043d46b7567fd9986a3bf0e2d4f5",
+    "version": "TravelRuleGate v11",
+    "institution": "staging (fictitious)"
+  },
+  "kept_allowed": [
+    "source 46a74a45\u2026",
+    "policy 6c1f46a8\u2026"
+  ]
+}
