@@ -36,16 +36,18 @@ inv() { stellar contract invoke --id "$ID" --source "$SRC" --network "$NET" --se
 echo "== pin source $SOURCE_CHAIN / $MIDNIGHT_GATE and policy $POLICY_HASH =="
 inv set_source --source_chain "$SOURCE_CHAIN" --source_contract "$MIDNIGHT_GATE" --allowed true
 inv set_policy --policy_hash "$POLICY_HASH" --allowed true
+RELAYER_ADDRS=""
 for r in $RELAYERS; do
   addr="$(stellar keys address "$r")"
+  RELAYER_ADDRS="${RELAYER_ADDRS:+$RELAYER_ADDRS }$addr"
   echo "== authorize relayer $r ($addr) =="
   inv set_relayer --relayer "$addr" --allowed true
 done
 
 mkdir -p "$REPO/deployments"
 jq -n --arg id "$ID" --arg net "$NET" --arg admin "$ADMIN" --arg src "$SOURCE_CHAIN" --arg gate "$MIDNIGHT_GATE" \
-  --arg policy "$POLICY_HASH" --argjson threshold "$THRESHOLD" --arg relayers "$RELAYERS" --arg wasm "$(sha256sum "$WASM" | cut -d' ' -f1)" \
-  '{contract:"travel-rule-gate", id:$id, network:$net, admin:$admin, threshold:$threshold, relayers:($relayers|split(" ")),
+  --arg policy "$POLICY_HASH" --argjson threshold "$THRESHOLD" --arg relayers "$RELAYER_ADDRS" --arg aliases "$RELAYERS" --arg wasm "$(sha256sum "$WASM" | cut -d' ' -f1)" \
+  '{contract:"travel-rule-gate", id:$id, network:$net, admin:$admin, threshold:$threshold, relayers:($relayers|split(" ")), relayer_aliases:($aliases|split(" ")),
     source:{chain:$src, contract:$gate}, policy_hash:$policy, wasm_sha256:$wasm, trust_model:"operator", deployed_at:(now|todate)}' \
   > "$REPO/deployments/travel-rule-gate-$NET.json"
 echo "wrote deployments/travel-rule-gate-$NET.json"
