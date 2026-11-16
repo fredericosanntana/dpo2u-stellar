@@ -1,0 +1,75 @@
+{
+  "format": "dpo2u.travel-rule-relay-evidence/1",
+  "trust_model": "operator",
+  "trust_statement": "Operator trust, not a proof. The Stellar gate checks the verdict's form (format rules, pinned Midnight gate, allowed policy, digest, M-of-N authorized relayers) but has no Midnight light client or state proof: it cannot check that Midnight produced this verdict. Audit it by re-exporting the verdict from Midnight at the anchored tx and comparing the digest.",
+  "midnight": {
+    "verdict": {
+      "format": "dpo2u.travel-rule-verdict/1",
+      "transfer_id": "961b2b2ef2f26335377ea0e0205b98adb0d94de460d55cd04e1e78e1921608c5",
+      "verdict": "PASS",
+      "released": true,
+      "reason": {
+        "code": 0,
+        "label": "none"
+      },
+      "policy_hash": "6c1f46a8fc85ecbf46ab71c9d838931f6a7621101b88e63e2b2473497b089ad4",
+      "originator_root": "9146347bc45d4db6c8dbe5ee5e2fcf035adfd93fa2a1a327843552b91fe11f0b",
+      "beneficiary_root": "f98a1180d8bfca2fc1f57ec171c4f6b3506b029e4cc13148f6ab650732bd6e22",
+      "source_chain": "midnight:preview",
+      "source_contract": "46a74a45cb0c0a8b336b4cda986886a4d685b5aba72372df518120af8517d62c",
+      "block": {
+        "height": 129957,
+        "hash": "f5fcf21ae4b20eb70a63b60dd95b6436df94f06d55143bf5130f0003fd6a1d00"
+      },
+      "tx": "0024c150e6c71a9f2020da4621b3e4759038c1b4690543510945d334ce7fb80630",
+      "sanctions": {
+        "list_root": "ea3a36a0c3288f2864d578668bf3e26a8c54ff3fc45172110a273c36103f1ead",
+        "provider_id": "73637265656e696e672d6c697374730000000000000000000000000000000000",
+        "valid_until": 1795396733
+      }
+    },
+    "digest": "72434147e199712e8a3067abe7b63db7c276067a729402b2c0355d3f561a17af",
+    "reproduce": "MIDNIGHT_NETWORK=preview npx tsx scripts/export-verdict.ts --transfer 961b2b2ef2f26335377ea0e0205b98adb0d94de460d55cd04e1e78e1921608c5 --tx 0024c150e6c71a9f2020da4621b3e4759038c1b4690543510945d334ce7fb80630 --contract 46a74a45cb0c0a8b336b4cda986886a4d685b5aba72372df518120af8517d62c"
+  },
+  "stellar": {
+    "network": "testnet",
+    "contract": "CCE5QO6V37YT4PBDNG54Y7QHPSC5OF3CAM3GM7PQ26ZPNDTZ5WAY2PLY",
+    "relayer": "GCWFDWEHJVUMT5Y7FCXTBSWIEGSWWG7C6FFN3YJBPO6PX6EC75V6FXKB",
+    "confirmations": 1,
+    "recorded": true,
+    "record": {
+      "digest": "72434147e199712e8a3067abe7b63db7c276067a729402b2c0355d3f561a17af",
+      "ledger": 5754593,
+      "relayed_by": [
+        "GCWFDWEHJVUMT5Y7FCXTBSWIEGSWWG7C6FFN3YJBPO6PX6EC75V6FXKB"
+      ],
+      "timestamp": 1794796610,
+      "verdict": {
+        "beneficiary_root": "f98a1180d8bfca2fc1f57ec171c4f6b3506b029e4cc13148f6ab650732bd6e22",
+        "block": {
+          "Anchored": {
+            "hash": "f5fcf21ae4b20eb70a63b60dd95b6436df94f06d55143bf5130f0003fd6a1d00",
+            "height": 129957,
+            "tx": "0024c150e6c71a9f2020da4621b3e4759038c1b4690543510945d334ce7fb80630"
+          }
+        },
+        "originator_root": "9146347bc45d4db6c8dbe5ee5e2fcf035adfd93fa2a1a327843552b91fe11f0b",
+        "pass": true,
+        "policy_hash": "6c1f46a8fc85ecbf46ab71c9d838931f6a7621101b88e63e2b2473497b089ad4",
+        "reason_code": 0,
+        "released": true,
+        "sanctions": {
+          "Signed": {
+            "list_root": "ea3a36a0c3288f2864d578668bf3e26a8c54ff3fc45172110a273c36103f1ead",
+            "provider_id": "73637265656e696e672d6c697374730000000000000000000000000000000000",
+            "valid_until": 1795396733
+          }
+        },
+        "source_chain": "midnight:preview",
+        "source_contract": "46a74a45cb0c0a8b336b4cda986886a4d685b5aba72372df518120af8517d62c",
+        "transfer_id": "961b2b2ef2f26335377ea0e0205b98adb0d94de460d55cd04e1e78e1921608c5"
+      }
+    }
+  },
+  "relayed_at": "2026-11-16T02:36:53.518Z"
+}
