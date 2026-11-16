@@ -1,0 +1,18 @@
+{
+  "contract": "travel-rule-gate",
+  "id": "CCE5QO6V37YT4PBDNG54Y7QHPSC5OF3CAM3GM7PQ26ZPNDTZ5WAY2PLY",
+  "network": "testnet",
+  "admin": "GCWFDWEHJVUMT5Y7FCXTBSWIEGSWWG7C6FFN3YJBPO6PX6EC75V6FXKB",
+  "threshold": 1,
+  "relayers": [
+    "dpo2u-trg-relay"
+  ],
+  "source": {
+    "chain": "midnight:preview",
+    "contract": "46a74a45cb0c0a8b336b4cda986886a4d685b5aba72372df518120af8517d62c"
+  },
+  "policy_hash": "6c1f46a8fc85ecbf46ab71c9d838931f6a7621101b88e63e2b2473497b089ad4",
+  "wasm_sha256": "914b763600fde673e62d13141a95b69bfee4b57bf503d338addf53a754290123",
+  "trust_model": "operator",
+  "deployed_at": "2026-11-16T02:36:35Z"
+}
